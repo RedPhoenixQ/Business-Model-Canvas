@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { selectedItem, type Item } from ".";
+  import { type Item, selectedItem } from ".";
+  import { movable } from "$lib/actions/movable";
 
   export let item: Item;
 
@@ -10,9 +11,6 @@
   }
 
   $: is_selected = $selectedItem === item;
-
-  $: is_marked_as_related =
-    $selectedItem?.relations?.includes(item.id) ?? false;
 </script>
 
 <div
@@ -20,8 +18,14 @@
   class:scale-125={is_selected}
   style="left:{item.x}px;top:{item.y}px;"
   on:pointerdown={handleSelect}
+  use:movable={item}
+  on:moving={({ detail }) => {
+    item.x = detail.x;
+    item.y = detail.y;
+    $selectedItem = item;
+  }}
 >
-  {#if is_marked_as_related}
+  {#if is_selected}
     <div
       class="absolute aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-red-500"
       style="width: 150%;left:50%;top:50%;"

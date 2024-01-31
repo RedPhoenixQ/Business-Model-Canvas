@@ -11,7 +11,7 @@
     style="grid-template-columns: 2fr 1fr 2fr; grid-template-rows: 3fr 1fr;"
     class="relative grid flex-1 grid-rows-3 gap-1 [&_section]:border-2 [&_section]:border-black"
   >
-    <div class="pointer-events-none absolute h-full w-full">
+    <div class="absolute h-full w-full">
       <Area></Area>
     </div>
     <section class="flex flex-col bg-cyan-600">

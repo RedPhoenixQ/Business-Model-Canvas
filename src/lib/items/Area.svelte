@@ -11,7 +11,7 @@
 
 <div class="relative h-full w-full" on:pointerdown={handleUnselect}>
   <LineDrawing />
-  {#each [...$items.values()] as item (item.id)}
+  {#each $items as [_key, item]}
     <ItemIcon {item} />
   {/each}
 </div>

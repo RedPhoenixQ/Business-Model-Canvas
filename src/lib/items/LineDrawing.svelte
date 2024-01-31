@@ -1,20 +1,12 @@
 <script lang="ts">
-  import { items, selectedItem } from ".";
+  import { items, selectedItem, type Item } from ".";
 
-  let line_origin = { x: 0, y: 0 };
-  let line_endpoints: { x: number; y: number }[];
-  $: if ($selectedItem === undefined) {
-    line_endpoints = [];
-  } else {
-    line_origin.x = $selectedItem.x;
-    line_origin.y = $selectedItem.y;
-    line_endpoints = [];
-    for (const related_id of $selectedItem.relations) {
-      const other_item = $items.get(related_id);
-      if (other_item) {
-        // Pushes the whole item, which doesn't create new copies
-        line_endpoints.push(other_item);
-      }
+  let relatedBy: Item[] = [];
+  $: if ($selectedItem) {
+    relatedBy = [];
+    for (const other of $items.values()) {
+      other.relations.includes($selectedItem.id);
+      relatedBy.push(other);
     }
   }
 </script>
@@ -24,16 +16,28 @@
   width="100%"
   height="100%"
   xmlns="http://www.w3.org/2000/svg"
-  class="text-red-500"
 >
-  {#each line_endpoints as line}
-    <line
-      x1={line_origin.x}
-      y1={line_origin.y}
-      x2={line.x}
-      y2={line.y}
-      stroke="currentColor"
-      stroke-width="3"
-    ></line>
-  {/each}
+  {#if $selectedItem}
+    {#each relatedBy as target}
+      <line
+        class="stroke-green-400"
+        x1={$selectedItem.x}
+        y1={$selectedItem.y}
+        x2={target.x}
+        y2={target.y}
+        stroke-width="3"
+      ></line>
+    {/each}
+    {#each $selectedItem.relations as target_id}
+      {@const target = $items.get(target_id)}
+      <line
+        class="stroke-red-500"
+        x1={$selectedItem?.x}
+        y1={$selectedItem?.y}
+        x2={target?.x}
+        y2={target?.y}
+        stroke-width="3"
+      />
+    {/each}
+  {/if}
 </svg>
