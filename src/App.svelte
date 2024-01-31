@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Area from "$lib/items/Area.svelte";
   import Counter from "./lib/Counter.svelte";
 </script>
 
@@ -13,7 +14,9 @@
   <section class="flex flex-col bg-cyan-600">
     <h2 class="p-2 text-lg font-bold text-white">Key Partners</h2>
     <div class="grid flex-grow grid-cols-2">
-      <div class="row-span-2"></div>
+      <div class="row-span-2">
+        <Area />
+      </div>
       <section class="bg-cyan-500">
         <h3 class="text-md p-2 font-bold text-white">Key Activites</h3>
       </section>
