@@ -5,8 +5,9 @@
   $: if ($selectedItem) {
     relatedBy = [];
     for (const other of $items.values()) {
-      other.relations.includes($selectedItem.id);
-      relatedBy.push(other);
+      if (other.relations.includes($selectedItem.id)) {
+        relatedBy.push(other);
+      }
     }
   }
 </script>
