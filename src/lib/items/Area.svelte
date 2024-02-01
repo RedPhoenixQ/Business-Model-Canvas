@@ -24,7 +24,10 @@
   <AddIconDialog bind:openDialog></AddIconDialog>
   <ContextMenu.Trigger
     class="relative h-full w-full"
-    on:pointerdown={handleUnselect}
+    on:pointerdown={(event) => {
+      // @ts-ignore: Event is misstyped from ContextMenu.Trigger
+      handleUnselect(event.detail.originalEvent);
+    }}
     bind:el={areaElement}
   >
     <LineDrawing />

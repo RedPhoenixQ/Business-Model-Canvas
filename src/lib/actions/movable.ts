@@ -7,17 +7,25 @@ type Position = {
 
 export const movable: Action<
   HTMLElement,
-  Position | undefined,
+  { pos: Position; enabled: boolean },
   { "on:moving": (event: CustomEvent<Position>) => void }
-> = (node, pos = { x: 0, y: 0 }) => {
+> = (node, { pos, enabled } = { pos: { x: 0, y: 0 }, enabled: true }) => {
   let moving = false;
 
   node.style.userSelect = "none";
-  node.style.cursor = "grab";
   node.style.position = "absolute";
+  setCursor();
+
+  function setCursor() {
+    if (enabled) {
+      node.style.cursor = "grab";
+    } else {
+      node.style.cursor = "pointer";
+    }
+  }
 
   function onStart(e: PointerEvent) {
-    if (e.pointerType === "mouse" && e.button !== 0) return;
+    if (!enabled || (e.pointerType === "mouse" && e.button !== 0)) return;
     node.style.cursor = "grabbing";
     moving = true;
   }
@@ -33,8 +41,9 @@ export const movable: Action<
   }
 
   function onEnd() {
+    if (!moving) return;
     moving = false;
-    node.style.cursor = "grab";
+    setCursor();
   }
 
   // Register handlers
@@ -52,6 +61,10 @@ export const movable: Action<
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onEnd);
       window.removeEventListener("pointercancel", onEnd);
+    },
+    update(params) {
+      enabled = params.enabled;
+      setCursor();
     },
   };
 };

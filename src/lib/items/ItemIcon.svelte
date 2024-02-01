@@ -5,9 +5,20 @@
   export let item: Item;
 
   function handleSelect(event: PointerEvent) {
-    if (event.defaultPrevented) return;
+    if (event.defaultPrevented || $selectedItem === item) return;
     event.preventDefault();
-    $selectedItem = item;
+    if ($selectedItem) {
+      // Toggle relation to the selected item
+      let i = $selectedItem.relations.findIndex((id) => id === item.id);
+      if (i >= 0) {
+        $selectedItem.relations.splice(i);
+      } else {
+        $selectedItem.relations.push(item.id);
+      }
+      $selectedItem.relations = $selectedItem.relations;
+    } else {
+      $selectedItem = item;
+    }
   }
 
   $: is_selected = $selectedItem === item;
@@ -18,7 +29,7 @@
   class:scale-125={is_selected}
   style="left:{item.x}px;top:{item.y}px;"
   on:pointerdown={handleSelect}
-  use:movable={item}
+  use:movable={{ pos: item, enabled: !$selectedItem || $selectedItem === item }}
   on:moving={({ detail }) => {
     item.x = detail.x;
     item.y = detail.y;
