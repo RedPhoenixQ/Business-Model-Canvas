@@ -1,6 +1,7 @@
 <script lang="ts">
   import { type Item, selectedItem } from ".";
   import { movable } from "$lib/actions/movable";
+  import NoIcon from "../../assets/no-icon.svg";
 
   export let item: Item;
 
@@ -22,6 +23,10 @@
   }
 
   $: is_selected = $selectedItem === item;
+
+  // Use fallback icon
+  $: icon = item.icon || NoIcon;
+  console.log(icon);
 </script>
 
 <div
@@ -42,5 +47,5 @@
       style="width: 150%;left:50%;top:50%;"
     ></div>
   {/if}
-  <img src={item.icon} alt={item.name} />
+  <img src={icon} alt={item.name} />
 </div>

@@ -6,7 +6,7 @@ export type Item = {
   x: number;
   y: number;
   name: string;
-  icon: string;
+  icon?: string;
   relations: ItemId[];
 };
 
