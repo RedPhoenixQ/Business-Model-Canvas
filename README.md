@@ -14,19 +14,26 @@ You can access a preview of the application [here](https://htmlpreview.github.io
 
 1. Make sure that you have [Node](https://nodejs.org/en/download) installed
 2. If you are using Vs Code, install the official [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode) plugin
-3. Install the packages used
+3. Clone the repo
+
+   ```sh
+   git clone https://github.com/RedPhoenixQ/Business-Model-Canvas
+   cd "Business-Model-Canvas"
+   ```
+
+4. Install the packages used
 
    ```sh
    npm install
    ```
 
-4. Start dev server
+5. Start dev server
 
    ```sh
    npm run dev
    ```
 
-5. Build the application
+6. Build the application
 
    ```sh
    npm run build
