@@ -3,10 +3,9 @@
   import ItemIcon from "./ItemIcon.svelte";
   import LineDrawing from "./LineDrawing.svelte";
   import AddIconDialog from "./AddIconDialog.svelte";
-  import * as ContextMenu from "$lib/components/ui/context-menu";
 
   function handleUnselect(event: PointerEvent) {
-    if (event.defaultPrevented) return;
+    if (event.defaultPrevented || event.button !== 0) return;
     $selectedItem = undefined;
   }
 
@@ -20,28 +19,14 @@
   }
 </script>
 
-<ContextMenu.Root>
-  <AddIconDialog bind:openDialog></AddIconDialog>
-  <ContextMenu.Trigger
-    class="relative h-full w-full"
-    on:pointerdown={(event) => {
-      // @ts-ignore: Event is misstyped from ContextMenu.Trigger
-      handleUnselect(event.detail.originalEvent);
-    }}
-    bind:el={areaElement}
-  >
-    <LineDrawing />
-    {#each $items as [_key, item]}
-      <ItemIcon {item} />
-    {/each}
-  </ContextMenu.Trigger>
-  <ContextMenu.Content>
-    <ContextMenu.Item
-      on:click={(event) => {
-        console.log(event);
-        // @ts-ignore: Event from ContextMenu.Item doesn't match the actual object
-        handleOpenAddDialog(event.detail.originalEvent);
-      }}>Add icon</ContextMenu.Item
-    >
-  </ContextMenu.Content>
-</ContextMenu.Root>
+<AddIconDialog bind:openDialog></AddIconDialog>
+<div
+  class="relative h-full w-full"
+  on:pointerdown={handleUnselect}
+  bind:this={areaElement}
+>
+  <LineDrawing />
+  {#each $items as [_key, item]}
+    <ItemIcon {item} />
+  {/each}
+</div>
