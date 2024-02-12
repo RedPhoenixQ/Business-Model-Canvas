@@ -13,6 +13,9 @@ export type Item = {
 export const selectedItem: Writable<Item | undefined> = writable();
 selectedItem.subscribe(console.debug);
 
+export const itemDetails: Writable<ItemId | undefined> = writable();
+itemDetails.subscribe(console.debug);
+
 export const items: Writable<Map<ItemId, Item>> = writable(
   new Map([
     [

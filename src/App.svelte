@@ -1,7 +1,10 @@
 <script lang="ts">
   import Area from "$lib/items/Area.svelte";
+  import ItemDetails from "$lib/items/ItemDetails.svelte";
   import Counter from "./lib/Counter.svelte";
 </script>
+
+<ItemDetails />
 
 <div class="flex min-h-screen flex-col bg-neutral-600 p-2">
   <h1 class="col-span-full mx-2 text-lg font-bold text-white">
