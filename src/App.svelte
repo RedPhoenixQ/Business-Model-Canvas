@@ -75,6 +75,19 @@
   ] as Edge[]);
 
   const snapGrid: SnapGrid = [25, 25];
+
+  function hideAllEdges() {
+    for (const edge of $edges) {
+      edge.hidden = true;
+    }
+    $edges = $edges;
+  }
+  function showNodeEdges(node: Node) {
+    for (const edge of $edges) {
+      edge.hidden = edge.source !== node.id && edge.target !== node.id;
+    }
+    $edges = $edges;
+  }
 </script>
 
 <ItemDetails />
@@ -92,21 +105,14 @@
     {snapGrid}
     {nodeTypes}
     fitView
-    on:paneclick={() => {
-      // Hide all edges
-      for (const edge of $edges) {
-        edge.hidden = true;
-      }
-      $edges = $edges;
-    }}
+    on:paneclick={hideAllEdges}
     on:nodeclick={(event) => {
       console.log("on node click", event.detail.node);
-      // Show only edges connecting to clicked node
-      const id = event.detail.node.id;
-      for (const edge of $edges) {
-        edge.hidden = !(edge.source === id || edge.target === id);
-      }
-      $edges = $edges;
+      showNodeEdges(event.detail.node);
+    }}
+    on:nodedragstart={(event) => {
+      console.log("on node drag start", event.detail.node);
+      showNodeEdges(event.detail.node);
     }}
   >
     <Controls />
