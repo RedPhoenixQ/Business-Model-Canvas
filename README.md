@@ -2,10 +2,6 @@
 
 An interactive interface for Buisiness Model Canvas that aims to be an educational tool for buisinesses.
 
-## Preview
-
-You can access a preview of the application [here](https://htmlpreview.github.io/?https://github.com/RedPhoenixQ/Business-Model-Canvas/blob/master/dist/index.html).
-
 ## Recommended IDE Setup
 
 [VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
