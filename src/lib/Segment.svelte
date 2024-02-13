@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { NodeResizer, type NodeProps } from "@xyflow/svelte";
+  import { type NodeProps, NodeResizeControl } from "@xyflow/svelte";
   import type { SegmentData } from "./layout";
 
   type $$Props = NodeProps<SegmentData>;
@@ -11,5 +11,25 @@
     ''}"
 >
   <span class="px-2 text-white">{id}</span>
-  <NodeResizer handleClass="pointer-events-auto" isVisible={false} />
+  <NodeResizeControl
+    minHeight={200}
+    minWidth={200}
+    position="top-right"
+    style="background: none; border: none;"
+  >
+    <svg
+      class="pointer-events-auto aspect-square w-6 -translate-x-full translate-y-1 stroke-black p-1 dark:stroke-white"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 512 512"
+      ><g
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="32"
+        ><path d="m304 96h112v112" /><path
+          d="m405.77 106.2-293.79 293.82"
+        /><path d="m208 416h-112v-112" /></g
+      ></svg
+    >
+  </NodeResizeControl>
 </div>
