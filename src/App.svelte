@@ -18,8 +18,9 @@
   import Item from "$lib/Item.svelte";
   import Segment from "$lib/Segment.svelte";
   import { defaultSegments, type SegmentKey } from "$lib/layout";
-  import { initTheme } from "$lib/theme";
+  import { initTheme, theme } from "$lib/theme";
   import { onMount } from "svelte";
+  import ThemeSelector from "$lib/ThemeSelector.svelte";
 
   const nodeTypes = {
     item: Item,
@@ -115,13 +116,16 @@
   >
     <h1 class="text-lg font-bold">Business Model Canvas</h1>
   </Panel>
+  <Panel position="top-right">
+    <ThemeSelector />
+  </Panel>
   <SvelteFlow
     {nodes}
     {edges}
     {snapGrid}
     {nodeTypes}
     fitView
-    colorMode="system"
+    colorMode={$theme || "system"}
     on:paneclick={hideAllEdges}
     on:nodeclick={(event) => {
       console.log("on node click", event.detail.node);
