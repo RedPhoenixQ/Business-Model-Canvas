@@ -3,10 +3,10 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import Label from "$lib/components/ui/label/label.svelte";
   import * as Sheet from "$lib/components/ui/sheet";
-  import { itemDetails, type Item, items } from ".";
+  import { itemDetails } from "./items";
 
   let open: boolean;
-  $: item = $itemDetails ? $items.get($itemDetails) : undefined;
+  $: item = $itemDetails ? $itemDetails : undefined;
   $: open = item !== undefined;
 
   $: console.log(item, open);
@@ -24,11 +24,21 @@
     <Sheet.Header>
       <Sheet.Title>Edit item</Sheet.Title>
     </Sheet.Header>
-    {#if item}
+    {#if $item}
       <div class="grid gap-4 py-4">
         <div class="grid grid-cols-4 items-center gap-4">
           <Label for="name" class="text-right">Name</Label>
-          <Input id="name" bind:value={item.name} class="col-span-3" />
+          <Input id="name" bind:value={$item.name} class="col-span-3" />
+        </div>
+        <div class="grid grid-cols-4 items-center gap-4">
+          <Label for="name" class="text-right">Icon Link</Label>
+          <Input
+            id="name"
+            type="url"
+            bind:value={$item.icon}
+            class="col-span-2"
+          />
+          <img class="w-10" src={$item.icon} alt={$item.name} />
         </div>
       </div>
     {:else}
