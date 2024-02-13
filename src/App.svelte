@@ -111,6 +111,7 @@
     {snapGrid}
     {nodeTypes}
     fitView
+    colorMode="system"
     on:paneclick={hideAllEdges}
     on:nodeclick={(event) => {
       console.log("on node click", event.detail.node);
