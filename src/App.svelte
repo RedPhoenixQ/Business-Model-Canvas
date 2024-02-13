@@ -1,4 +1,7 @@
 <script lang="ts">
+  // 👇 this is important! You need to import the styles for Svelte Flow to work
+  import "@xyflow/svelte/dist/style.css";
+
   import ItemDetails from "$lib/ItemDetails.svelte";
   import { writable } from "svelte/store";
   import {
@@ -11,10 +14,6 @@
     type Node,
     type Edge,
   } from "@xyflow/svelte";
-
-  // 👇 this is important! You need to import the styles for Svelte Flow to work
-  import "@xyflow/svelte/dist/style.css";
-
   import Item from "$lib/Item.svelte";
 
   const nodeTypes = {
@@ -33,7 +32,6 @@
       id: "2",
       type: "item",
       data: {
-        label: "Node",
         item: writable({
           name: "steam",
           icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
