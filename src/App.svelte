@@ -13,6 +13,7 @@
     type SnapGrid,
     type Node,
     type Edge,
+    Panel,
   } from "@xyflow/svelte";
   import Item from "$lib/Item.svelte";
   import Segment from "$lib/Segment.svelte";
@@ -98,13 +99,13 @@
 
 <ItemDetails />
 
-<div
-  style:grid-template-rows="auto 1fr"
-  class="grid min-h-screen bg-neutral-600"
->
-  <h1 class="col-span-full mx-2 text-lg font-bold text-white">
-    Business Model Canvas
-  </h1>
+<div class="h-screen bg-neutral-600">
+  <Panel
+    position="top-left"
+    class="bg-white p-2 text-black shadow-sm dark:bg-neutral-700 dark:text-white"
+  >
+    <h1 class="text-lg font-bold">Business Model Canvas</h1>
+  </Panel>
   <SvelteFlow
     {nodes}
     {edges}
