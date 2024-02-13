@@ -18,6 +18,8 @@
   import Item from "$lib/Item.svelte";
   import Segment from "$lib/Segment.svelte";
   import { defaultSegments, type SegmentKey } from "$lib/layout";
+  import { initTheme } from "$lib/theme";
+  import { onMount } from "svelte";
 
   const nodeTypes = {
     item: Item,
@@ -95,6 +97,13 @@
     }
     $edges = $edges;
   }
+
+  onMount(() => {
+    const cleanupTheme = initTheme();
+    return () => {
+      cleanupTheme();
+    };
+  });
 </script>
 
 <ItemDetails />
