@@ -3,6 +3,7 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import Label from "$lib/components/ui/label/label.svelte";
   import * as Sheet from "$lib/components/ui/sheet";
+  import ItemIcon from "./ItemIcon.svelte";
   import { itemDetails } from "./items";
 
   let open: boolean;
@@ -38,7 +39,7 @@
             bind:value={$item.icon}
             class="col-span-2"
           />
-          <img class="w-10" src={$item.icon} alt={$item.name} />
+          <ItemIcon src={$item.icon} alt={$item.name} />
         </div>
       </div>
     {:else}
