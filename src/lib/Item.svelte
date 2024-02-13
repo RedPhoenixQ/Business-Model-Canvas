@@ -10,11 +10,13 @@
   }>;
 
   export let data: $$Props["data"];
+  export let selected: $$Props["selected"];
+
   const { item } = data;
 </script>
 
 <ItemContextMenu {item}>
-  <div class="aspect-square w-10">
+  <div class="aspect-square w-10 {selected ? 'scale-125' : ''}">
     <Handle
       type="target"
       onconnect={(connections) => {
