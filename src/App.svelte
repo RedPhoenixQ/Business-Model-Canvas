@@ -15,13 +15,17 @@
     type Edge,
   } from "@xyflow/svelte";
   import Item from "$lib/Item.svelte";
+  import Segment from "$lib/Segment.svelte";
+  import { defaultSegments, type SegmentKey } from "$lib/layout";
 
   const nodeTypes = {
     item: Item,
+    segment: Segment,
   };
 
   // We are using writables for the nodes and edges to sync them easily. When a user drags a node for example, Svelte Flow updates its position.
   const nodes = writable([
+    ...defaultSegments,
     {
       id: "1",
       type: "input",
@@ -37,7 +41,9 @@
           icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
         }),
       },
-      position: { x: 0, y: 150 },
+      position: { x: 0, y: 0 },
+      parentNode: "key-activities" as SegmentKey,
+      extent: "parent",
     },
     {
       id: "3",
@@ -48,7 +54,9 @@
           name: "empty test",
         }),
       },
-      position: { x: 100, y: 150 },
+      position: { x: 0, y: 100 },
+      parentNode: "key-activities" as SegmentKey,
+      extent: "parent",
     },
   ] as Node[]);
 
