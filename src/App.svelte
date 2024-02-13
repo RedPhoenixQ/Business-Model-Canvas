@@ -1,59 +1,143 @@
 <script lang="ts">
-  import Area from "$lib/items/Area.svelte";
-  import Counter from "./lib/Counter.svelte";
+  // 👇 this is important! You need to import the styles for Svelte Flow to work
+  import "@xyflow/svelte/dist/style.css";
+
+  import ItemDetails from "$lib/ItemDetails.svelte";
+  import { writable } from "svelte/store";
+  import {
+    SvelteFlow,
+    Controls,
+    Background,
+    BackgroundVariant,
+    MiniMap,
+    type SnapGrid,
+    type Node,
+    type Edge,
+    Panel,
+  } from "@xyflow/svelte";
+  import Item from "$lib/Item.svelte";
+  import Segment from "$lib/Segment.svelte";
+  import { defaultSegments, type SegmentKey } from "$lib/layout";
+  import { initTheme, theme } from "$lib/theme";
+  import { onMount } from "svelte";
+  import ThemeSelector from "$lib/ThemeSelector.svelte";
+
+  const nodeTypes = {
+    item: Item,
+    segment: Segment,
+  };
+
+  // We are using writables for the nodes and edges to sync them easily. When a user drags a node for example, Svelte Flow updates its position.
+  const nodes = writable([
+    ...defaultSegments,
+    {
+      id: "1",
+      type: "input",
+      data: { label: "Input Node" },
+      position: { x: 0, y: 0 },
+    },
+    {
+      id: "2",
+      type: "item",
+      data: {
+        item: writable({
+          name: "steam",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+        }),
+      },
+      position: { x: 0, y: 0 },
+      parentNode: "key-activities" as SegmentKey,
+      extent: "parent",
+    },
+    {
+      id: "3",
+      type: "item",
+      data: {
+        label: "Node",
+        item: writable({
+          name: "empty test",
+        }),
+      },
+      position: { x: 0, y: 100 },
+      parentNode: "key-activities" as SegmentKey,
+      extent: "parent",
+    },
+  ] as Node[]);
+
+  // same for edges
+  const edges = writable([
+    {
+      id: "1-2-test",
+      type: "default",
+      source: "1",
+      target: "2",
+      label: "Edge Text",
+      hidden: true,
+    },
+    {
+      id: "1-3-test",
+      type: "default",
+      source: "1",
+      target: "3",
+      label: "Edge Text 2",
+      hidden: true,
+    },
+  ] as Edge[]);
+
+  const snapGrid: SnapGrid = [25, 25];
+
+  function hideAllEdges() {
+    for (const edge of $edges) {
+      edge.hidden = true;
+    }
+    $edges = $edges;
+  }
+  function showNodeEdges(node: Node) {
+    for (const edge of $edges) {
+      edge.hidden = edge.source !== node.id && edge.target !== node.id;
+    }
+    $edges = $edges;
+  }
+
+  onMount(() => {
+    const cleanupTheme = initTheme();
+    return () => {
+      cleanupTheme();
+    };
+  });
 </script>
 
-<div class="flex min-h-screen flex-col bg-neutral-600 p-2">
-  <h1 class="col-span-full mx-2 text-lg font-bold text-white">
-    Business Model Canvas
-  </h1>
-  <main
-    style="grid-template-columns: 2fr 1fr 2fr; grid-template-rows: 3fr 1fr;"
-    class="relative grid flex-1 grid-rows-3 gap-1 [&_section]:border-2 [&_section]:border-black"
+<ItemDetails />
+
+<div class="h-screen bg-neutral-600">
+  <Panel
+    position="top-left"
+    class="bg-white p-2 text-black shadow-sm dark:bg-neutral-700 dark:text-white"
   >
-    <div class="absolute h-full w-full">
-      <Area></Area>
-    </div>
-    <section class="flex flex-col bg-cyan-600">
-      <h2 class="p-2 text-lg font-bold text-white">Key Partners</h2>
-      <div class="grid flex-grow grid-cols-2">
-        <div class="row-span-2"></div>
-        <section class="bg-cyan-500">
-          <h3 class="text-md p-2 font-bold text-white">Key Activites</h3>
-        </section>
-        <section class="bg-cyan-500">
-          <h3 class="text-md p-2 font-bold text-white">Key Resources</h3>
-        </section>
-      </div>
-    </section>
-
-    <section class="row-span-2 flex flex-col bg-yellow-400">
-      <h2 class="p-2 text-lg font-bold text-neutral-700">Value Propositions</h2>
-      <div class="flex flex-grow items-center justify-center">
-        <Counter />
-      </div>
-    </section>
-
-    <section class="flex flex-col bg-lime-600">
-      <h2 class="p-2 text-lg font-bold text-white">Customer Segments</h2>
-      <div class="grid flex-grow grid-cols-2">
-        <div class="row-span-2"></div>
-        <section class="bg-lime-500">
-          <h3 class="text-md p-2 font-bold text-white">
-            Customer Relationships
-          </h3>
-        </section>
-        <section class="bg-lime-500">
-          <h3 class="text-md p-2 font-bold text-white">Channels</h3>
-        </section>
-      </div>
-    </section>
-
-    <section class="bg-amber-500">
-      <h2 class="p-2 text-lg font-bold text-white">Cost Structure</h2>
-    </section>
-    <section class="bg-amber-500">
-      <h2 class="p-2 text-lg font-bold text-white">Revenue Streams</h2>
-    </section>
-  </main>
+    <h1 class="text-lg font-bold">Business Model Canvas</h1>
+  </Panel>
+  <Panel position="top-right">
+    <ThemeSelector />
+  </Panel>
+  <SvelteFlow
+    {nodes}
+    {edges}
+    {snapGrid}
+    {nodeTypes}
+    fitView
+    colorMode={$theme || "system"}
+    on:paneclick={hideAllEdges}
+    on:nodeclick={(event) => {
+      console.log("on node click", event.detail.node);
+      showNodeEdges(event.detail.node);
+    }}
+    on:nodedragstart={(event) => {
+      console.log("on node drag start", event.detail.node);
+      showNodeEdges(event.detail.node);
+    }}
+  >
+    <Controls />
+    <Background variant={BackgroundVariant.Dots} />
+    <MiniMap />
+  </SvelteFlow>
 </div>

@@ -1,7 +1,7 @@
 {
   "name": "Business Model Canvas",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -27,6 +27,7 @@
     "vite-plugin-singlefile": "^1.0.0"
   },
   "dependencies": {
+    "@xyflow/svelte": "^0.0.35",
     "bits-ui": "^0.16.0",
     "clsx": "^2.1.0",
     "lucide-svelte": "^0.319.0",
