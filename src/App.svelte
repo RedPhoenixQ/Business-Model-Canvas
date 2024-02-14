@@ -108,7 +108,8 @@
       >
         <h1 class="text-lg font-bold">Business Model Canvas</h1>
       </Panel>
-      <Panel position="top-right">
+      <Panel position="top-right" class="flex gap-2">
+        <Save />
         <ThemeSelector />
       </Panel>
 
