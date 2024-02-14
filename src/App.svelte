@@ -12,80 +12,25 @@
     MiniMap,
     type SnapGrid,
     type Node,
-    type Edge,
     Panel,
     type XYPosition,
   } from "@xyflow/svelte";
   import Item from "$lib/Item.svelte";
   import Segment from "$lib/Segment.svelte";
-  import { defaultSegments, type SegmentKey } from "$lib/layout";
   import { initTheme, theme } from "$lib/theme";
   import { onMount } from "svelte";
   import ThemeSelector from "$lib/ThemeSelector.svelte";
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
+  import { defaultTemplate } from "$lib/items";
 
   const nodeTypes = {
     item: Item,
     segment: Segment,
   };
 
-  // We are using writables for the nodes and edges to sync them easily. When a user drags a node for example, Svelte Flow updates its position.
-  const nodes = writable([
-    ...defaultSegments,
-    {
-      id: "1",
-      type: "input",
-      data: { label: "Input Node" },
-      position: { x: 0, y: 0 },
-    },
-    {
-      id: "2",
-      type: "item",
-      data: {
-        item: writable({
-          name: "steam",
-          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
-        }),
-      },
-      position: { x: 60, y: 40 },
-      parentNode: "key-activities" as SegmentKey,
-      extent: "parent",
-    },
-    {
-      id: "3",
-      type: "item",
-      data: {
-        label: "Node",
-        item: writable({
-          name: "empty test",
-        }),
-      },
-      position: { x: 10, y: 100 },
-      parentNode: "key-activities" as SegmentKey,
-      extent: "parent",
-    },
-  ] as Node[]);
-
-  // same for edges
-  const edges = writable([
-    {
-      id: "1-2-test",
-      type: "default",
-      source: "1",
-      target: "2",
-      label: "Edge Text",
-      hidden: true,
-    },
-    {
-      id: "1-3-test",
-      type: "default",
-      source: "1",
-      target: "3",
-      label: "Edge Text 2",
-      hidden: true,
-    },
-  ] as Edge[]);
+  const nodes = writable(defaultTemplate.nodes);
+  const edges = writable(defaultTemplate.edges);
 
   const snapGrid: SnapGrid = [25, 25];
 
