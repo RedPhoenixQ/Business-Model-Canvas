@@ -46,6 +46,13 @@
   </div>
 
   <ContextMenu.Content>
+    <ContextMenu.Label class="flex items-center gap-2">
+      <div class="w-6">
+        <ItemIcon src={$item.icon} alt={$item.name} />
+      </div>
+      <span class="text-center">{$item.name}</span>
+    </ContextMenu.Label>
+    <ContextMenu.Separator />
     <ContextMenu.Item
       on:click={() => {
         $itemDetails = item;
