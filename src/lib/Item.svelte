@@ -1,21 +1,32 @@
 <script lang="ts">
-  import { Handle, Position, type NodeProps } from "@xyflow/svelte";
+  import * as ContextMenu from "$lib/components/ui/context-menu";
+  import {
+    Handle,
+    Position,
+    type NodeProps,
+    useNodes,
+    useEdges,
+  } from "@xyflow/svelte";
   import type { Writable } from "svelte/store";
-  import type { Item } from "./items";
-  import ItemContextMenu from "./ItemContextMenu.svelte";
+  import { itemDetails, type Item } from "./items";
   import ItemIcon from "./ItemIcon.svelte";
+  import CustomContextMenuTrigger from "./CustomContextMenuTrigger.svelte";
 
   type $$Props = NodeProps<{
     item: Writable<Item>;
   }>;
 
+  export let id: $$Props["id"];
   export let data: $$Props["data"];
   export let selected: $$Props["selected"];
 
   const { item } = data;
+
+  const nodes = useNodes();
+  const edges = useEdges();
 </script>
 
-<ItemContextMenu data={$$props}>
+<CustomContextMenuTrigger>
   <div class="aspect-square w-10 {selected ? 'scale-125' : ''}">
     <Handle
       type="target"
@@ -33,4 +44,25 @@
     />
     <ItemIcon src={$item.icon} alt={$item.name} />
   </div>
-</ItemContextMenu>
+
+  <ContextMenu.Content>
+    <ContextMenu.Item
+      on:click={() => {
+        $itemDetails = item;
+      }}>Edit</ContextMenu.Item
+    >
+    <ContextMenu.Separator />
+    <ContextMenu.Item
+      class="text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"
+      on:click={() => {
+        if (confirm("Are you sure?")) {
+          console.log("deleting node", id, $item);
+          $nodes = $nodes.filter((node) => node.id !== id);
+          $edges = $edges.filter(
+            (edge) => edge.source !== id && edge.target !== id,
+          );
+        }
+      }}>Delete</ContextMenu.Item
+    >
+  </ContextMenu.Content>
+</CustomContextMenuTrigger>
