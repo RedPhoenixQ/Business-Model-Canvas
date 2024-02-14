@@ -14,12 +14,6 @@ export const defaultTemplate: { nodes: Node[]; edges: Edge[] } = {
     ...defaultSegments,
     {
       id: "1",
-      type: "input",
-      data: { label: "Input Node" },
-      position: { x: 0, y: 0 },
-    },
-    {
-      id: "2",
       type: "item",
       data: {
         item: writable({
@@ -27,7 +21,19 @@ export const defaultTemplate: { nodes: Node[]; edges: Edge[] } = {
           icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
         }),
       },
-      position: { x: 60, y: 40 },
+      position: { x: 90, y: 80 },
+      parentNode: "key-partners" satisfies SegmentKey,
+      extent: "parent",
+    },
+    {
+      id: "2",
+      type: "item",
+      data: {
+        item: writable({
+          name: "empty test",
+        }),
+      },
+      position: { x: 30, y: 100 },
       parentNode: "key-activities" satisfies SegmentKey,
       extent: "parent",
     },
@@ -35,32 +41,44 @@ export const defaultTemplate: { nodes: Node[]; edges: Edge[] } = {
       id: "3",
       type: "item",
       data: {
-        label: "Node",
         item: writable({
           name: "empty test",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
         }),
       },
-      position: { x: 10, y: 100 },
-      parentNode: "key-activities" satisfies SegmentKey,
+      position: { x: 120, y: 50 },
+      parentNode: "channels" satisfies SegmentKey,
+      extent: "parent",
+    },
+    {
+      id: "4",
+      type: "item",
+      data: {
+        item: writable({
+          name: "Costs",
+          icon: "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
+        }),
+      },
+      position: { x: 320, y: 120 },
+      parentNode: "costs" satisfies SegmentKey,
       extent: "parent",
     },
   ],
   edges: [
     {
       id: "1-2-test",
-      type: "line",
       source: "1",
       target: "2",
-      label: "Edge Text",
-      hidden: true,
     },
     {
-      id: "1-3-test",
-      type: "line",
-      source: "1",
+      id: "2-3-test",
+      source: "2",
       target: "3",
-      label: "Edge Text 2",
-      hidden: true,
+    },
+    {
+      id: "1-4-test",
+      source: "1",
+      target: "4",
     },
   ],
 } as const;

@@ -92,6 +92,10 @@
       <ThemeSelector />
     </Panel>
     <SvelteFlow
+      defaultEdgeOptions={{
+        type: "line",
+        style: "stroke-width: 2;",
+      }}
       {nodes}
       {edges}
       {snapGrid}
