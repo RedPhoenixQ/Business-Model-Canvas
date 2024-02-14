@@ -7,7 +7,7 @@
   <img {src} {alt} />
 {:else}
   <svg
-    class="aspect-square w-10 stroke-black dark:stroke-white"
+    class="aspect-square stroke-black dark:stroke-white"
     viewBox="0 0 100 100"
     xmlns="http://www.w3.org/2000/svg"
   >
