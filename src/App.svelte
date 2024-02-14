@@ -21,6 +21,8 @@
   import { initTheme, theme } from "$lib/theme";
   import { onMount } from "svelte";
   import ThemeSelector from "$lib/ThemeSelector.svelte";
+  import * as ContextMenu from "$lib/components/ui/context-menu";
+  import FlowContextMenu from "$lib/FlowContextMenu.svelte";
 
   const nodeTypes = {
     item: Item,
@@ -45,7 +47,7 @@
           icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
         }),
       },
-      position: { x: 0, y: 0 },
+      position: { x: 60, y: 40 },
       parentNode: "key-activities" as SegmentKey,
       extent: "parent",
     },
@@ -58,7 +60,7 @@
           name: "empty test",
         }),
       },
-      position: { x: 0, y: 100 },
+      position: { x: 10, y: 100 },
       parentNode: "key-activities" as SegmentKey,
       extent: "parent",
     },
@@ -109,35 +111,37 @@
 
 <ItemDetails />
 
-<div class="h-screen bg-neutral-600">
-  <Panel
-    position="top-left"
-    class="bg-white p-2 text-black shadow-sm dark:bg-neutral-700 dark:text-white"
-  >
-    <h1 class="text-lg font-bold">Business Model Canvas</h1>
-  </Panel>
-  <Panel position="top-right">
-    <ThemeSelector />
-  </Panel>
-  <SvelteFlow
-    {nodes}
-    {edges}
-    {snapGrid}
-    {nodeTypes}
-    fitView
-    colorMode={$theme || "system"}
-    on:paneclick={hideAllEdges}
-    on:nodeclick={(event) => {
-      console.log("on node click", event.detail.node);
-      showNodeEdges(event.detail.node);
-    }}
-    on:nodedragstart={(event) => {
-      console.log("on node drag start", event.detail.node);
-      showNodeEdges(event.detail.node);
-    }}
-  >
-    <Controls />
-    <Background variant={BackgroundVariant.Dots} />
-    <MiniMap />
-  </SvelteFlow>
-</div>
+<FlowContextMenu>
+  <div class="h-screen bg-neutral-600">
+    <Panel
+      position="top-left"
+      class="bg-white p-2 text-black shadow-sm dark:bg-neutral-700 dark:text-white"
+    >
+      <h1 class="text-lg font-bold">Business Model Canvas</h1>
+    </Panel>
+    <Panel position="top-right">
+      <ThemeSelector />
+    </Panel>
+    <SvelteFlow
+      {nodes}
+      {edges}
+      {snapGrid}
+      {nodeTypes}
+      fitView
+      colorMode={$theme || "system"}
+      on:paneclick={hideAllEdges}
+      on:nodeclick={(event) => {
+        console.log("on node click", event.detail.node);
+        showNodeEdges(event.detail.node);
+      }}
+      on:nodedragstart={(event) => {
+        console.log("on node drag start", event.detail.node);
+        showNodeEdges(event.detail.node);
+      }}
+    >
+      <Controls />
+      <Background variant={BackgroundVariant.Dots} />
+      <MiniMap />
+    </SvelteFlow>
+  </div>
+</FlowContextMenu>
