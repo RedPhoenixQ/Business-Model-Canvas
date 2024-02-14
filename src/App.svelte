@@ -45,15 +45,27 @@
     }
     $edges = $edges;
   }
-  function showNodeEdges(node_ids: string[]) {
-    for (const edge of $edges) {
-      edge.hidden =
-        !node_ids.includes(edge.source) && !node_ids.includes(edge.target);
+  function showNodeEdges(node_ids: string[], depth = 2) {
+    const idsToShow: string[] = [];
+    for (let i = 0; i < depth; i++) {
+      let next_node_list = [];
+      for (const edge of $edges) {
+        if (idsToShow.includes(edge.id)) continue;
+        const includesSource = node_ids.includes(edge.source);
+        const includesTarget = node_ids.includes(edge.target);
+        edge.hidden = !includesSource && !includesTarget;
+        if (!edge.hidden) {
+          idsToShow.push(edge.id);
+          next_node_list.push(includesSource ? edge.target : edge.source);
+        }
+      }
+      node_ids = next_node_list;
     }
     $edges = $edges;
   }
 
   onMount(() => {
+    hideAllEdges();
     const cleanupTheme = initTheme();
     return () => {
       cleanupTheme();
