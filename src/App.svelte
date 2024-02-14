@@ -90,7 +90,7 @@
         showNodeEdges(event.detail.node);
       }}
     >
-      <FlowContextMenu {nodes} bind:opened_at={contextmenu_pos} />
+      <FlowContextMenu bind:opened_at={contextmenu_pos} />
 
       <Controls />
       <Background variant={BackgroundVariant.Dots} />

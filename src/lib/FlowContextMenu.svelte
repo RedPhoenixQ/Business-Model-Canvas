@@ -5,14 +5,14 @@
     type Node,
     type Rect,
     type XYPosition,
+    useNodes,
   } from "@xyflow/svelte";
   import { writable, type Writable } from "svelte/store";
   import { itemDetails, type Item } from "./items";
 
-  export let nodes: Writable<Node[]>;
-
   export let opened_at: XYPosition;
 
+  const nodes = useNodes();
   const { screenToFlowPosition, getIntersectingNodes } = useSvelteFlow();
 
   function addItem(
