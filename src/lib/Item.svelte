@@ -24,8 +24,6 @@
   const { item } = data;
 
   const { deleteElements } = useSvelteFlow();
-  const nodes = useNodes();
-  const edges = useEdges();
 </script>
 
 <CustomContextMenuTrigger>
