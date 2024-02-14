@@ -1,5 +1,5 @@
 import { writable, type Writable } from "svelte/store";
-import { defaultSegments, type SegmentKey } from "./layout";
+import { defaultSegments, type SegmentKey } from "./segments";
 import type { Edge, Node } from "@xyflow/svelte";
 
 export type Item = {

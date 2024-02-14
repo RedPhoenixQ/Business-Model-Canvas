@@ -1,6 +1,6 @@
 <script lang="ts">
   import { type NodeProps, NodeResizeControl } from "@xyflow/svelte";
-  import { segmentInfo, type SegmentData, type SegmentKey } from "./layout";
+  import { segmentInfo, type SegmentData, type SegmentKey } from "./segments";
 
   type $$Props = NodeProps<SegmentData>;
   export let id: $$Props["id"];
