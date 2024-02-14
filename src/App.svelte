@@ -45,9 +45,10 @@
     }
     $edges = $edges;
   }
-  function showNodeEdges(node: Node) {
+  function showNodeEdges(node_ids: string[]) {
     for (const edge of $edges) {
-      edge.hidden = edge.source !== node.id && edge.target !== node.id;
+      edge.hidden =
+        !node_ids.includes(edge.source) && !node_ids.includes(edge.target);
     }
     $edges = $edges;
   }
@@ -89,11 +90,15 @@
       on:paneclick={hideAllEdges}
       on:nodeclick={(event) => {
         console.log("on node click", event.detail.node);
-        showNodeEdges(event.detail.node);
+        showNodeEdges([event.detail.node.id]);
       }}
       on:nodedragstart={(event) => {
         console.log("on node drag start", event.detail.node);
-        showNodeEdges(event.detail.node);
+        showNodeEdges([event.detail.node.id]);
+      }}
+      on:edgeclick={(event) => {
+        console.log("on edge click", event.detail.edge);
+        showNodeEdges([event.detail.edge.source, event.detail.edge.target]);
       }}
     >
       <FlowContextMenu bind:opened_at={contextmenu_pos} />
