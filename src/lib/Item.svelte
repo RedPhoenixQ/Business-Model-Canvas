@@ -6,6 +6,7 @@
     type NodeProps,
     useNodes,
     useEdges,
+    useSvelteFlow,
   } from "@xyflow/svelte";
   import type { Writable } from "svelte/store";
   import { itemDetails, type Item } from "./items";
@@ -22,6 +23,7 @@
 
   const { item } = data;
 
+  const { deleteElements } = useSvelteFlow();
   const nodes = useNodes();
   const edges = useEdges();
 </script>
@@ -64,10 +66,7 @@
       on:click={() => {
         if (confirm("Are you sure?")) {
           console.log("deleting node", id, $item);
-          $nodes = $nodes.filter((node) => node.id !== id);
-          $edges = $edges.filter(
-            (edge) => edge.source !== id && edge.target !== id,
-          );
+          deleteElements({ nodes: [{ id }] });
         }
       }}>Delete</ContextMenu.Item
     >
