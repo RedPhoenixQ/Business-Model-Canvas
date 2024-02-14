@@ -23,10 +23,15 @@
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
   import { defaultTemplate } from "$lib/items";
+  import StraightLineEdge from "$lib/edges/StraightLineEdge.svelte";
 
   const nodeTypes = {
     item: Item,
     segment: Segment,
+  };
+
+  const edgeTypes = {
+    line: StraightLineEdge,
   };
 
   const nodes = writable(defaultTemplate.nodes);
@@ -78,6 +83,7 @@
       {edges}
       {snapGrid}
       {nodeTypes}
+      {edgeTypes}
       fitView
       colorMode={$theme || "system"}
       on:paneclick={hideAllEdges}

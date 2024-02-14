@@ -48,7 +48,7 @@ export const defaultTemplate: { nodes: Node[]; edges: Edge[] } = {
   edges: [
     {
       id: "1-2-test",
-      type: "default",
+      type: "line",
       source: "1",
       target: "2",
       label: "Edge Text",
@@ -56,7 +56,7 @@ export const defaultTemplate: { nodes: Node[]; edges: Edge[] } = {
     },
     {
       id: "1-3-test",
-      type: "default",
+      type: "line",
       source: "1",
       target: "3",
       label: "Edge Text 2",
