@@ -6,6 +6,7 @@
 
 <ContextMenu.Root bind:open>
   <ContextMenu.Trigger
+    {...$$restProps}
     on:contextmenu={(event) => {
       // @ts-ignore: ContextMenu event is improperly typed
       if (event.detail.originalEvent.defaultPrevented) {
@@ -18,9 +19,4 @@
   >
     <slot />
   </ContextMenu.Trigger>
-  <slot name="content">
-    <ContextMenu.Content>
-      <ContextMenu.Item>No content added</ContextMenu.Item>
-    </ContextMenu.Content>
-  </slot>
 </ContextMenu.Root>

@@ -10,7 +10,7 @@
 <CustomContextMenuTrigger>
   <slot />
 
-  <ContextMenu.Content slot="content">
+  <ContextMenu.Content>
     <ContextMenu.Item
       on:click={() => {
         $itemDetails = item;
