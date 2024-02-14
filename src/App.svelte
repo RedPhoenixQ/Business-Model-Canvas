@@ -25,6 +25,7 @@
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
   import { defaultTemplate } from "$lib/items";
   import StraightLineEdge from "$lib/edges/StraightLineEdge.svelte";
+  import Save from "$lib/Save.svelte";
 
   const nodeTypes = {
     item: Item,
@@ -72,15 +73,6 @@
     class="absolute h-full w-full bg-red-500"
     bind:opened_at={contextmenu_pos}
   >
-    <Panel
-      position="top-left"
-      class="bg-white p-2 text-black shadow-sm dark:bg-neutral-700 dark:text-white"
-    >
-      <h1 class="text-lg font-bold">Business Model Canvas</h1>
-    </Panel>
-    <Panel position="top-right">
-      <ThemeSelector />
-    </Panel>
     <SvelteFlow
       defaultEdgeOptions={{
         type: "line",
@@ -110,6 +102,16 @@
         ]);
       }}
     >
+      <Panel
+        position="top-left"
+        class="bg-white p-2 text-black shadow-sm dark:bg-neutral-700 dark:text-white"
+      >
+        <h1 class="text-lg font-bold">Business Model Canvas</h1>
+      </Panel>
+      <Panel position="top-right">
+        <ThemeSelector />
+      </Panel>
+
       <FlowContextMenu bind:opened_at={contextmenu_pos} />
 
       <Controls />
