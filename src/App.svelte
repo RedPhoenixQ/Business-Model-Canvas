@@ -14,6 +14,7 @@
     type Node,
     Panel,
     type XYPosition,
+    getConnectedEdges,
   } from "@xyflow/svelte";
   import Item from "$lib/Item.svelte";
   import Segment from "$lib/Segment.svelte";
@@ -45,21 +46,10 @@
     }
     $edges = $edges;
   }
-  function showNodeEdges(node_ids: string[], depth = 2) {
-    const idsToShow: string[] = [];
-    for (let i = 0; i < depth; i++) {
-      let next_node_list = [];
-      for (const edge of $edges) {
-        if (idsToShow.includes(edge.id)) continue;
-        const includesSource = node_ids.includes(edge.source);
-        const includesTarget = node_ids.includes(edge.target);
-        edge.hidden = !includesSource && !includesTarget;
-        if (!edge.hidden) {
-          idsToShow.push(edge.id);
-          next_node_list.push(includesSource ? edge.target : edge.source);
-        }
-      }
-      node_ids = next_node_list;
+  function showNodeEdges(node_ids: ({ id: string } | Node)[]) {
+    const connected = getConnectedEdges(node_ids as Node[], $edges);
+    for (const edge of connected) {
+      edge.hidden = false;
     }
     $edges = $edges;
   }
@@ -106,15 +96,18 @@
       on:paneclick={hideAllEdges}
       on:nodeclick={(event) => {
         console.log("on node click", event.detail.node);
-        showNodeEdges([event.detail.node.id]);
+        showNodeEdges([event.detail.node]);
       }}
       on:nodedragstart={(event) => {
         console.log("on node drag start", event.detail.node);
-        showNodeEdges([event.detail.node.id]);
+        showNodeEdges([event.detail.node]);
       }}
       on:edgeclick={(event) => {
         console.log("on edge click", event.detail.edge);
-        showNodeEdges([event.detail.edge.source, event.detail.edge.target]);
+        showNodeEdges([
+          { id: event.detail.edge.source },
+          { id: event.detail.edge.target },
+        ]);
       }}
     >
       <FlowContextMenu bind:opened_at={contextmenu_pos} />
