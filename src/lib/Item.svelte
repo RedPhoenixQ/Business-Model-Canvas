@@ -15,7 +15,7 @@
   const { item } = data;
 </script>
 
-<ItemContextMenu {item}>
+<ItemContextMenu data={$$props}>
   <div class="aspect-square w-10 {selected ? 'scale-125' : ''}">
     <Handle
       type="target"
