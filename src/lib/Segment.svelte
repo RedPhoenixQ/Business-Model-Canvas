@@ -1,16 +1,18 @@
 <script lang="ts">
   import { type NodeProps, NodeResizeControl } from "@xyflow/svelte";
-  import type { SegmentData } from "./layout";
+  import { segmentInfo, type SegmentData, type SegmentKey } from "./layout";
 
   type $$Props = NodeProps<SegmentData>;
   export let id: $$Props["id"];
+
+  const { title, colorClass } = segmentInfo[id as SegmentKey];
 </script>
 
 <div
-  class="h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50 {$$restProps?.class ??
+  class="h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50 {colorClass} {$$restProps?.class ??
     ''}"
 >
-  <span class="px-2 text-white">{id}</span>
+  <span class="px-2 text-white">{title}</span>
   <NodeResizeControl
     minHeight={200}
     minWidth={200}

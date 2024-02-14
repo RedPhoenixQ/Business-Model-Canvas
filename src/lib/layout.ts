@@ -13,6 +13,48 @@ export type SegmentKey =
 
 export type SegmentData = {};
 
+export const segmentInfo: Record<
+  SegmentKey,
+  { title: string; colorClass: string }
+> = {
+  customers: {
+    title: "Customers",
+    colorClass: "bg-lime-600",
+  },
+  "customer-relations": {
+    title: "Customer Relations",
+    colorClass: "bg-lime-700",
+  },
+  channels: {
+    title: "Channels",
+    colorClass: "bg-lime-700",
+  },
+  value: {
+    title: "Channels",
+    colorClass: "bg-yellow-600",
+  },
+  "key-partners": {
+    title: "Key Partners",
+    colorClass: "bg-cyan-600",
+  },
+  "key-activities": {
+    title: "Key activities",
+    colorClass: "bg-cyan-700",
+  },
+  "key-resources": {
+    title: "Key Resources",
+    colorClass: "bg-cyan-700",
+  },
+  costs: {
+    title: "Costs",
+    colorClass: "bg-orange-500",
+  },
+  revenue: {
+    title: "Revenue Streams",
+    colorClass: "bg-orange-500",
+  },
+} as const;
+
 const SIZE = 200;
 
 const defaultSegment: Omit<Node<SegmentData, "segment">, "id" | "position"> = {
@@ -26,24 +68,26 @@ const defaultSegment: Omit<Node<SegmentData, "segment">, "id" | "position"> = {
   zIndex: -10,
 };
 
-export const defaultSegments: Node<SegmentData, "segment">[] = [
+export const defaultSegments: (Node<SegmentData, "segment"> & {
+  id: SegmentKey;
+})[] = [
   //  Key left side
   {
-    id: "key-partners" as SegmentKey,
+    id: "key-partners",
     position: { x: 0, y: 0 },
     width: SIZE,
     height: SIZE * 2,
     ...defaultSegment,
   },
   {
-    id: "key-activities" as SegmentKey,
+    id: "key-activities",
     position: { x: SIZE, y: 0 },
     width: SIZE,
     height: SIZE,
     ...defaultSegment,
   },
   {
-    id: "key-resources" as SegmentKey,
+    id: "key-resources",
     position: { x: SIZE, y: SIZE },
     width: SIZE,
     height: SIZE,
@@ -51,7 +95,7 @@ export const defaultSegments: Node<SegmentData, "segment">[] = [
   },
   // Value
   {
-    id: "value" as SegmentKey,
+    id: "value",
     position: { x: SIZE * 2, y: 0 },
     width: SIZE,
     height: SIZE * 2,
@@ -59,21 +103,21 @@ export const defaultSegments: Node<SegmentData, "segment">[] = [
   },
   // Customers
   {
-    id: "customer-relations" as SegmentKey,
+    id: "customer-relations",
     position: { x: SIZE * 3, y: SIZE },
     width: SIZE,
     height: SIZE,
     ...defaultSegment,
   },
   {
-    id: "channels" as SegmentKey,
+    id: "channels",
     position: { x: SIZE * 3, y: 0 },
     width: SIZE,
     height: SIZE,
     ...defaultSegment,
   },
   {
-    id: "customers" as SegmentKey,
+    id: "customers",
     position: { x: SIZE * 4, y: 0 },
     width: SIZE,
     height: SIZE * 2,
@@ -81,14 +125,14 @@ export const defaultSegments: Node<SegmentData, "segment">[] = [
   },
   // Money
   {
-    id: "costs" as SegmentKey,
+    id: "costs",
     position: { x: 0, y: SIZE * 2 },
     width: SIZE * 2.5,
     height: SIZE,
     ...defaultSegment,
   },
   {
-    id: "revenue" as SegmentKey,
+    id: "revenue",
     position: { x: SIZE * 2.5, y: SIZE * 2 },
     width: SIZE * 2.5,
     height: SIZE,
