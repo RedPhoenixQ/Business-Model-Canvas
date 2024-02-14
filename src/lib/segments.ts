@@ -1,4 +1,5 @@
 import type { Node } from "@xyflow/svelte";
+import { writable, type Writable } from "svelte/store";
 
 export type SegmentKey =
   | "key-partners"
@@ -13,49 +14,192 @@ export type SegmentKey =
 
 export type SegmentData = {};
 
+const SIZE = 200;
+
 export const segmentInfo: Record<
   SegmentKey,
-  { title: string; colorClass: string }
+  {
+    title: string;
+    colorClass: string;
+    grid: {
+      column: {
+        start: number;
+        end: number;
+      };
+      row: {
+        start: number;
+        end: number;
+      };
+    };
+    size: {
+      width: number;
+      height: number;
+    };
+  }
 > = {
-  customers: {
-    title: "Customers",
-    colorClass: "bg-lime-600",
-  },
-  "customer-relations": {
-    title: "Customer Relations",
-    colorClass: "bg-lime-700",
-  },
-  channels: {
-    title: "Channels",
-    colorClass: "bg-lime-700",
-  },
-  value: {
-    title: "Value Proposition",
-    colorClass: "bg-yellow-600",
-  },
   "key-partners": {
     title: "Key Partners",
     colorClass: "bg-cyan-600",
+    grid: {
+      column: {
+        start: 0,
+        end: 1,
+      },
+      row: {
+        start: 1,
+        end: 3,
+      },
+    },
+    size: {
+      width: SIZE,
+      height: SIZE * 2,
+    },
   },
   "key-activities": {
     title: "Key activities",
     colorClass: "bg-cyan-700",
+    grid: {
+      column: {
+        start: 1,
+        end: 2,
+      },
+      row: {
+        start: 2,
+        end: 3,
+      },
+    },
+    size: {
+      width: SIZE,
+      height: SIZE,
+    },
   },
   "key-resources": {
     title: "Key Resources",
     colorClass: "bg-cyan-700",
+    grid: {
+      column: {
+        start: 1,
+        end: 2,
+      },
+      row: {
+        start: 1,
+        end: 2,
+      },
+    },
+    size: {
+      width: SIZE,
+      height: SIZE,
+    },
+  },
+  value: {
+    title: "Value Proposition",
+    colorClass: "bg-yellow-600",
+    grid: {
+      column: {
+        start: 2,
+        end: 4,
+      },
+      row: {
+        start: 1,
+        end: 3,
+      },
+    },
+    size: {
+      width: SIZE,
+      height: SIZE * 2,
+    },
+  },
+  "customer-relations": {
+    title: "Customer Relations",
+    colorClass: "bg-lime-700",
+    grid: {
+      column: {
+        start: 4,
+        end: 5,
+      },
+      row: {
+        start: 2,
+        end: 3,
+      },
+    },
+    size: {
+      width: SIZE,
+      height: SIZE,
+    },
+  },
+  channels: {
+    title: "Channels",
+    colorClass: "bg-lime-700",
+    grid: {
+      column: {
+        start: 4,
+        end: 5,
+      },
+      row: {
+        start: 1,
+        end: 2,
+      },
+    },
+    size: {
+      width: SIZE,
+      height: SIZE,
+    },
+  },
+  customers: {
+    title: "Customers",
+    colorClass: "bg-lime-600",
+    grid: {
+      column: {
+        start: 5,
+        end: 6,
+      },
+      row: {
+        start: 1,
+        end: 3,
+      },
+    },
+    size: {
+      width: SIZE,
+      height: SIZE * 2,
+    },
   },
   costs: {
     title: "Costs",
     colorClass: "bg-orange-500",
+    grid: {
+      column: {
+        start: 0,
+        end: 3,
+      },
+      row: {
+        start: 0,
+        end: 1,
+      },
+    },
+    size: {
+      width: SIZE * 2.5,
+      height: SIZE,
+    },
   },
   revenue: {
     title: "Revenue Streams",
     colorClass: "bg-orange-500",
+    grid: {
+      column: {
+        start: 3,
+        end: 6,
+      },
+      row: {
+        start: 0,
+        end: 1,
+      },
+    },
+    size: {
+      width: SIZE * 2.5,
+      height: SIZE,
+    },
   },
 } as const;
-
-const SIZE = 200;
 
 const defaultSegment: Omit<Node<SegmentData, "segment">, "id" | "position"> = {
   type: "segment",
@@ -73,8 +217,6 @@ export const defaultSegments: Node[] = [
   {
     id: "key-partners",
     position: { x: 0, y: 0 },
-    width: SIZE,
-    height: SIZE * 2,
     ...defaultSegment,
   },
   {
@@ -132,10 +274,31 @@ export const defaultSegments: Node[] = [
   {
     id: "revenue",
     position: { x: SIZE * 2.5, y: SIZE * 2 },
-    width: SIZE * 2.5,
-    height: SIZE,
     ...defaultSegment,
   },
 ] as const satisfies (Node<SegmentData, "segment"> & {
   id: SegmentKey;
 })[];
+
+export const segmentColumns: Writable<
+  [number, number, number, number, number, number]
+> = writable([SIZE, SIZE, SIZE / 2, SIZE / 2, SIZE, SIZE]);
+segmentColumns.subscribe(console.debug);
+
+export const segmentRows: Writable<[number, number, number]> = writable([
+  SIZE,
+  SIZE,
+  SIZE,
+]);
+segmentRows.subscribe(console.debug);
+
+export const segmentForUpdate: Writable<
+  Map<
+    SegmentKey,
+    {
+      id: SegmentKey;
+      nodeElement: HTMLDivElement;
+      forceUpdate?: boolean;
+    }
+  >
+> = writable(new Map());
