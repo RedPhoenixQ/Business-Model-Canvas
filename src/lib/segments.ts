@@ -30,7 +30,7 @@ export const segmentInfo: Record<
     colorClass: "bg-lime-700",
   },
   value: {
-    title: "Channels",
+    title: "Value Proposition",
     colorClass: "bg-yellow-600",
   },
   "key-partners": {
