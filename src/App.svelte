@@ -14,6 +14,7 @@
     type Node,
     type Edge,
     Panel,
+    type XYPosition,
   } from "@xyflow/svelte";
   import Item from "$lib/Item.svelte";
   import Segment from "$lib/Segment.svelte";
@@ -21,8 +22,8 @@
   import { initTheme, theme } from "$lib/theme";
   import { onMount } from "svelte";
   import ThemeSelector from "$lib/ThemeSelector.svelte";
-  import * as ContextMenu from "$lib/components/ui/context-menu";
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
+  import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
 
   const nodeTypes = {
     item: Item,
@@ -107,12 +108,17 @@
       cleanupTheme();
     };
   });
+
+  let contextmenu_pos: XYPosition = { x: 0, y: 0 };
 </script>
 
 <ItemDetails />
 
-<FlowContextMenu>
-  <div class="h-screen bg-neutral-600">
+<div class="h-screen bg-neutral-600">
+  <CustomContextMenuTrigger
+    class="absolute h-full w-full bg-red-500"
+    bind:opened_at={contextmenu_pos}
+  >
     <Panel
       position="top-left"
       class="bg-white p-2 text-black shadow-sm dark:bg-neutral-700 dark:text-white"
@@ -139,9 +145,11 @@
         showNodeEdges(event.detail.node);
       }}
     >
+      <FlowContextMenu {nodes} bind:opened_at={contextmenu_pos} />
+
       <Controls />
       <Background variant={BackgroundVariant.Dots} />
       <MiniMap />
     </SvelteFlow>
-  </div>
-</FlowContextMenu>
+  </CustomContextMenuTrigger>
+</div>
