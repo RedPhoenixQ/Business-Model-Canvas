@@ -68,9 +68,7 @@ const defaultSegment: Omit<Node<SegmentData, "segment">, "id" | "position"> = {
   zIndex: -10,
 };
 
-export const defaultSegments: (Node<SegmentData, "segment"> & {
-  id: SegmentKey;
-})[] = [
+export const defaultSegments: Node[] = [
   //  Key left side
   {
     id: "key-partners",
@@ -138,4 +136,6 @@ export const defaultSegments: (Node<SegmentData, "segment"> & {
     height: SIZE,
     ...defaultSegment,
   },
-] as const;
+] as const satisfies (Node<SegmentData, "segment"> & {
+  id: SegmentKey;
+})[];
