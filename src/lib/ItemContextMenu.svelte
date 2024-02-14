@@ -2,20 +2,19 @@
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import type { Writable } from "svelte/store";
   import { itemDetails, type Item } from "./items";
+  import CustomContextMenuTrigger from "./CustomContextMenuTrigger.svelte";
 
   export let item: Writable<Item>;
 </script>
 
-<ContextMenu.Root>
-  <ContextMenu.Trigger>
-    <slot />
-  </ContextMenu.Trigger>
+<CustomContextMenuTrigger>
+  <slot />
 
-  <ContextMenu.Content>
+  <ContextMenu.Content slot="content">
     <ContextMenu.Item
       on:click={() => {
         $itemDetails = item;
       }}>Edit</ContextMenu.Item
     >
   </ContextMenu.Content>
-</ContextMenu.Root>
+</CustomContextMenuTrigger>
