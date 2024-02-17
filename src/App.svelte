@@ -23,7 +23,7 @@
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
   import { defaultTemplate } from "$lib/items";
   import StraightLineEdge from "$lib/edges/StraightLineEdge.svelte";
-  import Save from "$lib/Save.svelte";
+  import Menubar from "$lib/menubar/Menubar.svelte";
 
   const nodeTypes = {
     item: Item,
@@ -92,15 +92,10 @@
         ]);
       }}
     >
-      <Panel
-        position="top-left"
-        class="bg-white p-2 text-black shadow-sm dark:bg-neutral-700 dark:text-white"
-      >
-        <h1 class="text-lg font-bold">Business Model Canvas</h1>
-      </Panel>
-      <Panel position="top-right" class="flex gap-2">
-        <Save />
-        <ThemeSelector />
+      <Panel position="top-left" class="flex gap-2">
+        <Menubar>
+          <h1 class="px-2">Business Model Canvas</h1>
+        </Menubar>
       </Panel>
 
       <FlowContextMenu bind:opened_at={contextmenu_pos} />

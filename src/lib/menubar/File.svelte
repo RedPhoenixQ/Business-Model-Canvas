@@ -6,16 +6,16 @@
     type Node,
     useStore,
   } from "@xyflow/svelte";
-  import Button from "./components/ui/button/button.svelte";
+  import * as Menubar from "$lib/components/ui/menubar";
   import { get, writable } from "svelte/store";
-  import { segmentColumns, segmentRows } from "./segments";
+  import { segmentColumns, segmentRows } from "../segments";
 
   const { toObject, viewport } = useSvelteFlow();
   const { reset } = useStore();
   const nodes = useNodes();
   const edges = useEdges();
 
-  function save() {
+  function save(): string {
     const flowData = toObject();
 
     console.log();
@@ -37,15 +37,25 @@
         rows: $segmentRows,
       },
     });
-    navigator.clipboard.writeText(json);
-    console.log("Save data copied to clipboard");
+    return json;
   }
 
-  function load() {
-    const input = prompt("input");
-    if (input === null) return;
+  function download_file() {
+    const blob = new Blob([save()], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    // Create a one-time link element for downloading
+    const dlink = document.createElement("a");
+    // TODO: Get project name from somewere
+    dlink.download = "Test name.json";
+    dlink.href = url;
+    dlink.click();
+    dlink.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function load(json: string) {
     // TODO: Handle parse error
-    const flowData = JSON.parse(input);
+    const flowData = JSON.parse(json);
     flowData.nodes.forEach((node: Node) => {
       let storeKeys: string[] = [];
       switch (node.type) {
@@ -71,5 +81,18 @@
   }
 </script>
 
-<Button on:click={save}>Save</Button>
-<Button on:click={load}>Load</Button>
+<Menubar.Menu>
+  <Menubar.Trigger>File</Menubar.Trigger>
+  <Menubar.Content class="min-w-fit">
+    <Menubar.Item
+      on:click={() => {
+        const input = prompt("input");
+        if (input === null) return;
+        load(input);
+      }}>Open</Menubar.Item
+    >
+    <Menubar.Item on:click={download_file}>Download</Menubar.Item>
+  </Menubar.Content>
+</Menubar.Menu>
+<!-- <Button on:click={save}>Save</Button>
+<Button on:click={load}>Load</Button> -->
