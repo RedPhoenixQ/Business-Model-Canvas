@@ -18,9 +18,7 @@
   } from "@xyflow/svelte";
   import Item from "$lib/Item.svelte";
   import Segment from "$lib/Segment.svelte";
-  import { initTheme, theme } from "$lib/theme";
-  import { onMount } from "svelte";
-  import ThemeSelector from "$lib/ThemeSelector.svelte";
+  import { theme } from "$lib/theme";
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
   import { defaultTemplate } from "$lib/items";
@@ -55,14 +53,6 @@
     $edges = $edges;
   }
 
-  onMount(() => {
-    hideAllEdges();
-    const cleanupTheme = initTheme();
-    return () => {
-      cleanupTheme();
-    };
-  });
-
   let contextmenu_pos: XYPosition = { x: 0, y: 0 };
 </script>
 
@@ -84,7 +74,7 @@
       {nodeTypes}
       {edgeTypes}
       fitView
-      colorMode={$theme || "system"}
+      colorMode={$theme}
       on:paneclick={hideAllEdges}
       on:nodeclick={(event) => {
         console.log("on node click", event.detail.node);
