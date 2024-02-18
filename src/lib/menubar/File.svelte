@@ -91,6 +91,9 @@
         load(input);
       }}>Open</Menubar.Item
     >
+    <Menubar.Item on:click={() => navigator.clipboard.writeText(save())}>
+      Copy to Clipboard
+    </Menubar.Item>
     <Menubar.Item on:click={download_file}>Download</Menubar.Item>
   </Menubar.Content>
 </Menubar.Menu>
