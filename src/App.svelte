@@ -24,6 +24,7 @@
   import { defaultTemplate } from "$lib/items";
   import StraightLineEdge from "$lib/edges/StraightLineEdge.svelte";
   import Menubar from "$lib/menubar/Menubar.svelte";
+  import AutoSave from "$lib/AutoSave.svelte";
 
   const nodeTypes = {
     item: Item,
@@ -103,6 +104,8 @@
       <Controls />
       <Background variant={BackgroundVariant.Dots} />
       <MiniMap />
+
+      <AutoSave />
     </SvelteFlow>
   </CustomContextMenuTrigger>
 </div>
