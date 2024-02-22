@@ -285,8 +285,10 @@ export const defaultSegments: Node[] = [
   id: SegmentKey;
 })[];
 
-export const gridSize: Writable<Grid> = writable({
+export const defaultGridSize = {
   columns: [SIZE, SIZE, SIZE / 2, SIZE / 2, SIZE, SIZE],
   rows: [SIZE, SIZE, SIZE],
-});
+};
+
+export const gridSize: Writable<Grid> = writable(defaultGridSize);
 gridSize.subscribe(console.debug);
