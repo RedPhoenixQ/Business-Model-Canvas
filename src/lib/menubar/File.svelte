@@ -2,7 +2,7 @@
   import * as Menubar from "$lib/components/ui/menubar";
   import { useSave } from "$lib/save";
 
-  const { save, download_file, load } = useSave();
+  const { save, downloadFile, load } = useSave();
 </script>
 
 <Menubar.Menu>
@@ -18,7 +18,7 @@
     <Menubar.Item on:click={() => navigator.clipboard.writeText(save())}>
       Copy to Clipboard
     </Menubar.Item>
-    <Menubar.Item on:click={download_file}>Download</Menubar.Item>
+    <Menubar.Item on:click={downloadFile}>Download</Menubar.Item>
   </Menubar.Content>
 </Menubar.Menu>
 <!-- <Button on:click={save}>Save</Button>

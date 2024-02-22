@@ -49,7 +49,7 @@ export function useSave() {
     }
   }
 
-  function download_file() {
+  function downloadFile() {
     const blob = new Blob([save()], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     // Create a one-time link element for downloading
@@ -90,7 +90,7 @@ export function useSave() {
   return {
     save,
     load,
-    download_file,
+    downloadFile,
     saveToLocalStorage,
     loadFromLocalStorage,
   };
