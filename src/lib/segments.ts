@@ -291,4 +291,4 @@ export const defaultGridSize = {
 };
 
 export const gridSize: Writable<Grid> = writable(defaultGridSize);
-gridSize.subscribe(console.debug);
+gridSize.subscribe((val) => console.debug("gridSize", val));

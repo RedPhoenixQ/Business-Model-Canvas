@@ -1,8 +1,22 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { useSave } from "./save";
+  import { useProject } from "./project";
 
-  const { saveToLocalStorage, loadFromLocalStorage } = useSave();
+  const { toJSON, fromJSON } = useProject();
+
+  function save() {
+    localStorage.setItem("save", toJSON());
+  }
+
+  function load() {
+    const json = localStorage.getItem("save");
+    if (!json) return;
+    try {
+      fromJSON(json);
+    } catch (err) {
+      console.error("From local storage load", err);
+    }
+  }
 
   function autosave() {
     console.debug(
@@ -12,15 +26,15 @@
     );
     if (!document.hidden) return;
     console.debug("Autosaving to localstorage");
-    saveToLocalStorage();
+    save();
   }
 
-  window.addEventListener("visibilitychange", autosave);
-
   onMount(() => {
-    loadFromLocalStorage();
+    load();
     return () => {
-      window.removeEventListener("visibilitychange", autosave);
+      save();
     };
   });
 </script>
+
+<svelte:document on:visibilitychange={autosave} />

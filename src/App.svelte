@@ -15,16 +15,17 @@
     Panel,
     type XYPosition,
     getConnectedEdges,
+    type Edge,
   } from "@xyflow/svelte";
   import Item from "$lib/Item.svelte";
   import Segment from "$lib/Segment.svelte";
   import { theme } from "$lib/theme";
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
-  import { defaultTemplate } from "$lib/items";
   import StraightLineEdge from "$lib/edges/StraightLineEdge.svelte";
   import Menubar from "$lib/menubar/Menubar.svelte";
   import AutoSave from "$lib/AutoSave.svelte";
+  import PagesList from "$lib/PagesList.svelte";
 
   const nodeTypes = {
     item: Item,
@@ -35,8 +36,8 @@
     line: StraightLineEdge,
   };
 
-  const nodes = writable(defaultTemplate.nodes);
-  const edges = writable(defaultTemplate.edges);
+  const nodes = writable([] as Node[]);
+  const edges = writable([] as Edge[]);
 
   const snapGrid: SnapGrid = [25, 25];
 
@@ -53,6 +54,9 @@
     }
     $edges = $edges;
   }
+
+  $: console.debug("nodes", $nodes);
+  $: console.debug("edges", $edges);
 
   let contextmenu_pos: XYPosition = { x: 0, y: 0 };
 </script>
@@ -98,6 +102,8 @@
           <h1 class="px-2">Business Model Canvas</h1>
         </Menubar>
       </Panel>
+
+      <PagesList />
 
       <FlowContextMenu bind:opened_at={contextmenu_pos} />
 
