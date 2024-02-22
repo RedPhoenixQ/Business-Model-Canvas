@@ -2,7 +2,7 @@
   import * as Menubar from "$lib/components/ui/menubar";
   import { useProject } from "$lib/project";
 
-  const { toJSON, fromJSON, newProject } = useProject();
+  const { project, toJSON, fromJSON, newProject } = useProject();
 
   function downloadFile() {
     const blob = new Blob([toJSON()], { type: "application/json" });
@@ -10,7 +10,7 @@
     // Create a one-time link element for downloading
     const dlink = document.createElement("a");
     // TODO: Get project name from somewere
-    dlink.download = "Test name.json";
+    dlink.download = `${$project.name ?? "unnamed"}.json`;
     dlink.href = url;
     dlink.click();
     dlink.remove();
