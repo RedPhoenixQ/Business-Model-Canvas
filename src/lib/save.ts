@@ -5,7 +5,7 @@ import {
   useSvelteFlow,
   type Node,
 } from "@xyflow/svelte";
-import { segmentColumns, segmentRows } from "./segments";
+import { gridSize, type Grid } from "./segments";
 import { get, writable } from "svelte/store";
 
 export function useSave() {
@@ -29,10 +29,7 @@ export function useSave() {
     console.log(flowData);
     const json = JSON.stringify({
       ...flowData,
-      grid: {
-        columns: get(segmentColumns),
-        rows: get(segmentRows),
-      },
+      grid: get(gridSize),
     });
     return json;
   }
@@ -85,8 +82,7 @@ export function useSave() {
     });
     console.log(flowData);
     reset();
-    segmentColumns.set(flowData.grid.columns);
-    segmentRows.set(flowData.grid.rows);
+    gridSize.set(flowData.grid);
     nodes.set(flowData.nodes);
     edges.set(flowData.edges);
     viewport.set(flowData.viewport);

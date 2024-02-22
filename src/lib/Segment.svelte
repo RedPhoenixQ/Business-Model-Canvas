@@ -9,8 +9,7 @@
     segmentInfo,
     type SegmentData,
     type SegmentKey,
-    segmentRows,
-    segmentColumns,
+    gridSize,
   } from "./segments";
 
   type $$Props = NodeProps<SegmentData>;
@@ -29,19 +28,19 @@
     if (node) {
       let new_width = 0;
       for (let i = grid.column.start; i < grid.column.end; i++) {
-        new_width += $segmentColumns[i];
+        new_width += $gridSize.columns[i];
       }
       let new_height = 0;
       for (let i = grid.row.start; i < grid.row.end; i++) {
-        new_height += $segmentRows[i];
+        new_height += $gridSize.rows[i];
       }
       let new_x = 0;
       for (let i = 0; i < grid.column.start; i++) {
-        new_x += $segmentColumns[i];
+        new_x += $gridSize.columns[i];
       }
       let new_y = -new_height;
       for (let i = 0; i < grid.row.start; i++) {
-        new_y -= $segmentRows[i];
+        new_y -= $gridSize.rows[i];
       }
       if (
         node.position.x !== new_x ||
@@ -81,10 +80,10 @@
     //        Should probably move a "grid line" instread of a block
     //        or respect minimum size of grid blocks
     for (let i = grid.column.start; i < grid.column.end; i++) {
-      $segmentColumns[i] += dx / cols;
+      $gridSize.columns[i] += dx / cols;
     }
     for (let i = grid.row.start; i < grid.row.end; i++) {
-      $segmentRows[i] += dy / rows;
+      $gridSize.rows[i] += dy / rows;
     }
   }
 </script>

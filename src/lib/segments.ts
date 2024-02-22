@@ -14,6 +14,11 @@ export type SegmentKey =
 
 export type SegmentData = {};
 
+export type Grid = {
+  columns: number[];
+  rows: number[];
+};
+
 const SIZE = 200;
 
 export const segmentInfo: Record<
@@ -280,25 +285,8 @@ export const defaultSegments: Node[] = [
   id: SegmentKey;
 })[];
 
-export const segmentColumns: Writable<
-  [number, number, number, number, number, number]
-> = writable([SIZE, SIZE, SIZE / 2, SIZE / 2, SIZE, SIZE]);
-segmentColumns.subscribe(console.debug);
-
-export const segmentRows: Writable<[number, number, number]> = writable([
-  SIZE,
-  SIZE,
-  SIZE,
-]);
-segmentRows.subscribe(console.debug);
-
-export const segmentForUpdate: Writable<
-  Map<
-    SegmentKey,
-    {
-      id: SegmentKey;
-      nodeElement: HTMLDivElement;
-      forceUpdate?: boolean;
-    }
-  >
-> = writable(new Map());
+export const gridSize: Writable<Grid> = writable({
+  columns: [SIZE, SIZE, SIZE / 2, SIZE / 2, SIZE, SIZE],
+  rows: [SIZE, SIZE, SIZE],
+});
+gridSize.subscribe(console.debug);
