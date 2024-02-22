@@ -124,6 +124,20 @@ export function useProject() {
       loadPage($project);
       project.set($project);
     },
+    duplicatePage(pageIndex: number) {
+      const $project = get(project);
+      if (pageIndex >= $project.pages.length) return;
+      storePage($project);
+      $project.activePageIndex = pageIndex + 1;
+      $project.pages = [
+        ...$project.pages.slice(0, pageIndex + 1),
+        structuredClone($project.pages[pageIndex]),
+        ...$project.pages.slice(pageIndex + 1),
+      ];
+      $project.pages[pageIndex + 1].name += " copy";
+      loadPage($project);
+      project.set($project);
+    },
     removePage(pageIndex: number) {
       const $project = get(project);
 

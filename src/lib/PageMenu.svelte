@@ -7,7 +7,7 @@
   export let i: number;
   export let page: Page;
 
-  const { removePage } = useProject();
+  const { duplicatePage, removePage } = useProject();
 </script>
 
 <Dropdown.Root>
@@ -26,6 +26,8 @@
     </Button>
   </Dropdown.Trigger>
   <Dropdown.Content>
+    <Dropdown.Item on:click={() => duplicatePage(i)}>Duplicate</Dropdown.Item>
+    <Dropdown.Separator />
     <Dropdown.Item
       class="justify-between text-destructive hover:bg-destructive hover:text-destructive-foreground"
       on:click={() => removePage(i)}
