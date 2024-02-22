@@ -1,4 +1,6 @@
 <script lang="ts">
+  import * as Dialog from "$lib/components/ui/dialog";
+  import Dropzone from "svelte-file-dropzone";
   import * as Menubar from "$lib/components/ui/menubar";
   import { useProject } from "$lib/project";
 
@@ -16,6 +18,8 @@
     dlink.remove();
     URL.revokeObjectURL(url);
   }
+
+  let open = false;
 </script>
 
 <Menubar.Menu>
@@ -41,6 +45,8 @@
         fromJSON(input);
       }}>Open</Menubar.Item
     >
+    <Menubar.Item on:click={() => (open = true)}>Open file</Menubar.Item>
+
     <Menubar.Separator />
     <Menubar.Item on:click={() => navigator.clipboard.writeText(toJSON())}>
       Copy to Clipboard
@@ -48,5 +54,25 @@
     <Menubar.Item on:click={downloadFile}>Download</Menubar.Item>
   </Menubar.Content>
 </Menubar.Menu>
-<!-- <Button on:click={save}>Save</Button>
-<Button on:click={load}>Load</Button> -->
+
+<Dialog.Root bind:open>
+  <Dialog.Content class="pt-10">
+    <span class="text-xl">Open file</span>
+    <Dropzone
+      on:dropaccepted={async (event) => {
+        const file = event.detail?.acceptedFiles?.[0];
+        if (file) {
+          open = false;
+          fromJSON(await file.text());
+        }
+      }}
+      on:droprejected={(event) => {
+        console.warn("rejected file", event);
+      }}
+      accept="application/json"
+      containerClasses="flex justify-center h-24 w-full rounded-md border border-input !bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+    >
+      Drop a file here or click to select a file
+    </Dropzone>
+  </Dialog.Content>
+</Dialog.Root>
