@@ -1,4 +1,11 @@
 <script lang="ts">
+  import {
+    DownloadIcon,
+    ClipboardCopyIcon,
+    ClipboardPasteIcon,
+    FileInputIcon,
+    PlusIcon,
+  } from "lucide-svelte/icons";
   import * as Dialog from "$lib/components/ui/dialog";
   import Dropzone from "svelte-file-dropzone";
   import * as Menubar from "$lib/components/ui/menubar";
@@ -24,9 +31,12 @@
 
 <Menubar.Menu>
   <Menubar.Trigger>File</Menubar.Trigger>
-  <Menubar.Content class="min-w-fit">
+  <Menubar.Content class="min-w-fit [&_[role=menuitem]]:gap-2">
     <Menubar.Sub>
-      <Menubar.SubTrigger>New</Menubar.SubTrigger>
+      <Menubar.SubTrigger>
+        <PlusIcon size="20" />
+        New
+      </Menubar.SubTrigger>
       <Menubar.SubContent>
         <Menubar.Label>Template</Menubar.Label>
         <Menubar.Item
@@ -37,21 +47,32 @@
         <Menubar.Item on:click={() => newProject("empty")}>Empty</Menubar.Item>
       </Menubar.SubContent>
     </Menubar.Sub>
+
     <Menubar.Separator />
     <Menubar.Item
       on:click={() => {
         const input = prompt("input");
         if (input === null) return;
         fromJSON(input);
-      }}>Open</Menubar.Item
+      }}
     >
-    <Menubar.Item on:click={() => (open = true)}>Open file</Menubar.Item>
+      <ClipboardPasteIcon size="20" />
+      Open from clipboard
+    </Menubar.Item>
+    <Menubar.Item on:click={() => (open = true)}>
+      <FileInputIcon size="20" />
+      Open file
+    </Menubar.Item>
 
     <Menubar.Separator />
     <Menubar.Item on:click={() => navigator.clipboard.writeText(toJSON())}>
+      <ClipboardCopyIcon size="20" />
       Copy to Clipboard
     </Menubar.Item>
-    <Menubar.Item on:click={downloadFile}>Download</Menubar.Item>
+    <Menubar.Item on:click={downloadFile}>
+      <DownloadIcon size="20" />
+      Download
+    </Menubar.Item>
   </Menubar.Content>
 </Menubar.Menu>
 
