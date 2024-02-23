@@ -1,9 +1,17 @@
 <script lang="ts">
+  import { PlusIcon } from "lucide-svelte";
   import PageMenu from "./PageMenu.svelte";
   import { buttonVariants, Button } from "./components/ui/button";
   import { useProject } from "./project";
+  import { pageTemplates } from "./templates";
+  import * as Dropdown from "./components/ui/dropdown-menu";
 
   const { project, pageName, swapActivePage, addPage } = useProject();
+
+  function pageFromTemplate(template: string) {
+    if (!Object.keys(pageTemplates).includes(template)) return;
+    addPage(template as keyof typeof pageTemplates);
+  }
 </script>
 
 <ul
@@ -50,6 +58,23 @@
     </li>
   {/each}
   <li>
-    <Button variant="secondary" on:click={() => addPage()}>+</Button>
+    <Dropdown.Root>
+      <Dropdown.Trigger
+        class={buttonVariants({ variant: "secondary", size: "icon" })}
+      >
+        <PlusIcon />
+      </Dropdown.Trigger>
+      <Dropdown.Content>
+        <Dropdown.Label>Templates</Dropdown.Label>
+        {#each Object.keys(pageTemplates) as template}
+          <Dropdown.Item
+            class="capitalize"
+            on:click={() => pageFromTemplate(template)}
+          >
+            {template.replaceAll("-", " ")}
+          </Dropdown.Item>
+        {/each}
+      </Dropdown.Content>
+    </Dropdown.Root>
   </li>
 </ul>
