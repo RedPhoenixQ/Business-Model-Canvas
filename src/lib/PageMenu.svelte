@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { MoreVerticalIcon, XIcon } from "lucide-svelte";
+  import { MoreVerticalIcon, XIcon, CopyPlusIcon } from "lucide-svelte";
   import * as Dropdown from "./components/ui/dropdown-menu";
   import { useProject, type Page } from "./project";
   import Button from "./components/ui/button/button.svelte";
@@ -25,14 +25,18 @@
       <MoreVerticalIcon />
     </Button>
   </Dropdown.Trigger>
-  <Dropdown.Content>
-    <Dropdown.Item on:click={() => duplicatePage(i)}>Duplicate</Dropdown.Item>
+  <Dropdown.Content class="[&_[role=menuitem]]:gap-2">
+    <Dropdown.Item on:click={() => duplicatePage(i)}>
+      <CopyPlusIcon size="20" />
+      Duplicate
+    </Dropdown.Item>
     <Dropdown.Separator />
     <Dropdown.Item
-      class="justify-between text-destructive hover:bg-destructive hover:text-destructive-foreground"
+      class="text-destructive hover:bg-destructive hover:text-destructive-foreground"
       on:click={() => removePage(i)}
     >
-      Delete <XIcon />
+      <XIcon size="20" />
+      Delete
     </Dropdown.Item>
   </Dropdown.Content>
 </Dropdown.Root>
