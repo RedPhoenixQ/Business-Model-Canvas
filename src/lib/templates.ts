@@ -83,6 +83,11 @@ export const pageTemplates = {
       },
     ],
   },
+  detailed: {
+    grid: segmentTemplateInfo.detailed.grid,
+    nodes: getSegmentTemplateNodes("detailed"),
+    edges: [],
+  },
 } as const satisfies Record<string, Page>;
 
 export const projectTemplates = {
