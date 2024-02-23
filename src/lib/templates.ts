@@ -1,9 +1,5 @@
 import type { Page, Project } from "./project";
-import {
-  defaultGridSize,
-  defaultSegments,
-  type SegmentKey,
-} from "./nodes/segments";
+import { getSegmentTemplateNodes, segmentTemplateInfo } from "./nodes/segments";
 
 export const pageTemplates = {
   empty: {
@@ -15,8 +11,8 @@ export const pageTemplates = {
     },
   },
   default: {
-    nodes: [
-      ...defaultSegments,
+    grid: segmentTemplateInfo.default.grid,
+    nodes: getSegmentTemplateNodes("default", [
       {
         id: "1",
         type: "item",
@@ -27,7 +23,7 @@ export const pageTemplates = {
           },
         },
         position: { x: 90, y: 80 },
-        parentNode: "key-partners" satisfies SegmentKey,
+        parentNode: "key-partners",
         extent: "parent",
       },
       {
@@ -39,7 +35,7 @@ export const pageTemplates = {
           },
         },
         position: { x: 30, y: 100 },
-        parentNode: "key-activities" satisfies SegmentKey,
+        parentNode: "key-activities",
         extent: "parent",
       },
       {
@@ -52,7 +48,7 @@ export const pageTemplates = {
           },
         },
         position: { x: 120, y: 50 },
-        parentNode: "channels" satisfies SegmentKey,
+        parentNode: "channels",
         extent: "parent",
       },
       {
@@ -65,10 +61,10 @@ export const pageTemplates = {
           },
         },
         position: { x: 320, y: 120 },
-        parentNode: "costs" satisfies SegmentKey,
+        parentNode: "costs",
         extent: "parent",
       },
-    ],
+    ]),
     edges: [
       {
         id: "1-2-test",
@@ -86,7 +82,6 @@ export const pageTemplates = {
         target: "4",
       },
     ],
-    grid: defaultGridSize,
   },
 } as const satisfies Record<string, Page>;
 

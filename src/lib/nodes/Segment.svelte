@@ -6,52 +6,41 @@
     useSvelteFlow,
   } from "@xyflow/svelte";
   import {
-    segmentInfo,
+    segmentTemplateInfo,
+    getDimensionsInGrid,
     type SegmentData,
-    type SegmentKey,
     gridSize,
   } from "./segments";
+  import { twMerge } from "tailwind-merge";
 
   type $$Props = NodeProps<SegmentData>;
 
   export let id: $$Props["id"];
+  export let data: $$Props["data"];
 
   const { getNode } = useSvelteFlow();
   const updateNodeInternals = useUpdateNodeInternals();
+  const templateNodes = segmentTemplateInfo[data.template].nodes;
 
-  const { title, colorClass, grid, size } = segmentInfo[id as SegmentKey];
+  const { title, classes, grid } =
+    templateNodes[id as keyof typeof templateNodes];
   const cols = grid.column.end - grid.column.start;
   const rows = grid.row.end - grid.row.start;
 
   $: {
     const node = getNode(id);
     if (node) {
-      let new_width = 0;
-      for (let i = grid.column.start; i < grid.column.end; i++) {
-        new_width += $gridSize.columns[i];
-      }
-      let new_height = 0;
-      for (let i = grid.row.start; i < grid.row.end; i++) {
-        new_height += $gridSize.rows[i];
-      }
-      let new_x = 0;
-      for (let i = 0; i < grid.column.start; i++) {
-        new_x += $gridSize.columns[i];
-      }
-      let new_y = -new_height;
-      for (let i = 0; i < grid.row.start; i++) {
-        new_y -= $gridSize.rows[i];
-      }
+      const dim = getDimensionsInGrid($gridSize, grid);
       if (
-        node.position.x !== new_x ||
-        node.position.y !== new_y ||
-        node.width !== new_width ||
-        node.height !== new_height
+        node.position.x !== dim.position.x ||
+        node.position.y !== dim.position.y ||
+        node.width !== dim.width ||
+        node.height !== dim.height
       ) {
-        node.position.x = new_x;
-        node.position.y = new_y;
-        node.width = new_width;
-        node.height = new_height;
+        node.position.x = dim.position.x;
+        node.position.y = dim.position.y;
+        node.width = dim.width;
+        node.height = dim.height;
         updateNodeInternals(id);
       }
     }
@@ -89,13 +78,14 @@
 </script>
 
 <div
-  class="h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50 {colorClass} {$$restProps?.class ??
-    ''}"
+  class={twMerge(
+    "h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50",
+    classes,
+    $$restProps.class,
+  )}
 >
   <span class="px-2 text-white">{title}</span>
   <NodeResizeControl
-    minHeight={size.height}
-    minWidth={size.width}
     position="top-right"
     style="background: none; border: none;"
     {onResizeStart}
