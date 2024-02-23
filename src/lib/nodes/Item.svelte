@@ -19,7 +19,7 @@
   export let data: $$Props["data"];
   export let selected: $$Props["selected"];
 
-  const { item } = data;
+  $: item = data.item;
 
   const { deleteElements } = useSvelteFlow();
 </script>

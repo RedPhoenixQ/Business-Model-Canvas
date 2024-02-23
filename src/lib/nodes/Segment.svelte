@@ -20,17 +20,16 @@
 
   const { getNode } = useSvelteFlow();
   const updateNodeInternals = useUpdateNodeInternals();
-  const templateNodes = segmentTemplateInfo[data.template].nodes;
+  $: templateNodes = segmentTemplateInfo[data.template].nodes;
+  $: segmentInfo = templateNodes[id as keyof typeof templateNodes];
 
-  const { title, classes, grid } =
-    templateNodes[id as keyof typeof templateNodes];
-  const cols = grid.column.end - grid.column.start;
-  const rows = grid.row.end - grid.row.start;
+  $: cols = segmentInfo.grid.column.end - segmentInfo.grid.column.start;
+  $: rows = segmentInfo.grid.row.end - segmentInfo.grid.row.start;
 
   $: {
     const node = getNode(id);
     if (node) {
-      const dim = getDimensionsInGrid($gridSize, grid);
+      const dim = getDimensionsInGrid($gridSize, segmentInfo.grid);
       if (
         node.position.x !== dim.position.x ||
         node.position.y !== dim.position.y ||
@@ -68,10 +67,18 @@
     // TODO:  Find a better way of distributing the size increase.
     //        Should probably move a "grid line" instread of a block
     //        or respect minimum size of grid blocks
-    for (let i = grid.column.start; i < grid.column.end; i++) {
+    for (
+      let i = segmentInfo.grid.column.start;
+      i < segmentInfo.grid.column.end;
+      i++
+    ) {
       $gridSize.columns[i] += dx / cols;
     }
-    for (let i = grid.row.start; i < grid.row.end; i++) {
+    for (
+      let i = segmentInfo.grid.row.start;
+      i < segmentInfo.grid.row.end;
+      i++
+    ) {
       $gridSize.rows[i] += dy / rows;
     }
   }
@@ -80,11 +87,11 @@
 <div
   class={twMerge(
     "h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50",
-    classes,
+    segmentInfo.classes,
     $$restProps.class,
   )}
 >
-  <span class="px-2 text-white">{title}</span>
+  <span class="px-2 text-white">{segmentInfo.title}</span>
   <NodeResizeControl
     position="top-right"
     style="background: none; border: none;"
