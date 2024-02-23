@@ -6,20 +6,15 @@
     type NodeProps,
     useSvelteFlow,
   } from "@xyflow/svelte";
-  import type { Writable } from "svelte/store";
-  import { itemDetails, type Item } from "./items";
+  import { itemDetails, type ItemData } from "./items";
   import ItemIcon from "./ItemIcon.svelte";
   import CustomContextMenuTrigger from "../CustomContextMenuTrigger.svelte";
 
-  type $$Props = NodeProps<{
-    item: Writable<Item>;
-  }>;
+  type $$Props = NodeProps<ItemData>;
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];
   export let selected: $$Props["selected"];
-
-  $: item = data.item;
 
   const { deleteElements } = useSvelteFlow();
 </script>
@@ -40,28 +35,26 @@
       }}
       position={Position.Bottom}
     />
-    <ItemIcon src={$item.icon} alt={$item.name} />
+    <ItemIcon src={data.icon} alt={data.name} />
   </div>
 
   <ContextMenu.Content>
     <ContextMenu.Label class="flex items-center gap-2">
       <div class="w-6">
-        <ItemIcon src={$item.icon} alt={$item.name} />
+        <ItemIcon src={data.icon} alt={data.name} />
       </div>
-      <span class="text-center">{$item.name}</span>
+      <span class="text-center">{data.name}</span>
     </ContextMenu.Label>
     <ContextMenu.Separator />
-    <ContextMenu.Item
-      on:click={() => {
-        $itemDetails = item;
-      }}>Edit</ContextMenu.Item
-    >
+    <ContextMenu.Item on:click={() => ($itemDetails = { id, data })}>
+      Edit
+    </ContextMenu.Item>
     <ContextMenu.Separator />
     <ContextMenu.Item
       class="text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"
       on:click={() => {
         if (confirm("Are you sure?")) {
-          console.log("deleting node", id, $item);
+          console.log("deleting node", id, data);
           deleteElements({ nodes: [{ id }] });
         }
       }}>Delete</ContextMenu.Item

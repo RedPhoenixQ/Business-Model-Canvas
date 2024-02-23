@@ -49,8 +49,6 @@
   let contextmenu_pos: XYPosition = { x: 0, y: 0 };
 </script>
 
-<ItemDetails />
-
 <div class="h-screen bg-neutral-600">
   <CustomContextMenuTrigger
     class="absolute h-full w-full bg-red-500"
@@ -97,6 +95,8 @@
       <Controls />
       <Background variant={BackgroundVariant.Dots} />
       <MiniMap />
+
+      <ItemDetails />
 
       <AutoSave />
     </SvelteFlow>

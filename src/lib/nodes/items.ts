@@ -1,8 +1,9 @@
 import { writable, type Writable } from "svelte/store";
 
-export type Item = {
+export type ItemData = {
   name: string;
   icon?: string;
 };
 
-export const itemDetails: Writable<Writable<Item> | undefined> = writable();
+export const itemDetails: Writable<{ id: string; data: ItemData } | undefined> =
+  writable();

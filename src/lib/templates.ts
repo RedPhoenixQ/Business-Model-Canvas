@@ -1,5 +1,6 @@
 import type { Page, Project } from "./project";
 import { getSegmentTemplateNodes, segmentTemplateInfo } from "./nodes/segments";
+import type { ItemData } from "./nodes/items";
 
 export const pageTemplates = {
   empty: {
@@ -12,15 +13,13 @@ export const pageTemplates = {
   },
   default: {
     grid: segmentTemplateInfo.default.grid,
-    nodes: getSegmentTemplateNodes("default", [
+    nodes: getSegmentTemplateNodes<"default", ItemData, "item">("default", [
       {
         id: "1",
         type: "item",
         data: {
-          item: {
-            name: "steam",
-            icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
-          },
+          name: "steam",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
         },
         position: { x: 90, y: 80 },
         parentNode: "key-partners",
@@ -30,9 +29,7 @@ export const pageTemplates = {
         id: "2",
         type: "item",
         data: {
-          item: {
-            name: "empty test",
-          },
+          name: "empty test",
         },
         position: { x: 30, y: 100 },
         parentNode: "key-activities",
@@ -42,10 +39,8 @@ export const pageTemplates = {
         id: "3",
         type: "item",
         data: {
-          item: {
-            name: "empty test",
-            icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
-          },
+          name: "empty test",
+          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
         },
         position: { x: 120, y: 50 },
         parentNode: "channels",
@@ -55,10 +50,8 @@ export const pageTemplates = {
         id: "4",
         type: "item",
         data: {
-          item: {
-            name: "Costs",
-            icon: "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
-          },
+          name: "Costs",
+          icon: "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
         },
         position: { x: 320, y: 120 },
         parentNode: "costs",

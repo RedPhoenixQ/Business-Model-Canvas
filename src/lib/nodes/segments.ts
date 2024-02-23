@@ -407,7 +407,9 @@ type ChildNodes<
 
 export function getSegmentTemplateNodes<
   S extends keyof typeof segmentTemplateInfo,
->(template: S, extend_nodes: ChildNodes<S>[] = []): Node[] {
+  NodeData = any,
+  NodeType extends string | undefined = string | undefined,
+>(template: S, extend_nodes: ChildNodes<S, NodeData, NodeType>[] = []): Node[] {
   const { grid, nodes } = segmentTemplateInfo[template];
   return (
     Object.entries(nodes).map(([id, info]) => {

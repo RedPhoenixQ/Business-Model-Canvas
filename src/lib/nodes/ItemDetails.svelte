@@ -3,20 +3,25 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import Label from "$lib/components/ui/label/label.svelte";
   import * as Sheet from "$lib/components/ui/sheet";
+  import { useSvelteFlow } from "@xyflow/svelte";
   import ItemIcon from "./ItemIcon.svelte";
   import { itemDetails } from "./items";
 
-  let open: boolean;
-  $: item = $itemDetails ? $itemDetails : undefined;
-  $: open = item !== undefined;
+  const { updateNodeData } = useSvelteFlow();
 
-  $: console.log(item, open);
+  function change() {
+    if (!$itemDetails) return;
+    updateNodeData($itemDetails.id, $itemDetails.data);
+  }
+
+  $: open = $itemDetails !== undefined;
 </script>
 
 <Sheet.Root
   bind:open
   onOpenChange={(is_open) => {
-    if (!is_open) {
+    if (!is_open && $itemDetails) {
+      updateNodeData($itemDetails.id, $itemDetails.data);
       $itemDetails = undefined;
     }
   }}
@@ -25,21 +30,28 @@
     <Sheet.Header>
       <Sheet.Title>Edit item</Sheet.Title>
     </Sheet.Header>
-    {#if $item}
+    {#if $itemDetails}
       <div class="grid gap-4 py-4">
         <div class="grid grid-cols-4 items-center gap-4">
           <Label for="name" class="text-right">Name</Label>
-          <Input id="name" bind:value={$item.name} class="col-span-3" />
-        </div>
-        <div class="grid grid-cols-4 items-center gap-4">
-          <Label for="name" class="text-right">Icon Link</Label>
           <Input
             id="name"
-            type="url"
-            bind:value={$item.icon}
-            class="col-span-2"
+            type="text"
+            class="col-span-3"
+            bind:value={$itemDetails.data.name}
+            on:change={change}
           />
-          <ItemIcon src={$item.icon} alt={$item.name} />
+        </div>
+        <div class="grid grid-cols-4 items-center gap-4">
+          <Label for="icon" class="text-right">Icon Link</Label>
+          <Input
+            id="icon"
+            type="url"
+            class="col-span-2"
+            bind:value={$itemDetails.data.icon}
+            on:change={change}
+          />
+          <ItemIcon src={$itemDetails.data.icon} alt={$itemDetails.data.name} />
         </div>
       </div>
     {:else}

@@ -8,7 +8,7 @@
     useNodes,
   } from "@xyflow/svelte";
   import { writable, type Writable } from "svelte/store";
-  import { itemDetails, type Item } from "./nodes/items";
+  import { itemDetails, type ItemData } from "./nodes/items";
 
   export let opened_at: XYPosition;
 
@@ -47,21 +47,19 @@
       };
     }
 
-    const item = writable({
-      name: "",
-    } as Item);
-    $nodes.push({
+    const node = {
       type: "item",
       id: crypto.randomUUID() as string,
       position,
       data: {
-        item,
+        name: "",
       },
       extent: "parent",
       parentNode: parent?.id,
-    } as Node<{ item: Writable<Item> }>);
+    } satisfies Node<ItemData, "item">;
+    $nodes.push(node);
     $nodes = $nodes;
-    $itemDetails = item;
+    $itemDetails = node;
   }
 </script>
 
