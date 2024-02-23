@@ -10,6 +10,7 @@
   import Dropzone from "svelte-file-dropzone";
   import * as Menubar from "$lib/components/ui/menubar";
   import { useProject } from "$lib/project";
+  import { projectTemplates } from "$lib/templates";
 
   const { project, toJSON, fromJSON, newProject } = useProject();
 
@@ -26,6 +27,11 @@
     URL.revokeObjectURL(url);
   }
 
+  function fromTemplate(template: string) {
+    if (!Object.keys(projectTemplates).includes(template)) return;
+    newProject(template as keyof typeof projectTemplates);
+  }
+
   let open = false;
 </script>
 
@@ -39,12 +45,16 @@
       </Menubar.SubTrigger>
       <Menubar.SubContent>
         <Menubar.Label>Template</Menubar.Label>
-        <Menubar.Item
-          on:click={() =>
-            // TODO: Prompt for saving old project first
-            newProject("default")}>Default</Menubar.Item
-        >
-        <Menubar.Item on:click={() => newProject("empty")}>Empty</Menubar.Item>
+        {#each Object.keys(projectTemplates) as template}
+          <Menubar.Item
+            class="capitalize"
+            on:click={() =>
+              // TODO: Prompt for saving old project first
+              fromTemplate(template)}
+          >
+            {template.replace("-", " ")}
+          </Menubar.Item>
+        {/each}
       </Menubar.SubContent>
     </Menubar.Sub>
 
