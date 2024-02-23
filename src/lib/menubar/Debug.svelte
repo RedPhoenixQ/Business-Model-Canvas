@@ -8,7 +8,7 @@
 
 <Menubar.Menu>
   <Menubar.Trigger>Debug</Menubar.Trigger>
-  <Menubar.Content>
+  <Menubar.Content class="min-w-fit [&_[role=menuitem]]:gap-2">
     <Menubar.Sub>
       <Menubar.SubTrigger>Log</Menubar.SubTrigger>
       <Menubar.SubContent>
