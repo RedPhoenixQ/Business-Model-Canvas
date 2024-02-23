@@ -2,7 +2,7 @@
   // 👇 this is important! You need to import the styles for Svelte Flow to work
   import "@xyflow/svelte/dist/style.css";
 
-  import ItemDetails from "$lib/ItemDetails.svelte";
+  import ItemDetails from "$lib/nodes/ItemDetails.svelte";
   import { writable } from "svelte/store";
   import {
     SvelteFlow,
@@ -17,20 +17,14 @@
     getConnectedEdges,
     type Edge,
   } from "@xyflow/svelte";
-  import Item from "$lib/Item.svelte";
-  import Segment from "$lib/Segment.svelte";
   import { theme } from "$lib/theme";
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
   import { edgeTypes } from "$lib/edges";
+  import { nodeTypes } from "$lib/nodes";
   import Menubar from "$lib/menubar/Menubar.svelte";
   import AutoSave from "$lib/AutoSave.svelte";
   import PagesList from "$lib/PagesList.svelte";
-
-  const nodeTypes = {
-    item: Item,
-    segment: Segment,
-  };
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);

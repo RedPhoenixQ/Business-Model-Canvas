@@ -1,5 +1,9 @@
 import type { Page, Project } from "./project";
-import { defaultGridSize, defaultSegments, type SegmentKey } from "./segments";
+import {
+  defaultGridSize,
+  defaultSegments,
+  type SegmentKey,
+} from "./nodes/segments";
 
 export const pageTemplates = {
   empty: {

@@ -4,14 +4,12 @@
     Handle,
     Position,
     type NodeProps,
-    useNodes,
-    useEdges,
     useSvelteFlow,
   } from "@xyflow/svelte";
   import type { Writable } from "svelte/store";
   import { itemDetails, type Item } from "./items";
   import ItemIcon from "./ItemIcon.svelte";
-  import CustomContextMenuTrigger from "./CustomContextMenuTrigger.svelte";
+  import CustomContextMenuTrigger from "../CustomContextMenuTrigger.svelte";
 
   type $$Props = NodeProps<{
     item: Writable<Item>;

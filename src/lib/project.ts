@@ -5,7 +5,7 @@ import {
   type Viewport,
   useStore,
 } from "@xyflow/svelte";
-import { gridSize, type Grid } from "./segments";
+import { gridSize, type Grid } from "./nodes/segments";
 import { get, writable, type Writable } from "svelte/store";
 import { pageTemplates, projectTemplates } from "./templates";
 
