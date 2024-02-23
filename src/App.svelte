@@ -22,7 +22,7 @@
   import { theme } from "$lib/theme";
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
-  import StraightLineEdge from "$lib/edges/StraightLineEdge.svelte";
+  import { edgeTypes } from "$lib/edges";
   import Menubar from "$lib/menubar/Menubar.svelte";
   import AutoSave from "$lib/AutoSave.svelte";
   import PagesList from "$lib/PagesList.svelte";
@@ -30,10 +30,6 @@
   const nodeTypes = {
     item: Item,
     segment: Segment,
-  };
-
-  const edgeTypes = {
-    line: StraightLineEdge,
   };
 
   const nodes = writable([] as Node[]);
