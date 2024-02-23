@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { MoveDiagonalIcon } from "lucide-svelte";
   import {
     type NodeProps,
     NodeResizeControl,
@@ -98,19 +99,9 @@
     {onResizeStart}
     {onResizeEnd}
   >
-    <svg
-      class="pointer-events-auto aspect-square w-6 -translate-x-full translate-y-1 stroke-black p-1 dark:stroke-white"
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 512 512"
-      ><g
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="32"
-        ><path d="m304 96h112v112" /><path
-          d="m405.77 106.2-293.79 293.82"
-        /><path d="m208 416h-112v-112" /></g
-      ></svg
-    >
+    <MoveDiagonalIcon
+      class="pointer-events-auto -translate-x-full translate-y-1"
+      strokeWidth={1}
+    />
   </NodeResizeControl>
 </div>
