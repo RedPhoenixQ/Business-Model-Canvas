@@ -12,7 +12,7 @@
     type SegmentData,
     gridSize,
   } from "./segments";
-  import { twMerge } from "tailwind-merge";
+  import { cn } from "$lib/utils";
 
   type $$Props = NodeProps<SegmentData>;
 
@@ -86,7 +86,7 @@
 </script>
 
 <div
-  class={twMerge(
+  class={cn(
     "h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50",
     segmentInfo.classes,
     $$restProps.class,
