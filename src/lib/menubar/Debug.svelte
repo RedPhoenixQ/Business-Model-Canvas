@@ -19,5 +19,16 @@
     >
       Show all edges
     </Menubar.Item>
+    <Menubar.Sub>
+      <Menubar.SubTrigger>Log</Menubar.SubTrigger>
+      <Menubar.SubContent>
+        <Menubar.Item on:click={() => console.log("Debug nodes", $nodes)}>
+          Nodes
+        </Menubar.Item>
+        <Menubar.Item on:click={() => console.log("Debug edges", $edges)}>
+          Edges
+        </Menubar.Item>
+      </Menubar.SubContent>
+    </Menubar.Sub>
   </Menubar.Content>
 </Menubar.Menu>
