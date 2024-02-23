@@ -37,9 +37,6 @@ export function useProject() {
   function storePage($project: Project) {
     if ($project.activePageIndex < 0) return;
     const obj = toObject();
-    obj.nodes.forEach((node) => {
-      removeStores(node.data);
-    });
     const page: Page = {
       ...obj,
       name: get(pageName),
@@ -165,14 +162,4 @@ export function useProject() {
       project.set($project);
     },
   };
-}
-
-function removeStores(obj: any) {
-  if (typeof obj === "object") {
-    for (const key in obj) {
-      try {
-        obj[key] = get(obj[key]);
-      } catch (err) {}
-    }
-  }
 }
