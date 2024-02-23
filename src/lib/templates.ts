@@ -4,6 +4,7 @@ import type { ItemData } from "./nodes/items";
 
 export const pageTemplates = {
   empty: {
+    name: "Page 1",
     nodes: [],
     edges: [],
     grid: {
@@ -12,6 +13,7 @@ export const pageTemplates = {
     },
   },
   default: {
+    name: "Page 1",
     grid: segmentTemplateInfo.default.grid,
     nodes: getSegmentTemplateNodes<"default", ItemData, "item">("default", [
       {
@@ -77,11 +79,12 @@ export const pageTemplates = {
     ],
   },
   detailed: {
+    name: "Page 1",
     grid: segmentTemplateInfo.detailed.grid,
     nodes: getSegmentTemplateNodes("detailed"),
     edges: [],
   },
-} as const satisfies Record<string, Page>;
+} as const satisfies Record<string, Page & { name: "Page 1" }>;
 
 export const projectTemplates = {
   empty: {

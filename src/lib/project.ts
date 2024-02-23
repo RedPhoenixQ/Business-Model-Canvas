@@ -10,7 +10,7 @@ import { get, writable, type Writable } from "svelte/store";
 import { pageTemplates, projectTemplates } from "./templates";
 
 export type Page = {
-  name?: string;
+  name: string;
   nodes: Node[];
   edges: Edge[];
   viewport?: Viewport;
