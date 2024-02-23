@@ -55,24 +55,6 @@ export function useProject() {
 
     pageName.set(page.name ?? "page");
 
-    page.nodes.forEach((node: Node) => {
-      let storeKeys: string[] = [];
-      switch (node.type) {
-        case "item":
-          storeKeys = ["item"];
-          break;
-        default:
-          return;
-      }
-      for (const key in node.data) {
-        if (
-          storeKeys.includes(key) &&
-          !Object.hasOwn(node.data[key], "subscribe")
-        ) {
-          node.data[key] = writable(node.data[key]);
-        }
-      }
-    });
     console.log("page being loaded:", page);
     reset();
     // Leave some time for the reset to happen. This prevents wierd
