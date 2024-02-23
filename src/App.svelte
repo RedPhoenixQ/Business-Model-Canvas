@@ -29,8 +29,6 @@
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
 
-  const snapGrid: SnapGrid = [25, 25];
-
   function hideAllEdges() {
     for (const edge of $edges) {
       edge.hidden = true;
@@ -65,7 +63,6 @@
       }}
       {nodes}
       {edges}
-      {snapGrid}
       {nodeTypes}
       {edgeTypes}
       fitView
