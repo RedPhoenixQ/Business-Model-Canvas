@@ -9,16 +9,6 @@
 <Menubar.Menu>
   <Menubar.Trigger>Debug</Menubar.Trigger>
   <Menubar.Content>
-    <Menubar.Item
-      on:click={() => {
-        $edges.forEach((edge) => {
-          edge.hidden = false;
-        });
-        $edges = $edges;
-      }}
-    >
-      Show all edges
-    </Menubar.Item>
     <Menubar.Sub>
       <Menubar.SubTrigger>Log</Menubar.SubTrigger>
       <Menubar.SubContent>
@@ -30,5 +20,15 @@
         </Menubar.Item>
       </Menubar.SubContent>
     </Menubar.Sub>
+    <Menubar.Item
+      on:click={() => {
+        $edges.forEach((edge) => {
+          edge.hidden = false;
+        });
+        $edges = $edges;
+      }}
+    >
+      Show all edges
+    </Menubar.Item>
   </Menubar.Content>
 </Menubar.Menu>
