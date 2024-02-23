@@ -101,8 +101,22 @@ export function useProject() {
     addPage(template: keyof typeof pageTemplates = "default") {
       const $project = get(project);
       storePage($project);
+
+      // Find the max number of the default page name
+      let max = 0;
+      for (const page of $project.pages) {
+        const match = /^Page (\d+)\s*$/.exec(page.name);
+        if (match) {
+          // Convert capture group 1 with digits to number and save the max
+          max = Math.max(max, ~~match[1]);
+        }
+      }
+
       $project.activePageIndex = $project.pages.length;
-      $project.pages.push(structuredClone(pageTemplates[template]));
+      $project.pages.push({
+        ...pageTemplates[template],
+        name: `Page ${max + 1}`,
+      });
       loadPage($project);
       project.set($project);
     },
