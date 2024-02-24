@@ -25,6 +25,7 @@
   import Menubar from "$lib/menubar/Menubar.svelte";
   import AutoSave from "$lib/AutoSave.svelte";
   import PagesList from "$lib/PagesList.svelte";
+  import { addHistoryEntry } from "$lib/history";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -65,6 +66,10 @@
       {edgeTypes}
       fitView
       colorMode={$theme}
+      ondelete={(deleted) => {
+        console.log("ondelete", deleted);
+        addHistoryEntry({ type: "delete", ...deleted });
+      }}
       on:paneclick={hideAllEdges}
       on:nodeclick={(event) => {
         console.log("on node click", event.detail.node);
