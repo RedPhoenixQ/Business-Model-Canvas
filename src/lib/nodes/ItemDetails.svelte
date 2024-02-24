@@ -5,13 +5,46 @@
   import * as Sheet from "$lib/components/ui/sheet";
   import { useSvelteFlow } from "@xyflow/svelte";
   import ItemIcon from "./ItemIcon.svelte";
-  import { itemDetails } from "./items";
+  import { itemDetails, type ItemData } from "./items";
+  import { addHistoryEntry } from "$lib/history";
 
   const { updateNodeData } = useSvelteFlow();
 
   function change() {
-    if (!$itemDetails) return;
-    updateNodeData($itemDetails.id, $itemDetails.data);
+    if (
+      !$itemDetails ||
+      !data ||
+      !Object.entries(data).some(
+        ([k, v]) => $itemDetails?.data[k as keyof ItemData] !== v,
+      )
+    ) {
+      console.debug(
+        "Change called but no values where changed",
+        $itemDetails?.data,
+        data,
+      );
+      return;
+    }
+    const id = $itemDetails.id;
+    updateNodeData(id, (node) => {
+      if (!data) return;
+      console.log(data === node.data);
+      addHistoryEntry({
+        type: "nodeData",
+        id,
+        from: structuredClone(node.data),
+        to: structuredClone(data),
+      });
+      return data;
+    });
+  }
+
+  // Create a copy to save previous values for history
+  let data: ItemData | undefined;
+  $: if ($itemDetails) {
+    if (!data) data = structuredClone($itemDetails.data);
+  } else {
+    data = undefined;
   }
 
   $: open = $itemDetails !== undefined;
@@ -21,7 +54,7 @@
   bind:open
   onOpenChange={(is_open) => {
     if (!is_open && $itemDetails) {
-      updateNodeData($itemDetails.id, $itemDetails.data);
+      change();
       $itemDetails = undefined;
     }
   }}
@@ -30,7 +63,7 @@
     <Sheet.Header>
       <Sheet.Title>Edit item</Sheet.Title>
     </Sheet.Header>
-    {#if $itemDetails}
+    {#if data}
       <div class="grid gap-4 py-4">
         <div class="grid grid-cols-4 items-center gap-4">
           <Label for="name" class="text-right">Name</Label>
@@ -38,7 +71,7 @@
             id="name"
             type="text"
             class="col-span-3"
-            bind:value={$itemDetails.data.name}
+            bind:value={data.name}
             on:change={change}
           />
         </div>
@@ -48,10 +81,10 @@
             id="icon"
             type="url"
             class="col-span-2"
-            bind:value={$itemDetails.data.icon}
+            bind:value={data.icon}
             on:change={change}
           />
-          <ItemIcon src={$itemDetails.data.icon} alt={$itemDetails.data.name} />
+          <ItemIcon src={data.icon} alt={data.name} />
         </div>
       </div>
     {:else}

@@ -9,6 +9,7 @@
   import { itemDetails, type ItemData } from "./items";
   import ItemIcon from "./ItemIcon.svelte";
   import CustomContextMenuTrigger from "../CustomContextMenuTrigger.svelte";
+  import { addHistoryEntry } from "$lib/history";
 
   type $$Props = NodeProps<ItemData>;
 
@@ -17,6 +18,15 @@
   export let selected: $$Props["selected"];
 
   const { deleteElements } = useSvelteFlow();
+
+  async function deleteNode(id: string) {
+    const deleted = await deleteElements({ nodes: [{ id }] });
+    addHistoryEntry({
+      type: "delete",
+      nodes: deleted.deletedNodes,
+      edges: deleted.deletedEdges,
+    });
+  }
 </script>
 
 <CustomContextMenuTrigger>
@@ -55,7 +65,7 @@
       on:click={() => {
         if (confirm("Are you sure?")) {
           console.log("deleting node", id, data);
-          deleteElements({ nodes: [{ id }] });
+          deleteNode(id);
         }
       }}>Delete</ContextMenu.Item
     >
