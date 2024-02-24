@@ -1,7 +1,7 @@
 <script lang="ts">
   import { UndoIcon, RedoIcon } from "lucide-svelte";
   import * as Menubar from "$lib/components/ui/menubar";
-  import { useHistory, undoEmpty, redoEmpty } from "$lib/history";
+  import { useHistory, undoEmpty, redoEmpty } from "$lib/project/history";
 
   const { undo, redo, applyHistory } = useHistory();
 

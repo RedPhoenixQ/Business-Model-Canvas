@@ -9,8 +9,8 @@
   import * as Dialog from "$lib/components/ui/dialog";
   import Dropzone from "svelte-file-dropzone";
   import * as Menubar from "$lib/components/ui/menubar";
-  import { useProject } from "$lib/project";
-  import { projectTemplates } from "$lib/templates";
+  import { useProject } from "$lib/project/index";
+  import { projectTemplates } from "$lib/project/templates";
 
   const { project, toJSON, fromJSON, newProject } = useProject();
 

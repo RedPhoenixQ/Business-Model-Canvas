@@ -1,6 +1,6 @@
 <script lang="ts">
   import * as Menubar from "$lib/components/ui/menubar";
-  import { readHistory } from "$lib/history";
+  import { readHistory } from "$lib/project/history";
   import { useEdges, useNodes } from "@xyflow/svelte";
 
   const nodes = useNodes();

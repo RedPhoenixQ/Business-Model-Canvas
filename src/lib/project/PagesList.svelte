@@ -1,10 +1,10 @@
 <script lang="ts">
   import { PlusIcon } from "lucide-svelte";
   import PageMenu from "./PageMenu.svelte";
-  import { buttonVariants, Button } from "./components/ui/button";
-  import { useProject } from "./project";
+  import { buttonVariants, Button } from "../components/ui/button";
+  import { useProject } from ".";
   import { pageTemplates } from "./templates";
-  import * as Dropdown from "./components/ui/dropdown-menu";
+  import * as Dropdown from "../components/ui/dropdown-menu";
 
   const { project, pageName, swapActivePage, addPage } = useProject();
 

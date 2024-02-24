@@ -23,9 +23,9 @@
   import { edgeTypes } from "$lib/edges";
   import { nodeTypes } from "$lib/nodes";
   import Menubar from "$lib/menubar/Menubar.svelte";
-  import AutoSave from "$lib/AutoSave.svelte";
-  import PagesList from "$lib/PagesList.svelte";
-  import { addHistoryEntry } from "$lib/history";
+  import AutoSave from "$lib/project/AutoSave.svelte";
+  import PagesList from "$lib/project/PagesList.svelte";
+  import { addHistoryEntry } from "$lib/project/history";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);

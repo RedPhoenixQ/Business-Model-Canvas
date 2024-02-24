@@ -1,8 +1,8 @@
 <script lang="ts">
   import { MoreVerticalIcon, XIcon, CopyPlusIcon } from "lucide-svelte";
-  import * as Dropdown from "./components/ui/dropdown-menu";
-  import { useProject, type Page } from "./project";
-  import Button from "./components/ui/button/button.svelte";
+  import * as Dropdown from "../components/ui/dropdown-menu";
+  import { useProject, type Page } from ".";
+  import Button from "../components/ui/button/button.svelte";
 
   export let i: number;
   export let page: Page;

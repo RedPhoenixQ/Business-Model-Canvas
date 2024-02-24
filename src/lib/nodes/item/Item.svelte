@@ -9,7 +9,7 @@
   import { itemDetails, type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
   import CustomContextMenuTrigger from "../../CustomContextMenuTrigger.svelte";
-  import { addHistoryEntry } from "$lib/history";
+  import { addHistoryEntry } from "$lib/project/history";
 
   type $$Props = NodeProps<ItemData>;
 

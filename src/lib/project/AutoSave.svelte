@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { useProject } from "./project";
+  import { useProject } from ".";
 
   const { toJSON, fromJSON } = useProject();
 

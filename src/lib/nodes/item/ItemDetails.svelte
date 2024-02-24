@@ -6,7 +6,7 @@
   import { useSvelteFlow } from "@xyflow/svelte";
   import ItemIcon from "./ItemIcon.svelte";
   import { itemDetails, type ItemData } from ".";
-  import { addHistoryEntry } from "$lib/history";
+  import { addHistoryEntry } from "$lib/project/history";
 
   const { updateNodeData } = useSvelteFlow();
 
