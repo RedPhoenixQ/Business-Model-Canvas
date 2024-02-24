@@ -23,7 +23,7 @@ export type HistoryEntry =
       edge: Edge;
     }
   | {
-      type: "nodeData";
+      type: "nodeData" | "edgeData";
       id: string;
       from: any;
       to: any;
@@ -123,6 +123,15 @@ export function useHistory() {
         break;
       case "nodeData":
         updateNodeData(entry.id, undo ? entry.from : entry.to);
+        break;
+      case "edgeData":
+        edges.update(($edges) => {
+          const edge = $edges.find((edge) => edge.id === entry.id);
+          if (edge) {
+            edge.data = { ...edge.data, ...(undo ? entry.from : entry.to) };
+          }
+          return $edges;
+        });
         break;
       case "move":
         console.log("apply move");
