@@ -2,7 +2,7 @@ import {
   useSvelteFlow,
   type Edge,
   type Node,
-  type Position,
+  type XYPosition,
   useStore,
 } from "@xyflow/svelte";
 import { RingBuffer } from "ring-buffer-ts";
@@ -24,8 +24,9 @@ export type HistoryEntry =
     }
   | {
       type: "move";
-      prev: Position;
-      next: Position;
+      id: string;
+      from: XYPosition;
+      to: XYPosition;
     };
 
 const UNDO_SIZE = 32 as const;
@@ -73,8 +74,8 @@ export function setHistory(
 }
 
 export function useHistory() {
-  const { deleteElements } = useSvelteFlow();
-  const { addEdge, nodes, edges } = useStore();
+  const { deleteElements, updateNode } = useSvelteFlow();
+  const { nodes, edges } = useStore();
 
   function applyEntry(entry: HistoryEntry, undo: boolean) {
     switch (entry.type) {
@@ -93,6 +94,9 @@ export function useHistory() {
           deleteElements(entry);
         }
         break;
+      case "move":
+        console.log("apply move");
+        updateNode(entry.id, { position: undo ? entry.from : entry.to });
       default:
         break;
     }
