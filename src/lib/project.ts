@@ -8,6 +8,7 @@ import {
 import { gridSize, type Grid } from "./nodes/segments";
 import { get, writable, type Writable } from "svelte/store";
 import { pageTemplates, projectTemplates } from "./templates";
+import { type HistoryEntry, getHistory, setHistory } from "./history";
 
 export type Page = {
   name: string;
@@ -15,6 +16,10 @@ export type Page = {
   edges: Edge[];
   viewport?: Viewport;
   grid: Grid;
+  history?: {
+    undo: HistoryEntry[];
+    redo: HistoryEntry[];
+  };
 };
 
 export type Project = {
@@ -41,6 +46,7 @@ export function useProject() {
       ...obj,
       name: get(pageName),
       grid: { ...get(gridSize) },
+      history: getHistory(),
     };
     $project.pages[$project.activePageIndex] = page;
   }
@@ -61,6 +67,7 @@ export function useProject() {
       gridSize.set(page.grid);
       nodes.set(page.nodes);
       edges.set(page.edges);
+      setHistory(page.history);
 
       setTimeout(() => {
         // Fit the view if no view is saved

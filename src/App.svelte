@@ -25,6 +25,7 @@
   import Menubar from "$lib/menubar/Menubar.svelte";
   import AutoSave from "$lib/AutoSave.svelte";
   import PagesList from "$lib/PagesList.svelte";
+  import { addHistoryEntry } from "$lib/history";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -46,6 +47,7 @@
   $: console.debug("nodes", $nodes);
   $: console.debug("edges", $edges);
 
+  let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
   let contextmenu_pos: XYPosition = { x: 0, y: 0 };
 </script>
 
@@ -65,6 +67,18 @@
       {edgeTypes}
       fitView
       colorMode={$theme}
+      ondelete={(deleted) => {
+        console.log("ondelete", deleted);
+        addHistoryEntry({ type: "delete", ...deleted });
+      }}
+      onedgecreate={(connection) => {
+        const edge = {
+          ...connection,
+          id: `${connection.sourceHandle ?? connection.source}-${connection.targetHandle ?? connection.target}`,
+        };
+        addHistoryEntry({ type: "createEdge", edge });
+        return edge;
+      }}
       on:paneclick={hideAllEdges}
       on:nodeclick={(event) => {
         console.log("on node click", event.detail.node);
@@ -73,6 +87,16 @@
       on:nodedragstart={(event) => {
         console.log("on node drag start", event.detail.node);
         showNodeEdges([event.detail.node]);
+        // For node move history
+        moveNodeStartPos = event.detail.node.position;
+      }}
+      on:nodedragstop={(event) => {
+        addHistoryEntry({
+          type: "move",
+          id: event.detail.node.id,
+          from: moveNodeStartPos,
+          to: event.detail.node.position,
+        });
       }}
       on:edgeclick={(event) => {
         console.log("on edge click", event.detail.edge);

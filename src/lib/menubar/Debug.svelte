@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as Menubar from "$lib/components/ui/menubar";
+  import { readHistory } from "$lib/history";
   import { useEdges, useNodes } from "@xyflow/svelte";
 
   const nodes = useNodes();
@@ -17,6 +18,11 @@
         </Menubar.Item>
         <Menubar.Item on:click={() => console.log("Debug edges", $edges)}>
           Edges
+        </Menubar.Item>
+        <Menubar.Item
+          on:click={() => console.log("Debug history", $readHistory)}
+        >
+          History
         </Menubar.Item>
       </Menubar.SubContent>
     </Menubar.Sub>
