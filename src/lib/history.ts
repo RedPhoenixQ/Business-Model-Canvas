@@ -74,25 +74,40 @@ export function setHistory(
 }
 
 export function useHistory() {
-  const { deleteElements, updateNode } = useSvelteFlow();
+  const { updateNode } = useSvelteFlow();
   const { nodes, edges } = useStore();
+
+  function applyNodes(nodelist: Node[], add: boolean) {
+    if (add) {
+      nodes.update(($nodes) => {
+        $nodes.push(...nodelist);
+        return $nodes;
+      });
+    } else {
+      nodes.update(($nodes) =>
+        $nodes.filter((node) => !nodelist.some(({ id }) => node.id === id)),
+      );
+    }
+  }
+  function applyEdges(edgelist: Edge[], add: boolean) {
+    if (add) {
+      edges.update(($edges) => {
+        $edges.push(...edgelist);
+        return $edges;
+      });
+    } else {
+      edges.update(($edges) =>
+        $edges.filter((edge) => !edgelist.some(({ id }) => edge.id === id)),
+      );
+    }
+  }
 
   function applyEntry(entry: HistoryEntry, undo: boolean) {
     switch (entry.type) {
       case "delete":
         console.log("apply delete");
-        if (undo) {
-          nodes.update(($nodes) => {
-            $nodes.push(...entry.nodes);
-            return $nodes;
-          });
-          edges.update(($edges) => {
-            $edges.push(...entry.edges);
-            return $edges;
-          });
-        } else {
-          deleteElements(entry);
-        }
+        applyNodes(entry.nodes, undo);
+        applyEdges(entry.edges, undo);
         break;
       case "move":
         console.log("apply move");
