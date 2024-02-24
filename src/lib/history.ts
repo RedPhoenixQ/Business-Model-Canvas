@@ -20,7 +20,7 @@ export type HistoryEntry =
     }
   | {
       type: "createEdge";
-      edges: Edge;
+      edge: Edge;
     }
   | {
       type: "move";
@@ -108,6 +108,12 @@ export function useHistory() {
         console.log("apply delete");
         applyNodes(entry.nodes, undo);
         applyEdges(entry.edges, undo);
+        break;
+      case "createNode":
+        applyNodes([entry.node], !undo);
+        break;
+      case "createEdge":
+        applyEdges([entry.edge], !undo);
         break;
       case "move":
         console.log("apply move");
