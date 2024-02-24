@@ -86,7 +86,6 @@ export function useProject() {
   }
 
   return {
-    ...history,
     project,
     pageName,
     toJSON(): string {
