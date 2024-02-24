@@ -1,6 +1,6 @@
 import type { Page, Project } from "./project";
-import { getSegmentTemplateNodes, segmentTemplateInfo } from "./nodes/segments";
-import type { ItemData } from "./nodes/items";
+import { getSegmentTemplateNodes, segmentTemplateInfo } from "./nodes/segment";
+import type { ItemData } from "./nodes/item";
 
 export const pageTemplates = {
   empty: {

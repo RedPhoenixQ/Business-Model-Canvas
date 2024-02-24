@@ -6,9 +6,9 @@
     type NodeProps,
     useSvelteFlow,
   } from "@xyflow/svelte";
-  import { itemDetails, type ItemData } from "./items";
+  import { itemDetails, type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
-  import CustomContextMenuTrigger from "../CustomContextMenuTrigger.svelte";
+  import CustomContextMenuTrigger from "../../CustomContextMenuTrigger.svelte";
   import { addHistoryEntry } from "$lib/history";
 
   type $$Props = NodeProps<ItemData>;

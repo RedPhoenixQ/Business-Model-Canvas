@@ -8,7 +8,7 @@
     useNodes,
   } from "@xyflow/svelte";
   import { writable, type Writable } from "svelte/store";
-  import { itemDetails, type ItemData } from "./nodes/items";
+  import { itemDetails, type ItemData } from "./nodes/item";
   import { addHistoryEntry } from "./history";
 
   export let opened_at: XYPosition;

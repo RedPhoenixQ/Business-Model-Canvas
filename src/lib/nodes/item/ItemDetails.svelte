@@ -5,7 +5,7 @@
   import * as Sheet from "$lib/components/ui/sheet";
   import { useSvelteFlow } from "@xyflow/svelte";
   import ItemIcon from "./ItemIcon.svelte";
-  import { itemDetails, type ItemData } from "./items";
+  import { itemDetails, type ItemData } from ".";
   import { addHistoryEntry } from "$lib/history";
 
   const { updateNodeData } = useSvelteFlow();

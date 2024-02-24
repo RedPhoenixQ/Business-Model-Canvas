@@ -11,7 +11,7 @@
     getDimensionsInGrid,
     type SegmentData,
     gridSize,
-  } from "./segments";
+  } from ".";
   import { cn } from "$lib/utils";
 
   type $$Props = NodeProps<SegmentData>;
