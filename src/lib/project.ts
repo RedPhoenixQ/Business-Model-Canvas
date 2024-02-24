@@ -8,6 +8,7 @@ import {
 import { gridSize, type Grid } from "./nodes/segments";
 import { get, writable, type Writable } from "svelte/store";
 import { pageTemplates, projectTemplates } from "./templates";
+import { type HistoryEntry, getHistory, setHistory } from "./history";
 
 export type Page = {
   name: string;
@@ -15,6 +16,10 @@ export type Page = {
   edges: Edge[];
   viewport?: Viewport;
   grid: Grid;
+  history?: {
+    undo: HistoryEntry[];
+    redo: HistoryEntry[];
+  };
 };
 
 export type Project = {
@@ -31,8 +36,10 @@ project.subscribe(($project) => console.debug("project", $project));
 const pageName: Writable<string> = writable("page");
 
 export function useProject() {
-  const { toObject, setViewport, fitView } = useSvelteFlow();
-  const { reset, edges, nodes } = useStore();
+  const flow = useSvelteFlow();
+  const store = useStore();
+  const { toObject, setViewport, fitView } = flow;
+  const { reset, edges, nodes } = store;
 
   function storePage($project: Project) {
     if ($project.activePageIndex < 0) return;
@@ -44,6 +51,7 @@ export function useProject() {
       ...obj,
       name: get(pageName),
       grid: { ...get(gridSize) },
+      history: getHistory(),
     };
     $project.pages[$project.activePageIndex] = page;
   }
@@ -64,6 +72,7 @@ export function useProject() {
       gridSize.set(page.grid);
       nodes.set(page.nodes);
       edges.set(page.edges);
+      setHistory(page.history);
 
       setTimeout(() => {
         // Fit the view if no view is saved
@@ -79,6 +88,7 @@ export function useProject() {
   }
 
   return {
+    ...history,
     project,
     pageName,
     toJSON(): string {
