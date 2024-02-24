@@ -47,6 +47,7 @@
   $: console.debug("nodes", $nodes);
   $: console.debug("edges", $edges);
 
+  let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
   let contextmenu_pos: XYPosition = { x: 0, y: 0 };
 </script>
 
@@ -78,6 +79,16 @@
       on:nodedragstart={(event) => {
         console.log("on node drag start", event.detail.node);
         showNodeEdges([event.detail.node]);
+        // For node move history
+        moveNodeStartPos = event.detail.node.position;
+      }}
+      on:nodedragstop={(event) => {
+        addHistoryEntry({
+          type: "move",
+          id: event.detail.node.id,
+          from: moveNodeStartPos,
+          to: event.detail.node.position,
+        });
       }}
       on:edgeclick={(event) => {
         console.log("on edge click", event.detail.edge);
