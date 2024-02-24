@@ -36,10 +36,8 @@ project.subscribe(($project) => console.debug("project", $project));
 const pageName: Writable<string> = writable("page");
 
 export function useProject() {
-  const flow = useSvelteFlow();
-  const store = useStore();
-  const { toObject, setViewport, fitView } = flow;
-  const { reset, edges, nodes } = store;
+  const { toObject, setViewport, fitView } = useSvelteFlow();
+  const { reset, edges, nodes } = useStore();
 
   function storePage($project: Project) {
     if ($project.activePageIndex < 0) return;
