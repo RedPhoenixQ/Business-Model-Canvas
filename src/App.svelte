@@ -71,6 +71,14 @@
         console.log("ondelete", deleted);
         addHistoryEntry({ type: "delete", ...deleted });
       }}
+      onedgecreate={(connection) => {
+        const edge = {
+          ...connection,
+          id: `${connection.sourceHandle ?? connection.source}-${connection.targetHandle ?? connection.target}`,
+        };
+        addHistoryEntry({ type: "createEdge", edge });
+        return edge;
+      }}
       on:paneclick={hideAllEdges}
       on:nodeclick={(event) => {
         console.log("on node click", event.detail.node);
