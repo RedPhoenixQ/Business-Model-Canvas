@@ -23,6 +23,12 @@ export type HistoryEntry =
       edge: Edge;
     }
   | {
+      type: "nodeData";
+      id: string;
+      from: any;
+      to: any;
+    }
+  | {
       type: "move";
       id: string;
       from: XYPosition;
@@ -74,7 +80,7 @@ export function setHistory(
 }
 
 export function useHistory() {
-  const { updateNode } = useSvelteFlow();
+  const { updateNode, updateNodeData } = useSvelteFlow();
   const { nodes, edges } = useStore();
 
   function applyNodes(nodelist: Node[], add: boolean) {
@@ -114,6 +120,9 @@ export function useHistory() {
         break;
       case "createEdge":
         applyEdges([entry.edge], !undo);
+        break;
+      case "nodeData":
+        updateNodeData(entry.id, undo ? entry.from : entry.to);
         break;
       case "move":
         console.log("apply move");
