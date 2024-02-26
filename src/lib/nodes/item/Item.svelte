@@ -48,26 +48,5 @@
     <ItemIcon src={data.icon} alt={data.name} />
   </div>
 
-  <ContextMenu.Content>
-    <ContextMenu.Label class="flex items-center gap-2">
-      <div class="w-6">
-        <ItemIcon src={data.icon} alt={data.name} />
-      </div>
-      <span class="text-center">{data.name}</span>
-    </ContextMenu.Label>
-    <ContextMenu.Separator />
-    <ContextMenu.Item on:click={() => ($itemDetails = { id, data })}>
-      Edit
-    </ContextMenu.Item>
-    <ContextMenu.Separator />
-    <ContextMenu.Item
-      class="text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"
-      on:click={() => {
-        if (confirm("Are you sure?")) {
-          console.log("deleting node", id, data);
-          deleteNode(id);
-        }
-      }}>Delete</ContextMenu.Item
-    >
-  </ContextMenu.Content>
+  <ItemContextMenu {data} {id} />
 </CustomContextMenuTrigger>
