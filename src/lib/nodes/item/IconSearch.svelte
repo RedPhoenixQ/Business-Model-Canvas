@@ -90,21 +90,23 @@
       <SearchIcon />
     </Button>
   </form>
-  {#if icons.length > 0}
-    <div
-      class="grid max-h-32 gap-2 overflow-y-auto"
-      style:grid-template-columns="repeat(auto-fill, minmax(75px, 1fr))"
-    >
+  <div
+    class="grid max-h-32 gap-2 overflow-y-auto rounded border p-1"
+    style:grid-template-columns="repeat(auto-fill, minmax(75px, 1fr))"
+  >
+    {#if icons.length > 0}
       {#each icons as icon}
         {@const src = Icons8BaseImgUrl + icon.id}
         <button on:click={() => dispatch("iconSelected", { ...icon, src })}>
           <ItemIcon icon={{ ...iconInfo, src }} alt={icon.name} />
         </button>
       {/each}
-    </div>
-  {:else if debounce !== undefined}
-    <Loader2Icon class="col-span-full mx-auto animate-spin" />
-  {:else}
-    <span>No icons, search for something</span>
-  {/if}
+    {:else if debounce !== undefined}
+      <Loader2Icon class="col-span-full mx-auto animate-spin" />
+    {:else}
+      <div class="col-span-full text-center text-sm text-muted-foreground">
+        No results, search for something
+      </div>
+    {/if}
+  </div>
 </div>
