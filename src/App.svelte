@@ -26,6 +26,7 @@
   import AutoSave from "$lib/project/AutoSave.svelte";
   import PagesList from "$lib/project/PagesList.svelte";
   import { addHistoryEntry } from "$lib/project/history";
+  import Toolbar from "$lib/menubar/Toolbar.svelte";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -106,10 +107,11 @@
         ]);
       }}
     >
-      <Panel position="top-left" class="flex gap-2">
+      <Panel position="top-left" class="space-y-1">
         <Menubar>
           <h1 class="px-2">Business Model Canvas</h1>
         </Menubar>
+        <Toolbar />
       </Panel>
 
       <PagesList />
