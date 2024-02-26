@@ -1,13 +1,31 @@
 <script lang="ts">
-  export let src: string | undefined = undefined;
+  import type { ItemIconInfo } from ".";
+
+  export let icon: ItemIconInfo;
   export let alt = "";
 </script>
 
-{#if src}
-  <img {src} {alt} />
+{#if icon?.src}
+  <div
+    class="flex aspect-square items-center justify-center
+    {icon.shape === 'circle' ? 'rounded-full' : 'rounded'}
+     {icon.background !== undefined
+      ? icon.background === 'dark'
+        ? 'bg-black'
+        : 'bg-white'
+      : ''}"
+  >
+    <img class="w-full" src={icon.src} {alt} />
+  </div>
 {:else}
   <svg
-    class="aspect-square stroke-black dark:stroke-white"
+    class="aspect-square stroke-black dark:stroke-white
+    {icon.shape === 'circle' ? 'rounded-full' : 'rounded'}
+    {icon.background !== undefined
+      ? icon.background === 'dark'
+        ? 'bg-black'
+        : 'bg-white'
+      : ''}"
     viewBox="0 0 100 100"
     xmlns="http://www.w3.org/2000/svg"
   >

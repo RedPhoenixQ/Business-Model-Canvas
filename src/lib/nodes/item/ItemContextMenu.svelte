@@ -23,7 +23,7 @@
 <ContextMenu.Content>
   <ContextMenu.Label class="flex items-center gap-2">
     <div class="w-6">
-      <ItemIcon src={data.icon} alt={data.name} />
+      <ItemIcon icon={data.icon} alt={data.name} />
     </div>
     <span class="text-center">{data.name}</span>
   </ContextMenu.Label>

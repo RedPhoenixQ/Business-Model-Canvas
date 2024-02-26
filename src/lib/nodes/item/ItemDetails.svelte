@@ -25,6 +25,7 @@
       );
       return;
     }
+    $itemDetails.data = data;
     const id = $itemDetails.id;
     updateNodeData(id, (node) => {
       if (!data) return;
@@ -81,10 +82,10 @@
             id="icon"
             type="url"
             class="col-span-2"
-            bind:value={data.icon}
+            bind:value={data.icon.src}
             on:change={change}
           />
-          <ItemIcon src={data.icon} alt={data.name} />
+          <ItemIcon icon={data.icon} alt={data.name} />
         </div>
       </div>
     {:else}

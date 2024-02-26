@@ -20,7 +20,7 @@
       type="target"
       position={Position.Top}
     />
-    <ItemIcon src={data.icon} alt={data.name} />
+    <ItemIcon icon={data.icon} alt={data.name} />
   </div>
 
   <ItemContextMenu {data} {id} />

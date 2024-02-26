@@ -21,7 +21,10 @@ export const pageTemplates = {
         type: "item",
         data: {
           name: "steam",
-          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+          icon: {
+            src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+            shape: "circle",
+          },
         },
         position: { x: 90, y: 80 },
         parentNode: "key-partners",
@@ -32,6 +35,7 @@ export const pageTemplates = {
         type: "item",
         data: {
           name: "empty test",
+          icon: {},
         },
         position: { x: 30, y: 100 },
         parentNode: "key-activities",
@@ -42,7 +46,9 @@ export const pageTemplates = {
         type: "item",
         data: {
           name: "empty test",
-          icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+          icon: {
+            src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+          },
         },
         position: { x: 120, y: 50 },
         parentNode: "channels",
@@ -53,7 +59,11 @@ export const pageTemplates = {
         type: "item",
         data: {
           name: "Costs",
-          icon: "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
+          icon: {
+            src: "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
+            shape: "circle",
+            background: "light",
+          },
         },
         position: { x: 320, y: 120 },
         parentNode: "costs",
