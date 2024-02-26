@@ -76,11 +76,11 @@
 <div class="space-y-4">
   <form
     class="flex w-full max-w-sm items-center space-x-2"
-    on:submit|preventDefault={(event) => {
+    on:submit|preventDefault={async () => {
       // Cancel autosearch when searching manually
       clearTimeout(debounce);
+      await getIcons(term);
       debounce = undefined;
-      getIcons(term);
     }}
   >
     <Input bind:value={term} on:input={autoSearch} placeholder="Search for icon"
