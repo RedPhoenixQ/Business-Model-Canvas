@@ -158,6 +158,14 @@
                   {/each}
                 </Select.Content>
               </Select.Root>
+              <IconSearch
+                iconInfo={data.icon}
+                on:iconSelected={(event) => {
+                  console.log("iconSelected", event.detail);
+                  if (!data) return;
+                  data.icon.src = event.detail.src;
+                }}
+              />
             </Popover.Content>
           </Popover.Root>
         </div>
