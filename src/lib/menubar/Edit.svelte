@@ -6,7 +6,6 @@
   const { undo, redo, applyHistory } = useHistory();
 
   function shortcuts(event: KeyboardEvent) {
-    console.log(event);
     switch (event.code) {
       case "KeyZ":
         if (!event.ctrlKey) return;
@@ -20,6 +19,7 @@
       default:
         return;
     }
+    console.log("Shortcut", event);
     event.preventDefault();
   }
 </script>
