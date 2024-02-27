@@ -1,7 +1,7 @@
 <script lang="ts">
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import { useSvelteFlow, type NodeProps } from "@xyflow/svelte";
-  import { itemDetails, type ItemData } from ".";
+  import { type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
@@ -32,10 +32,6 @@
       </div>
       <span class="text-center">{data.name}</span>
     </ContextMenu.Label>
-    <ContextMenu.Separator />
-    <ContextMenu.Item on:click={() => ($itemDetails = { id, data })}>
-      Edit
-    </ContextMenu.Item>
     <ContextMenu.Separator />
     <ContextMenu.Item
       class="text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"

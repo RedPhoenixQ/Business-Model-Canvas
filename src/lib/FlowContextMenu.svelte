@@ -8,7 +8,7 @@
     useNodes,
   } from "@xyflow/svelte";
   import { writable, type Writable } from "svelte/store";
-  import { itemDetails, type ItemData } from "./nodes/item";
+  import { type ItemData } from "./nodes/item";
   import { addHistoryEntry } from "./project/history";
 
   export let opened_at: XYPosition;
@@ -61,7 +61,6 @@
     $nodes.push(node);
     $nodes = $nodes;
     addHistoryEntry({ type: "createNode", node });
-    $itemDetails = node;
   }
 </script>
 

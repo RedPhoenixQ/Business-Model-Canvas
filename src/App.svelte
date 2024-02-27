@@ -2,7 +2,6 @@
   // 👇 this is important! You need to import the styles for Svelte Flow to work
   import "@xyflow/svelte/dist/style.css";
 
-  import ItemDetails from "$lib/nodes/item/ItemDetails.svelte";
   import { writable } from "svelte/store";
   import {
     SvelteFlow,
@@ -121,8 +120,6 @@
       <Controls />
       <Background variant={BackgroundVariant.Dots} />
       <MiniMap />
-
-      <ItemDetails />
 
       <AutoSave />
     </SvelteFlow>
