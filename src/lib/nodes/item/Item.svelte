@@ -3,7 +3,6 @@
   import { Handle, Position, type NodeProps } from "@xyflow/svelte";
   import type { ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
-  import CustomContextMenuTrigger from "../../CustomContextMenuTrigger.svelte";
 
   type $$Props = NodeProps<ItemData>;
 
@@ -12,7 +11,7 @@
   export let selected: $$Props["selected"];
 </script>
 
-<CustomContextMenuTrigger>
+<ItemContextMenu bind:data {id}>
   <div class="relative aspect-square w-10 {selected ? 'scale-125' : ''}">
     <Handle type="source" position={Position.Top} />
     <Handle
@@ -22,6 +21,4 @@
     />
     <ItemIcon icon={data.icon} alt={data.name} />
   </div>
-
-  <ItemContextMenu {data} {id} />
-</CustomContextMenuTrigger>
+</ItemContextMenu>
