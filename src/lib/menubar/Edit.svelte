@@ -6,13 +6,14 @@
   const { undo, redo, applyHistory } = useHistory();
 
   function shortcuts(event: KeyboardEvent) {
+    const ctrl = event.ctrlKey || event.metaKey;
     switch (event.code) {
       case "KeyZ":
-        if (!event.ctrlKey) return;
+        if (!ctrl) return;
         applyHistory(!event.shiftKey);
         break;
       case "KeyY":
-        if (!event.ctrlKey) return;
+        if (!ctrl) return;
         redo();
         break;
 
@@ -32,12 +33,12 @@
     <Menubar.Item on:click={undo} disabled={$undoEmpty}>
       <UndoIcon size="20" />
       Undo
-      <Menubar.Shortcut>^Z</Menubar.Shortcut>
+      <Menubar.Shortcut>Ctrl/Cmd+Z</Menubar.Shortcut>
     </Menubar.Item>
     <Menubar.Item on:click={redo} disabled={$redoEmpty}>
       <RedoIcon size="20" />
       Redo
-      <Menubar.Shortcut>^Y</Menubar.Shortcut>
+      <Menubar.Shortcut>Ctrl/Cmd+Y</Menubar.Shortcut>
     </Menubar.Item>
   </Menubar.Content>
 </Menubar.Menu>
