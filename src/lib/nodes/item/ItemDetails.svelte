@@ -1,19 +1,35 @@
 <script lang="ts">
   import IconPopover from "./IconPopover.svelte";
-  import Button from "$lib/components/ui/button/button.svelte";
   import Input from "$lib/components/ui/input/input.svelte";
   import Label from "$lib/components/ui/label/label.svelte";
   import * as Sheet from "$lib/components/ui/sheet";
-  import { type NodeProps } from "@xyflow/svelte";
+  import {
+    type NodeProps,
+    type Node,
+    getConnectedEdges,
+    useEdges,
+    useSvelteFlow,
+  } from "@xyflow/svelte";
   import ItemIcon from "./ItemIcon.svelte";
   import { type ItemData } from ".";
   import { addHistoryEntry } from "$lib/project/history";
-  import { EditIcon } from "lucide-svelte";
+  import {
+    EditIcon,
+    ArrowLeftFromLineIcon,
+    ArrowRightToLineIcon,
+  } from "lucide-svelte";
   import { Textarea } from "$lib/components/ui/textarea";
 
   export let id: NodeProps<ItemData>["id"];
   export let data: NodeProps<ItemData>["data"];
   export let open = false;
+
+  const { getNode } = useSvelteFlow();
+  const edges = useEdges();
+
+  // FIXME: This recomputes every time any node changes.
+  //        Should probably only use one ItemDetails for all nodes
+  $: connections = getConnectedEdges([{ id } as Node], $edges);
 
   let from = data;
 </script>
@@ -36,11 +52,15 @@
   {#if $$slots.default}
     <Sheet.Trigger><slot /></Sheet.Trigger>
   {/if}
-  <Sheet.Content side="right">
+  <Sheet.Content
+    side="right"
+    class="grid"
+    style="grid-template-rows: auto 1fr;"
+  >
     <Sheet.Header class="mb-6">
       <Sheet.Title>Edit item</Sheet.Title>
     </Sheet.Header>
-    <div class="space-y-4">
+    <div class="space-y-4 overflow-y-auto">
       <div class="flex items-center gap-4">
         <IconPopover
           bind:data
@@ -58,10 +78,54 @@
         </Label>
       </div>
       <div>
-        <Label>
+        <Label class="w-full space-y-2">
           <span>Description</span>
           <Textarea bind:value={data.description} />
         </Label>
+      </div>
+      <div class="space-y-2 text-sm font-medium leading-none">
+        <span>Connections</span>
+        <div class="max-h-[50vh] space-y-2 overflow-y-auto">
+          {#each connections as connection}
+            {@const selfIsSource = connection.source === id}
+            {@const node = getNode(
+              selfIsSource ? connection.target : connection.source,
+            )}
+            {#if node && node.data}
+              <div
+                class="grid items-center gap-2"
+                style:grid-template-columns="auto auto 1fr"
+              >
+                <div class="w-12">
+                  <ItemIcon icon={node?.data?.icon} />
+                </div>
+                {#if selfIsSource}
+                  <ArrowLeftFromLineIcon />
+                {:else}
+                  <ArrowRightToLineIcon />
+                {/if}
+                <Label class="w-full space-y-2">
+                  <span>
+                    {node.data.name}
+                    {node.parentNode ? ` - ${node.parentNode}` : ""}
+                  </span>
+                  <Input
+                    value={connection.label}
+                    on:change={(event) => {
+                      const edge = $edges.find(
+                        (edge) => edge.id === connection.id,
+                      );
+                      if (!edge || !event.target) return;
+                      // @ts-ignore: Event target is <input> which has .value
+                      edge.label = event.target.value;
+                      $edges = $edges;
+                    }}
+                  ></Input>
+                </Label>
+              </div>
+            {/if}
+          {/each}
+        </div>
       </div>
     </div>
   </Sheet.Content>
