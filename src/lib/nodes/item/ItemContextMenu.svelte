@@ -5,7 +5,7 @@
   import ItemIcon from "./ItemIcon.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import CustomContextMenuTrigger from "$lib/CustomContextMenuTrigger.svelte";
-  import { EditIcon } from "lucide-svelte";
+  import { EditIcon, XIcon } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
 
   type $$Props = Pick<NodeProps<ItemData>, "data" | "id">;
@@ -49,7 +49,10 @@
           console.log("deleting node", id, data);
           deleteNode(id);
         }
-      }}>Delete</ContextMenu.Item
+      }}
     >
+      <XIcon size="20" />
+      Delete
+    </ContextMenu.Item>
   </ContextMenu.Content>
 </CustomContextMenuTrigger>
