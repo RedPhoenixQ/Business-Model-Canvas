@@ -25,6 +25,7 @@ export const pageTemplates = {
             src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
             shape: "circle",
           },
+          description: "",
         },
         position: { x: 90, y: 80 },
         parentNode: "key-partners",
@@ -36,6 +37,7 @@ export const pageTemplates = {
         data: {
           name: "empty test",
           icon: {},
+          description: "",
         },
         position: { x: 30, y: 100 },
         parentNode: "key-activities",
@@ -49,6 +51,7 @@ export const pageTemplates = {
           icon: {
             src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
           },
+          description: "",
         },
         position: { x: 120, y: 50 },
         parentNode: "channels",
@@ -64,6 +67,7 @@ export const pageTemplates = {
             shape: "circle",
             background: "light",
           },
+          description: "",
         },
         position: { x: 320, y: 120 },
         parentNode: "costs",
