@@ -10,15 +10,15 @@
   import { addHistoryEntry } from "$lib/project/history";
   import { EditIcon } from "lucide-svelte";
 
-  type $$Props = Pick<NodeProps<ItemData>, "data" | "id">;
-
-  export let id: $$Props["id"];
-  export let data: $$Props["data"];
+  export let id: NodeProps<ItemData>["id"];
+  export let data: NodeProps<ItemData>["data"];
+  export let open = false;
 
   let from = data;
 </script>
 
 <Sheet.Root
+  bind:open
   onOpenChange={(is_open) => {
     if (is_open) {
       from = structuredClone(data);
@@ -32,7 +32,9 @@
     }
   }}
 >
-  <Sheet.Trigger><slot /></Sheet.Trigger>
+  {#if $$slots.default}
+    <Sheet.Trigger><slot /></Sheet.Trigger>
+  {/if}
   <Sheet.Content side="right">
     <Sheet.Header class="mb-6">
       <Sheet.Title>Edit item</Sheet.Title>
