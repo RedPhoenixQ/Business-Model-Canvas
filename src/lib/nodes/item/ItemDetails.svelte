@@ -9,6 +9,7 @@
   import { type ItemData } from ".";
   import { addHistoryEntry } from "$lib/project/history";
   import { EditIcon } from "lucide-svelte";
+  import { Textarea } from "$lib/components/ui/textarea";
 
   export let id: NodeProps<ItemData>["id"];
   export let data: NodeProps<ItemData>["data"];
@@ -39,7 +40,7 @@
     <Sheet.Header class="mb-6">
       <Sheet.Title>Edit item</Sheet.Title>
     </Sheet.Header>
-    <div class="space-y-6">
+    <div class="space-y-4">
       <div class="flex items-center gap-4">
         <IconPopover
           bind:data
@@ -54,6 +55,12 @@
         <Label class="w-full space-y-2">
           <span> Name </span>
           <Input type="text" class="col-span-3" bind:value={data.name} />
+        </Label>
+      </div>
+      <div>
+        <Label>
+          <span>Description</span>
+          <Textarea bind:value={data.description} />
         </Label>
       </div>
     </div>

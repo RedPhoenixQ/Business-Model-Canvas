@@ -7,4 +7,5 @@ export type ItemIconInfo = {
 export type ItemData = {
   name: string;
   icon: ItemIconInfo;
+  description: string;
 };
