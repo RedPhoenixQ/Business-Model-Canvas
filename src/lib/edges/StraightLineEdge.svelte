@@ -32,14 +32,12 @@
     });
     if (sourceNode && targetNode) {
       const { sx, sy, tx, ty } = getEdgeParams(sourceNode, targetNode);
-      labelX = (sx + tx) / 2;
-      labelY = (sy + ty) / 2;
-      edgePath = getStraightPath({
+      [edgePath, labelX, labelY] = getStraightPath({
         sourceX: sx,
         sourceY: sy,
         targetX: tx,
         targetY: ty,
-      })[0];
+      });
     } else {
       edgePath = undefined;
     }
