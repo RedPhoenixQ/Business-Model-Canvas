@@ -54,6 +54,7 @@
       position,
       data: {
         name: "",
+        icon: {},
       },
       extent: "parent",
       parentNode: parent?.id,
