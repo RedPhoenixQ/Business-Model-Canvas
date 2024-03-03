@@ -4,6 +4,7 @@ import {
   type Node,
   type XYPosition,
   useStore,
+  type Dimensions,
 } from "@xyflow/svelte";
 import { RingBuffer } from "ring-buffer-ts";
 import { derived, get, readonly, writable } from "svelte/store";
@@ -33,6 +34,16 @@ export type HistoryEntry =
       id: string;
       from: XYPosition;
       to: XYPosition;
+    }
+  | {
+      type: "resize";
+      id: string;
+      from: Dimensions & {
+        position: XYPosition;
+      };
+      to: Dimensions & {
+        position: XYPosition;
+      };
     };
 
 const UNDO_SIZE = 32 as const;
@@ -136,6 +147,11 @@ export function useHistory() {
       case "move":
         console.log("apply move");
         updateNode(entry.id, { position: undo ? entry.from : entry.to });
+        break;
+      case "resize":
+        console.log("apply resize");
+        updateNode(entry.id, undo ? entry.from : entry.to);
+        break;
       default:
         break;
     }

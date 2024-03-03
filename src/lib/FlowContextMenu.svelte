@@ -7,9 +7,11 @@
     type XYPosition,
     useNodes,
   } from "@xyflow/svelte";
-  import { writable, type Writable } from "svelte/store";
   import { type ItemData } from "./nodes/item";
   import { addHistoryEntry } from "./project/history";
+  import { PlusIcon } from "lucide-svelte";
+
+  type ItemNodeTypes = "item" | "text";
 
   export let opened_at: XYPosition;
 
@@ -20,6 +22,7 @@
     event: CustomEvent<{
       originalEvent: PointerEvent;
     }>,
+    type: ItemNodeTypes,
   ) {
     console.debug("add item event", event);
 
@@ -49,27 +52,48 @@
     }
 
     const node = {
-      type: "item",
+      type,
       id: crypto.randomUUID() as string,
       position,
       data: {
         name: "",
         icon: {},
+        description: "",
       },
       extent: "parent",
       parentNode: parent?.id,
-    } satisfies Node<ItemData, "item">;
+    } as Node<ItemData, ItemNodeTypes>;
+    if (type === "text") {
+      // Nodes without dimensions are node considered initialized.
+      // It's a mystery why this is not needed for nodes of type "item"
+      node.width = 100;
+      node.height = 60;
+    }
     $nodes.push(node);
     $nodes = $nodes;
     addHistoryEntry({ type: "createNode", node });
   }
 </script>
 
-<ContextMenu.Content>
-  <ContextMenu.Item
-    on:click={(event) => {
-      // @ts-ignore: Incorrect event typing
-      addItem(event);
-    }}>Add Item</ContextMenu.Item
-  >
+<ContextMenu.Content class="[&_[role=menuitem]]:gap-2">
+  <ContextMenu.Sub>
+    <ContextMenu.SubTrigger>
+      <PlusIcon size="20" />
+      Add
+    </ContextMenu.SubTrigger>
+    <ContextMenu.SubContent>
+      <ContextMenu.Item
+        on:click={(event) => {
+          // @ts-ignore: Incorrect event typing
+          addItem(event, "item");
+        }}>Item</ContextMenu.Item
+      >
+      <ContextMenu.Item
+        on:click={(event) => {
+          // @ts-ignore: Incorrect event typing
+          addItem(event, "text");
+        }}>Text</ContextMenu.Item
+      >
+    </ContextMenu.SubContent>
+  </ContextMenu.Sub>
 </ContextMenu.Content>

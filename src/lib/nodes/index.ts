@@ -4,5 +4,6 @@ import Segment from "./segment/Segment.svelte";
 
 export const nodeTypes: NodeTypes = {
   item: Item,
+  text: Item,
   segment: Segment,
 };
