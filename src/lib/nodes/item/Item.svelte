@@ -5,11 +5,14 @@
     Position,
     type NodeProps,
     NodeResizer,
+    type Dimensions,
+    type XYPosition,
   } from "@xyflow/svelte";
   import type { ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
   import ItemDetails from "./ItemDetails.svelte";
   import { MoveIcon } from "lucide-svelte";
+  import { addHistoryEntry, type HistoryEntry } from "$lib/project/history";
 
   type $$Props = NodeProps<ItemData>;
 
@@ -19,6 +22,25 @@
   export let selected: $$Props["selected"];
 
   $: isTextNode = type === "text";
+
+  let beforeResize: (HistoryEntry & { type: "resize" })["from"];
+  function onResizeStart(
+    _: any,
+    { width, height, x, y }: Dimensions & XYPosition,
+  ) {
+    beforeResize = { width, height, position: { x, y } };
+  }
+  function onResizeEnd(
+    _: any,
+    { width, height, x, y }: Dimensions & XYPosition,
+  ) {
+    addHistoryEntry({
+      type: "resize",
+      id,
+      from: beforeResize,
+      to: { width, height, position: { x, y } },
+    });
+  }
 
   let detailsOpen = false;
 </script>
@@ -33,7 +55,13 @@
       position={Position.Top}
     />
     {#if isTextNode}
-      <NodeResizer minHeight={60} minWidth={100} isVisible={selected} />
+      <NodeResizer
+        minHeight={60}
+        minWidth={100}
+        isVisible={selected}
+        {onResizeStart}
+        {onResizeEnd}
+      />
       <MoveIcon
         class="absolute right-0 top-0 -translate-y-full translate-x-full {selected
           ? 'opacity-100'
