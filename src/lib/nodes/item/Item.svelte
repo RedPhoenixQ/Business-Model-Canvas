@@ -40,9 +40,10 @@
           : 'opacity-0'}"
       />
       <div
-        class="nodrag size-full overflow-y-auto rounded bg-background bg-opacity-75 px-1"
+        class="nodrag grid size-full rounded bg-background bg-opacity-75 px-1"
+        style:grid-template-rows="auto 1fr"
       >
-        <div class="flex items-center">
+        <div class="flex min-h-[1ch] items-center">
           {#if data.icon.src}
             <div class="size-8 p-1">
               <ItemIcon icon={data.icon} alt={data.name} />
@@ -55,7 +56,7 @@
           />
         </div>
         <div
-          class="p-1 text-sm"
+          class="min-h-[1ch] p-1 text-sm"
           contenteditable="plaintext-only"
           bind:textContent={data.description}
         />
