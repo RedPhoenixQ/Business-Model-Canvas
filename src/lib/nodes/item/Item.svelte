@@ -15,9 +15,10 @@
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];
+  export let type: $$Props["type"];
   export let selected: $$Props["selected"];
 
-  $: isTextNode = !!data.description;
+  $: isTextNode = type === "text";
 
   let detailsOpen = false;
 </script>
