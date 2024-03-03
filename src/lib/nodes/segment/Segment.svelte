@@ -13,6 +13,7 @@
     gridSize,
   } from ".";
   import { cn } from "$lib/utils";
+  import { addHistoryEntry } from "$lib/project/history";
 
   type $$Props = NodeProps<SegmentData>;
 
@@ -65,6 +66,7 @@
     const dy = node.height - prevHeight;
     console.log("resize prev", prevWidth, prevHeight);
     console.log("resize", dx, dy);
+    const from = structuredClone($gridSize);
     // TODO:  Find a better way of distributing the size increase.
     //        Should probably move a "grid line" instread of a block
     //        or respect minimum size of grid blocks
@@ -82,6 +84,12 @@
     ) {
       $gridSize.rows[i] += dy / rows;
     }
+
+    addHistoryEntry({
+      type: "gridResize",
+      to: structuredClone($gridSize),
+      from,
+    });
   }
 </script>
 
