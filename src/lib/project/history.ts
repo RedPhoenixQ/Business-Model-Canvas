@@ -1,3 +1,4 @@
+import { gridSize, type Grid } from "$lib/nodes/segment";
 import {
   useSvelteFlow,
   type Edge,
@@ -44,6 +45,11 @@ export type HistoryEntry =
       to: Dimensions & {
         position: XYPosition;
       };
+    }
+  | {
+      type: "gridResize";
+      from: Grid;
+      to: Grid;
     };
 
 const UNDO_SIZE = 32 as const;
@@ -151,6 +157,10 @@ export function useHistory() {
       case "resize":
         console.log("apply resize");
         updateNode(entry.id, undo ? entry.from : entry.to);
+        break;
+      case "gridResize":
+        console.log("apply gridResize");
+        gridSize.set(undo ? entry.from : entry.to);
         break;
       default:
         break;
