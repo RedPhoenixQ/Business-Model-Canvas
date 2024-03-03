@@ -32,7 +32,7 @@
       position={Position.Top}
     />
     {#if isTextNode}
-      <NodeResizer isVisible={selected} />
+      <NodeResizer minHeight={60} minWidth={100} isVisible={selected} />
       <MoveIcon
         class="absolute right-0 top-0 -translate-y-full translate-x-full {selected
           ? 'opacity-100'
