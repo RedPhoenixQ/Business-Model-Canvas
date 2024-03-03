@@ -118,7 +118,7 @@ export function useProject() {
 
       $project.activePageIndex = $project.pages.length;
       $project.pages.push({
-        ...pageTemplates[template],
+        ...structuredClone(pageTemplates[template]),
         name: `Page ${max + 1}`,
       });
       loadPage($project);
