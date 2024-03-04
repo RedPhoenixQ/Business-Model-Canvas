@@ -94,6 +94,12 @@
           addItem(event, "text");
         }}>Text</ContextMenu.Item
       >
+      <ContextMenu.Item
+        on:click={(event) => {
+          // @ts-ignore: Incorrect event typing
+          addItem(event, "slider");
+        }}>Slider</ContextMenu.Item
+      >
     </ContextMenu.SubContent>
   </ContextMenu.Sub>
 </ContextMenu.Content>
