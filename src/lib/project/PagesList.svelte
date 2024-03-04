@@ -5,12 +5,21 @@
   import { useProject } from ".";
   import { pageTemplates } from "./templates";
   import * as Dropdown from "../components/ui/dropdown-menu";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher<{ pageSwap: undefined }>();
 
   const { project, pageName, swapActivePage, addPage } = useProject();
 
   function pageFromTemplate(template: string) {
     if (!Object.keys(pageTemplates).includes(template)) return;
     addPage(template as keyof typeof pageTemplates);
+  }
+
+  let prevPage = $project.activePageIndex;
+  $: if ($project.activePageIndex !== prevPage) {
+    prevPage = $project.activePageIndex;
+    dispatch("pageSwap");
   }
 </script>
 

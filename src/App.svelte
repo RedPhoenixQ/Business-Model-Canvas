@@ -30,16 +30,27 @@
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
 
+  const nodeEdgesToShow: Set<string> = new Set();
   function hideAllEdges() {
+    nodeEdgesToShow.clear();
     for (const edge of $edges) {
       edge.hidden = true;
     }
     $edges = $edges;
   }
-  function showNodeEdges(node_ids: ({ id: string } | Node)[]) {
-    const connected = getConnectedEdges(node_ids as Node[], $edges);
+  function toggleNodeEdgeHidden(
+    nodeList: ({ id: string } | Node)[],
+    hidden = false,
+  ) {
+    const connected = getConnectedEdges(nodeList as Node[], $edges);
     for (const edge of connected) {
-      edge.hidden = false;
+      if (
+        hidden &&
+        (nodeEdgesToShow.has(edge.source) || nodeEdgesToShow.has(edge.target))
+      ) {
+        continue;
+      }
+      edge.hidden = hidden;
     }
     $edges = $edges;
   }
@@ -68,10 +79,11 @@
       fitView
       colorMode={$theme}
       ondelete={(deleted) => {
-        console.log("ondelete", deleted);
+        console.debug("ondelete", deleted);
         addHistoryEntry({ type: "delete", ...deleted });
       }}
       onedgecreate={(connection) => {
+        console.debug("onedgecreate", connection);
         const edge = {
           ...connection,
           id: `${connection.sourceHandle ?? connection.source}-${connection.targetHandle ?? connection.target}`,
@@ -81,16 +93,26 @@
       }}
       on:paneclick={hideAllEdges}
       on:nodeclick={(event) => {
-        console.log("on node click", event.detail.node);
-        showNodeEdges([event.detail.node]);
+        console.debug("on node click", event.detail.node);
+        nodeEdgesToShow.add(event.detail.node.id);
+        toggleNodeEdgeHidden([event.detail.node]);
+      }}
+      on:nodemouseenter={(event) => {
+        console.debug("on node enter", event.detail.node);
+        toggleNodeEdgeHidden([event.detail.node]);
+      }}
+      on:nodemouseleave={(event) => {
+        console.debug("on node leave", event.detail.node);
+        toggleNodeEdgeHidden([event.detail.node], true);
       }}
       on:nodedragstart={(event) => {
-        console.log("on node drag start", event.detail.node);
-        showNodeEdges([event.detail.node]);
+        console.debug("on node drag start", event.detail.node);
+        toggleNodeEdgeHidden([event.detail.node]);
         // For node move history
         moveNodeStartPos = event.detail.node.position;
       }}
       on:nodedragstop={(event) => {
+        console.debug("on node drag stop", event.detail.node);
         addHistoryEntry({
           type: "move",
           id: event.detail.node.id,
@@ -99,8 +121,8 @@
         });
       }}
       on:edgeclick={(event) => {
-        console.log("on edge click", event.detail.edge);
-        showNodeEdges([
+        console.debug("on edge click", event.detail.edge);
+        toggleNodeEdgeHidden([
           { id: event.detail.edge.source },
           { id: event.detail.edge.target },
         ]);
@@ -113,7 +135,7 @@
         <Toolbar />
       </Panel>
 
-      <PagesList />
+      <PagesList on:pageSwap={() => nodeEdgesToShow.clear()} />
 
       <FlowContextMenu bind:opened_at={contextmenu_pos} />
 
