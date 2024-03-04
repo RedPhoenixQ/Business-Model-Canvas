@@ -122,6 +122,8 @@
       <MiniMap />
 
       <AutoSave />
+
+      <div id="itemDetailsPortal" />
     </SvelteFlow>
   </CustomContextMenuTrigger>
 </div>

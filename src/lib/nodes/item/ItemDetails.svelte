@@ -35,6 +35,7 @@
 </script>
 
 <Sheet.Root
+  portal="#itemDetailsPortal"
   bind:open
   onOpenChange={(is_open) => {
     if (is_open) {
