@@ -11,7 +11,7 @@
   import { addHistoryEntry } from "./project/history";
   import { PlusIcon } from "lucide-svelte";
 
-  type ItemNodeTypes = "item" | "text";
+  type ItemNodeTypes = "item" | "text" | "slider";
 
   export let opened_at: XYPosition;
 
@@ -55,14 +55,19 @@
       type,
       id: crypto.randomUUID() as string,
       position,
-      data: {
-        name: "",
-        icon: {},
-        description: "",
-      },
+      data:
+        type === "slider"
+          ? {
+              value: [50],
+            }
+          : {
+              name: "",
+              icon: {},
+              description: "",
+            },
       extent: "parent",
       parentNode: parent?.id,
-    } as Node<ItemData, ItemNodeTypes>;
+    } as Node<ItemData | SliderData, ItemNodeTypes>;
     if (type === "text") {
       // Nodes without dimensions are node considered initialized.
       // It's a mystery why this is not needed for nodes of type "item"

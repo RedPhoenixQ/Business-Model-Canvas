@@ -1,0 +1,3 @@
+type SliderData = {
+  value: [number];
+};

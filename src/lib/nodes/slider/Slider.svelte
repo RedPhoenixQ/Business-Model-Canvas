@@ -3,15 +3,43 @@
   import Slider from "$lib/components/ui/slider/slider.svelte";
   import MaleIcon from "./MaleIcon.svelte";
   import FemaleIcon from "./FemaleIcon.svelte";
+  import { addHistoryEntry } from "$lib/project/history";
 
-  type $$Props = NodeProps<{}>;
+  type $$Props = NodeProps<SliderData>;
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];
+
+  let from: SliderData;
+  let timeout: number | undefined;
+  function onValueChange(value: number[]) {
+    if (timeout === undefined) {
+      from = structuredClone(data);
+    } else {
+      clearTimeout(timeout);
+    }
+    timeout = setTimeout(() => {
+      timeout = undefined;
+      console.log("setting history");
+      addHistoryEntry({
+        type: "nodeData",
+        id,
+        from,
+        to: structuredClone(data),
+      });
+    }, 1000);
+  }
 </script>
 
 <div class="grid gap-2" style:grid-template-columns="auto 1fr auto">
   <MaleIcon />
-  <Slider value={[50]} min={0} max={100} class="w-24" />
+  <Slider
+    bind:value={data.value}
+    min={0}
+    max={100}
+    step={1}
+    {onValueChange}
+    class="w-24"
+  />
   <FemaleIcon />
 </div>
