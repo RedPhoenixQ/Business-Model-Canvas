@@ -97,7 +97,11 @@
                 style:grid-template-columns="auto auto 1fr"
               >
                 <div class="w-12">
-                  <ItemIcon icon={node?.data?.icon} />
+                  {#if node?.data?.icon}
+                    <ItemIcon icon={node?.data?.icon} />
+                  {:else if node.type === "slider"}
+                    <span>Slider</span>
+                  {/if}
                 </div>
                 {#if selfIsSource}
                   <ArrowLeftFromLineIcon />
