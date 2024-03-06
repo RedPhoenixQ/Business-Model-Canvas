@@ -15,6 +15,7 @@
     type XYPosition,
     getConnectedEdges,
     type Edge,
+    ControlButton,
   } from "@xyflow/svelte";
   import { theme } from "$lib/theme";
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
@@ -26,6 +27,8 @@
   import PagesList from "$lib/project/PagesList.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import Toolbar from "$lib/menubar/Toolbar.svelte";
+  import { showItemNames } from "$lib/nodes/item";
+  import { EyeIcon, EyeOffIcon } from "lucide-svelte";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -139,7 +142,19 @@
 
       <FlowContextMenu bind:opened_at={contextmenu_pos} />
 
-      <Controls />
+      <Controls>
+        <ControlButton
+          title="toggle always show names"
+          aria-label="toggle always show names"
+          on:click={() => ($showItemNames = !$showItemNames)}
+        >
+          {#if $showItemNames}
+            <EyeIcon class="!fill-transparent" />
+          {:else}
+            <EyeOffIcon class="!fill-transparent" />
+          {/if}
+        </ControlButton>
+      </Controls>
       <Background variant={BackgroundVariant.Dots} />
       <MiniMap />
 

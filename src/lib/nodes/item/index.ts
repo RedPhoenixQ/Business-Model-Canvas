@@ -1,3 +1,5 @@
+import { writable } from "svelte/store";
+
 export type ItemIconInfo = {
   src?: string;
   background?: "dark" | "light";
@@ -9,3 +11,5 @@ export type ItemData = {
   icon: ItemIconInfo;
   description: string;
 };
+
+export const showItemNames = writable(false);
