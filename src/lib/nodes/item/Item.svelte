@@ -7,6 +7,7 @@
     NodeResizer,
     type Dimensions,
     type XYPosition,
+    useConnection,
   } from "@xyflow/svelte";
   import { showItemNames, type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
@@ -21,7 +22,11 @@
   export let type: $$Props["type"];
   export let selected: $$Props["selected"];
 
+  const connection = useConnection();
+
   $: isTextNode = type === "text";
+
+  $: isConnecting = !!$connection.startHandle?.nodeId;
 
   let beforeResize: (HistoryEntry & { type: "resize" })["from"];
   function onResizeStart(
@@ -48,11 +53,18 @@
 <ItemContextMenu bind:data {id} on:edit={() => (detailsOpen = true)}>
   <ItemDetails bind:data {id} bind:open={detailsOpen} />
   <div class="group {isTextNode ? 'absolute inset-0 grid' : 'relative'}">
-    <Handle type="source" position={Position.Top} />
+    {#if !isConnecting}
+      <Handle
+        type="source"
+        position={Position.Top}
+        isConnectable={!isConnecting}
+      />
+    {/if}
     <Handle
-      style="top: 0; left: 0; transform: none; width: 100%; height: 100%; visibility: hidden;"
+      style="top: 0; left: 0; transform: none; width: 100%; height: 100%; opacity: 0; border-radius: unset; border: none;"
       type="target"
-      position={Position.Top}
+      position={Position.Bottom}
+      isConnectable={isConnecting}
     />
     {#if isTextNode}
       <NodeResizer
