@@ -63,9 +63,7 @@
         {onResizeEnd}
       />
       <MoveIcon
-        class="absolute right-0 top-0 -translate-y-full translate-x-full {selected
-          ? 'opacity-100'
-          : 'opacity-0'}"
+        class="absolute right-0 top-0 -translate-y-1/2 translate-x-1/2 opacity-0 group-hover:opacity-100"
       />
       <div
         class="nodrag grid size-full rounded bg-background bg-opacity-75 px-1"
