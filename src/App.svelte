@@ -16,6 +16,7 @@
     getConnectedEdges,
     type Edge,
     ControlButton,
+    ConnectionLineType,
   } from "@xyflow/svelte";
   import { theme } from "$lib/theme";
   import FlowContextMenu from "$lib/FlowContextMenu.svelte";
@@ -75,6 +76,9 @@
         type: "line",
         style: "stroke-width: 2;",
       }}
+      connectionRadius={0}
+      connectionLineStyle="stroke-width: 2;"
+      connectionLineType={ConnectionLineType.Straight}
       {nodes}
       {edges}
       {nodeTypes}
