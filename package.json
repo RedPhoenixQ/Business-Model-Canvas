@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "deploy": "npm run build && touch dist/.nojekyll && git add dist -f && git commit -m 'build for deploy' && git push origin --delete gh-pages && git subtree push --prefix dist origin gh-pages && git reset --soft HEAD~ && git restore --staged dist"
+    "deploy": "touch dist/.nojekyll && git add dist -f && git commit -m deploy && git push origin --delete gh-pages && git subtree push --prefix dist origin gh-pages && git reset --soft HEAD~ && git restore --staged dist"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
