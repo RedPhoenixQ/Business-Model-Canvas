@@ -84,9 +84,7 @@
       >
         <div class="flex min-h-[1ch] items-center">
           {#if data.icon.src}
-            <div class="size-8 p-1">
-              <ItemIcon icon={data.icon} alt={data.name} />
-            </div>
+            <ItemIcon class="size-8 p-1" icon={data.icon} alt={data.name} />
           {/if}
           <span
             class="flex-1 p-1"

@@ -31,9 +31,7 @@
   <slot />
   <ContextMenu.Content class="[&_[role=menuitem]]:gap-2">
     <ContextMenu.Label class="flex items-center gap-2">
-      <div class="w-6">
-        <ItemIcon icon={data.icon} alt={data.name} />
-      </div>
+      <ItemIcon class="size-6" icon={data.icon} alt={data.name} />
       <span class="text-center">{data.name}</span>
     </ContextMenu.Label>
     <ContextMenu.Separator />
