@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { cn } from "$lib/utils";
   import type { ItemIconInfo } from ".";
 
   export let icon: ItemIconInfo;
@@ -7,25 +8,31 @@
 
 {#if icon?.src}
   <div
-    class="flex aspect-square items-center justify-center
-    {icon.shape === 'circle' ? 'rounded-full' : 'rounded'}
-     {icon.background !== undefined
-      ? icon.background === 'dark'
-        ? 'bg-black'
-        : 'bg-white'
-      : ''}"
+    class={cn(
+      "flex aspect-square items-center justify-center",
+      icon.shape === "circle" ? "rounded-full" : "rounded",
+      icon.background !== undefined
+        ? icon.background === "dark"
+          ? "bg-black"
+          : "bg-white"
+        : "",
+      $$restProps.class,
+    )}
   >
     <img class="w-full" src={icon.src} {alt} />
   </div>
 {:else}
   <svg
-    class="aspect-square stroke-black dark:stroke-white
-    {icon.shape === 'circle' ? 'rounded-full' : 'rounded'}
-    {icon.background !== undefined
-      ? icon.background === 'dark'
-        ? 'bg-black'
-        : 'bg-white'
-      : ''}"
+    class={cn(
+      "aspect-square stroke-black dark:stroke-white",
+      icon.shape === "circle" ? "rounded-full" : "rounded",
+      icon.background !== undefined
+        ? icon.background === "dark"
+          ? "bg-black"
+          : "bg-white"
+        : "",
+      $$restProps.class,
+    )}
     viewBox="0 0 100 100"
     xmlns="http://www.w3.org/2000/svg"
   >
