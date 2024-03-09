@@ -55,6 +55,7 @@
   <div class="group {isTextNode ? 'absolute inset-0 grid' : 'relative'}">
     {#if !isConnecting}
       <Handle
+        class="opacity-0 group-hover:opacity-100"
         type="source"
         position={Position.Top}
         isConnectable={!isConnecting}
@@ -100,9 +101,11 @@
         />
       </div>
     {:else}
-      <div class="size-10 {selected ? 'scale-125' : ''}">
-        <ItemIcon icon={data.icon} alt={data.name} />
-      </div>
+      <ItemIcon
+        class="size-10 ring-blue-500 [.selected_&]:ring"
+        icon={data.icon}
+        alt={data.name}
+      />
       {#if data.name}
         <div
           class="pointer-events-none absolute -left-32 -right-32 -top-10 m-auto line-clamp-1 w-max rounded-full bg-background/75 px-2 py-1 transition-opacity {$showItemNames
