@@ -66,7 +66,13 @@
   let contextmenu_pos: XYPosition = { x: 0, y: 0 };
 </script>
 
-<div class="h-screen bg-neutral-600">
+<div
+  class="h-screen bg-neutral-600"
+  on:selectstart={(event) => {
+    // This prevents wierd selection in textareas when selecting nodes
+    event.preventDefault();
+  }}
+>
   <CustomContextMenuTrigger
     class="absolute h-full w-full bg-red-500"
     bind:opened_at={contextmenu_pos}
