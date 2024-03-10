@@ -13,7 +13,10 @@
   export let id: $$Props["id"];
   export let data: $$Props["data"];
 
-  const dispatch = createEventDispatcher<{ edit: undefined }>();
+  const dispatch = createEventDispatcher<{
+    edit: undefined;
+    change: keyof ItemData;
+  }>();
 
   const { deleteElements } = useSvelteFlow();
 
@@ -29,16 +32,26 @@
 
 <CustomContextMenuTrigger>
   <slot />
-  <ContextMenu.Content class="[&_[role=menuitem]]:gap-2">
+  <ContextMenu.Content>
     <ContextMenu.Label class="flex items-center gap-2">
       <ItemIcon class="size-6" icon={data.icon} alt={data.name} />
       <span class="text-center">{data.name}</span>
     </ContextMenu.Label>
     <ContextMenu.Separator />
     <ContextMenu.Item on:click={() => dispatch("edit")}>
-      <EditIcon size={20} />
+      <EditIcon class="mr-2" size={20} />
       Edit
     </ContextMenu.Item>
+    <ContextMenu.Separator />
+    <ContextMenu.CheckboxItem
+      bind:checked={data.showText}
+      onCheckedChange={() => {
+        // Make sure data object is updated before sending "change" by adding delay
+        setTimeout(() => dispatch("change", "showText"));
+      }}
+    >
+      Show text
+    </ContextMenu.CheckboxItem>
     <ContextMenu.Separator />
     <ContextMenu.Item
       class="text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"

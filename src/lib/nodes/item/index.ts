@@ -10,6 +10,9 @@ export type ItemData = {
   name: string;
   icon: ItemIconInfo;
   description: string;
+  showText: boolean;
+  textWidth: number;
+  textHeight: number;
 };
 
 export const showItemNames = writable(false);
