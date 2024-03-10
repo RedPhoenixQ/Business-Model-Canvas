@@ -86,7 +86,7 @@
         on:pointerup={() => nodeDataChange("textHeight", "textWidth")}
       >
         <textarea
-          class="absolute h-full w-full resize-none bg-background/75 p-1 text-sm text-foreground"
+          class="absolute h-full w-full resize-none rounded-lg bg-background/75 px-2 py-1 text-sm text-foreground"
           bind:value={data.description}
           on:change={() => nodeDataChange("description")}
         />
