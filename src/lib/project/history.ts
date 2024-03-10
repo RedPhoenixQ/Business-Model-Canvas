@@ -139,7 +139,9 @@ export function useHistory() {
         applyEdges([entry.edge], !undo);
         break;
       case "nodeData":
-        updateNodeData(entry.id, undo ? entry.from : entry.to);
+        updateNodeData(entry.id, undo ? entry.from : entry.to, {
+          replace: true,
+        });
         break;
       case "edgeData":
         edges.update(($edges) => {
