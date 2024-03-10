@@ -5,8 +5,11 @@
   import IconSearch from "./IconSearch.svelte";
   import * as Popover from "$lib/components/ui/popover";
   import * as Select from "$lib/components/ui/select";
+  import { createEventDispatcher } from "svelte";
 
   export let data: ItemData;
+
+  const dispatch = createEventDispatcher<{ close: undefined }>();
 
   const iconBackground = [
     { label: "None", value: "none" },
@@ -19,7 +22,11 @@
   ];
 </script>
 
-<Popover.Root>
+<Popover.Root
+  onOpenChange={(is_open) => {
+    if (!is_open) dispatch("close");
+  }}
+>
   <Popover.Trigger {...$$restProps}>
     <slot />
   </Popover.Trigger>

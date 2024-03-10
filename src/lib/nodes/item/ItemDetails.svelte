@@ -12,17 +12,21 @@
   } from "@xyflow/svelte";
   import ItemIcon from "./ItemIcon.svelte";
   import { type ItemData } from ".";
-  import { addHistoryEntry } from "$lib/project/history";
   import {
     EditIcon,
     ArrowLeftFromLineIcon,
     ArrowRightToLineIcon,
   } from "lucide-svelte";
   import { Textarea } from "$lib/components/ui/textarea";
+  import { createEventDispatcher } from "svelte";
 
   export let id: NodeProps<ItemData>["id"];
   export let data: NodeProps<ItemData>["data"];
   export let open = false;
+
+  const dispatch = createEventDispatcher<{
+    change: keyof ItemData;
+  }>();
 
   const { getNode } = useSvelteFlow();
   const edges = useEdges();
@@ -30,26 +34,9 @@
   // FIXME: This recomputes every time any node changes.
   //        Should probably only use one ItemDetails for all nodes
   $: connections = getConnectedEdges([{ id } as Node], $edges);
-
-  let from = data;
 </script>
 
-<Sheet.Root
-  portal="#itemDetailsPortal"
-  bind:open
-  onOpenChange={(is_open) => {
-    if (is_open) {
-      from = structuredClone(data);
-    } else {
-      addHistoryEntry({
-        type: "nodeData",
-        to: structuredClone(data),
-        from,
-        id,
-      });
-    }
-  }}
->
+<Sheet.Root portal="#itemDetailsPortal" bind:open>
   {#if $$slots.default}
     <Sheet.Trigger><slot /></Sheet.Trigger>
   {/if}
@@ -66,6 +53,7 @@
         <IconPopover
           bind:data
           class="group relative size-20 flex-none rounded border p-2"
+          on:close={() => dispatch("change", "icon")}
         >
           <ItemIcon icon={data.icon} alt={data.name} />
           <EditIcon
@@ -75,13 +63,21 @@
         </IconPopover>
         <Label class="w-full space-y-2">
           <span> Name </span>
-          <Input type="text" class="col-span-3" bind:value={data.name} />
+          <Input
+            type="text"
+            class="col-span-3"
+            bind:value={data.name}
+            on:change={() => dispatch("change", "name")}
+          />
         </Label>
       </div>
       <div>
         <Label class="w-full space-y-2">
           <span>Description</span>
-          <Textarea bind:value={data.description} />
+          <Textarea
+            bind:value={data.description}
+            on:change={() => dispatch("change", "description")}
+          />
         </Label>
       </div>
       <div class="space-y-2 text-sm font-medium leading-none">
