@@ -45,7 +45,7 @@
     bind:open={detailsOpen}
     on:change={(e) => nodeDataChange(e.detail)}
   />
-  <div class="group relative">
+  <div class="group relative" title={data.name}>
     {#if !isConnecting}
       <Handle
         class="opacity-0 group-hover:opacity-100"
@@ -68,7 +68,7 @@
     />
     {#if data.name}
       <div
-        class="pointer-events-none absolute -left-32 -right-32 -top-10 m-auto line-clamp-1 w-max rounded-full bg-background/75 px-2 py-1 transition-opacity group-hover:opacity-100 {data.showTitle ||
+        class="pointer-events-none absolute -top-2 left-1/2 right-1/2 w-max max-w-40 -translate-x-1/2 -translate-y-full text-pretty rounded-lg bg-background/75 px-2 py-1 text-center transition-opacity group-hover:opacity-100 {data.showTitle ||
         $showItemNames
           ? 'opacity-75'
           : 'opacity-0'}"
