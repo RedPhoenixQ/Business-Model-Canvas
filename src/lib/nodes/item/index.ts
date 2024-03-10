@@ -10,6 +10,7 @@ export type ItemData = {
   name: string;
   icon: ItemIconInfo;
   description: string;
+  showTitle: boolean;
   showText: boolean;
   textWidth: number;
   textHeight: number;

@@ -44,6 +44,15 @@
     </ContextMenu.Item>
     <ContextMenu.Separator />
     <ContextMenu.CheckboxItem
+      bind:checked={data.showTitle}
+      onCheckedChange={() => {
+        // Make sure data object is updated before sending "change" by adding delay
+        setTimeout(() => dispatch("change", "showTitle"));
+      }}
+    >
+      Always show title
+    </ContextMenu.CheckboxItem>
+    <ContextMenu.CheckboxItem
       bind:checked={data.showText}
       onCheckedChange={() => {
         // Make sure data object is updated before sending "change" by adding delay

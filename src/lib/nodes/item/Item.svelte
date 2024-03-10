@@ -68,7 +68,8 @@
     />
     {#if data.name}
       <div
-        class="pointer-events-none absolute -left-32 -right-32 -top-10 m-auto line-clamp-1 w-max rounded-full bg-background/75 px-2 py-1 transition-opacity {$showItemNames
+        class="pointer-events-none absolute -left-32 -right-32 -top-10 m-auto line-clamp-1 w-max rounded-full bg-background/75 px-2 py-1 transition-opacity {data.showTitle ||
+        $showItemNames
           ? ''
           : 'opacity-0 group-hover:opacity-100'}"
       >
