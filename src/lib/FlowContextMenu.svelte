@@ -11,7 +11,7 @@
   import { addHistoryEntry } from "./project/history";
   import { PlusIcon } from "lucide-svelte";
 
-  type ItemNodeTypes = "item" | "text" | "slider";
+  type ItemNodeTypes = "item" | "slider";
 
   export let opened_at: XYPosition;
 
@@ -68,12 +68,6 @@
       extent: "parent",
       parentNode: parent?.id,
     } as Node<ItemData | SliderData, ItemNodeTypes>;
-    if (type === "text") {
-      // Nodes without dimensions are node considered initialized.
-      // It's a mystery why this is not needed for nodes of type "item"
-      node.width = 100;
-      node.height = 60;
-    }
     $nodes.push(node);
     $nodes = $nodes;
     addHistoryEntry({ type: "createNode", node });
@@ -92,12 +86,6 @@
           // @ts-ignore: Incorrect event typing
           addItem(event, "item");
         }}>Item</ContextMenu.Item
-      >
-      <ContextMenu.Item
-        on:click={(event) => {
-          // @ts-ignore: Incorrect event typing
-          addItem(event, "text");
-        }}>Text</ContextMenu.Item
       >
       <ContextMenu.Item
         on:click={(event) => {

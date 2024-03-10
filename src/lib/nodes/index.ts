@@ -5,7 +5,6 @@ import Slider from "./slider/Slider.svelte";
 
 export const nodeTypes: NodeTypes = {
   item: Item,
-  text: Item,
   segment: Segment,
   slider: Slider,
 };
