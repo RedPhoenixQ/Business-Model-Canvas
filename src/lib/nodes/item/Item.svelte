@@ -78,7 +78,7 @@
     {/if}
     {#if data.showText}
       <div
-        class="nodrag absolute -bottom-2 left-1/2 right-1/2 m-auto min-h-8 w-fit min-w-24 -translate-x-1/2 translate-y-full resize overflow-auto rounded-sm transition-opacity"
+        class="nodrag absolute -bottom-2 left-1/2 right-1/2 grid min-h-8 min-w-24 -translate-x-1/2 translate-y-full resize overflow-auto rounded-lg"
         bind:clientWidth={data.textWidth}
         bind:clientHeight={data.textHeight}
         style:height={data.textHeight + "px"}
@@ -86,7 +86,7 @@
         on:pointerup={() => nodeDataChange("textHeight", "textWidth")}
       >
         <textarea
-          class="absolute h-full w-full resize-none rounded-lg bg-background/75 px-2 py-1 text-sm text-foreground"
+          class="resize-none bg-background/75 px-2 py-1 text-sm text-foreground"
           bind:value={data.description}
           on:change={() => nodeDataChange("description")}
         />
