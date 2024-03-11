@@ -148,12 +148,12 @@ export function useProject() {
     removePage(pageIndex: number) {
       const $project = get(project);
 
-      if (pageIndex >= $project.pages.length) return;
+      if (pageIndex >= $project.pages.length || pageIndex < 0) return;
       let removed = $project.pages.splice(pageIndex, 1);
       if (removed.length < 1) return;
       if (
         $project.pages.length === 0 ||
-        (pageIndex > 0 && pageIndex <= $project.activePageIndex)
+        pageIndex <= $project.activePageIndex
       ) {
         $project.activePageIndex -= 1;
       }
