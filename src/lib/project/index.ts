@@ -5,12 +5,12 @@ import {
   type Viewport,
   useStore,
 } from "@xyflow/svelte";
-import { gridSize, type Grid } from "../nodes/segment";
+import { gridSize, type Grid, type SegmentTemplateKey } from "../nodes/segment";
 import { get, writable, type Writable } from "svelte/store";
 import { pageTemplates, projectTemplates } from "./templates";
 import { type HistoryEntry, getHistory, setHistory } from "./history";
 
-export type SavedPage = P & {
+export type SavedPage = PageData & {
   nodes: Node[];
   edges: Edge[];
   viewport?: Viewport;
@@ -21,9 +21,9 @@ export type SavedPage = P & {
   };
 };
 
-export type P = {
+export type PageData = {
   name: string;
-  template: string;
+  template: SegmentTemplateKey;
 };
 
 export type Project = {
@@ -37,7 +37,10 @@ const project: Writable<Project> = writable(
 );
 project.subscribe(($project) => console.debug("project", $project));
 
-const pageStore: Writable<P> = writable({ name: "page", template: "empty" });
+const pageStore: Writable<PageData> = writable({
+  name: "page",
+  template: "empty",
+});
 
 export function useProject() {
   const { toObject, setViewport, fitView } = useSvelteFlow();

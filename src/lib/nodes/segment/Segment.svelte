@@ -7,23 +7,23 @@
     useSvelteFlow,
   } from "@xyflow/svelte";
   import {
-    segmentTemplateInfo,
+    getSegmentInfo,
     getDimensionsInGrid,
     type SegmentData,
     gridSize,
   } from ".";
   import { cn } from "$lib/utils";
   import { addHistoryEntry } from "$lib/project/history";
+  import { useProject } from "$lib/project";
 
   type $$Props = NodeProps<SegmentData>;
 
   export let id: $$Props["id"];
-  export let data: $$Props["data"];
 
+  const { page } = useProject();
   const { getNode } = useSvelteFlow();
   const updateNodeInternals = useUpdateNodeInternals();
-  $: templateNodes = segmentTemplateInfo[data.template].nodes;
-  $: segmentInfo = templateNodes[id as keyof typeof templateNodes];
+  $: segmentInfo = getSegmentInfo($page.template, id);
 
   $: cols = segmentInfo.grid.column.end - segmentInfo.grid.column.start;
   $: rows = segmentInfo.grid.row.end - segmentInfo.grid.row.start;

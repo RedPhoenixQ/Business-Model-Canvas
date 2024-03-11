@@ -1,9 +1,8 @@
+import type { PageData, SavedPage } from "$lib/project";
 import type { Node } from "@xyflow/svelte";
 import { writable, type Writable } from "svelte/store";
 
-export type SegmentData = {
-  template: keyof typeof segmentTemplateInfo;
-};
+export type SegmentData = undefined;
 
 export type Grid = {
   columns: number[];
@@ -34,7 +33,16 @@ export type Dimensions = {
   height: number;
 };
 
+export type SegmentTemplateKey = keyof typeof segmentTemplateInfo;
+
 export const segmentTemplateInfo = {
+  empty: {
+    grid: {
+      columns: [],
+      rows: [],
+    },
+    nodes: {} as Record<string, SegmentInfo>,
+  },
   default: {
     grid: {
       columns: [200, 200, 100, 100, 200, 200],
@@ -374,6 +382,24 @@ const defaultSegment: Omit<
   zIndex: -10,
 };
 
+/**
+ * @throws if an invalid tempalte and id combination is given
+ */
+export function getSegmentInfo(
+  template: SegmentTemplateKey,
+  id: string,
+): SegmentInfo {
+  const info = (segmentTemplateInfo as Record<string, SegmentsTemplate>)?.[
+    template
+  ]?.nodes?.[id];
+  if (!info) {
+    throw new Error(
+      `No segment info is available for template ${template} with id ${id}`,
+    );
+  }
+  return info;
+}
+
 export function getDimensionsInGrid(
   grid: Grid,
   { column, row }: GridPos,
@@ -397,32 +423,27 @@ export function getDimensionsInGrid(
   return { width, height, position: { x, y } };
 }
 
-type ChildNodes<
-  S extends keyof typeof segmentTemplateInfo,
-  NodeData = any,
-  NodeType extends string | undefined = string | undefined,
-> = Node<NodeData, NodeType> & {
-  parentNode?: keyof (typeof segmentTemplateInfo)[S]["nodes"];
-};
-
-export function getSegmentTemplateNodes<
-  S extends keyof typeof segmentTemplateInfo,
-  NodeData = any,
-  NodeType extends string | undefined = string | undefined,
->(template: S, extend_nodes: ChildNodes<S, NodeData, NodeType>[] = []): Node[] {
-  const { grid, nodes } = segmentTemplateInfo[template];
-  return (
-    Object.entries(nodes).map(([id, info]) => {
-      return {
-        id,
-        data: {
-          template,
-        },
-        ...defaultSegment,
-        ...getDimensionsInGrid(grid, info.grid),
-      } satisfies Node<SegmentData, "segment">;
-    }) as Node[]
-  ).concat(extend_nodes);
+export function fromSegmentTempalte<T extends SegmentTemplateKey>(
+  template: T,
+  page: Omit<Partial<SavedPage> & PageData, "template">,
+): SavedPage & { template: T } {
+  const { grid, nodes: segmentNodes } = segmentTemplateInfo[template];
+  const nodes = Object.entries(segmentNodes).map(([id, info]) => {
+    return {
+      id,
+      data: undefined,
+      ...defaultSegment,
+      ...getDimensionsInGrid(grid, info.grid),
+    } satisfies Node<SegmentData, "segment">;
+  }) as Node[];
+  nodes.push(...(page.nodes ?? []));
+  return {
+    edges: [],
+    template,
+    grid,
+    ...page,
+    nodes,
+  };
 }
 
 export const gridSize: Writable<Grid> = writable({ columns: [], rows: [] });

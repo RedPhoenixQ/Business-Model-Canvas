@@ -80,7 +80,7 @@
             class="capitalize"
             on:click={() => pageFromTemplate(template)}
           >
-            {template.replaceAll("-", " ")}
+            {template.replaceAll("_", " ")}
           </Dropdown.Item>
         {/each}
       </Dropdown.Content>

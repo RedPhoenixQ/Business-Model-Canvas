@@ -1,5 +1,5 @@
 import type { SavedPage, Project } from ".";
-import { getSegmentTemplateNodes, segmentTemplateInfo } from "../nodes/segment";
+import { fromSegmentTempalte } from "../nodes/segment";
 import type { ItemData } from "../nodes/item";
 
 const emptyItemData = {
@@ -12,21 +12,12 @@ const emptyItemData = {
 } as const satisfies Partial<ItemData>;
 
 export const pageTemplates = {
-  empty: {
-    template: "empty",
+  empty: fromSegmentTempalte("empty", {
     name: "Page 1",
-    nodes: [],
-    edges: [],
-    grid: {
-      columns: [],
-      rows: [],
-    },
-  },
-  default: {
-    template: "default",
+  }),
+  default: fromSegmentTempalte("default", {
     name: "Page 1",
-    grid: segmentTemplateInfo.default.grid,
-    nodes: getSegmentTemplateNodes<"default", ItemData, "item">("default", [
+    nodes: [
       {
         id: "1",
         type: "item",
@@ -84,7 +75,7 @@ export const pageTemplates = {
         parentNode: "costs",
         extent: "parent",
       },
-    ]),
+    ],
     edges: [
       {
         id: "1-2-test",
@@ -102,22 +93,17 @@ export const pageTemplates = {
         target: "4",
       },
     ],
-  },
-  detailed: {
-    template: "detailed",
+  }),
+  detailed_empty: fromSegmentTempalte("detailed", {
     name: "Page 1",
-    grid: segmentTemplateInfo.detailed.grid,
-    nodes: getSegmentTemplateNodes("detailed"),
-    edges: [],
-  },
-  example1: {
-    template: "detailed",
+  }),
+  example1: fromSegmentTempalte("detailed", {
     name: "Page 1",
     grid: {
       columns: [200, 224, 200, 200, 200, 200],
       rows: [200, 210, 210, 210, 200],
     },
-    nodes: getSegmentTemplateNodes("detailed", [
+    nodes: [
       {
         type: "item",
         id: "5421c8f9-6181-4230-a702-2a44ce7c1e66",
@@ -709,7 +695,7 @@ export const pageTemplates = {
         extent: "parent",
         parentNode: "key-resources",
       },
-    ]),
+    ],
     edges: [
       {
         type: "line",
@@ -1013,11 +999,8 @@ export const pageTemplates = {
         target: "f69c8d2c-ac1c-48d5-aef3-9cce795f100b",
       },
     ],
-  },
-} as const satisfies Record<
-  string,
-  SavedPage & { name: "Page 1"; template: string }
->;
+  }),
+} as const satisfies Record<string, SavedPage>;
 
 export const projectTemplates = {
   empty: {
