@@ -9,7 +9,7 @@
 
   const dispatch = createEventDispatcher<{ pageSwap: undefined }>();
 
-  const { project, pageName, swapActivePage, addPage } = useProject();
+  const { project, page: activePage, swapActivePage, addPage } = useProject();
 
   function pageFromTemplate(template: string) {
     if (!Object.keys(pageTemplates).includes(template)) return;
@@ -40,7 +40,7 @@
             role="textbox"
             tabindex="0"
             contenteditable="plaintext-only"
-            bind:textContent={$pageName}
+            bind:textContent={$activePage.name}
             on:keypress={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();
@@ -49,7 +49,7 @@
           >
             {page.name}
           </span>
-          <PageMenu {i} {page} />
+          <PageMenu {i} />
         </div>
       {:else}
         {@const name = page.name ?? "page"}
@@ -61,7 +61,7 @@
           <span class="p-2">
             {name}
           </span>
-          <PageMenu {i} {page} />
+          <PageMenu {i} />
         </Button>
       {/if}
     </li>

@@ -10,8 +10,7 @@ import { get, writable, type Writable } from "svelte/store";
 import { pageTemplates, projectTemplates } from "./templates";
 import { type HistoryEntry, getHistory, setHistory } from "./history";
 
-export type Page = {
-  name: string;
+export type SavedPage = P & {
   nodes: Node[];
   edges: Edge[];
   viewport?: Viewport;
@@ -22,10 +21,15 @@ export type Page = {
   };
 };
 
+export type P = {
+  name: string;
+  template: string;
+};
+
 export type Project = {
   name?: string;
   activePageIndex: number;
-  pages: Page[];
+  pages: SavedPage[];
 };
 
 const project: Writable<Project> = writable(
@@ -33,7 +37,7 @@ const project: Writable<Project> = writable(
 );
 project.subscribe(($project) => console.debug("project", $project));
 
-const pageName: Writable<string> = writable("page");
+const pageStore: Writable<P> = writable({ name: "page", template: "empty" });
 
 export function useProject() {
   const { toObject, setViewport, fitView } = useSvelteFlow();
@@ -42,9 +46,9 @@ export function useProject() {
   function storePage($project: Project) {
     if ($project.activePageIndex < 0) return;
     const obj = toObject();
-    const page: Page = {
+    const page: SavedPage = {
       ...obj,
-      name: get(pageName),
+      ...get(pageStore),
       grid: { ...get(gridSize) },
       history: getHistory(),
     };
@@ -56,7 +60,7 @@ export function useProject() {
       $project.pages?.[$project.activePageIndex] ??
       structuredClone(pageTemplates.empty);
 
-    pageName.set(page.name ?? "page");
+    pageStore.set({ name: page.name ?? "page", template: page.template });
 
     console.log("page being loaded:", page);
     reset();
@@ -84,7 +88,7 @@ export function useProject() {
 
   return {
     project,
-    pageName,
+    page: pageStore,
     toJSON(): string {
       const $project = get(project);
       storePage($project);
