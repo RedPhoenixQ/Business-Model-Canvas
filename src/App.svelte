@@ -9,7 +9,6 @@
     Background,
     BackgroundVariant,
     MiniMap,
-    type SnapGrid,
     type Node,
     Panel,
     type XYPosition,
@@ -63,7 +62,7 @@
   $: console.debug("edges", $edges);
 
   let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
-  let contextmenu_pos: XYPosition = { x: 0, y: 0 };
+  let contextmenuPos: XYPosition = { x: 0, y: 0 };
 </script>
 
 <div
@@ -75,7 +74,7 @@
 >
   <CustomContextMenuTrigger
     class="absolute h-full w-full bg-red-500"
-    bind:opened_at={contextmenu_pos}
+    bind:opened_at={contextmenuPos}
   >
     <SvelteFlow
       defaultEdgeOptions={{
@@ -150,7 +149,7 @@
 
       <PagesList on:pageSwap={() => nodeEdgesToShow.clear()} />
 
-      <FlowContextMenu bind:opened_at={contextmenu_pos} />
+      <FlowContextMenu bind:opened_at={contextmenuPos} />
 
       <Controls>
         <ControlButton
