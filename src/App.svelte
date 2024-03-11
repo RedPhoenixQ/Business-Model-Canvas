@@ -29,6 +29,7 @@
   import Toolbar from "$lib/menubar/Toolbar.svelte";
   import { showItemNames } from "$lib/nodes/item";
   import { EyeIcon, EyeOffIcon } from "lucide-svelte";
+  import ProjectName from "$lib/project/ProjectName.svelte";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -141,10 +142,11 @@
       }}
     >
       <Panel position="top-left" class="space-y-1">
-        <Menubar>
-          <h1 class="px-2">Business Model Canvas</h1>
-        </Menubar>
-        <Toolbar />
+        <div class="flex gap-2">
+          <ProjectName />
+          <Toolbar />
+        </div>
+        <Menubar />
       </Panel>
 
       <PagesList on:pageSwap={() => nodeEdgesToShow.clear()} />

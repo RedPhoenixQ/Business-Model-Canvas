@@ -7,7 +7,6 @@
 </script>
 
 <Menubar.Root>
-  <slot />
   <File />
   <Settings />
   <Edit />
