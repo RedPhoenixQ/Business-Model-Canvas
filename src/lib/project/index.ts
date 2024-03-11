@@ -63,13 +63,23 @@ export function useProject() {
       $project.pages?.[$project.activePageIndex] ??
       structuredClone(pageTemplates.empty);
 
-    pageStore.set({ name: page.name ?? "page", template: page.template });
-
+    // Update name immediatly to prevent flashing
+    pageStore.update((p) => {
+      p.name = page.name;
+      return p;
+    });
     console.log("page being loaded:", page);
     reset();
     // Leave some time for the reset to happen. This prevents wierd
     // behaviour where some state is left behind from previous page
     setTimeout(() => {
+      // Set template name before nodes to limit risk of looking up the
+      // wrong template for the page.Setting this after the reset() above
+      // also prevent existing nodes from accessing incorrect templates
+      pageStore.update((p) => {
+        p.template = page.template;
+        return p;
+      });
       // TODO: set snapGrid
       gridSize.set(page.grid);
       nodes.set(page.nodes);
