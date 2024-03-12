@@ -16,10 +16,12 @@
     EditIcon,
     ArrowLeftFromLineIcon,
     ArrowRightToLineIcon,
+    XIcon,
   } from "lucide-svelte";
   import { Textarea } from "$lib/components/ui/textarea";
   import { createEventDispatcher } from "svelte";
   import { addHistoryEntry } from "$lib/project/history";
+  import Button from "$lib/components/ui/button/button.svelte";
 
   export let id: NodeProps<ItemData>["id"];
   export let data: NodeProps<ItemData>["data"];
@@ -129,13 +131,13 @@
                     $edges = $edges;
                   }}
                 />
-                <!-- Delete connection button -->
-                <button
-                  class="ml-2 text-red-500 hover:text-red-700"
+                <Button
+                  variant="destructive"
+                  size="icon"
                   on:click={() => deleteConnection(connection.id)}
                 >
-                  X
-                </button>
+                  <XIcon />
+                </Button>
               </div>
             {/if}
           {/each}
