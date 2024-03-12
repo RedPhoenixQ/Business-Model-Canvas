@@ -98,7 +98,7 @@
 >
   <span class="px-2 text-white">{segmentInfo.title}</span>
   <NodeResizeControl
-    position="top-right"
+    position="bottom-right"
     style="background: none; border: none;"
     {onResizeStart}
     {onResizeEnd}

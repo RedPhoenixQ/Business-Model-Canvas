@@ -390,23 +390,27 @@ export function getDimensionsInGrid(
   grid: Grid,
   { column, row }: GridPos,
 ): Dimensions & { position: XYPosition } {
-  let width = 0;
+  const data: Dimensions & { position: XYPosition } = {
+    width: 0,
+    height: 0,
+    position: {
+      x: 0,
+      y: 0,
+    },
+  };
   for (let i = column.start; i < column.end; i++) {
-    width += grid.columns[i];
+    data.width += grid.columns[i];
   }
-  let height = 0;
   for (let i = row.start; i < row.end; i++) {
-    height += grid.rows[i];
+    data.height += grid.rows[i];
   }
-  let x = 0;
   for (let i = 0; i < column.start; i++) {
-    x += grid.columns[i];
+    data.position.x += grid.columns[i];
   }
-  let y = -height;
   for (let i = 0; i < row.start; i++) {
-    y -= grid.rows[i];
+    data.position.y += grid.rows[i];
   }
-  return { width, height, position: { x, y } };
+  return data;
 }
 
 export function fromSegmentTemplate<T extends SegmentTemplateKey>(
