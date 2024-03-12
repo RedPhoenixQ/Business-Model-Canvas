@@ -30,6 +30,7 @@
   import { showItemNames } from "$lib/nodes/item";
   import { EyeIcon, EyeOffIcon } from "lucide-svelte";
   import ProjectName from "$lib/project/ProjectName.svelte";
+  import MoveHandler from "$lib/nodes/MoveHandler.svelte";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -64,6 +65,7 @@
 
   let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
   let contextmenuPos: XYPosition = { x: 0, y: 0 };
+  let onMove: (node: Node, old_pos: XYPosition) => void;
 </script>
 
 <div
@@ -126,12 +128,7 @@
       }}
       on:nodedragstop={(event) => {
         console.debug("on node drag stop", event.detail.node);
-        addHistoryEntry({
-          type: "move",
-          id: event.detail.node.id,
-          from: moveNodeStartPos,
-          to: event.detail.node.position,
-        });
+        onMove(event.detail.node, moveNodeStartPos);
       }}
       on:edgeclick={(event) => {
         console.debug("on edge click", event.detail.edge);
@@ -170,6 +167,7 @@
       <MiniMap />
 
       <AutoSave />
+      <MoveHandler bind:onMove />
 
       <div id="itemDetailsPortal" />
     </SvelteFlow>

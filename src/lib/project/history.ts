@@ -35,6 +35,10 @@ export type HistoryEntry =
       id: string;
       from: XYPosition;
       to: XYPosition;
+      parent?: {
+        to: string;
+        from: string;
+      };
     }
   | {
       type: "resize";
@@ -154,7 +158,14 @@ export function useHistory() {
         break;
       case "move":
         console.log("apply move");
-        updateNode(entry.id, { position: undo ? entry.from : entry.to });
+        updateNode(entry.id, {
+          position: undo ? entry.from : entry.to,
+          ...(entry.parent
+            ? {
+                parentNode: undo ? entry.parent.from : entry.parent.to,
+              }
+            : {}),
+        });
         break;
       case "resize":
         console.log("apply resize");
