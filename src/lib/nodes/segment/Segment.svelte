@@ -1,8 +1,6 @@
 <script lang="ts">
-  import ResizeIcon from "./ResizeIcon.svelte";
   import {
     type NodeProps,
-    NodeResizeControl,
     useUpdateNodeInternals,
     useSvelteFlow,
   } from "@xyflow/svelte";
@@ -11,6 +9,7 @@
   import { cn } from "$lib/utils";
   import { addHistoryEntry } from "$lib/project/history";
   import { useProject } from "$lib/project";
+  import ResizeControl from "../ResizeControl.svelte";
 
   type $$Props = NodeProps<SegmentData>;
 
@@ -97,14 +96,5 @@
   )}
 >
   <span class="px-2 text-white">{segmentInfo.title}</span>
-  <NodeResizeControl
-    position="bottom-right"
-    style="background: none; border: none;"
-    {onResizeStart}
-    {onResizeEnd}
-  >
-    <ResizeIcon
-      class="pointer-events-auto -translate-x-full -translate-y-full opacity-50 transition-opacity hover:opacity-100"
-    />
-  </NodeResizeControl>
+  <ResizeControl {id} {onResizeStart} {onResizeEnd} />
 </div>
