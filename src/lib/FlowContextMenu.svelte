@@ -7,7 +7,9 @@
     type XYPosition,
     useNodes,
   } from "@xyflow/svelte";
-  import { type ItemData } from "./nodes/item";
+  import type { ItemData } from "./nodes/item";
+  import type { GroupData } from "./nodes/group";
+  import type { SliderData } from "./nodes/slider";
   import { addHistoryEntry } from "./project/history";
   import { PlusIcon } from "lucide-svelte";
   import type { nodeTypes } from "./nodes";
@@ -39,7 +41,9 @@
     } as Rect);
     console.debug("add item intersection", intersecting);
 
-    let parent = intersecting.find((node) => node.type === "segment");
+    let parent = intersecting.find(
+      (node) => node.type === "segment" || node.type === "customGroup",
+    );
 
     if (parent) {
       // Set position relative to parent
@@ -53,19 +57,38 @@
       type,
       id: crypto.randomUUID() as string,
       position,
-      data:
-        type === "slider"
-          ? {
-              value: [50],
-            }
-          : {
-              name: "",
-              icon: {},
-              description: "",
-            },
+      data: undefined,
       extent: "parent",
       parentNode: parent?.id,
     };
+    switch (type) {
+      case "item":
+        node.data = {
+          name: "",
+          icon: {},
+          description: "",
+          showText: false,
+          showTitle: false,
+          textHeight: 80,
+          textWidth: 120,
+        } satisfies ItemData;
+        break;
+      case "slider":
+        node.data = {
+          value: [50],
+        } satisfies SliderData;
+        break;
+      case "customGroup":
+        node.zIndex = -5;
+        node.width = 60;
+        node.height = 60;
+        node.data = {
+          title: "Test",
+        } satisfies GroupData;
+        break;
+      default:
+        break;
+    }
     $nodes.push(node);
     $nodes = $nodes;
     addHistoryEntry({ type: "createNode", node });
@@ -83,6 +106,11 @@
         on:click={(event) => {
           addItem(event, "item");
         }}>Item</ContextMenu.Item
+      >
+      <ContextMenu.Item
+        on:click={(event) => {
+          addItem(event, "customGroup");
+        }}>Group</ContextMenu.Item
       >
       <ContextMenu.Item
         on:click={(event) => {
