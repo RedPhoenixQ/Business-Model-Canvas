@@ -1,15 +1,6 @@
 import type { SavedPage, Project } from "../project";
 import { fromSegmentTemplate } from "../info/segments";
-import type { ItemData } from "../nodes/item";
-
-const emptyItemData = {
-  name: "",
-  description: "",
-  showText: false,
-  showTitle: false,
-  textHeight: 40,
-  textWidth: 120,
-} as const satisfies Partial<ItemData>;
+import { defaultItemData, defaultItemNode } from "../nodes/item";
 
 export const pageTemplates = {
   empty: fromSegmentTemplate("empty", {
@@ -19,10 +10,10 @@ export const pageTemplates = {
     name: "Page 1",
     nodes: [
       {
+        ...defaultItemNode,
         id: "1",
-        type: "item",
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "steam",
           icon: {
             src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
@@ -34,10 +25,10 @@ export const pageTemplates = {
         extent: "parent",
       },
       {
+        ...defaultItemNode,
         id: "2",
-        type: "item",
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "empty test",
           icon: {},
         },
@@ -46,10 +37,10 @@ export const pageTemplates = {
         extent: "parent",
       },
       {
+        ...defaultItemNode,
         id: "3",
-        type: "item",
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "empty test",
           icon: {
             src: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
@@ -60,10 +51,10 @@ export const pageTemplates = {
         extent: "parent",
       },
       {
+        ...defaultItemNode,
         id: "4",
-        type: "item",
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Costs",
           icon: {
             src: "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
@@ -105,11 +96,11 @@ export const pageTemplates = {
     },
     nodes: [
       {
-        type: "item",
+        ...defaultItemNode,
         id: "5421c8f9-6181-4230-a702-2a44ce7c1e66",
         position: { x: 44, y: 46 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Sociala Medier",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=13963",
@@ -121,11 +112,11 @@ export const pageTemplates = {
         parentNode: "marketing",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "a816ea5f-0fd0-495c-b432-9f571ab126f5",
         position: { x: 99, y: 46 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "YouTube",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=108794",
@@ -135,11 +126,11 @@ export const pageTemplates = {
         parentNode: "marketing",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "faddacb6-4077-4f67-a1ef-8c28dea25595",
         position: { x: 150, y: 44 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Podcast",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=12380",
@@ -149,11 +140,11 @@ export const pageTemplates = {
         parentNode: "marketing",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "10aa18b7-8439-4590-8add-dc0ee4f784a9",
         position: { x: 201, y: 44 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Influencer",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=nrEFWOZ9YrxK",
@@ -163,11 +154,11 @@ export const pageTemplates = {
         parentNode: "marketing",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "26d2420d-1715-4b98-a25c-f3710f3611aa",
         position: { x: 266, y: 43 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Reddit",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=13642",
@@ -177,11 +168,11 @@ export const pageTemplates = {
         parentNode: "marketing",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "2c0a0d47-0795-403b-9e7e-280bcef14cc3",
         position: { x: 16, y: 45 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Personal Support",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=11947",
@@ -191,11 +182,11 @@ export const pageTemplates = {
         parentNode: "customer-relations",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "b9d03733-2dfb-4196-8133-9be27d452602",
         position: { x: 68, y: 39 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Ai Support",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=13631",
@@ -205,11 +196,11 @@ export const pageTemplates = {
         parentNode: "customer-relations",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "773de772-b93d-4170-9f14-5438fea51c98",
         position: { x: 119, y: 38 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Self Service",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=fGknlRQpuSVb",
@@ -219,11 +210,11 @@ export const pageTemplates = {
         parentNode: "customer-relations",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "84667731-2c1e-4d4f-8f2b-b602682a6a60",
         position: { x: 172, y: 48 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Community Driven",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=122811",
@@ -233,11 +224,11 @@ export const pageTemplates = {
         parentNode: "customer-relations",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "54dd529b-e332-44f8-a646-35b410a02871",
         position: { x: 242, y: 42 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Co-Creation (Modding)",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=Pj0ay2nNKIhI",
@@ -247,11 +238,11 @@ export const pageTemplates = {
         parentNode: "customer-relations",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "651c5357-6880-4129-9793-b6b308187df8",
         position: { x: 23, y: 39 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Steam",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=ImwGPKqJwA2U",
@@ -261,11 +252,11 @@ export const pageTemplates = {
         parentNode: "distribution",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "cc09e4f8-4274-486d-9073-1519018eaf57",
         position: { x: 81, y: 38 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Game Distributors",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=68104",
@@ -276,11 +267,11 @@ export const pageTemplates = {
         parentNode: "distribution",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "33671027-e55b-40a1-a449-eab60267e6c6",
         position: { x: 144, y: 32 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Epic Games",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=gItgZriuEvjv",
@@ -290,11 +281,11 @@ export const pageTemplates = {
         parentNode: "distribution",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "adbbda78-b18d-415c-aba5-49f3715021ba",
         position: { x: 192, y: 30 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "PlayStation",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=13629",
@@ -304,11 +295,11 @@ export const pageTemplates = {
         parentNode: "distribution",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "8ef84b2b-45ef-409c-b745-cb361458e515",
         position: { x: 265, y: 43 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Xbox",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=63696",
@@ -318,11 +309,11 @@ export const pageTemplates = {
         parentNode: "distribution",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "f7fa5629-9f52-4234-8835-83c069d648c2",
         position: { x: 30, y: 108 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Windows Store",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=108792",
@@ -332,11 +323,11 @@ export const pageTemplates = {
         parentNode: "distribution",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "0fe14b90-abd7-4c6d-b4a5-89ed851f4b8e",
         position: { x: 89, y: 106 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "App Stores",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=63788",
@@ -346,11 +337,11 @@ export const pageTemplates = {
         parentNode: "distribution",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "e7596d97-3301-4994-a677-b7dce2fd4fa2",
         position: { x: 158, y: 113 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Nintendo",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=19598",
@@ -360,11 +351,11 @@ export const pageTemplates = {
         parentNode: "distribution",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "035f4920-9359-4e25-9ddd-0ff15a925fde",
         position: { x: 21, y: 36 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Publisher",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=4QcyAmItf6M0",
@@ -374,11 +365,11 @@ export const pageTemplates = {
         parentNode: "key-support",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "28ba27e0-1b2e-42b0-abfe-0fcd636fb22d",
         position: { x: 16, y: 98 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Investor",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=19844",
@@ -388,11 +379,11 @@ export const pageTemplates = {
         parentNode: "key-support",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "b9ec921c-845f-4fdb-9952-b43ddff808bc",
         position: { x: 12, y: 157 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Marketing Partner",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=12381",
@@ -402,11 +393,11 @@ export const pageTemplates = {
         parentNode: "key-support",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "eb3efd8b-c4e8-4344-9cd3-24293be75d8e",
         position: { x: 11, y: 244 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Service Provider",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=103938",
@@ -416,11 +407,11 @@ export const pageTemplates = {
         parentNode: "key-support",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "960013d8-874c-4c10-a462-d06e3bd513b2",
         position: { x: 30, y: 450 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Hardware",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=18749",
@@ -430,11 +421,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "86634535-7633-4f90-af9f-777cd8eeb84b",
         position: { x: 110, y: 450 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Software",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=12929",
@@ -444,11 +435,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "3697fd6a-b8a6-48b4-98ce-7d1e6fa99585",
         position: { x: 17, y: 132 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Devkit",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=19294",
@@ -458,11 +449,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "124db701-c837-41d5-bfde-b49421adbcdd",
         position: { x: 91, y: 168 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Proprietary Tech",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=12784",
@@ -472,11 +463,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "d82960fc-4109-4e1b-b28d-beb7a86d1c10",
         position: { x: 14, y: 197 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Intellectual Assets",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=104078",
@@ -486,11 +477,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "82e42362-e11f-49b7-ba3b-61042a5cefff",
         position: { x: 111, y: 213 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Office Space",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=104227",
@@ -500,11 +491,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "15fd643e-16ee-4510-b002-71670f69cb9b",
         position: { x: 14, y: 292 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Customer Register",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=13139",
@@ -514,11 +505,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "8162ce54-f6a7-43b9-8f6d-f1d625a25779",
         position: { x: 120, y: 287 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Funds",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=34060",
@@ -528,11 +519,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "54a02463-a45c-4a11-a126-56d3a528634a",
         position: { x: 27, y: 365 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Agreements",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=108783",
@@ -542,11 +533,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "ed8bf0f2-7c3a-49ff-b47b-5f2c95e23b95",
         position: { x: 130, y: 373 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Know-How",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=qiruWgTuD5o8",
@@ -556,11 +547,11 @@ export const pageTemplates = {
         parentNode: "key-resources",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "8f95c875-8544-4585-9046-db9585ca3402",
         position: { x: 33, y: 65 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Development",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=SBEjRDmczSCC",
@@ -572,11 +563,11 @@ export const pageTemplates = {
         parentNode: "key-activities",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "a941bfc3-6bf6-4ce1-8b8f-0f5d4b5322b7",
         position: { x: 31, y: 122 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "QA",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=23315",
@@ -586,11 +577,11 @@ export const pageTemplates = {
         parentNode: "key-activities",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "aa1bc14b-a1a7-4c42-b36a-f97e3f489517",
         position: { x: 28, y: 183 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Localisation",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=31016",
@@ -600,11 +591,11 @@ export const pageTemplates = {
         parentNode: "key-activities",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "7c6d9e97-ffab-4b7a-883e-90b4a7b6743e",
         position: { x: 109, y: 61 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Porting",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=70714",
@@ -614,11 +605,11 @@ export const pageTemplates = {
         parentNode: "key-activities",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "656fabf1-46bd-4592-ae04-576030fed217",
         position: { x: 135, y: 303 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Marketing",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=xOxAdcl6DVo2",
@@ -628,11 +619,11 @@ export const pageTemplates = {
         parentNode: "key-activities",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "10453db4-cbb3-4c22-bee2-793d10ed6d3b",
         position: { x: 123, y: 189 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Community Management",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=14804",
@@ -642,11 +633,11 @@ export const pageTemplates = {
         parentNode: "key-activities",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "5e859660-508c-410d-be53-0e5047739895",
         position: { x: 32, y: 263 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Business Development",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=103932",
@@ -656,11 +647,11 @@ export const pageTemplates = {
         parentNode: "key-activities",
       },
       {
-        type: "item",
+        ...defaultItemNode,
         id: "f69c8d2c-ac1c-48d5-aef3-9cce795f100b",
         position: { x: 141, y: 115 },
         data: {
-          ...emptyItemData,
+          ...defaultItemData,
           name: "Employees",
           icon: {
             src: "https://img.icons8.com/?size=100&format=png&id=108334",

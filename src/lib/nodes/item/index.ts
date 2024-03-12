@@ -1,3 +1,4 @@
+import type { DefaultNode } from "$lib/info/nodes";
 import { writable } from "svelte/store";
 
 export type ItemIconInfo = {
@@ -17,3 +18,19 @@ export type ItemData = {
 };
 
 export const showItemNames = writable(false);
+
+export const defaultItemData = {
+  name: "",
+  icon: {},
+  description: "",
+  showText: false,
+  showTitle: false,
+  textWidth: 120,
+  textHeight: 40,
+} as const satisfies ItemData;
+
+export const defaultItemNode = {
+  type: "item",
+  data: defaultItemData,
+  extent: "parent",
+} as const satisfies DefaultNode<ItemData, "item">;
