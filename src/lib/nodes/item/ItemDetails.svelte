@@ -127,6 +127,7 @@
                       (edge) => edge.id === connection.id,
                     );
                     if (!edge || !event.target) return;
+                    // @ts-ignore: event.target.value will exist
                     edge.label = event.target.value;
                     $edges = $edges;
                   }}
