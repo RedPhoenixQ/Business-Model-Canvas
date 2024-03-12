@@ -19,6 +19,7 @@
   } from "lucide-svelte";
   import { Textarea } from "$lib/components/ui/textarea";
   import { createEventDispatcher } from "svelte";
+  import { addHistoryEntry } from "$lib/project/history";
 
   export let id: NodeProps<ItemData>["id"];
   export let data: NodeProps<ItemData>["data"];
@@ -28,13 +29,18 @@
     change: keyof ItemData;
   }>();
 
-  const { getNode } = useSvelteFlow();
+  const { getNode, deleteElements } = useSvelteFlow();
   const edges = useEdges();
 
   $: connections = getConnectedEdges([{ id } as Node], $edges);
 
-  function deleteConnection(connectionId: string) {
-    $edges = $edges.filter(edge => edge.id !== connectionId);
+  async function deleteConnection(id: string) {
+    const deleted = await deleteElements({ edges: [{ id }] });
+    addHistoryEntry({
+      type: "delete",
+      nodes: deleted.deletedNodes,
+      edges: deleted.deletedEdges,
+    });
   }
 </script>
 
@@ -106,7 +112,9 @@
                 {/if}
                 <Label class="flex-1">
                   <span>
-                    {node.data.name}{node.parentNode ? ` - ${node.parentNode}` : ""}
+                    {node.data.name}{node.parentNode
+                      ? ` - ${node.parentNode}`
+                      : ""}
                   </span>
                 </Label>
                 <Input
@@ -126,7 +134,7 @@
                   class="ml-2 text-red-500 hover:text-red-700"
                   on:click={() => deleteConnection(connection.id)}
                 >
-                  X 
+                  X
                 </button>
               </div>
             {/if}
