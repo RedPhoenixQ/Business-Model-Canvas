@@ -31,9 +31,11 @@
   const { getNode } = useSvelteFlow();
   const edges = useEdges();
 
-  // FIXME: This recomputes every time any node changes.
-  //        Should probably only use one ItemDetails for all nodes
   $: connections = getConnectedEdges([{ id } as Node], $edges);
+
+  function deleteConnection(connectionId: string) {
+    $edges = $edges.filter(edge => edge.id !== connectionId);
+  }
 </script>
 
 <Sheet.Root portal="#itemDetailsPortal" bind:open>
@@ -89,10 +91,7 @@
               selfIsSource ? connection.target : connection.source,
             )}
             {#if node && node.data}
-              <div
-                class="grid items-center gap-2"
-                style:grid-template-columns="auto auto 1fr"
-              >
+              <div class="flex items-center gap-2">
                 <div class="w-12">
                   {#if node?.data?.icon}
                     <ItemIcon icon={node?.data?.icon} />
@@ -105,24 +104,30 @@
                 {:else}
                   <ArrowRightToLineIcon />
                 {/if}
-                <Label class="w-full space-y-2">
+                <Label class="flex-1">
                   <span>
-                    {node.data.name}
-                    {node.parentNode ? ` - ${node.parentNode}` : ""}
+                    {node.data.name}{node.parentNode ? ` - ${node.parentNode}` : ""}
                   </span>
-                  <Input
-                    value={connection.label}
-                    on:change={(event) => {
-                      const edge = $edges.find(
-                        (edge) => edge.id === connection.id,
-                      );
-                      if (!edge || !event.target) return;
-                      // @ts-ignore: Event target is <input> which has .value
-                      edge.label = event.target.value;
-                      $edges = $edges;
-                    }}
-                  ></Input>
                 </Label>
+                <Input
+                  class="flex-1"
+                  value={connection.label}
+                  on:change={(event) => {
+                    const edge = $edges.find(
+                      (edge) => edge.id === connection.id,
+                    );
+                    if (!edge || !event.target) return;
+                    edge.label = event.target.value;
+                    $edges = $edges;
+                  }}
+                />
+                <!-- Delete connection button -->
+                <button
+                  class="ml-2 text-red-500 hover:text-red-700"
+                  on:click={() => deleteConnection(connection.id)}
+                >
+                  X 
+                </button>
               </div>
             {/if}
           {/each}
