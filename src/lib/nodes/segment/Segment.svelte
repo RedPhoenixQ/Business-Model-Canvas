@@ -104,8 +104,7 @@
     {onResizeEnd}
   >
     <ResizeIcon
-      class="pointer-events-auto -translate-x-full -translate-y-full"
-      strokeWidth={1}
+      class="pointer-events-auto -translate-x-full -translate-y-full opacity-50 transition-opacity hover:opacity-100"
     />
   </NodeResizeControl>
 </div>
