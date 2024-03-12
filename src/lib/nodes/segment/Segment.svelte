@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { MoveDiagonalIcon } from "lucide-svelte";
+  import ResizeIcon from "./ResizeIcon.svelte";
   import {
     type NodeProps,
     NodeResizeControl,
@@ -103,8 +103,8 @@
     {onResizeStart}
     {onResizeEnd}
   >
-    <MoveDiagonalIcon
-      class="pointer-events-auto -translate-x-full translate-y-1"
+    <ResizeIcon
+      class="pointer-events-auto -translate-x-full -translate-y-full"
       strokeWidth={1}
     />
   </NodeResizeControl>
