@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { MoreVerticalIcon } from "lucide-svelte";
   import {
     NodeResizeControl,
     type NodeProps,
@@ -6,6 +7,8 @@
   } from "@xyflow/svelte";
   import type { GroupData } from ".";
   import ResizeIcon from "../segment/ResizeIcon.svelte";
+  import GroupMenu from "./GroupMenu.svelte";
+  import { Button } from "../../components/ui/button";
 
   type $$Props = NodeProps<GroupData>;
 
@@ -20,10 +23,28 @@
 <div
   class="h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50"
 >
-  <input
-    class="nodrag w-full overflow-ellipsis bg-transparent px-2 py-1"
-    bind:value={data.title}
-  />
+  <div class="flex p-1">
+    <input
+      class="nodrag w-full overflow-ellipsis bg-transparent px-2 py-1"
+      bind:value={data.title}
+    />
+    <GroupMenu type="dropdown-menu" let:Trigger {id}>
+      <Trigger asChild let:builder>
+        <Button
+          variant="ghost"
+          size="sm"
+          class="aspect-square rounded-full p-0 hover:bg-opacity-50"
+          builders={[builder]}
+          on:click={(event) => {
+            console.log(event);
+            event.stopPropagation();
+          }}
+        >
+          <MoreVerticalIcon />
+        </Button>
+      </Trigger>
+    </GroupMenu>
+  </div>
   <NodeResizeControl
     position="bottom-right"
     style="background: none; border: none;"
