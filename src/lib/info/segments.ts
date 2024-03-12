@@ -1,4 +1,4 @@
-import type { SegmentData } from "$lib/nodes/segment";
+import { defaultSegmentNode, type SegmentData } from "$lib/nodes/segment";
 import type { PageData, SavedPage } from "$lib/project";
 import type { Grid } from "$lib/project";
 import type { Dimensions, Node, XYPosition } from "@xyflow/svelte";
@@ -355,19 +355,6 @@ export const segmentTemplateInfo = {
   },
 } as const satisfies Record<string, SegmentsTemplate>;
 
-const defaultSegment: Omit<
-  Node<SegmentData, "segment">,
-  "id" | "position" | "data"
-> = {
-  type: "segment",
-  selectable: false,
-  connectable: false,
-  deletable: false,
-  draggable: false,
-  style: "pointer-events: none",
-  zIndex: -10,
-};
-
 /**
  * @throws if an invalid tempalte and id combination is given
  */
@@ -421,8 +408,7 @@ export function fromSegmentTemplate<T extends SegmentTemplateKey>(
   const nodes = Object.entries(segmentNodes).map(([id, info]) => {
     return {
       id,
-      data: undefined,
-      ...defaultSegment,
+      ...defaultSegmentNode,
       ...getDimensionsInGrid(grid, info.grid),
     } satisfies Node<SegmentData, "segment">;
   }) as Node[];
