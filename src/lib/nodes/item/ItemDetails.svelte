@@ -16,9 +16,12 @@
     EditIcon,
     ArrowLeftFromLineIcon,
     ArrowRightToLineIcon,
+    XIcon,
   } from "lucide-svelte";
   import { Textarea } from "$lib/components/ui/textarea";
   import { createEventDispatcher } from "svelte";
+  import { addHistoryEntry } from "$lib/project/history";
+  import Button from "$lib/components/ui/button/button.svelte";
 
   export let id: NodeProps<ItemData>["id"];
   export let data: NodeProps<ItemData>["data"];
@@ -28,12 +31,19 @@
     change: keyof ItemData;
   }>();
 
-  const { getNode } = useSvelteFlow();
+  const { getNode, deleteElements } = useSvelteFlow();
   const edges = useEdges();
 
-  // FIXME: This recomputes every time any node changes.
-  //        Should probably only use one ItemDetails for all nodes
   $: connections = getConnectedEdges([{ id } as Node], $edges);
+
+  async function deleteConnection(id: string) {
+    const deleted = await deleteElements({ edges: [{ id }] });
+    addHistoryEntry({
+      type: "delete",
+      nodes: deleted.deletedNodes,
+      edges: deleted.deletedEdges,
+    });
+  }
 </script>
 
 <Sheet.Root portal="#itemDetailsPortal" bind:open>
@@ -89,10 +99,7 @@
               selfIsSource ? connection.target : connection.source,
             )}
             {#if node && node.data}
-              <div
-                class="grid items-center gap-2"
-                style:grid-template-columns="auto auto 1fr"
-              >
+              <div class="flex items-center gap-2">
                 <div class="w-12">
                   {#if node?.data?.icon}
                     <ItemIcon icon={node?.data?.icon} />
@@ -105,24 +112,32 @@
                 {:else}
                   <ArrowRightToLineIcon />
                 {/if}
-                <Label class="w-full space-y-2">
+                <Label class="flex-1">
                   <span>
-                    {node.data.name}
-                    {node.parentNode ? ` - ${node.parentNode}` : ""}
+                    {node.data.name}{node.parentNode
+                      ? ` - ${node.parentNode}`
+                      : ""}
                   </span>
-                  <Input
-                    value={connection.label}
-                    on:change={(event) => {
-                      const edge = $edges.find(
-                        (edge) => edge.id === connection.id,
-                      );
-                      if (!edge || !event.target) return;
-                      // @ts-ignore: Event target is <input> which has .value
-                      edge.label = event.target.value;
-                      $edges = $edges;
-                    }}
-                  ></Input>
                 </Label>
+                <Input
+                  class="flex-1"
+                  value={connection.label}
+                  on:change={(event) => {
+                    const edge = $edges.find(
+                      (edge) => edge.id === connection.id,
+                    );
+                    if (!edge || !event.target) return;
+                    edge.label = event.target.value;
+                    $edges = $edges;
+                  }}
+                />
+                <Button
+                  variant="destructive"
+                  size="icon"
+                  on:click={() => deleteConnection(connection.id)}
+                >
+                  <XIcon />
+                </Button>
               </div>
             {/if}
           {/each}
