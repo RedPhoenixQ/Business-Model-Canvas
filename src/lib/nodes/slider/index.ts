@@ -1,3 +1,3 @@
-type SliderData = {
+export type SliderData = {
   value: [number];
 };

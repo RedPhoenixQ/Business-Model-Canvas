@@ -4,6 +4,7 @@
   import MaleIcon from "./MaleIcon.svelte";
   import FemaleIcon from "./FemaleIcon.svelte";
   import { addHistoryEntry } from "$lib/project/history";
+  import type { SliderData } from ".";
 
   type $$Props = NodeProps<SliderData>;
 
