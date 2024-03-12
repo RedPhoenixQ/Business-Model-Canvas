@@ -10,7 +10,7 @@
   import Dropzone from "svelte-file-dropzone";
   import * as Menubar from "$lib/components/ui/menubar";
   import { useProject } from "$lib/project/index";
-  import { projectTemplates } from "$lib/project/templates";
+  import { projectTemplates } from "$lib/info/templates";
 
   const { project, toJSON, fromJSON, newProject } = useProject();
 

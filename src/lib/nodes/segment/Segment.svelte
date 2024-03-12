@@ -6,12 +6,8 @@
     useUpdateNodeInternals,
     useSvelteFlow,
   } from "@xyflow/svelte";
-  import {
-    getSegmentInfo,
-    getDimensionsInGrid,
-    type SegmentData,
-    gridSize,
-  } from ".";
+  import { getSegmentInfo, getDimensionsInGrid } from "$lib/info/segments";
+  import { type SegmentData } from ".";
   import { cn } from "$lib/utils";
   import { addHistoryEntry } from "$lib/project/history";
   import { useProject } from "$lib/project";
@@ -20,7 +16,7 @@
 
   export let id: $$Props["id"];
 
-  const { page } = useProject();
+  const { page, grid } = useProject();
   const { getNode } = useSvelteFlow();
   const updateNodeInternals = useUpdateNodeInternals();
   $: segmentInfo = getSegmentInfo($page.template, id);
@@ -31,7 +27,7 @@
   $: {
     const node = getNode(id);
     if (node) {
-      const dim = getDimensionsInGrid($gridSize, segmentInfo.grid);
+      const dim = getDimensionsInGrid($grid, segmentInfo.grid);
       if (
         node.position.x !== dim.position.x ||
         node.position.y !== dim.position.y ||
@@ -66,7 +62,7 @@
     const dy = node.height - prevHeight;
     console.log("resize prev", prevWidth, prevHeight);
     console.log("resize", dx, dy);
-    const from = structuredClone($gridSize);
+    const from = structuredClone($grid);
     // TODO:  Find a better way of distributing the size increase.
     //        Should probably move a "grid line" instread of a block
     //        or respect minimum size of grid blocks
@@ -75,19 +71,19 @@
       i < segmentInfo.grid.column.end;
       i++
     ) {
-      $gridSize.columns[i] += dx / cols;
+      $grid.columns[i] += dx / cols;
     }
     for (
       let i = segmentInfo.grid.row.start;
       i < segmentInfo.grid.row.end;
       i++
     ) {
-      $gridSize.rows[i] += dy / rows;
+      $grid.rows[i] += dy / rows;
     }
 
     addHistoryEntry({
       type: "gridResize",
-      to: structuredClone($gridSize),
+      to: structuredClone($grid),
       from,
     });
   }

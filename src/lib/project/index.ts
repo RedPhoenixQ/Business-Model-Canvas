@@ -5,9 +5,9 @@ import {
   type Viewport,
   useStore,
 } from "@xyflow/svelte";
-import { gridSize, type Grid, type SegmentTemplateKey } from "../nodes/segment";
+import { type SegmentTemplateKey } from "../info/segments";
 import { get, writable, type Writable } from "svelte/store";
-import { pageTemplates, projectTemplates } from "./templates";
+import { pageTemplates, projectTemplates } from "../info/templates";
 import { type HistoryEntry, getHistory, setHistory } from "./history";
 
 export type SavedPage = PageData & {
@@ -26,21 +26,30 @@ export type PageData = {
   template: SegmentTemplateKey;
 };
 
+export type Grid = {
+  columns: number[];
+  rows: number[];
+};
+
 export type Project = {
   name?: string;
   activePageIndex: number;
   pages: SavedPage[];
 };
 
-const project: Writable<Project> = writable(
+const projectStore: Writable<Project> = writable(
   structuredClone(projectTemplates.empty),
 );
-project.subscribe(($project) => console.debug("project", $project));
+projectStore.subscribe(($project) => console.debug("project", $project));
 
 const pageStore: Writable<PageData> = writable({
   name: "page",
   template: "empty",
 });
+pageStore.subscribe(($page) => console.debug("pageStore", $page));
+
+export const gridStore: Writable<Grid> = writable({ columns: [], rows: [] });
+gridStore.subscribe(($grid) => console.debug("gridSize", $grid));
 
 export function useProject() {
   const { toObject, setViewport, fitView } = useSvelteFlow();
@@ -52,7 +61,7 @@ export function useProject() {
     const page: SavedPage = {
       ...obj,
       ...get(pageStore),
-      grid: { ...get(gridSize) },
+      grid: { ...get(gridStore) },
       history: getHistory(),
     };
     $project.pages[$project.activePageIndex] = page;
@@ -81,7 +90,7 @@ export function useProject() {
         return p;
       });
       // TODO: set snapGrid
-      gridSize.set(page.grid);
+      gridStore.set(page.grid);
       nodes.set(page.nodes);
       edges.set(page.edges);
       setHistory(page.history);
@@ -100,10 +109,11 @@ export function useProject() {
   }
 
   return {
-    project,
+    project: projectStore,
     page: pageStore,
+    grid: gridStore,
     toJSON(): string {
-      const $project = get(project);
+      const $project = get(projectStore);
       storePage($project);
       return JSON.stringify($project);
     },
@@ -112,15 +122,15 @@ export function useProject() {
       const $project: Project = JSON.parse(json);
       console.log("loaded project", $project);
       loadPage($project);
-      project.set($project);
+      projectStore.set($project);
     },
     newProject(template: keyof typeof projectTemplates = "default") {
       const $project: Project = structuredClone(projectTemplates[template]);
       loadPage($project);
-      project.set($project);
+      projectStore.set($project);
     },
     addPage(template: keyof typeof pageTemplates = "default") {
-      const $project = get(project);
+      const $project = get(projectStore);
       storePage($project);
 
       // Find the max number of the default page name
@@ -139,10 +149,10 @@ export function useProject() {
         name: `Page ${max + 1}`,
       });
       loadPage($project);
-      project.set($project);
+      projectStore.set($project);
     },
     duplicatePage(pageIndex: number) {
-      const $project = get(project);
+      const $project = get(projectStore);
       if (pageIndex >= $project.pages.length) return;
       storePage($project);
       $project.activePageIndex = pageIndex + 1;
@@ -153,10 +163,10 @@ export function useProject() {
       ];
       $project.pages[pageIndex + 1].name += " copy";
       loadPage($project);
-      project.set($project);
+      projectStore.set($project);
     },
     removePage(pageIndex: number) {
-      const $project = get(project);
+      const $project = get(projectStore);
 
       if (pageIndex >= $project.pages.length || pageIndex < 0) return;
       let removed = $project.pages.splice(pageIndex, 1);
@@ -168,10 +178,10 @@ export function useProject() {
         $project.activePageIndex -= 1;
       }
       loadPage($project);
-      project.set($project);
+      projectStore.set($project);
     },
     swapActivePage(pageIndex: number) {
-      const $project = get(project);
+      const $project = get(projectStore);
       if (
         $project.activePageIndex === pageIndex ||
         !$project.pages?.[pageIndex]
@@ -183,7 +193,7 @@ export function useProject() {
       $project.activePageIndex = pageIndex;
       loadPage($project);
 
-      project.set($project);
+      projectStore.set($project);
     },
   };
 }

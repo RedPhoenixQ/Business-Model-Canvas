@@ -1,4 +1,3 @@
-import { gridSize, type Grid } from "$lib/nodes/segment";
 import {
   useSvelteFlow,
   type Edge,
@@ -9,6 +8,7 @@ import {
 } from "@xyflow/svelte";
 import { RingBuffer } from "ring-buffer-ts";
 import { derived, get, readonly, writable } from "svelte/store";
+import { gridStore, type Grid } from ".";
 
 export type HistoryEntry =
   | {
@@ -55,30 +55,30 @@ export type HistoryEntry =
 const UNDO_SIZE = 32 as const;
 const REDO_SIZE = 32 as const;
 
-const history = writable({
+const historyStore = writable({
   undo: new RingBuffer<HistoryEntry>(UNDO_SIZE),
   redo: new RingBuffer<HistoryEntry>(REDO_SIZE),
 });
-history.subscribe((val) => console.debug("history", val));
+historyStore.subscribe((val) => console.debug("history", val));
 
-export const readHistory = readonly(history);
-export const undoEmpty = derived(history, ($history) => {
+export const readHistory = readonly(historyStore);
+export const undoEmpty = derived(historyStore, ($history) => {
   return $history.undo.isEmpty();
 });
-export const redoEmpty = derived(history, ($history) => {
+export const redoEmpty = derived(historyStore, ($history) => {
   return $history.redo.isEmpty();
 });
 
 export function addHistoryEntry(entry: HistoryEntry) {
-  const $history = get(history);
+  const $history = get(historyStore);
   // TODO: Check that entry is valid (like not delete entry after undoing create)
   $history.undo.add(entry);
   $history.redo.clear();
-  history.set($history);
+  historyStore.set($history);
 }
 
 export function getHistory() {
-  const $history = get(history);
+  const $history = get(historyStore);
   return {
     undo: $history.undo.toArray(),
     redo: $history.redo.toArray(),
@@ -90,7 +90,7 @@ export function setHistory(
     redo: [],
   },
 ) {
-  history.set({
+  historyStore.set({
     undo: RingBuffer.fromArray(newHistory.undo, UNDO_SIZE),
     redo: RingBuffer.fromArray(newHistory.redo, REDO_SIZE),
   });
@@ -162,7 +162,7 @@ export function useHistory() {
         break;
       case "gridResize":
         console.log("apply gridResize");
-        gridSize.set(undo ? entry.from : entry.to);
+        gridStore.set(undo ? entry.from : entry.to);
         break;
       default:
         break;
@@ -170,12 +170,12 @@ export function useHistory() {
   }
 
   function applyHistory(undo: boolean) {
-    const $history = get(history);
+    const $history = get(historyStore);
     const entry = (undo ? $history.undo : $history.redo).removeLast();
     if (!entry) return;
     applyEntry(entry, undo);
     (undo ? $history.redo : $history.undo).add(entry);
-    history.set($history);
+    historyStore.set($history);
   }
 
   return {

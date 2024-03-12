@@ -1,5 +1,5 @@
-import type { SavedPage, Project } from ".";
-import { fromSegmentTempalte } from "../nodes/segment";
+import type { SavedPage, Project } from "../project";
+import { fromSegmentTemplate } from "../info/segments";
 import type { ItemData } from "../nodes/item";
 
 const emptyItemData = {
@@ -12,10 +12,10 @@ const emptyItemData = {
 } as const satisfies Partial<ItemData>;
 
 export const pageTemplates = {
-  empty: fromSegmentTempalte("empty", {
+  empty: fromSegmentTemplate("empty", {
     name: "Page 1",
   }),
-  default: fromSegmentTempalte("default", {
+  default: fromSegmentTemplate("default", {
     name: "Page 1",
     nodes: [
       {
@@ -94,10 +94,10 @@ export const pageTemplates = {
       },
     ],
   }),
-  detailed_empty: fromSegmentTempalte("detailed", {
+  detailed_empty: fromSegmentTemplate("detailed", {
     name: "Page 1",
   }),
-  example1: fromSegmentTempalte("detailed", {
+  example1: fromSegmentTemplate("detailed", {
     name: "Page 1",
     grid: {
       columns: [200, 224, 200, 200, 200, 200],

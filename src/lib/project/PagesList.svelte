@@ -3,7 +3,7 @@
   import PageMenu from "./PageMenu.svelte";
   import { buttonVariants, Button } from "../components/ui/button";
   import { useProject } from ".";
-  import { pageTemplates } from "./templates";
+  import { pageTemplates } from "../info/templates";
   import * as Dropdown from "../components/ui/dropdown-menu";
   import { createEventDispatcher } from "svelte";
 
