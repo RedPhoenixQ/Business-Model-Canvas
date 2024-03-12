@@ -12,7 +12,7 @@
   class="h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50"
 >
   <input
-    class="w-full overflow-ellipsis bg-transparent px-2 py-1"
+    class="nodrag w-full overflow-ellipsis bg-transparent px-2 py-1"
     bind:value={data.title}
   />
   <NodeResizeControl
