@@ -15,9 +15,9 @@
 <div
   class="h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50"
 >
-  <div class="flex p-1">
+  <div class="nodrag flex p-1">
     <input
-      class="nodrag w-full overflow-ellipsis bg-transparent px-2 py-1"
+      class="w-full overflow-ellipsis bg-transparent px-2 py-1"
       bind:value={data.title}
     />
     <GroupMenu type="dropdown-menu" let:Trigger {id}>
@@ -37,5 +37,5 @@
       </Trigger>
     </GroupMenu>
   </div>
-  <ResizeControl {id} />
+  <ResizeControl {id} minHeight={100} minWidth={150} />
 </div>

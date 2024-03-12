@@ -96,5 +96,11 @@
   )}
 >
   <span class="px-2 text-white">{segmentInfo.title}</span>
-  <ResizeControl {id} {onResizeStart} {onResizeEnd} />
+  <ResizeControl
+    {id}
+    {onResizeStart}
+    {onResizeEnd}
+    minHeight={100}
+    minWidth={150}
+  />
 </div>
