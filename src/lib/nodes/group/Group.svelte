@@ -31,7 +31,11 @@
       const node = getNode(id);
       if (!node?.parentNode) return true;
       const parent = getNode(node?.parentNode);
-      if (!parent) return true;
+      if (
+        typeof parent?.width !== "number" ||
+        typeof parent?.height !== "number"
+      )
+        return true;
       if (
         (direction[0] !== 0 &&
           parent.width - resizePadding < resizePadding + x + width) ||
