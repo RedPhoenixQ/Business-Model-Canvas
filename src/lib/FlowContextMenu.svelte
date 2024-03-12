@@ -10,20 +10,18 @@
   import { type ItemData } from "./nodes/item";
   import { addHistoryEntry } from "./project/history";
   import { PlusIcon } from "lucide-svelte";
-
-  type ItemNodeTypes = "item" | "slider";
+  import type { nodeTypes } from "./nodes";
 
   export let opened_at: XYPosition;
 
   const nodes = useNodes();
   const { screenToFlowPosition, getIntersectingNodes } = useSvelteFlow();
 
-  function addItem(
-    event: CustomEvent<{
+  function addItem(any_event: any, type: keyof typeof nodeTypes) {
+    // Event type from bits-ui handlers is incorrect so we force the type
+    const event = any_event as CustomEvent<{
       originalEvent: PointerEvent;
-    }>,
-    type: ItemNodeTypes,
-  ) {
+    }>;
     console.debug("add item event", event);
 
     let position = screenToFlowPosition(
@@ -51,7 +49,7 @@
       };
     }
 
-    const node = {
+    const node: Node<unknown, keyof typeof nodeTypes> = {
       type,
       id: crypto.randomUUID() as string,
       position,
@@ -67,7 +65,7 @@
             },
       extent: "parent",
       parentNode: parent?.id,
-    } as Node<ItemData | SliderData, ItemNodeTypes>;
+    };
     $nodes.push(node);
     $nodes = $nodes;
     addHistoryEntry({ type: "createNode", node });
@@ -83,13 +81,11 @@
     <ContextMenu.SubContent>
       <ContextMenu.Item
         on:click={(event) => {
-          // @ts-ignore: Incorrect event typing
           addItem(event, "item");
         }}>Item</ContextMenu.Item
       >
       <ContextMenu.Item
         on:click={(event) => {
-          // @ts-ignore: Incorrect event typing
           addItem(event, "slider");
         }}>Slider</ContextMenu.Item
       >
