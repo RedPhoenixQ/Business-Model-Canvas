@@ -1,5 +1,5 @@
 import type { PageData, SavedPage } from "$lib/project";
-import type { Node } from "@xyflow/svelte";
+import type { Dimensions, Node, XYPosition } from "@xyflow/svelte";
 import { writable, type Writable } from "svelte/store";
 
 export type SegmentData = undefined;
@@ -22,15 +22,6 @@ export type SegmentInfo = {
 export type SegmentsTemplate = {
   grid: Grid;
   nodes: Record<string, SegmentInfo>;
-};
-
-export type Dimensions = {
-  position: {
-    x: number;
-    y: number;
-  };
-  width: number;
-  height: number;
 };
 
 export type SegmentTemplateKey = keyof typeof segmentTemplateInfo;
@@ -403,7 +394,7 @@ export function getSegmentInfo(
 export function getDimensionsInGrid(
   grid: Grid,
   { column, row }: GridPos,
-): Dimensions {
+): Dimensions & { position: XYPosition } {
   let width = 0;
   for (let i = column.start; i < column.end; i++) {
     width += grid.columns[i];
