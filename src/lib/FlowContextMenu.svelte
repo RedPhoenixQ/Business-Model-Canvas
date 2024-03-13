@@ -1,5 +1,6 @@
 <script lang="ts">
   import * as ContextMenu from "$lib/components/ui/context-menu";
+  import type { CustomEventHandler } from "bits-ui";
   import {
     useSvelteFlow,
     type Node,
@@ -17,11 +18,10 @@
   const nodes = useNodes();
   const { screenToFlowPosition, getIntersectingNodes } = useSvelteFlow();
 
-  function addItem(any_event: any, type: keyof typeof defaultNodes) {
-    // Event type from bits-ui handlers is incorrect so we force the type
-    const event = any_event as CustomEvent<{
-      originalEvent: PointerEvent;
-    }>;
+  function addItem(
+    event: CustomEventHandler<MouseEvent>,
+    type: keyof typeof defaultNodes,
+  ) {
     console.debug("add item event", event);
 
     let position = screenToFlowPosition(
