@@ -20,7 +20,7 @@
   <div class="nodrag flex p-1">
     <input
       class="w-full overflow-ellipsis bg-transparent px-2 py-1"
-      bind:value={data.title}
+      bind:value={data.name}
     />
     <GroupMenu type="dropdown-menu" let:Trigger {id}>
       <Trigger asChild let:builder>

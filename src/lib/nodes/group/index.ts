@@ -1,14 +1,14 @@
 import type { DefaultNode } from "$lib/info/nodes";
 
 export type GroupData = {
-  title: string;
+  name: string;
   color?: string;
 };
 
 export const defaultGroupNode = {
   type: "customGroup",
   data: {
-    title: "",
+    name: "",
   },
   zIndex: -5,
   width: 200,
