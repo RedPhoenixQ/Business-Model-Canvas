@@ -11,7 +11,8 @@ export const defaultGroupNode = {
     title: "",
   },
   zIndex: -5,
-  width: 60,
-  height: 60,
+  width: 200,
+  height: 120,
+  selectable: false,
   extent: "parent",
 } as const satisfies DefaultNode<GroupData, "customGroup">;

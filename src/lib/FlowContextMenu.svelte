@@ -10,6 +10,7 @@
   import { addHistoryEntry } from "./project/history";
   import { PlusIcon } from "lucide-svelte";
   import { defaultNodes } from "./nodes";
+  import { findFirstParentAndRelativePos } from "./info/nodes";
 
   export let opened_at: XYPosition;
 
@@ -38,23 +39,18 @@
     } as Rect);
     console.debug("add item intersection", intersecting);
 
-    let parent = intersecting.find(
-      (node) => node.type === "segment" || node.type === "customGroup",
+    const parent = findFirstParentAndRelativePos(
+      intersecting.filter(
+        (node) => node.type === "segment" || node.type === "customGroup",
+      ),
+      position,
     );
-
-    if (parent) {
-      // Set position relative to parent
-      position = {
-        x: position.x - parent.position.x,
-        y: position.y - parent.position.y,
-      };
-    }
 
     let node: Node = {
       ...structuredClone(defaultNodes[type]),
       id: crypto.randomUUID() as string,
-      position: position,
-      parentNode: parent?.id,
+      position: parent ? parent?.relative_pos : position,
+      parentNode: parent?.node?.id,
     };
     $nodes.push(node);
     $nodes = $nodes;

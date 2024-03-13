@@ -1,24 +1,16 @@
 <script lang="ts">
   import ItemContextMenu from "./ItemContextMenu.svelte";
-  import {
-    Handle,
-    Position,
-    type NodeProps,
-    useConnection,
-  } from "@xyflow/svelte";
+  import { Handle, Position, type NodeProps } from "@xyflow/svelte";
   import { showItemNames, type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
   import ItemDetails from "./ItemDetails.svelte";
   import { addHistoryEntry, type HistoryEntry } from "$lib/project/history";
+  import ConnectionHandles from "../ConnectionHandles.svelte";
 
   type $$Props = NodeProps<ItemData>;
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];
-
-  const connection = useConnection();
-
-  $: isConnecting = !!$connection.startHandle?.nodeId;
 
   let from: ItemData = structuredClone(data);
   async function nodeDataChange(...keys: (keyof ItemData)[]) {
@@ -46,20 +38,7 @@
     on:change={(e) => nodeDataChange(e.detail)}
   />
   <div class="group relative" title={data.name}>
-    {#if !isConnecting}
-      <Handle
-        class="opacity-0 group-hover:opacity-100"
-        type="source"
-        position={Position.Top}
-        isConnectable={!isConnecting}
-      />
-    {/if}
-    <Handle
-      style="top: 0; left: 0; transform: none; width: 100%; height: 100%; opacity: 0; border-radius: unset; border: none;"
-      type="target"
-      position={Position.Bottom}
-      isConnectable={isConnecting}
-    />
+    <ConnectionHandles />
 
     <ItemIcon
       class="size-10 ring-blue-500 [.selected_&]:ring"
