@@ -1,10 +1,10 @@
 <script lang="ts">
   import ItemContextMenu from "./ItemContextMenu.svelte";
-  import { Handle, Position, type NodeProps } from "@xyflow/svelte";
+  import { type NodeProps } from "@xyflow/svelte";
   import { showItemNames, type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
   import ItemDetails from "./ItemDetails.svelte";
-  import { addHistoryEntry, type HistoryEntry } from "$lib/project/history";
+  import { addHistoryEntry } from "$lib/project/history";
   import ConnectionHandles from "../ConnectionHandles.svelte";
 
   type $$Props = NodeProps<ItemData>;

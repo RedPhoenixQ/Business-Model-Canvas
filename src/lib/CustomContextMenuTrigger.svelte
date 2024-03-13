@@ -1,14 +1,14 @@
 <script lang="ts">
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import type { XYPosition } from "@xyflow/svelte";
+  import type { CustomEventHandler } from "bits-ui";
 
   let open = false;
 
   export let opened_at: XYPosition = { x: 0, y: 0 };
 
-  function handleContextMenu(
-    event: CustomEvent<{ originalEvent: PointerEvent }>,
-  ) {
+  function handleContextMenu(event: CustomEventHandler<MouseEvent>) {
+    console.log(event);
     if (event.detail.originalEvent.defaultPrevented) {
       event.preventDefault();
       open = false;
@@ -23,7 +23,7 @@
   <ContextMenu.Trigger
     {...$$restProps}
     on:contextmenu={(event) => {
-      // @ts-ignore: ContextMenu event is improperly typed
+      // @ts-expect-error: ContextMenu event is improperly typed, typed Event and not PointerEvent
       handleContextMenu(event);
     }}
   >

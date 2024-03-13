@@ -13,7 +13,7 @@
 
   let from: SliderData;
   let timeout: number | undefined;
-  function onValueChange(value: number[]) {
+  function onValueChange() {
     if (timeout === undefined) {
       from = structuredClone(data);
     } else {
