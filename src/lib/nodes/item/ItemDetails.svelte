@@ -105,6 +105,8 @@
                     <ItemIcon icon={node?.data?.icon} />
                   {:else if node.type === "slider"}
                     <span>Slider</span>
+                  {:else if node.type === "customGroup"}
+                    <span>Group</span>
                   {/if}
                 </div>
                 {#if selfIsSource}
