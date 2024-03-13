@@ -92,7 +92,7 @@
       </div>
       <div class="space-y-2 text-sm font-medium leading-none">
         <span>Connections</span>
-        <div class="max-h-[50vh] space-y-2 overflow-y-auto">
+        <div class="max-h-[50vh] space-y-2 overflow-y-auto py-2">
           {#each connections as connection}
             {@const selfIsSource = connection.source === id}
             {@const node = getNode(
