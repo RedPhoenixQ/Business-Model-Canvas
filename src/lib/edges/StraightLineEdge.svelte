@@ -12,8 +12,8 @@
 
   type $$Props = EdgeProps;
 
-  export let source: EdgeProps["source"];
-  export let target: EdgeProps["target"];
+  export let source: $$Props["source"];
+  export let target: $$Props["target"];
 
   const nodes = useNodes();
 

@@ -169,7 +169,7 @@ export function useProject() {
       const $project = get(projectStore);
 
       if (pageIndex >= $project.pages.length || pageIndex < 0) return;
-      let removed = $project.pages.splice(pageIndex, 1);
+      const removed = $project.pages.splice(pageIndex, 1);
       if (removed.length < 1) return;
       if (
         $project.pages.length === 0 ||

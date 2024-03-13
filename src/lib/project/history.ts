@@ -27,8 +27,8 @@ export type HistoryEntry =
   | {
       type: "nodeData" | "edgeData";
       id: string;
-      from: any;
-      to: any;
+      from: object;
+      to: object;
     }
   | {
       type: "move";
