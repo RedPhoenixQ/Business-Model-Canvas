@@ -101,7 +101,9 @@
         console.debug("onedgecreate", connection);
         const edge = {
           ...connection,
-          id: `${connection.sourceHandle ?? connection.source}-${connection.targetHandle ?? connection.target}`,
+          id: `${connection.sourceHandle ?? connection.source}-${
+            connection.targetHandle ?? connection.target
+          }`,
         };
         addHistoryEntry({ type: "createEdge", edge });
         return edge;
