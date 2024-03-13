@@ -5,6 +5,7 @@
   import GroupMenu from "./GroupMenu.svelte";
   import { Button } from "../../components/ui/button";
   import ResizeControl from "../ResizeControl.svelte";
+  import ConnectionHandles from "../ConnectionHandles.svelte";
 
   type $$Props = NodeProps<GroupData>;
 
@@ -13,8 +14,9 @@
 </script>
 
 <div
-  class="h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50"
+  class="group h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50"
 >
+  <ConnectionHandles />
   <div class="nodrag flex p-1">
     <input
       class="w-full overflow-ellipsis bg-transparent px-2 py-1"
