@@ -43,12 +43,8 @@ export type HistoryEntry =
   | {
       type: "resize";
       id: string;
-      from: Dimensions & {
-        position: XYPosition;
-      };
-      to: Dimensions & {
-        position: XYPosition;
-      };
+      from: Dimensions & XYPosition;
+      to: Dimensions & XYPosition;
     }
   | {
       type: "gridResize";
@@ -167,10 +163,12 @@ export function useHistory() {
             : {}),
         });
         break;
-      case "resize":
+      case "resize": {
         console.log("apply resize");
-        updateNode(entry.id, undo ? entry.from : entry.to);
+        const { width, height, x, y } = undo ? entry.from : entry.to;
+        updateNode(entry.id, { width, height, position: { x, y } });
         break;
+      }
       case "gridResize":
         console.log("apply gridResize");
         gridStore.set(undo ? entry.from : entry.to);
