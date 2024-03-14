@@ -1,12 +1,17 @@
 <script lang="ts">
   import ResizeIcon from "$lib/icons/ResizeIcon.svelte";
+  import { addHistoryEntry, type HistoryEntry } from "$lib/project/history";
   import { NodeResizeControl, useSvelteFlow, useNodes } from "@xyflow/svelte";
 
   type $$Props = NodeResizeControl["$$prop_def"] & {
     id: string;
+    noHistory?: boolean;
   };
 
   export let id: $$Props["id"];
+  export let onResizeStart: $$Props["onResizeStart"] = undefined;
+  export let onResizeEnd: $$Props["onResizeEnd"] = undefined;
+  export let noHistory = false;
   let _minWidth: $$Props["minWidth"] = 10;
   let _minHeight: $$Props["minHeight"] = 10;
   let _maxWidth: $$Props["maxWidth"] = Number.MAX_VALUE;
@@ -71,6 +76,8 @@
       maxHeight,
     );
   }
+
+  let from: (HistoryEntry & { type: "resize" })["from"];
 </script>
 
 <div
@@ -87,6 +94,20 @@
     {minHeight}
     {maxWidth}
     {maxHeight}
+    onResizeStart={(event, params) => {
+      onResizeStart?.(event, params);
+      from = params;
+    }}
+    onResizeEnd={(event, params) => {
+      onResizeEnd?.(event, params);
+      if (noHistory) return;
+      addHistoryEntry({
+        type: "resize",
+        to: params,
+        from,
+        id,
+      });
+    }}
     position="bottom-right"
     style="background: none; border: none;"
   >
