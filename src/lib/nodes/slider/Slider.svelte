@@ -1,8 +1,8 @@
 <script lang="ts">
   import { Handle, Position, type NodeProps } from "@xyflow/svelte";
   import Slider from "$lib/components/ui/slider/slider.svelte";
-  import MaleIcon from "./MaleIcon.svelte";
-  import FemaleIcon from "./FemaleIcon.svelte";
+  import MaleIcon from "../../icons/MaleIcon.svelte";
+  import FemaleIcon from "../../icons/FemaleIcon.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import type { SliderData } from ".";
 
