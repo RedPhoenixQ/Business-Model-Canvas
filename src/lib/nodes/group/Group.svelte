@@ -29,10 +29,6 @@
           size="sm"
           class="aspect-square rounded-full p-0 hover:bg-opacity-50"
           builders={[builder]}
-          on:click={(event) => {
-            console.log(event);
-            event.stopPropagation();
-          }}
         >
           <MoreVerticalIcon />
         </Button>
