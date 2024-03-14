@@ -22,17 +22,15 @@
       class="w-full overflow-ellipsis bg-transparent px-2 py-1"
       bind:value={data.name}
     />
-    <GroupMenu type="dropdown-menu" let:Trigger {id}>
-      <Trigger asChild let:builder>
-        <Button
-          variant="ghost"
-          size="sm"
-          class="aspect-square rounded-full p-0 hover:bg-opacity-50"
-          builders={[builder]}
-        >
-          <MoreVerticalIcon />
-        </Button>
-      </Trigger>
+    <GroupMenu type="dropdown-menu" asChild let:builder>
+      <Button
+        variant="ghost"
+        size="sm"
+        class="aspect-square rounded-full p-0 hover:bg-opacity-50"
+        builders={[builder]}
+      >
+        <MoreVerticalIcon />
+      </Button>
     </GroupMenu>
   </div>
   <ResizeControl {id} minHeight={100} minWidth={150} />
