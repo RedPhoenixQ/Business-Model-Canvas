@@ -3,6 +3,7 @@
     type NodeProps,
     useUpdateNodeInternals,
     useSvelteFlow,
+    type Dimensions,
   } from "@xyflow/svelte";
   import { getSegmentInfo, getDimensionsInGrid } from "$lib/info/segments";
   import { type SegmentData } from ".";
@@ -42,24 +43,11 @@
     }
   }
 
-  let prevWidth: number | null | undefined;
-  let prevHeight: number | null | undefined;
-  function onResizeStart() {
-    const node = getNode(id);
-    if (!node) {
-      prevHeight = null;
-      prevWidth = null;
-    } else {
-      prevWidth = node.width;
-      prevHeight = node.height;
-    }
-  }
-  function onResizeEnd() {
-    const node = getNode(id);
-    if (!node?.width || !node?.height || !prevWidth || !prevHeight) return;
-    const dx = node.width - prevWidth;
-    const dy = node.height - prevHeight;
-    console.log("resize prev", prevWidth, prevHeight);
+  let prev: Dimensions;
+  function resizeGrid(next: Dimensions) {
+    const dx = next.width - prev.width;
+    const dy = next.height - prev.height;
+    console.log("resize prev", prev.width, prev.height);
     console.log("resize", dx, dy);
     const from = structuredClone($grid);
     // TODO:  Find a better way of distributing the size increase.
@@ -98,8 +86,9 @@
   <span class="px-2 text-white">{segmentInfo.title}</span>
   <ResizeControl
     {id}
-    {onResizeStart}
-    {onResizeEnd}
+    noHistory
+    onResizeStart={(_event, params) => (prev = params)}
+    onResizeEnd={(_event, params) => resizeGrid(params)}
     minHeight={100}
     minWidth={150}
   />
