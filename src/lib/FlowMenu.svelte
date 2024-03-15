@@ -1,5 +1,4 @@
 <script lang="ts">
-  import * as ContextMenu from "$lib/components/ui/context-menu";
   import type { CustomEventHandler } from "bits-ui";
   import {
     useSvelteFlow,
@@ -12,8 +11,12 @@
   import { PlusIcon } from "lucide-svelte";
   import { defaultNodes } from "./nodes";
   import { findFirstParentAndRelativePos } from "./info/nodes";
+  import { menu, type MenuType } from "./components/custom/menu";
 
-  export let opened_at: XYPosition;
+  export let type: MenuType;
+  export let createPos: XYPosition;
+
+  const { Content, Item, Sub, SubTrigger, SubContent } = menu(type);
 
   const nodes = useNodes();
   const { screenToFlowPosition, getIntersectingNodes } = useSvelteFlow();
@@ -25,7 +28,7 @@
     console.debug("add item event", event);
 
     let position = screenToFlowPosition(
-      opened_at ?? {
+      createPos ?? {
         x: event.detail.originalEvent.clientX,
         y: event.detail.originalEvent.clientY,
       },
@@ -58,28 +61,28 @@
   }
 </script>
 
-<ContextMenu.Content class="[&_[role=menuitem]]:gap-2">
-  <ContextMenu.Sub>
-    <ContextMenu.SubTrigger>
+<Content>
+  <Sub>
+    <SubTrigger>
       <PlusIcon size="20" />
       Add
-    </ContextMenu.SubTrigger>
-    <ContextMenu.SubContent>
-      <ContextMenu.Item
+    </SubTrigger>
+    <SubContent>
+      <Item
         on:click={(event) => {
           addItem(event, "item");
-        }}>Item</ContextMenu.Item
+        }}>Item</Item
       >
-      <ContextMenu.Item
+      <Item
         on:click={(event) => {
           addItem(event, "customGroup");
-        }}>Group</ContextMenu.Item
+        }}>Group</Item
       >
-      <ContextMenu.Item
+      <Item
         on:click={(event) => {
           addItem(event, "slider");
-        }}>Slider</ContextMenu.Item
+        }}>Slider</Item
       >
-    </ContextMenu.SubContent>
-  </ContextMenu.Sub>
-</ContextMenu.Content>
+    </SubContent>
+  </Sub>
+</Content>
