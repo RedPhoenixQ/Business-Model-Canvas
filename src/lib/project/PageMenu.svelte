@@ -24,9 +24,9 @@
       <MoreVerticalIcon />
     </Button>
   </Dropdown.Trigger>
-  <Dropdown.Content class="[&_[role=menuitem]]:gap-2">
+  <Dropdown.Content>
     <Dropdown.Item on:click={() => duplicatePage(i)}>
-      <CopyPlusIcon size="20" />
+      <CopyPlusIcon class="mr-2" size="20" />
       Duplicate
     </Dropdown.Item>
     <Dropdown.Separator />
@@ -34,7 +34,7 @@
       class="text-destructive hover:bg-destructive hover:text-destructive-foreground"
       on:click={() => removePage(i)}
     >
-      <XIcon size="20" />
+      <XIcon class="mr-2" size="20" />
       Delete
     </Dropdown.Item>
   </Dropdown.Content>

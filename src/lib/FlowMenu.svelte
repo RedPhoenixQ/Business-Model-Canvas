@@ -64,7 +64,7 @@
 <Content>
   <Sub>
     <SubTrigger>
-      <PlusIcon size="20" />
+      <PlusIcon class="mr-2" size="20" />
       Add
     </SubTrigger>
     <SubContent>

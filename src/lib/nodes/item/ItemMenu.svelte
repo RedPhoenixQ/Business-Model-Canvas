@@ -73,7 +73,7 @@
       }
     }}
   >
-    <XIcon size="20" />
+    <XIcon class="mr-2" size="20" />
     Delete
   </Item>
 </Content>
