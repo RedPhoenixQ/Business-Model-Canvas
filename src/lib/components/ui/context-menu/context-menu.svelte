@@ -21,6 +21,6 @@
   });
 </script>
 
-<ContextMenuPrimitive.Root {...$$props} bind:open>
+<ContextMenuPrimitive.Root bind:open {...$$restProps}>
   <slot />
 </ContextMenuPrimitive.Root>

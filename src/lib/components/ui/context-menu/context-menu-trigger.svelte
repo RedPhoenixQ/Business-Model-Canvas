@@ -11,7 +11,7 @@
 </script>
 
 <ContextMenuPrimitive.Trigger
-  {...$$props}
+  {...$$restProps}
   on:pointerdown
   on:contextmenu={(event) => {
     if (event.detail.originalEvent.defaultPrevented) {

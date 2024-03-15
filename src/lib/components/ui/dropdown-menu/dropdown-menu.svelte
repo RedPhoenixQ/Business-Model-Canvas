@@ -13,15 +13,14 @@
   }
 
   onMount(() => {
-    document.addEventListener("custom-menu-close", close, false);
+    window.addEventListener("custom-menu-close", close, false);
     return () => {
-      document.removeEventListener("custom-menu-close", close);
+      window.removeEventListener("custom-menu-close", close);
     };
   });
 </script>
 
 <DropdownMenuPrimitive.Root
-  {...$$props}
   onOpenChange={(o) => {
     if (o) {
       document.dispatchEvent(
@@ -30,6 +29,7 @@
     }
     $$props.onOpenChange?.();
   }}
+  {...$$restProps}
   bind:open
 >
   <slot />
