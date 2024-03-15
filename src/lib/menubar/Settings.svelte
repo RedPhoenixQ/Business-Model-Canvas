@@ -12,14 +12,14 @@
 
 <Menubar.Menu>
   <Menubar.Trigger>Settings</Menubar.Trigger>
-  <Menubar.Content class="min-w-fit [&_[role=menuitem]]:gap-2">
+  <Menubar.Content>
     <!-- Theme -->
     <Menubar.Sub>
       <Menubar.SubTrigger>
         {#if $theme === "dark"}
-          <MoonIcon size="20" />
+          <MoonIcon class="mr-2" size="20" />
         {:else}
-          <SunIcon size="20" />
+          <SunIcon class="mr-2" size="20" />
         {/if}
         Theme
       </Menubar.SubTrigger>

@@ -37,10 +37,10 @@
 
 <Menubar.Menu>
   <Menubar.Trigger>File</Menubar.Trigger>
-  <Menubar.Content class="min-w-fit [&_[role=menuitem]]:gap-2">
+  <Menubar.Content>
     <Menubar.Sub>
       <Menubar.SubTrigger>
-        <PlusIcon size="20" />
+        <PlusIcon class="mr-2" size="20" />
         New
       </Menubar.SubTrigger>
       <Menubar.SubContent>
@@ -66,21 +66,21 @@
         fromJSON(input);
       }}
     >
-      <ClipboardPasteIcon size="20" />
+      <ClipboardPasteIcon class="mr-2" size="20" />
       Open from clipboard
     </Menubar.Item>
     <Menubar.Item on:click={() => (open = true)}>
-      <FileInputIcon size="20" />
+      <FileInputIcon class="mr-2" size="20" />
       Open file
     </Menubar.Item>
 
     <Menubar.Separator />
     <Menubar.Item on:click={() => navigator.clipboard.writeText(toJSON())}>
-      <ClipboardCopyIcon size="20" />
+      <ClipboardCopyIcon class="mr-2" size="20" />
       Copy to Clipboard
     </Menubar.Item>
     <Menubar.Item on:click={downloadFile}>
-      <DownloadIcon size="20" />
+      <DownloadIcon class="mr-2" size="20" />
       Download
     </Menubar.Item>
   </Menubar.Content>

@@ -1,11 +1,12 @@
 <script lang="ts">
-  import ItemContextMenu from "./ItemContextMenu.svelte";
+  import ItemMenu from "./ItemMenu.svelte";
   import { type NodeProps } from "@xyflow/svelte";
   import { showItemNames, type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
   import ItemDetails from "./ItemDetails.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import ConnectionHandles from "../ConnectionHandles.svelte";
+  import * as ContextMenu from "$lib/components/ui/context-menu";
 
   type $$Props = NodeProps<ItemData>;
 
@@ -25,19 +26,21 @@
   let detailsOpen = false;
 </script>
 
-<ItemContextMenu
-  bind:data
-  {id}
-  on:edit={() => (detailsOpen = true)}
-  on:change={(e) => nodeDataChange(e.detail)}
->
+<ContextMenu.Root>
+  <ItemMenu
+    type="context-menu"
+    bind:data
+    {id}
+    on:edit={() => (detailsOpen = true)}
+    on:change={(e) => nodeDataChange(e.detail)}
+  />
   <ItemDetails
     bind:data
     {id}
     bind:open={detailsOpen}
     on:change={(e) => nodeDataChange(e.detail)}
   />
-  <div class="group relative" title={data.name}>
+  <ContextMenu.Trigger class="group relative" title={data.name}>
     <ConnectionHandles />
 
     <ItemIcon
@@ -71,5 +74,5 @@
         />
       </div>
     {/if}
-  </div>
-</ItemContextMenu>
+  </ContextMenu.Trigger>
+</ContextMenu.Root>

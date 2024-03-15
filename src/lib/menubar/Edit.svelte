@@ -29,14 +29,14 @@
 
 <Menubar.Menu>
   <Menubar.Trigger>Edit</Menubar.Trigger>
-  <Menubar.Content class="[&_[role=menuitem]]:gap-2">
+  <Menubar.Content>
     <Menubar.Item on:click={undo} disabled={$undoEmpty}>
-      <UndoIcon size="20" />
+      <UndoIcon class="mr-2" size="20" />
       Undo
       <Menubar.Shortcut>Ctrl/Cmd+Z</Menubar.Shortcut>
     </Menubar.Item>
     <Menubar.Item on:click={redo} disabled={$redoEmpty}>
-      <RedoIcon size="20" />
+      <RedoIcon class="mr-2" size="20" />
       Redo
       <Menubar.Shortcut>Ctrl/Cmd+Y</Menubar.Shortcut>
     </Menubar.Item>
