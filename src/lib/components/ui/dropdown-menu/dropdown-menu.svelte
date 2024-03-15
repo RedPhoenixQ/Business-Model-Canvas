@@ -27,7 +27,7 @@
         new CustomEvent("custom-menu-close", { detail: id }),
       );
     }
-    $$props.onOpenChange?.();
+    $$props.onOpenChange?.(o);
   }}
   {...$$restProps}
   bind:open
