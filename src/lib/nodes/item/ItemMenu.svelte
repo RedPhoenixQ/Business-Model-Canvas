@@ -6,6 +6,7 @@
   import { EditIcon, XIcon } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
   import { menu, type MenuType } from "$lib/components/custom/menu";
+  import MoveMenuPart from "../MoveMenuPart.svelte";
 
   type $$Props = Pick<NodeProps<ItemData>, "data" | "id"> & {
     type: MenuType;
@@ -44,6 +45,7 @@
     <EditIcon class="mr-2" size={20} />
     Edit
   </Item>
+  <MoveMenuPart {type} {id} />
   <Separator />
   <CheckboxItem
     bind:checked={data.showTitle}
