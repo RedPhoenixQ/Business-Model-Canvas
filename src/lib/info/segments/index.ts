@@ -5,6 +5,7 @@ import type { Dimensions, Node, XYPosition } from "@xyflow/svelte";
 import { defaultTemplate } from "./default";
 import { detailedTemplate } from "./detailed";
 import type { ComponentType } from "svelte";
+import type { DefaultNode } from "../nodes";
 
 export type GridPos = {
   column: { start: number; end: number };
@@ -16,6 +17,14 @@ export type SegmentInfo = {
   description?: ComponentType;
   classes: string;
   grid: GridPos;
+  presetNodes?: Record<string, DefaultNode>;
+  presetGroups?: Record<
+    string,
+    {
+      group: DefaultNode & { type: "customGroup" };
+      nodes: (DefaultNode & Pick<Node, "position">)[];
+    }
+  >;
 };
 
 export type SegmentsTemplate = {
@@ -47,9 +56,7 @@ export function getSegmentInfo(
   template: SegmentTemplateKey,
   id: string,
 ): SegmentInfo {
-  const info = (segmentTemplateInfo_ as Record<string, SegmentsTemplate>)?.[
-    template
-  ]?.nodes?.[id];
+  const info = segmentTemplateInfo?.[template]?.nodes?.[id];
   if (!info) {
     throw new Error(
       `No segment info is available for template ${template} with id ${id}`,
