@@ -21,7 +21,4 @@ export const defaultNodes = {
   segment: defaultSegmentNode,
   slider: defaultSliderNode,
   customGroup: defaultGroupNode,
-} as const satisfies Record<
-  keyof typeof nodeTypes,
-  DefaultNode<unknown, string>
->;
+} as const satisfies Record<keyof typeof nodeTypes, DefaultNode>;

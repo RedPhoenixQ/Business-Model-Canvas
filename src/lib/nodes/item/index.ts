@@ -33,4 +33,4 @@ export const defaultItemNode = {
   type: "item",
   data: defaultItemData,
   extent: "parent",
-} as const satisfies DefaultNode<ItemData, "item">;
+} as const satisfies DefaultNode;

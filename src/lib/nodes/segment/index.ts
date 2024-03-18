@@ -11,4 +11,4 @@ export const defaultSegmentNode = {
   draggable: false,
   style: "pointer-events: none",
   zIndex: -10,
-} as const satisfies DefaultNode<SegmentData, "segment">;
+} as const satisfies DefaultNode;

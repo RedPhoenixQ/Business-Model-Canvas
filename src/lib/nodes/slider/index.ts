@@ -10,4 +10,4 @@ export const defaultSliderNode = {
     value: [50],
   },
   extent: "parent",
-} as const satisfies DefaultNode<SliderData, "slider">;
+} as const satisfies DefaultNode;

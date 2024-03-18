@@ -15,4 +15,4 @@ export const defaultGroupNode = {
   height: 120,
   selectable: false,
   extent: "parent",
-} as const satisfies DefaultNode<GroupData, "customGroup">;
+} as const satisfies DefaultNode;
