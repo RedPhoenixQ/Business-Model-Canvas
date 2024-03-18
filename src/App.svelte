@@ -5,7 +5,6 @@
   import { writable } from "svelte/store";
   import {
     SvelteFlow,
-    Controls,
     Background,
     BackgroundVariant,
     MiniMap,
@@ -14,11 +13,11 @@
     type XYPosition,
     getConnectedEdges,
     type Edge,
-    ControlButton,
     ConnectionLineType,
   } from "@xyflow/svelte";
   import { theme } from "$lib/theme";
   import FlowMenu from "$lib/FlowMenu.svelte";
+  import FlowControls from "./lib/FlowControls.svelte";
   import { edgeTypes } from "$lib/edges";
   import { nodeTypes } from "$lib/nodes";
   import Menubar from "$lib/menubar/Menubar.svelte";
@@ -26,8 +25,6 @@
   import PagesList from "$lib/project/PagesList.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import Toolbar from "$lib/menubar/Toolbar.svelte";
-  import { showItemNames } from "$lib/nodes/item";
-  import { EyeIcon, EyeOffIcon } from "lucide-svelte";
   import ProjectName from "$lib/project/ProjectName.svelte";
   import MoveHandler from "$lib/nodes/MoveHandler.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
@@ -156,19 +153,7 @@
 
         <FlowMenu type="context-menu" bind:createPos={contextmenuPos} />
 
-        <Controls>
-          <ControlButton
-            title="toggle always show names"
-            aria-label="toggle always show names"
-            on:click={() => ($showItemNames = !$showItemNames)}
-          >
-            {#if $showItemNames}
-              <EyeIcon class="!fill-transparent" />
-            {:else}
-              <EyeOffIcon class="!fill-transparent" />
-            {/if}
-          </ControlButton>
-        </Controls>
+        <FlowControls />
         <Background variant={BackgroundVariant.Dots} />
         <MiniMap />
 
