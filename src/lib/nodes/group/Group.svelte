@@ -24,7 +24,7 @@
       bind:value={data.name}
     />
     <DropdownMenu.Root>
-      <GroupMenu type="dropdown-menu" />
+      <GroupMenu type="dropdown-menu" {id} />
       <DropdownMenu.Trigger asChild let:builder>
         <Button
           variant="ghost"
