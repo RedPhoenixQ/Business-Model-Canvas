@@ -5,6 +5,7 @@ import type { Dimensions, Node, XYPosition } from "@xyflow/svelte";
 import { defaultTemplate } from "./default";
 import { detailedTemplate } from "./detailed";
 import type { ComponentType } from "svelte";
+import type { DefaultNode } from "../nodes";
 
 export type GridPos = {
   column: { start: number; end: number };
@@ -16,6 +17,14 @@ export type SegmentInfo = {
   description?: ComponentType;
   classes: string;
   grid: GridPos;
+  presetNodes?: Record<string, DefaultNode>;
+  presetGroups?: Record<
+    string,
+    {
+      group: DefaultNode & { type: "customGroup" };
+      nodes: DefaultNode[];
+    }
+  >;
 };
 
 export type SegmentsTemplate = {
