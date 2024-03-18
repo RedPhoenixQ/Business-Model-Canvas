@@ -23,9 +23,9 @@ export type SegmentsTemplate = {
   nodes: Record<string, SegmentInfo>;
 };
 
-export type SegmentTemplateKey = keyof typeof segmentTemplateInfo;
+export type SegmentTemplateKey = keyof typeof segmentTemplateInfo_;
 
-export const segmentTemplateInfo = {
+const segmentTemplateInfo_ = {
   empty: {
     grid: {
       columns: [],
@@ -37,6 +37,9 @@ export const segmentTemplateInfo = {
   detailed: detailedTemplate,
 } as const satisfies Record<string, SegmentsTemplate>;
 
+export const segmentTemplateInfo: Record<string, SegmentsTemplate> =
+  segmentTemplateInfo_;
+
 /**
  * @throws if an invalid tempalte and id combination is given
  */
@@ -44,7 +47,7 @@ export function getSegmentInfo(
   template: SegmentTemplateKey,
   id: string,
 ): SegmentInfo {
-  const info = (segmentTemplateInfo as Record<string, SegmentsTemplate>)?.[
+  const info = (segmentTemplateInfo_ as Record<string, SegmentsTemplate>)?.[
     template
   ]?.nodes?.[id];
   if (!info) {
@@ -86,7 +89,7 @@ export function fromSegmentTemplate<T extends SegmentTemplateKey>(
   template: T,
   page: Omit<Partial<SavedPage> & PageData, "template">,
 ): SavedPage & { template: T } {
-  const { grid, nodes: segmentNodes } = segmentTemplateInfo[template];
+  const { grid, nodes: segmentNodes } = segmentTemplateInfo_[template];
   const nodes = Object.entries(segmentNodes).map(([id, info]) => {
     return {
       id,
