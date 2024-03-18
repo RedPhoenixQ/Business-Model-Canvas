@@ -62,6 +62,7 @@
 
   let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
   let contextmenuPos: XYPosition = { x: 0, y: 0 };
+  let contextmenuOpen = false;
   let onMove: (node: Node, old_pos: XYPosition) => void;
 </script>
 
@@ -72,7 +73,7 @@
     event.preventDefault();
   }}
 >
-  <ContextMenu.Root>
+  <ContextMenu.Root bind:open={contextmenuOpen}>
     <ContextMenu.Trigger
       class="absolute h-full w-full"
       on:contextmenu={(event) => {
@@ -151,7 +152,11 @@
 
         <PagesList on:pageSwap={() => nodeEdgesToShow.clear()} />
 
-        <FlowMenu type="context-menu" bind:createPos={contextmenuPos} />
+        <FlowMenu
+          type="context-menu"
+          bind:createPos={contextmenuPos}
+          on:close={() => (contextmenuOpen = false)}
+        />
 
         <FlowControls />
         <Background variant={BackgroundVariant.Dots} />
