@@ -1,4 +1,5 @@
 import type { SegmentsTemplate } from "..";
+import ValueDesc from "./ValueDesc.svelte";
 
 export const detailedTemplate = {
   grid: {
@@ -22,6 +23,7 @@ export const detailedTemplate = {
     },
     value: {
       title: "Value Proposition",
+      description: ValueDesc,
       classes: "bg-yellow-600",
       grid: {
         column: {
