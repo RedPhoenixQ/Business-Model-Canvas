@@ -1,13 +1,18 @@
-import type { SavedPage, Project } from "../project";
+import type { SavedPage, Project, PageData } from "../project";
 import { fromSegmentTemplate } from "./segments";
 import { defaultItemData, defaultItemNode } from "../nodes/item";
 
+export const defaultPageData: Omit<PageData, "template"> = {
+  name: "Page 1",
+  keepWithinParent: true,
+};
+
 export const pageTemplates = {
   empty: fromSegmentTemplate("empty", {
-    name: "Page 1",
+    ...defaultPageData,
   }),
   default: fromSegmentTemplate("default", {
-    name: "Page 1",
+    ...defaultPageData,
     nodes: [
       {
         ...defaultItemNode,
@@ -86,10 +91,10 @@ export const pageTemplates = {
     ],
   }),
   detailed_empty: fromSegmentTemplate("detailed", {
-    name: "Page 1",
+    ...defaultPageData,
   }),
   example1: fromSegmentTemplate("detailed", {
-    name: "Page 1",
+    ...defaultPageData,
     grid: {
       columns: [200, 224, 200, 200, 200, 200],
       rows: [200, 210, 210, 210, 200],

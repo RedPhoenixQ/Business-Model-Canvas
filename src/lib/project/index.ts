@@ -24,6 +24,7 @@ export type SavedPage = PageData & {
 export type PageData = {
   name: string;
   template: SegmentTemplateKey;
+  keepWithinParent: boolean;
 };
 
 export type Grid = {
@@ -45,6 +46,7 @@ projectStore.subscribe(($project) => console.debug("project", $project));
 const pageStore: Writable<PageData> = writable({
   name: "page",
   template: "empty",
+  keepWithinParent: true,
 });
 pageStore.subscribe(($page) => console.debug("pageStore", $page));
 
@@ -85,10 +87,7 @@ export function useProject() {
       // Set template name before nodes to limit risk of looking up the
       // wrong template for the page.Setting this after the reset() above
       // also prevent existing nodes from accessing incorrect templates
-      pageStore.update((p) => {
-        p.template = page.template;
-        return p;
-      });
+      pageStore.set(page);
       // TODO: set snapGrid
       gridStore.set(page.grid);
       nodes.set(page.nodes);
