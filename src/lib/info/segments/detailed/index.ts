@@ -1,3 +1,5 @@
+import { defaultGroupNode } from "$lib/nodes/group";
+import { defaultItemData, defaultItemNode } from "$lib/nodes/item";
 import type { SegmentsTemplate } from "..";
 import ValueDesc from "./ValueDesc.svelte";
 
@@ -105,6 +107,26 @@ export const detailedTemplate = {
           end: 2,
         },
       },
+      presetGroups: {
+        "Social Media": {
+          group: {
+            ...defaultGroupNode,
+            data: {
+              name: "Social Media",
+            },
+          },
+          nodes: [
+            {
+              ...defaultItemNode,
+              type: "item",
+              data: {
+                ...defaultItemData,
+              },
+              position: { x: 10, y: 30 },
+            },
+          ],
+        },
+      },
     },
     "customer-relations": {
       title: "Customer Relations",
@@ -131,6 +153,16 @@ export const detailedTemplate = {
         row: {
           start: 3,
           end: 4,
+        },
+      },
+      presetNodes: {
+        "App Store": {
+          ...defaultItemNode,
+          type: "item",
+          data: {
+            ...defaultItemData,
+            name: "App Store",
+          },
         },
       },
     },
