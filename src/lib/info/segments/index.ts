@@ -4,6 +4,7 @@ import type { Grid } from "$lib/project";
 import type { Dimensions, Node, XYPosition } from "@xyflow/svelte";
 import { defaultTemplate } from "./default";
 import { detailedTemplate } from "./detailed";
+import type { ComponentType } from "svelte";
 
 export type GridPos = {
   column: { start: number; end: number };
@@ -12,6 +13,7 @@ export type GridPos = {
 
 export type SegmentInfo = {
   title: string;
+  description?: ComponentType;
   classes: string;
   grid: GridPos;
 };
