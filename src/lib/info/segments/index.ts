@@ -22,7 +22,7 @@ export type SegmentInfo = {
     string,
     {
       group: DefaultNode & { type: "customGroup" };
-      nodes: DefaultNode[];
+      nodes: (DefaultNode & Pick<Node, "position">)[];
     }
   >;
 };
@@ -56,9 +56,7 @@ export function getSegmentInfo(
   template: SegmentTemplateKey,
   id: string,
 ): SegmentInfo {
-  const info = (segmentTemplateInfo_ as Record<string, SegmentsTemplate>)?.[
-    template
-  ]?.nodes?.[id];
+  const info = segmentTemplateInfo?.[template]?.nodes?.[id];
   if (!info) {
     throw new Error(
       `No segment info is available for template ${template} with id ${id}`,
