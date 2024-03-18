@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { useSvelteFlow, type NodeProps } from "@xyflow/svelte";
+  import { type NodeProps } from "@xyflow/svelte";
   import { type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
-  import { addHistoryEntry } from "$lib/project/history";
-  import { EditIcon, XIcon } from "lucide-svelte";
+  import { EditIcon } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
   import { menu, type MenuType } from "$lib/components/custom/menu";
   import MoveMenuPart from "../MoveMenuPart.svelte";
+  import DeleteNodeMenuPart from "../DeleteNodeMenuPart.svelte";
 
   type $$Props = Pick<NodeProps<ItemData>, "data" | "id"> & {
     type: MenuType;
@@ -22,17 +22,6 @@
     edit: undefined;
     change: keyof ItemData;
   }>();
-
-  const { deleteElements } = useSvelteFlow();
-
-  async function deleteNode(id: string) {
-    const deleted = await deleteElements({ nodes: [{ id }] });
-    addHistoryEntry({
-      type: "delete",
-      nodes: deleted.deletedNodes,
-      edges: deleted.deletedEdges,
-    });
-  }
 </script>
 
 <Content>
@@ -66,16 +55,5 @@
     Show text
   </CheckboxItem>
   <Separator />
-  <Item
-    class="text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"
-    on:click={() => {
-      if (confirm("Are you sure?")) {
-        console.log("deleting node", id, data);
-        deleteNode(id);
-      }
-    }}
-  >
-    <XIcon class="mr-2" size="20" />
-    Delete
-  </Item>
+  <DeleteNodeMenuPart {type} {id} />
 </Content>
