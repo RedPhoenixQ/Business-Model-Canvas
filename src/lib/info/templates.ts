@@ -1,5 +1,5 @@
 import type { SavedPage, Project } from "../project";
-import { fromSegmentTemplate } from "../info/segments";
+import { fromSegmentTemplate } from "./segments";
 import { defaultItemData, defaultItemNode } from "../nodes/item";
 
 export const pageTemplates = {
