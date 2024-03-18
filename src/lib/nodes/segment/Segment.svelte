@@ -1,11 +1,15 @@
 <script lang="ts">
+  import SegmentDescPopover from "./SegmentDescPopover.svelte";
   import {
     type NodeProps,
     useUpdateNodeInternals,
     useSvelteFlow,
     type Dimensions,
   } from "@xyflow/svelte";
-  import { getSegmentInfo, getDimensionsInGrid } from "$lib/info/segments";
+  import {
+    getSegmentInfo,
+    getDimensionsInGrid,
+  } from "$lib/info/segments/index";
   import { type SegmentData } from ".";
   import { cn } from "$lib/utils";
   import { addHistoryEntry } from "$lib/project/history";
@@ -83,7 +87,10 @@
     $$restProps.class,
   )}
 >
-  <span class="px-2 text-white">{segmentInfo.title}</span>
+  <div class="flex justify-between">
+    <span class="px-2 text-white">{segmentInfo.title}</span>
+    <SegmentDescPopover info={segmentInfo} />
+  </div>
   <ResizeControl
     {id}
     noHistory
