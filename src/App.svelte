@@ -16,7 +16,7 @@
     ConnectionLineType,
   } from "@xyflow/svelte";
   import { theme } from "$lib/theme";
-  import FlowMenu from "$lib/FlowMenu.svelte";
+  import AddItemMenuPart from "$lib/AddItemMenuPart.svelte";
   import FlowControls from "./lib/FlowControls.svelte";
   import { edgeTypes } from "$lib/edges";
   import { nodeTypes } from "$lib/nodes";
@@ -152,11 +152,12 @@
 
         <PagesList on:pageSwap={() => nodeEdgesToShow.clear()} />
 
-        <FlowMenu
-          type="context-menu"
-          bind:createPos={contextmenuPos}
-          on:close={() => (contextmenuOpen = false)}
-        />
+        <ContextMenu.Content>
+          <AddItemMenuPart
+            type="context-menu"
+            bind:createPos={contextmenuPos}
+          />
+        </ContextMenu.Content>
 
         <FlowControls />
         <Background variant={BackgroundVariant.Dots} />

@@ -17,14 +17,11 @@
   import { menu, type MenuType } from "./components/custom/menu";
   import { getSegmentInfo } from "./info/segments";
   import { useProject } from "./project";
-  import { createEventDispatcher } from "svelte";
 
   export let type: MenuType;
   export let createPos: XYPosition;
 
-  const dispatch = createEventDispatcher<{ close: undefined }>();
-
-  const { Content, Item, Sub, SubTrigger, SubContent, Label } = menu(type);
+  const { Item, Sub, SubTrigger, SubContent, Label } = menu(type);
 
   const nodes = useNodes();
   const { screenToFlowPosition, getIntersectingNodes } = useSvelteFlow();
@@ -42,7 +39,7 @@
   /**
    * @returns id of the created node
    */
-  function addItem(
+  function createNode(
     event: CustomEventHandler<MouseEvent>,
     typeOrNode: DefaultNode | keyof typeof defaultNodes,
   ): Node {
@@ -85,89 +82,106 @@
   }
 </script>
 
-<Content>
-  {#if segmentInfo?.presetNodes}
-    <Sub>
-      <SubTrigger
-        on:click={(event) => {
-          addItem(event, "item");
-          dispatch("close");
-        }}
-      >
-        <PlusIcon class="mr-2" size="20" />
-        Add Item
-      </SubTrigger>
-      <SubContent>
-        <Label>Presets</Label>
-        {#each Object.entries(segmentInfo.presetNodes) as [name, preset]}
-          <Item
-            on:click={(event) => {
-              addItem(event, preset);
-            }}
-          >
-            {name}
-          </Item>
-        {/each}
-      </SubContent>
-    </Sub>
-  {:else}
-    <Item
+{#if !segmentInfo?.presetNodes}
+  <Item
+    on:click={(event) => {
+      createNode(event, "item");
+    }}
+  >
+    <PlusIcon class="mr-2" size="20" />
+    Item
+  </Item>
+{:else}
+  <Sub>
+    <SubTrigger
       on:click={(event) => {
-        addItem(event, "item");
+        document.dispatchEvent(
+          new CustomEvent("custom-menu-close", { detail: "" }),
+        );
+        createNode(event, "item");
       }}
     >
       <PlusIcon class="mr-2" size="20" />
       Item
-    </Item>
-  {/if}
-  {#if segmentInfo?.presetGroups}
-    <Sub>
-      <SubTrigger
+    </SubTrigger>
+    <SubContent>
+      <Item
         on:click={(event) => {
-          addItem(event, "customGroup");
-          dispatch("close");
+          createNode(event, "item");
         }}
       >
         <PlusIcon class="mr-2" size="20" />
-        Group
-      </SubTrigger>
-      <SubContent>
-        <Label>Presets</Label>
-        {#each Object.entries(segmentInfo.presetGroups) as [name, preset]}
-          <Item
-            on:click={(event) => {
-              const group = addItem(event, preset.group);
-              $nodes.push(
-                ...preset.nodes.map((node) => ({
-                  ...node,
-                  parentNode: group.id,
-                  id: crypto.randomUUID(),
-                })),
-              );
-              $nodes = $nodes;
-            }}
-          >
-            {name}
-          </Item>
-        {/each}
-      </SubContent>
-    </Sub>
-  {:else}
-    <Item
+        New empty
+      </Item>
+      <Label>Presets</Label>
+      {#each Object.entries(segmentInfo.presetNodes) as [name, preset]}
+        <Item
+          on:click={(event) => {
+            createNode(event, preset);
+          }}
+        >
+          {name}
+        </Item>
+      {/each}
+    </SubContent>
+  </Sub>
+{/if}
+{#if !segmentInfo?.presetGroups}
+  <Item
+    on:click={(event) => {
+      createNode(event, "customGroup");
+    }}
+  >
+    <PlusIcon class="mr-2" size="20" />
+    Group
+  </Item>
+{:else}
+  <Sub>
+    <SubTrigger
       on:click={(event) => {
-        addItem(event, "customGroup");
+        document.dispatchEvent(
+          new CustomEvent("custom-menu-close", { detail: "" }),
+        );
+        createNode(event, "customGroup");
       }}
     >
       <PlusIcon class="mr-2" size="20" />
       Group
-    </Item>
-  {/if}
-  <Item
-    on:click={(event) => {
-      addItem(event, "slider");
-    }}
-  >
-    <PlusIcon class="mr-2" size="20" />
-    Slider
-  </Item>
-</Content>
+    </SubTrigger>
+    <SubContent>
+      <Item
+        on:click={(event) => {
+          createNode(event, "item");
+        }}
+      >
+        <PlusIcon class="mr-2" size="20" />
+        New empty
+      </Item>
+      <Label>Presets</Label>
+      {#each Object.entries(segmentInfo.presetGroups) as [name, preset]}
+        <Item
+          on:click={(event) => {
+            const group = createNode(event, preset.group);
+            const new_nodes = preset.nodes.map((node) => ({
+              ...node,
+              parentNode: group.id,
+              id: crypto.randomUUID(),
+            }));
+            $nodes.push(...new_nodes);
+            $nodes = $nodes;
+          }}
+        >
+          {name}
+        </Item>
+      {/each}
+    </SubContent>
+  </Sub>
+{/if}
+<Item
+  on:click={(event) => {
+    createNode(event, "slider");
+  }}
+>
+  <PlusIcon class="mr-2" size="20" />
+  Slider
+</Item>
