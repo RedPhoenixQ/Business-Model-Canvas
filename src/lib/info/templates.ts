@@ -27,7 +27,6 @@ export const pageTemplates = {
         },
         position: { x: 90, y: 80 },
         parentNode: "key-partners",
-        extent: "parent",
       },
       {
         ...defaultItemNode,
@@ -39,7 +38,6 @@ export const pageTemplates = {
         },
         position: { x: 30, y: 100 },
         parentNode: "key-activities",
-        extent: "parent",
       },
       {
         ...defaultItemNode,
@@ -53,7 +51,6 @@ export const pageTemplates = {
         },
         position: { x: 120, y: 50 },
         parentNode: "channels",
-        extent: "parent",
       },
       {
         ...defaultItemNode,
@@ -69,7 +66,6 @@ export const pageTemplates = {
         },
         position: { x: 320, y: 120 },
         parentNode: "costs",
-        extent: "parent",
       },
     ],
     edges: [
@@ -113,7 +109,6 @@ export const pageTemplates = {
           description:
             "Facebook, twitter, instagram, threads, tiktok, snapchat",
         },
-        extent: "parent",
         parentNode: "marketing",
       },
       {
@@ -127,7 +122,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=108794",
           },
         },
-        extent: "parent",
         parentNode: "marketing",
       },
       {
@@ -141,7 +135,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=12380",
           },
         },
-        extent: "parent",
         parentNode: "marketing",
       },
       {
@@ -155,7 +148,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=nrEFWOZ9YrxK",
           },
         },
-        extent: "parent",
         parentNode: "marketing",
       },
       {
@@ -169,7 +161,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=13642",
           },
         },
-        extent: "parent",
         parentNode: "marketing",
       },
       {
@@ -183,7 +174,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=11947",
           },
         },
-        extent: "parent",
         parentNode: "customer-relations",
       },
       {
@@ -197,7 +187,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=13631",
           },
         },
-        extent: "parent",
         parentNode: "customer-relations",
       },
       {
@@ -211,7 +200,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=fGknlRQpuSVb",
           },
         },
-        extent: "parent",
         parentNode: "customer-relations",
       },
       {
@@ -225,7 +213,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=122811",
           },
         },
-        extent: "parent",
         parentNode: "customer-relations",
       },
       {
@@ -239,7 +226,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=Pj0ay2nNKIhI",
           },
         },
-        extent: "parent",
         parentNode: "customer-relations",
       },
       {
@@ -253,7 +239,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=ImwGPKqJwA2U",
           },
         },
-        extent: "parent",
         parentNode: "distribution",
       },
       {
@@ -268,7 +253,6 @@ export const pageTemplates = {
           },
           description: "GOG\nHumble Store\nGreen Man Gaming\nNuuvem",
         },
-        extent: "parent",
         parentNode: "distribution",
       },
       {
@@ -282,7 +266,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=gItgZriuEvjv",
           },
         },
-        extent: "parent",
         parentNode: "distribution",
       },
       {
@@ -296,7 +279,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=13629",
           },
         },
-        extent: "parent",
         parentNode: "distribution",
       },
       {
@@ -310,7 +292,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=63696",
           },
         },
-        extent: "parent",
         parentNode: "distribution",
       },
       {
@@ -324,7 +305,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=108792",
           },
         },
-        extent: "parent",
         parentNode: "distribution",
       },
       {
@@ -338,7 +318,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=63788",
           },
         },
-        extent: "parent",
         parentNode: "distribution",
       },
       {
@@ -352,7 +331,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=19598",
           },
         },
-        extent: "parent",
         parentNode: "distribution",
       },
       {
@@ -366,7 +344,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=4QcyAmItf6M0",
           },
         },
-        extent: "parent",
         parentNode: "key-support",
       },
       {
@@ -380,7 +357,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=19844",
           },
         },
-        extent: "parent",
         parentNode: "key-support",
       },
       {
@@ -394,7 +370,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=12381",
           },
         },
-        extent: "parent",
         parentNode: "key-support",
       },
       {
@@ -408,7 +383,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=103938",
           },
         },
-        extent: "parent",
         parentNode: "key-support",
       },
       {
@@ -422,7 +396,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=18749",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -436,7 +409,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=12929",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -450,7 +422,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=19294",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -464,7 +435,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=12784",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -478,7 +448,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=104078",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -492,7 +461,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=104227",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -506,7 +474,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=13139",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -520,7 +487,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=34060",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -534,7 +500,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=108783",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -548,7 +513,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=qiruWgTuD5o8",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -564,7 +528,6 @@ export const pageTemplates = {
           description:
             "Product Management\nProgramming\nArt\nAudio\nDesign/Writing",
         },
-        extent: "parent",
         parentNode: "key-activities",
       },
       {
@@ -578,7 +541,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=23315",
           },
         },
-        extent: "parent",
         parentNode: "key-activities",
       },
       {
@@ -592,7 +554,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=31016",
           },
         },
-        extent: "parent",
         parentNode: "key-activities",
       },
       {
@@ -606,7 +567,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=70714",
           },
         },
-        extent: "parent",
         parentNode: "key-activities",
       },
       {
@@ -620,7 +580,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=xOxAdcl6DVo2",
           },
         },
-        extent: "parent",
         parentNode: "key-activities",
       },
       {
@@ -634,7 +593,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=14804",
           },
         },
-        extent: "parent",
         parentNode: "key-activities",
       },
       {
@@ -648,7 +606,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=103932",
           },
         },
-        extent: "parent",
         parentNode: "key-activities",
       },
       {
@@ -662,7 +619,6 @@ export const pageTemplates = {
             src: "https://img.icons8.com/?size=100&format=png&id=108334",
           },
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
       {
@@ -675,7 +631,6 @@ export const pageTemplates = {
         data: {
           value: [50],
         },
-        extent: "parent",
         parentNode: "users",
       },
       {
@@ -688,7 +643,6 @@ export const pageTemplates = {
         data: {
           value: [50],
         },
-        extent: "parent",
         parentNode: "key-resources",
       },
     ],
