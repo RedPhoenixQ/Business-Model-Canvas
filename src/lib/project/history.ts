@@ -12,17 +12,9 @@ import { gridStore, type Grid } from ".";
 
 export type HistoryEntry =
   | {
-      type: "delete";
-      nodes: Node[];
-      edges: Edge[];
-    }
-  | {
-      type: "createNode";
-      node: Node;
-    }
-  | {
-      type: "createEdge";
-      edge: Edge;
+      type: "delete" | "create";
+      nodes?: Node[];
+      edges?: Edge[];
     }
   | {
       type: "nodeData" | "edgeData";
@@ -100,7 +92,8 @@ export function useHistory() {
   const { updateNode, updateNodeData } = useSvelteFlow();
   const { nodes, edges } = useStore();
 
-  function applyNodes(nodelist: Node[], add: boolean) {
+  function applyNodes(nodelist: Node[] | undefined, add: boolean) {
+    if (!nodelist) return;
     if (add) {
       nodes.update(($nodes) => {
         $nodes.push(...nodelist);
@@ -112,7 +105,8 @@ export function useHistory() {
       );
     }
   }
-  function applyEdges(edgelist: Edge[], add: boolean) {
+  function applyEdges(edgelist: Edge[] | undefined, add: boolean) {
+    if (!edgelist) return;
     if (add) {
       edges.update(($edges) => {
         $edges.push(...edgelist);
@@ -128,15 +122,12 @@ export function useHistory() {
   function applyEntry(entry: HistoryEntry, undo: boolean) {
     switch (entry.type) {
       case "delete":
-        console.log("apply delete");
         applyNodes(entry.nodes, undo);
         applyEdges(entry.edges, undo);
         break;
-      case "createNode":
-        applyNodes([entry.node], !undo);
-        break;
-      case "createEdge":
-        applyEdges([entry.edge], !undo);
+      case "create":
+        applyNodes(entry.nodes, !undo);
+        applyEdges(entry.edges, !undo);
         break;
       case "nodeData":
         updateNodeData(entry.id, undo ? entry.from : entry.to, {

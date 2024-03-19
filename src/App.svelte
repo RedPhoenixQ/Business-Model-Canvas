@@ -107,7 +107,7 @@
               connection.targetHandle ?? connection.target
             }`,
           };
-          addHistoryEntry({ type: "createEdge", edge });
+          addHistoryEntry({ type: "create", edges: [edge] });
           return edge;
         }}
         on:paneclick={hideAllEdges}

@@ -77,7 +77,7 @@
     };
     $nodes.push(node);
     $nodes = $nodes;
-    addHistoryEntry({ type: "createNode", node });
+    addHistoryEntry({ type: "create", nodes: [node] });
     return node;
   }
 </script>
