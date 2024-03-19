@@ -6,14 +6,12 @@
     BoxSelectIcon,
   } from "lucide-svelte";
   import { Controls, ControlButton, useNodes } from "@xyflow/svelte";
-  import { showItemNames } from "$lib/nodes/item";
-  import { useProject } from "./project";
+  import { pageStore } from "./project";
 
   const nodes = useNodes();
-  const { page } = useProject();
 
   function setExtent(keepWith: boolean) {
-    $page.keepWithinParent = keepWith;
+    $pageStore.keepWithinParent = keepWith;
     for (const node of $nodes) {
       if (keepWith && node.extent === undefined) {
         node.extent = "parent";
@@ -28,9 +26,9 @@
   <ControlButton
     title="toggle always show names"
     aria-label="toggle always show names"
-    on:click={() => ($showItemNames = !$showItemNames)}
+    on:click={() => ($pageStore.showItemNames = !$pageStore.showItemNames)}
   >
-    {#if $showItemNames}
+    {#if $pageStore.showItemNames}
       <EyeIcon class="!fill-transparent" />
     {:else}
       <EyeOffIcon class="!fill-transparent" />
@@ -39,9 +37,9 @@
   <ControlButton
     title="toggle keep items within parent"
     aria-label="toggle keep items within parent"
-    on:click={() => setExtent(!$page.keepWithinParent)}
+    on:click={() => setExtent(!$pageStore.keepWithinParent)}
   >
-    {#if $page.keepWithinParent}
+    {#if $pageStore.keepWithinParent}
       <SquareIcon class="!fill-transparent" />
     {:else}
       <BoxSelectIcon />

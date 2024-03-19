@@ -5,6 +5,7 @@ import { defaultItemData, defaultItemNode } from "../nodes/item";
 export const defaultPageData: Omit<PageData, "template"> = {
   name: "Page 1",
   keepWithinParent: true,
+  showItemNames: false,
 };
 
 export const pageTemplates = {

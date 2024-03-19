@@ -1,12 +1,13 @@
 <script lang="ts">
   import ItemMenu from "./ItemMenu.svelte";
   import { type NodeProps } from "@xyflow/svelte";
-  import { showItemNames, type ItemData } from ".";
+  import { type ItemData } from ".";
   import ItemIcon from "./ItemIcon.svelte";
   import ItemDetails from "./ItemDetails.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import ConnectionHandles from "../ConnectionHandles.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
+  import { pageStore } from "$lib/project";
 
   type $$Props = NodeProps<ItemData>;
 
@@ -51,7 +52,7 @@
     {#if data.name}
       <div
         class="pointer-events-none absolute -top-2 left-1/2 right-1/2 w-max max-w-40 -translate-x-1/2 -translate-y-full text-pretty rounded-lg bg-background/75 px-2 py-1 text-center transition-opacity group-hover:opacity-100 {data.showTitle ||
-        $showItemNames
+        $pageStore.showItemNames
           ? 'opacity-75'
           : 'opacity-0'}"
       >

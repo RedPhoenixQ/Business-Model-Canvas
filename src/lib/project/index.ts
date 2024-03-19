@@ -49,7 +49,7 @@ const projectStore: Writable<Project> = writable(
 );
 projectStore.subscribe(($project) => console.debug("project", $project));
 
-const pageStore: Writable<PageData> = writable({
+export const pageStore: Writable<PageData> = writable({
   ...defaultPageData,
   template: "empty",
 });

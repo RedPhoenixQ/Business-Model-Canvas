@@ -1,5 +1,4 @@
 import type { DefaultNode } from "$lib/info/nodes";
-import { writable } from "svelte/store";
 
 export type ItemIconInfo = {
   src?: string;
@@ -16,8 +15,6 @@ export type ItemData = {
   textWidth: number;
   textHeight: number;
 };
-
-export const showItemNames = writable(false);
 
 export const defaultItemData = {
   name: "",
