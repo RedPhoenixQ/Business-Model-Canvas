@@ -47,12 +47,12 @@
               }
             }}
           >
-            {page.name}
+            {page.data.name}
           </span>
           <PageMenu {i} />
         </div>
       {:else}
-        {@const name = page.name ?? "page"}
+        {@const name = page.data.name ?? "page"}
         <Button
           variant="secondary"
           class="justify-between p-2"
