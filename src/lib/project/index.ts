@@ -7,7 +7,11 @@ import {
 } from "@xyflow/svelte";
 import { type SegmentTemplateKey } from "../info/segments";
 import { get, writable, type Writable } from "svelte/store";
-import { pageTemplates, projectTemplates } from "../info/templates";
+import {
+  defaultPageData,
+  pageTemplates,
+  projectTemplates,
+} from "../info/templates";
 import { type HistoryEntry, getHistory, setHistory } from "./history";
 
 export type SavedPage = {
@@ -26,6 +30,7 @@ export type PageData = {
   name: string;
   template: SegmentTemplateKey;
   keepWithinParent: boolean;
+  showItemNames: boolean;
 };
 
 export type Grid = {
@@ -45,9 +50,8 @@ const projectStore: Writable<Project> = writable(
 projectStore.subscribe(($project) => console.debug("project", $project));
 
 const pageStore: Writable<PageData> = writable({
-  name: "page",
+  ...defaultPageData,
   template: "empty",
-  keepWithinParent: true,
 });
 pageStore.subscribe(($page) => console.debug("pageStore", $page));
 
