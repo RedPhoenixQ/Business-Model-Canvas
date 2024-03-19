@@ -1,12 +1,9 @@
-import { defaultSegmentNode, type SegmentData } from "$lib/nodes/segment";
-import type { PageData, SavedPage } from "$lib/project";
 import type { Grid } from "$lib/project";
 import type { Dimensions, Node, XYPosition } from "@xyflow/svelte";
 import { defaultTemplate } from "./default";
 import { detailedTemplate } from "./detailed";
 import type { ComponentType } from "svelte";
 import type { DefaultNode } from "../nodes";
-import { defaultPageData } from "../templates";
 
 export type GridPos = {
   column: { start: number; end: number };
@@ -91,30 +88,4 @@ export function getDimensionsInGrid(
     data.position.y += grid.rows[i];
   }
   return data;
-}
-
-export function fromSegmentTemplate<T extends SegmentTemplateKey>(
-  template: T,
-  page: Partial<Omit<SavedPage, "data"> & { data: Partial<PageData> }>,
-): SavedPage & { data: SavedPage["data"] & { template: T } } {
-  const { grid, nodes: segmentNodes } = segmentTemplateInfo_[template];
-  const nodes = Object.entries(segmentNodes).map(([id, info]) => {
-    return {
-      id,
-      ...defaultSegmentNode,
-      ...getDimensionsInGrid(grid, info.grid),
-    } satisfies Node<SegmentData, "segment">;
-  }) as Node[];
-  nodes.push(...(page.nodes ?? []));
-  return {
-    edges: [],
-    grid,
-    ...page,
-    data: {
-      ...defaultPageData,
-      ...(page.data ?? {}),
-      template,
-    },
-    nodes,
-  };
 }

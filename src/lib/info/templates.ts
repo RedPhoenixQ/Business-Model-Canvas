@@ -1,12 +1,44 @@
 import type { SavedPage, Project, PageData } from "../project";
-import { fromSegmentTemplate } from "./segments";
+import {
+  getDimensionsInGrid,
+  segmentTemplateInfo,
+  type SegmentTemplateKey,
+} from "./segments";
 import { defaultItemData, defaultItemNode } from "../nodes/item";
+import { defaultSegmentNode, type SegmentData } from "$lib/nodes/segment";
+import type { Node } from "@xyflow/svelte";
 
 export const defaultPageData: Omit<PageData, "template"> = {
   name: "Page 1",
   keepWithinParent: true,
   showItemNames: false,
 };
+
+export function fromSegmentTemplate<T extends SegmentTemplateKey>(
+  template: T,
+  page: Partial<Omit<SavedPage, "data"> & { data: Partial<PageData> }>,
+): SavedPage & { data: SavedPage["data"] & { template: T } } {
+  const { grid, nodes: segmentNodes } = segmentTemplateInfo[template];
+  const nodes = Object.entries(segmentNodes).map(([id, info]) => {
+    return {
+      id,
+      ...defaultSegmentNode,
+      ...getDimensionsInGrid(grid, info.grid),
+    } satisfies Node<SegmentData, "segment">;
+  }) as Node[];
+  nodes.push(...(page.nodes ?? []));
+  return {
+    edges: [],
+    grid,
+    ...page,
+    data: {
+      ...defaultPageData,
+      ...(page.data ?? {}),
+      template,
+    },
+    nodes,
+  };
+}
 
 export const pageTemplates = {
   empty: fromSegmentTemplate("empty", {}),
