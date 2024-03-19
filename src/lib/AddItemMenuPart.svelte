@@ -15,7 +15,7 @@
     type DefaultNode,
   } from "./info/nodes";
   import { menu, type MenuType } from "./components/custom/menu";
-  import { getSegmentInfo } from "./info/segments";
+  import { getSegmentInfo, type SegmentInfo } from "./info/segments";
   import { useProject } from "./project";
 
   export let type: MenuType;
@@ -75,17 +75,38 @@
       position: parent ? parent?.relative_pos : position,
       parentNode: parent?.node?.id,
     };
-    $nodes.push(node);
-    $nodes = $nodes;
-    addHistoryEntry({ type: "create", nodes: [node] });
     return node;
+  }
+
+  function addNode(
+    event: CustomEventHandler<MouseEvent>,
+    typeOrNode: DefaultNode | keyof typeof defaultNodes,
+  ) {
+    const node = createNode(event, typeOrNode);
+    $nodes = [...$nodes, node];
+    addHistoryEntry({ type: "create", nodes: [node] });
+  }
+
+  function addGroupPreset(
+    event: CustomEventHandler<MouseEvent>,
+    preset: Required<SegmentInfo>["presetGroups"][string],
+  ) {
+    const group = createNode(event, preset.group);
+    const new_nodes: Node[] = preset.nodes.map((node) => ({
+      ...node,
+      parentNode: group.id,
+      id: crypto.randomUUID(),
+    }));
+    new_nodes.push(group);
+    $nodes = [...$nodes, ...new_nodes];
+    addHistoryEntry({ type: "create", nodes: new_nodes });
   }
 </script>
 
 {#if !segmentInfo?.presetNodes}
   <Item
     on:click={(event) => {
-      createNode(event, "item");
+      addNode(event, "item");
     }}
   >
     <PlusIcon class="mr-2" size="20" />
@@ -98,7 +119,7 @@
         document.dispatchEvent(
           new CustomEvent("custom-menu-close", { detail: "" }),
         );
-        createNode(event, "item");
+        addNode(event, "item");
       }}
     >
       <PlusIcon class="mr-2" size="20" />
@@ -107,7 +128,7 @@
     <SubContent>
       <Item
         on:click={(event) => {
-          createNode(event, "item");
+          addNode(event, "item");
         }}
       >
         <PlusIcon class="mr-2" size="20" />
@@ -115,11 +136,7 @@
       </Item>
       <Label>Presets</Label>
       {#each Object.entries(segmentInfo.presetNodes) as [name, preset]}
-        <Item
-          on:click={(event) => {
-            createNode(event, preset);
-          }}
-        >
+        <Item on:click={(event) => addNode(event, preset)}>
           {name}
         </Item>
       {/each}
@@ -127,11 +144,7 @@
   </Sub>
 {/if}
 {#if !segmentInfo?.presetGroups}
-  <Item
-    on:click={(event) => {
-      createNode(event, "customGroup");
-    }}
-  >
+  <Item on:click={(event) => addNode(event, "customGroup")}>
     <PlusIcon class="mr-2" size="20" />
     Group
   </Item>
@@ -142,46 +155,27 @@
         document.dispatchEvent(
           new CustomEvent("custom-menu-close", { detail: "" }),
         );
-        createNode(event, "customGroup");
+        addNode(event, "customGroup");
       }}
     >
       <PlusIcon class="mr-2" size="20" />
       Group
     </SubTrigger>
     <SubContent>
-      <Item
-        on:click={(event) => {
-          createNode(event, "item");
-        }}
-      >
+      <Item on:click={(event) => addNode(event, "item")}>
         <PlusIcon class="mr-2" size="20" />
         New empty
       </Item>
       <Label>Presets</Label>
       {#each Object.entries(segmentInfo.presetGroups) as [name, preset]}
-        <Item
-          on:click={(event) => {
-            const group = createNode(event, preset.group);
-            const new_nodes = preset.nodes.map((node) => ({
-              ...node,
-              parentNode: group.id,
-              id: crypto.randomUUID(),
-            }));
-            $nodes.push(...new_nodes);
-            $nodes = $nodes;
-          }}
-        >
+        <Item on:click={(event) => addGroupPreset(event, preset)}>
           {name}
         </Item>
       {/each}
     </SubContent>
   </Sub>
 {/if}
-<Item
-  on:click={(event) => {
-    createNode(event, "slider");
-  }}
->
+<Item on:click={(event) => addNode(event, "slider")}>
   <PlusIcon class="mr-2" size="20" />
   Slider
 </Item>
