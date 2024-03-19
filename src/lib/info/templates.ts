@@ -8,11 +8,8 @@ export const defaultPageData: Omit<PageData, "template"> = {
 };
 
 export const pageTemplates = {
-  empty: fromSegmentTemplate("empty", {
-    ...defaultPageData,
-  }),
+  empty: fromSegmentTemplate("empty", {}),
   default: fromSegmentTemplate("default", {
-    ...defaultPageData,
     nodes: [
       {
         ...defaultItemNode,
@@ -86,11 +83,8 @@ export const pageTemplates = {
       },
     ],
   }),
-  detailed_empty: fromSegmentTemplate("detailed", {
-    ...defaultPageData,
-  }),
+  detailed_empty: fromSegmentTemplate("detailed", {}),
   example1: fromSegmentTemplate("detailed", {
-    ...defaultPageData,
     grid: {
       columns: [200, 224, 200, 200, 200, 200],
       rows: [200, 210, 210, 210, 200],

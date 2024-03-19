@@ -6,6 +6,7 @@ import { defaultTemplate } from "./default";
 import { detailedTemplate } from "./detailed";
 import type { ComponentType } from "svelte";
 import type { DefaultNode } from "../nodes";
+import { defaultPageData } from "../templates";
 
 export type GridPos = {
   column: { start: number; end: number };
@@ -94,8 +95,8 @@ export function getDimensionsInGrid(
 
 export function fromSegmentTemplate<T extends SegmentTemplateKey>(
   template: T,
-  page: Omit<Partial<SavedPage> & PageData, "template">,
-): SavedPage & { template: T } {
+  page: Partial<Omit<SavedPage, "data"> & { data: Partial<PageData> }>,
+): SavedPage & { data: SavedPage["data"] & { template: T } } {
   const { grid, nodes: segmentNodes } = segmentTemplateInfo_[template];
   const nodes = Object.entries(segmentNodes).map(([id, info]) => {
     return {
@@ -107,9 +108,13 @@ export function fromSegmentTemplate<T extends SegmentTemplateKey>(
   nodes.push(...(page.nodes ?? []));
   return {
     edges: [],
-    template,
     grid,
     ...page,
+    data: {
+      ...defaultPageData,
+      ...(page.data ?? {}),
+      template,
+    },
     nodes,
   };
 }

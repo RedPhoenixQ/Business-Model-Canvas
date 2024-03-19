@@ -10,7 +10,8 @@ import { get, writable, type Writable } from "svelte/store";
 import { pageTemplates, projectTemplates } from "../info/templates";
 import { type HistoryEntry, getHistory, setHistory } from "./history";
 
-export type SavedPage = PageData & {
+export type SavedPage = {
+  data: PageData;
   nodes: Node[];
   edges: Edge[];
   viewport?: Viewport;
@@ -62,7 +63,7 @@ export function useProject() {
     const obj = toObject();
     const page: SavedPage = {
       ...obj,
-      ...get(pageStore),
+      data: get(pageStore),
       grid: { ...get(gridStore) },
       history: getHistory(),
     };
@@ -76,7 +77,7 @@ export function useProject() {
 
     // Update name immediatly to prevent flashing
     pageStore.update((p) => {
-      p.name = page.name;
+      p.name = page.data.name;
       return p;
     });
     console.log("page being loaded:", page);
@@ -87,7 +88,7 @@ export function useProject() {
       // Set template name before nodes to limit risk of looking up the
       // wrong template for the page.Setting this after the reset() above
       // also prevent existing nodes from accessing incorrect templates
-      pageStore.set(page);
+      pageStore.set(page.data);
       // TODO: set snapGrid
       gridStore.set(page.grid);
       nodes.set(page.nodes);
@@ -135,7 +136,7 @@ export function useProject() {
       // Find the max number of the default page name
       let max = 0;
       for (const page of $project.pages) {
-        const match = /^Page (\d+)\s*$/.exec(page.name);
+        const match = /^Page (\d+)\s*$/.exec(page.data.name);
         if (match) {
           // Convert capture group 1 with digits to number and save the max
           max = Math.max(max, ~~match[1]);
@@ -143,10 +144,9 @@ export function useProject() {
       }
 
       $project.activePageIndex = $project.pages.length;
-      $project.pages.push({
-        ...structuredClone(pageTemplates[template]),
-        name: `Page ${max + 1}`,
-      });
+      const new_page = structuredClone(pageTemplates[template]);
+      new_page.data.name = `Page ${max + 1}`;
+      $project.pages.push(new_page);
       loadPage($project);
       projectStore.set($project);
     },
@@ -160,7 +160,7 @@ export function useProject() {
         structuredClone($project.pages[pageIndex]),
         ...$project.pages.slice(pageIndex + 1),
       ];
-      $project.pages[pageIndex + 1].name += " copy";
+      $project.pages[pageIndex + 1].data.name += " copy";
       loadPage($project);
       projectStore.set($project);
     },
