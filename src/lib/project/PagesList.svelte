@@ -2,23 +2,23 @@
   import { PlusIcon } from "lucide-svelte";
   import PageMenu from "./PageMenu.svelte";
   import { buttonVariants, Button } from "../components/ui/button";
-  import { useProject } from ".";
+  import { useProject, projectStore, pageStore } from ".";
   import { pageTemplates } from "../info/templates";
   import * as Dropdown from "../components/ui/dropdown-menu";
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher<{ pageSwap: undefined }>();
 
-  const { project, page: activePage, swapActivePage, addPage } = useProject();
+  const { swapActivePage, addPage } = useProject();
 
   function pageFromTemplate(template: string) {
     if (!Object.keys(pageTemplates).includes(template)) return;
     addPage(template as keyof typeof pageTemplates);
   }
 
-  let prevPage = $project.activePageIndex;
-  $: if ($project.activePageIndex !== prevPage) {
-    prevPage = $project.activePageIndex;
+  let prevPage = $projectStore.activePageIndex;
+  $: if ($projectStore.activePageIndex !== prevPage) {
+    prevPage = $projectStore.activePageIndex;
     dispatch("pageSwap");
   }
 </script>
@@ -26,9 +26,9 @@
 <ul
   class="pointer-events-auto absolute bottom-0 left-0 right-0 z-10 mx-auto flex w-min max-w-[70vw] gap-2 overflow-x-auto"
 >
-  {#each $project.pages as page, i}
+  {#each $projectStore.pages as page, i}
     <li>
-      {#if $project.activePageIndex === i}
+      {#if $projectStore.activePageIndex === i}
         <div
           class={buttonVariants({
             variant: "default",
@@ -40,7 +40,7 @@
             role="textbox"
             tabindex="0"
             contenteditable="plaintext-only"
-            bind:textContent={$activePage.name}
+            bind:textContent={$pageStore.name}
             on:keypress={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();

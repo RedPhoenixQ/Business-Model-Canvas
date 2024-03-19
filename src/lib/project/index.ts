@@ -44,7 +44,7 @@ export type Project = {
   pages: SavedPage[];
 };
 
-const projectStore: Writable<Project> = writable(
+export const projectStore: Writable<Project> = writable(
   structuredClone(projectTemplates.empty),
 );
 projectStore.subscribe(($project) => console.debug("project", $project));
@@ -113,9 +113,6 @@ export function useProject() {
   }
 
   return {
-    project: projectStore,
-    page: pageStore,
-    grid: gridStore,
     toJSON(): string {
       const $project = get(projectStore);
       storePage($project);

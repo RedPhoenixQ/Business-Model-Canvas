@@ -9,10 +9,10 @@
   import * as Dialog from "$lib/components/ui/dialog";
   import Dropzone from "svelte-file-dropzone";
   import * as Menubar from "$lib/components/ui/menubar";
-  import { useProject } from "$lib/project/index";
+  import { useProject, projectStore } from "$lib/project/index";
   import { projectTemplates } from "$lib/info/templates";
 
-  const { project, toJSON, fromJSON, newProject } = useProject();
+  const { toJSON, fromJSON, newProject } = useProject();
 
   function downloadFile() {
     const blob = new Blob([toJSON()], { type: "application/json" });
@@ -20,7 +20,7 @@
     // Create a one-time link element for downloading
     const dlink = document.createElement("a");
     // TODO: Get project name from somewere
-    dlink.download = `${$project.name ?? "unnamed"}.json`;
+    dlink.download = `${$projectStore.name ?? "unnamed"}.json`;
     dlink.href = url;
     dlink.click();
     dlink.remove();

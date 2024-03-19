@@ -13,17 +13,16 @@
   import { type SegmentData } from ".";
   import { cn } from "$lib/utils";
   import { addHistoryEntry } from "$lib/project/history";
-  import { useProject } from "$lib/project";
+  import { pageStore, gridStore } from "$lib/project";
   import ResizeControl from "../ResizeControl.svelte";
 
   type $$Props = NodeProps<SegmentData>;
 
   export let id: $$Props["id"];
 
-  const { page, grid } = useProject();
   const { getNode } = useSvelteFlow();
   const updateNodeInternals = useUpdateNodeInternals();
-  $: segmentInfo = getSegmentInfo($page.template, id);
+  $: segmentInfo = getSegmentInfo($pageStore.template, id);
 
   $: cols = segmentInfo.grid.column.end - segmentInfo.grid.column.start;
   $: rows = segmentInfo.grid.row.end - segmentInfo.grid.row.start;
@@ -31,7 +30,7 @@
   $: {
     const node = getNode(id);
     if (node) {
-      const dim = getDimensionsInGrid($grid, segmentInfo.grid);
+      const dim = getDimensionsInGrid($gridStore, segmentInfo.grid);
       if (
         node.position.x !== dim.position.x ||
         node.position.y !== dim.position.y ||
@@ -53,7 +52,7 @@
     const dy = next.height - prev.height;
     console.log("resize prev", prev.width, prev.height);
     console.log("resize", dx, dy);
-    const from = structuredClone($grid);
+    const from = structuredClone($gridStore);
     // TODO:  Find a better way of distributing the size increase.
     //        Should probably move a "grid line" instread of a block
     //        or respect minimum size of grid blocks
@@ -62,19 +61,19 @@
       i < segmentInfo.grid.column.end;
       i++
     ) {
-      $grid.columns[i] += dx / cols;
+      $gridStore.columns[i] += dx / cols;
     }
     for (
       let i = segmentInfo.grid.row.start;
       i < segmentInfo.grid.row.end;
       i++
     ) {
-      $grid.rows[i] += dy / rows;
+      $gridStore.rows[i] += dy / rows;
     }
 
     addHistoryEntry({
       type: "gridResize",
-      to: structuredClone($grid),
+      to: structuredClone($gridStore),
       from,
     });
   }

@@ -16,7 +16,7 @@
   } from "./info/nodes";
   import { menu, type MenuType } from "./components/custom/menu";
   import { getSegmentInfo, type SegmentInfo } from "./info/segments";
-  import { useProject } from "./project";
+  import { pageStore } from "./project";
 
   export let type: MenuType;
   export let createPos: XYPosition;
@@ -25,7 +25,6 @@
 
   const nodes = useNodes();
   const { screenToFlowPosition, getIntersectingNodes } = useSvelteFlow();
-  const { page } = useProject();
 
   $: clickedSegment = getIntersectingNodes({
     ...screenToFlowPosition(createPos),
@@ -33,7 +32,7 @@
     height: 1,
   }).find((node) => node.type === "segment");
   $: segmentInfo = clickedSegment
-    ? getSegmentInfo($page.template, clickedSegment.id)
+    ? getSegmentInfo($pageStore.template, clickedSegment.id)
     : undefined;
 
   /**

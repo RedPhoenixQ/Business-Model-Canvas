@@ -5,7 +5,7 @@
     type SegmentTemplateKey,
   } from "$lib/info/segments";
   import { BringToFrontIcon } from "lucide-svelte";
-  import { useProject } from "$lib/project";
+  import { pageStore } from "$lib/project";
   import { useSvelteFlow, type XYPosition } from "@xyflow/svelte";
   import { addHistoryEntry } from "$lib/project/history";
 
@@ -13,11 +13,11 @@
   export let id: string;
 
   const { getNode, updateNode } = useSvelteFlow();
-  const { page } = useProject();
 
   const { Item, Sub, SubContent, SubTrigger } = menu(type);
 
-  $: segments = segmentTemplateInfo[$page.template as SegmentTemplateKey].nodes;
+  $: segments =
+    segmentTemplateInfo[$pageStore.template as SegmentTemplateKey].nodes;
 
   function moveToSegment(segment_id: string) {
     const node = getNode(id);
