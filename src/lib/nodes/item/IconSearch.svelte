@@ -54,7 +54,7 @@
 
     const res = await fetch(url);
     const data: SearchResponse = await res.json();
-    console.log(res, data);
+    console.debug("icon search", res, data);
     icons = data.icons;
   }
 

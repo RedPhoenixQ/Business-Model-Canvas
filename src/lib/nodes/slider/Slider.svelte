@@ -21,7 +21,7 @@
     }
     timeout = setTimeout(() => {
       timeout = undefined;
-      console.log("setting history");
+      console.debug("setting history", id, from, data);
       addHistoryEntry({
         type: "nodeData",
         id,

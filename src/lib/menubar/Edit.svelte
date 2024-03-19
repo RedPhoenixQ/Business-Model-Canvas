@@ -20,7 +20,7 @@
       default:
         return;
     }
-    console.log("Shortcut", event);
+    console.debug("Shortcut", event);
     event.preventDefault();
   }
 </script>

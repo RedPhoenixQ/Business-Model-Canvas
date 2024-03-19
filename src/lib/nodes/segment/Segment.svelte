@@ -50,8 +50,8 @@
   function resizeGrid(next: Dimensions) {
     const dx = next.width - prev.width;
     const dy = next.height - prev.height;
-    console.log("resize prev", prev.width, prev.height);
-    console.log("resize", dx, dy);
+    console.debug("grid resize prev", prev.width, prev.height);
+    console.debug("grid resize change", dx, dy);
     const from = structuredClone($gridStore);
     // TODO:  Find a better way of distributing the size increase.
     //        Should probably move a "grid line" instread of a block

@@ -16,8 +16,6 @@
 
   let from: ItemData = structuredClone(data);
   async function nodeDataChange(...keys: (keyof ItemData)[]) {
-    console.log(from, data);
-    console.log(from[keys[0]], data[keys[0]], from[keys[0]] === data[keys[0]]);
     if (keys.length > 0 && !keys.some((key) => data[key] !== from[key])) return;
     const to = structuredClone(data);
     addHistoryEntry({ type: "nodeData", id, from, to });

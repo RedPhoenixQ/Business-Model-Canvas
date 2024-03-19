@@ -17,7 +17,6 @@
       class="rounded-full p-0 hover:bg-transparent hover:text-current"
       builders={[builder]}
       on:click={(event) => {
-        console.log(event);
         event.stopPropagation();
       }}
     >

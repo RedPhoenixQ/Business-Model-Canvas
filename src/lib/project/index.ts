@@ -84,7 +84,7 @@ export function useProject() {
       p.name = page.data.name;
       return p;
     });
-    console.log("page being loaded:", page);
+    console.debug("page being loaded:", page);
     reset();
     // Leave some time for the reset to happen. This prevents wierd
     // behaviour where some state is left behind from previous page
@@ -121,7 +121,7 @@ export function useProject() {
     fromJSON(json: string) {
       // TODO: Handle parse error and validation
       const $project: Project = JSON.parse(json);
-      console.log("loaded project", $project);
+      console.debug("loaded project", $project);
       loadPage($project);
       projectStore.set($project);
     },

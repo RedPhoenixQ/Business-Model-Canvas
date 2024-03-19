@@ -92,7 +92,7 @@
       <IconSearch
         iconInfo={data.icon}
         on:iconSelected={(event) => {
-          console.log("iconSelected", event.detail);
+          console.debug("iconSelected", event.detail);
           if (!data) return;
           data.icon.src = event.detail.src;
         }}

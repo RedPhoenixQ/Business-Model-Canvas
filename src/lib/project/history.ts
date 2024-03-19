@@ -144,7 +144,7 @@ export function useHistory() {
         });
         break;
       case "move":
-        console.log("apply move");
+        console.debug("apply move");
         updateNode(entry.id, {
           position: undo ? entry.from : entry.to,
           ...(entry.parent
@@ -155,13 +155,13 @@ export function useHistory() {
         });
         break;
       case "resize": {
-        console.log("apply resize");
+        console.debug("apply resize");
         const { width, height, x, y } = undo ? entry.from : entry.to;
         updateNode(entry.id, { width, height, position: { x, y } });
         break;
       }
       case "gridResize":
-        console.log("apply gridResize");
+        console.debug("apply gridResize");
         gridStore.set(undo ? entry.from : entry.to);
         break;
       default:
