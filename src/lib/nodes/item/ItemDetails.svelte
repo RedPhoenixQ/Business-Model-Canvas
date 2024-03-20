@@ -17,6 +17,7 @@
     ArrowLeftFromLineIcon,
     ArrowRightToLineIcon,
     XIcon,
+    PlusIcon,
   } from "lucide-svelte";
   import { Textarea } from "$lib/components/ui/textarea";
   import { createEventDispatcher } from "svelte";
@@ -90,6 +91,34 @@
           />
         </Label>
       </div>
+      {#if data.impactText === undefined}
+        <Button
+          variant="ghost"
+          class="text-muted-foreground"
+          on:click={() => (data.impactText = "")}
+        >
+          <PlusIcon />
+          Add impact description
+        </Button>
+      {:else}
+        <Label class="block w-full space-y-2">
+          <span> Impact </span>
+          <div class="flex items-center gap-2">
+            <Textarea
+              bind:value={data.impactText}
+              on:change={() => dispatch("change", "description")}
+            />
+            <Button
+              variant="destructive"
+              size="icon"
+              class="aspect-square"
+              on:click={() => (data.impactText = undefined)}
+            >
+              <XIcon />
+            </Button>
+          </div>
+        </Label>
+      {/if}
       <div class="space-y-2 text-sm font-medium leading-none">
         <span>Connections</span>
         <div class="max-h-[50vh] space-y-2 overflow-y-auto py-2">

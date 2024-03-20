@@ -14,6 +14,7 @@ export type ItemData = {
   showText: boolean;
   textWidth: number;
   textHeight: number;
+  impactText?: string;
 };
 
 export const defaultItemData = {
