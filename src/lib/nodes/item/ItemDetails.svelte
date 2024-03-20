@@ -56,7 +56,7 @@
     class="grid p-4"
     style="grid-template-rows: auto 1fr;"
   >
-    <Sheet.Header class="mb-6 p-2">
+    <Sheet.Header class="px-2">
       <Sheet.Title>Edit item</Sheet.Title>
     </Sheet.Header>
     <div class="space-y-4 overflow-y-auto p-2">
@@ -117,9 +117,9 @@
           </div>
         </Label>
       {/if}
-      <div class="space-y-2 text-sm font-medium leading-none">
+      <div class="space-y-4 text-sm font-medium leading-none">
         <span>Connections</span>
-        <div class="max-h-[50vh] space-y-2 overflow-y-auto py-2">
+        <div class="space-y-4">
           {#each connections as connection}
             {@const selfIsSource = connection.source === id}
             {@const node = getNode(
@@ -136,31 +136,31 @@
                     <span>Group</span>
                   {/if}
                 </div>
-                {#if selfIsSource}
-                  <ArrowLeftFromLineIcon />
-                {:else}
-                  <ArrowRightToLineIcon />
-                {/if}
-                <Label class="flex-1">
+                <Label class="flex-1 space-y-1">
                   <span>
+                    {#if selfIsSource}
+                      <ArrowLeftFromLineIcon size={16} class="inline" />
+                    {:else}
+                      <ArrowRightToLineIcon size={16} class="inline" />
+                    {/if}
                     {node.data.name}{node.parentNode
                       ? ` - ${node.parentNode}`
                       : ""}
                   </span>
+                  <Input
+                    value={connection.label}
+                    placeholder="Add connection label..."
+                    on:change={(event) => {
+                      const edge = $edges.find(
+                        (edge) => edge.id === connection.id,
+                      );
+                      if (!edge || !event.target) return;
+                      // @ts-expect-error: event.target.value will exist
+                      edge.label = event.target.value;
+                      $edges = $edges;
+                    }}
+                  />
                 </Label>
-                <Input
-                  class="flex-1"
-                  value={connection.label}
-                  on:change={(event) => {
-                    const edge = $edges.find(
-                      (edge) => edge.id === connection.id,
-                    );
-                    if (!edge || !event.target) return;
-                    // @ts-expect-error: event.target.value will exist
-                    edge.label = event.target.value;
-                    $edges = $edges;
-                  }}
-                />
                 <Button
                   variant="destructive"
                   size="icon"
