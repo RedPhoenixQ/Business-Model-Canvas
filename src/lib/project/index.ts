@@ -67,7 +67,7 @@ export function useProject() {
     const obj = toObject();
     const page: SavedPage = {
       ...obj,
-      data: get(pageStore),
+      data: { ...get(pageStore) },
       grid: { ...get(gridStore) },
       history: getHistory(),
     };
