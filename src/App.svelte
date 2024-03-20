@@ -70,7 +70,9 @@
   class="h-screen bg-neutral-600"
   on:selectstart={(event) => {
     // This prevents wierd selection in textareas when selecting nodes
-    event.preventDefault();
+    if (!event?.target?.getAttribute?.("contenteditable")) {
+      event.preventDefault();
+    }
   }}
 >
   <ContextMenu.Root bind:open={contextmenuOpen}>
