@@ -53,13 +53,13 @@
   {/if}
   <Sheet.Content
     side="right"
-    class="grid"
+    class="grid p-4"
     style="grid-template-rows: auto 1fr;"
   >
-    <Sheet.Header class="mb-6">
+    <Sheet.Header class="mb-6 p-2">
       <Sheet.Title>Edit item</Sheet.Title>
     </Sheet.Header>
-    <div class="space-y-4 overflow-y-auto">
+    <div class="space-y-4 overflow-y-auto p-2">
       <div class="flex items-center gap-4">
         <IconPopover
           bind:data
@@ -82,15 +82,13 @@
           />
         </Label>
       </div>
-      <div>
-        <Label class="w-full space-y-2">
-          <span>Description</span>
-          <Textarea
-            bind:value={data.description}
-            on:change={() => dispatch("change", "description")}
-          />
-        </Label>
-      </div>
+      <Label class="block w-full space-y-2">
+        <span>Description</span>
+        <Textarea
+          bind:value={data.description}
+          on:change={() => dispatch("change", "description")}
+        />
+      </Label>
       {#if data.impactText === undefined}
         <Button
           variant="ghost"
