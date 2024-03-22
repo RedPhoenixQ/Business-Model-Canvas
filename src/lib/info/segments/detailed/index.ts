@@ -1,7 +1,7 @@
 import { defaultGroupNode } from "$lib/nodes/group";
 import { defaultItemData, defaultItemNode } from "$lib/nodes/item";
 import type { SegmentsTemplate } from "..";
-import ValueDesc from "./ValueDesc.svelte";
+import * as detailedDesc from "$lib/info/descriptions/detailed";
 
 export const detailedTemplate = {
   grid: {
@@ -25,7 +25,7 @@ export const detailedTemplate = {
     },
     value: {
       title: "Value Proposition",
-      description: ValueDesc,
+      description: detailedDesc.Value,
       classes: "bg-yellow-600",
       grid: {
         column: {
