@@ -1,8 +1,8 @@
 import "./app.pcss";
-import App from "./App.svelte";
+import Main from "./Main.svelte";
 
-const app = new App({
-  target: document.getElementById("app")!,
+const main = new Main({
+  target: document.getElementById("main")!,
 });
 
-export default app;
+export default main;
