@@ -6,6 +6,8 @@
   import { addHistoryEntry } from "$lib/project/history";
   import type { SliderData } from ".";
   import ConnectionHandles from "../ConnectionHandles.svelte";
+  import * as ContextMenu from "$lib/components/ui/context-menu";
+  import SliderMenu from "./SliderMenu.svelte";
 
   type $$Props = NodeProps<SliderData>;
 
@@ -33,16 +35,24 @@
   }
 </script>
 
-<div class="group grid gap-2 pt-2" style:grid-template-columns="auto 1fr auto">
-  <ConnectionHandles />
-  <MaleIcon />
-  <Slider
-    bind:value={data.value}
-    min={0}
-    max={100}
-    step={1}
-    {onValueChange}
-    class="w-24"
-  />
-  <FemaleIcon />
-</div>
+<ContextMenu.Root>
+  <ContextMenu.Trigger>
+    <div
+      class="group grid gap-2 pt-2"
+      style:grid-template-columns="auto 1fr auto"
+    >
+      <SliderMenu type="context-menu" {id} />
+      <ConnectionHandles />
+      <MaleIcon />
+      <Slider
+        bind:value={data.value}
+        min={0}
+        max={100}
+        step={1}
+        {onValueChange}
+        class="w-24"
+      />
+      <FemaleIcon />
+    </div>
+  </ContextMenu.Trigger>
+</ContextMenu.Root>
