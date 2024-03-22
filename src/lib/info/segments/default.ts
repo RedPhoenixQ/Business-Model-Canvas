@@ -1,4 +1,4 @@
-import type { SegmentsTemplate } from "..";
+import type { SegmentsTemplate } from ".";
 
 export const defaultTemplate = {
   grid: {

@@ -1,6 +1,6 @@
 import { defaultGroupNode } from "$lib/nodes/group";
 import { defaultItemData, defaultItemNode } from "$lib/nodes/item";
-import type { SegmentsTemplate } from "..";
+import type { SegmentsTemplate } from ".";
 import * as detailedDesc from "$lib/info/descriptions/detailed";
 
 export const detailedTemplate = {
