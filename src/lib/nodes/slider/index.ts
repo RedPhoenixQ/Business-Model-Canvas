@@ -7,16 +7,18 @@ export type SliderData = {
   rightIcon: IconInfo;
 };
 
+export const defaultSliderData = {
+  value: [50],
+  leftIcon: {
+    iconDefault: "Male",
+  },
+  rightIcon: {
+    iconDefault: "Female",
+  },
+} as const satisfies SliderData;
+
 export const defaultSliderNode = {
   type: "slider",
-  data: {
-    value: [50],
-    leftIcon: {
-      iconDefault: "Male"
-    },
-    rightIcon: {
-      iconDefault: "Female"
-    },
-  },
+  data: defaultSliderData,
   extent: "parent",
 } as const satisfies DefaultNode;
