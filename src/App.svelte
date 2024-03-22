@@ -14,6 +14,7 @@
     getConnectedEdges,
     type Edge,
     ConnectionLineType,
+    useSvelteFlow,
   } from "@xyflow/svelte";
   import { theme } from "$lib/theme";
   import AddItemMenuPart from "$lib/AddItemMenuPart.svelte";
@@ -26,11 +27,61 @@
   import { addHistoryEntry } from "$lib/project/history";
   import Toolbar from "$lib/menubar/Toolbar.svelte";
   import ProjectName from "$lib/project/ProjectName.svelte";
-  import MoveHandler from "$lib/nodes/MoveHandler.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
+  import { findFirstParentAndRelativePos } from "$lib/info/nodes";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
+
+  const { getIntersectingNodes, updateNode } = useSvelteFlow();
+
+  let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
+  /**
+   * Automatically places the node in the first parent when moved ontop of it
+   */
+  function handleMove(node: Node, old_pos: XYPosition) {
+    if (!node.computed?.positionAbsolute) {
+      console.error("Node with no absolute position in move handler");
+      return;
+    }
+    const position = {
+      x: node.computed.positionAbsolute.x,
+      y: node.computed.positionAbsolute.y,
+    };
+    const intersecting = getIntersectingNodes(node).filter(
+      (n) => n.type === "segment" || n.type === "customGroup",
+    );
+    if (intersecting.length === 0) {
+      addHistoryEntry({
+        type: "move",
+        id: node.id,
+        from: old_pos,
+        to: node.position,
+      });
+      updateNode(node.id, {
+        parentNode: undefined,
+        position,
+      });
+      return;
+    }
+    const parent = findFirstParentAndRelativePos(intersecting, position);
+    if (parent) {
+      addHistoryEntry({
+        type: "move",
+        id: node.id,
+        from: old_pos,
+        to: parent.relative_pos,
+        parent: {
+          from: node.parentNode ?? "UNKNOWN",
+          to: parent.node.id,
+        },
+      });
+      updateNode(node.id, {
+        parentNode: parent.node.id,
+        position: parent.relative_pos,
+      });
+    }
+  }
 
   const nodeEdgesToShow: Set<string> = new Set();
   function hideAllEdges() {
@@ -60,10 +111,8 @@
   $: console.debug("nodes", $nodes);
   $: console.debug("edges", $edges);
 
-  let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
   let contextmenuPos: XYPosition = { x: 0, y: 0 };
   let contextmenuOpen = false;
-  let onMove: (node: Node, old_pos: XYPosition) => void;
 </script>
 
 <div
@@ -135,7 +184,7 @@
         }}
         on:nodedragstop={(event) => {
           console.debug("on node drag stop", event.detail.node);
-          onMove(event.detail.node, moveNodeStartPos);
+          handleMove(event.detail.node, moveNodeStartPos);
         }}
         on:edgeclick={(event) => {
           console.debug("on edge click", event.detail.edge);
@@ -167,7 +216,6 @@
         <MiniMap />
 
         <AutoSave />
-        <MoveHandler bind:onMove />
 
         <div id="itemDetailsPortal" />
       </SvelteFlow>
