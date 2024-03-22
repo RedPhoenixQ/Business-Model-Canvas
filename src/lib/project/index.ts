@@ -6,7 +6,7 @@ import {
   useStore,
 } from "@xyflow/svelte";
 import { type SegmentTemplateKey } from "../info/segments";
-import { get, writable, type Writable } from "svelte/store";
+import { get, writable } from "svelte/store";
 import {
   defaultPageData,
   pageTemplates,
@@ -44,18 +44,18 @@ export type Project = {
   pages: SavedPage[];
 };
 
-export const projectStore: Writable<Project> = writable(
+export const projectStore = writable<Project>(
   structuredClone(projectTemplates.empty),
 );
 projectStore.subscribe(($project) => console.debug("project", $project));
 
-export const pageStore: Writable<PageData> = writable({
+export const pageStore = writable<PageData>({
   ...defaultPageData,
   template: "empty",
 });
 pageStore.subscribe(($page) => console.debug("pageStore", $page));
 
-export const gridStore: Writable<Grid> = writable({ columns: [], rows: [] });
+export const gridStore = writable<Grid>({ columns: [], rows: [] });
 gridStore.subscribe(($grid) => console.debug("gridSize", $grid));
 
 export function useProject() {
