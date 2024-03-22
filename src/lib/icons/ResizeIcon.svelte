@@ -1,3 +1,5 @@
+<svelte:options immutable={true} />
+
 <script lang="ts">
   export let size = 24;
   export let strokeWidth = 2;
