@@ -3,6 +3,21 @@ import { defaultItemData, defaultItemNode } from "$lib/nodes/item";
 import type { SegmentsTemplate } from ".";
 import * as detailedDesc from "$lib/info/descriptions/detailed";
 
+type DetailedSegments =
+  | "sustainable-company"
+  | "value"
+  | "impact"
+  | "key-support"
+  | "key-resources"
+  | "key-activities"
+  | "marketing"
+  | "customer-relations"
+  | "distribution"
+  | "users"
+  | "costs"
+  | "sustainability"
+  | "revenue";
+
 export const detailedTemplate = {
   grid: {
     columns: [200, 200, 200, 200, 200, 200],
@@ -93,6 +108,7 @@ export const detailedTemplate = {
           end: 4,
         },
       },
+      needsRelation: [["key-resources"], ["key-support"]],
     },
     marketing: {
       title: "Marketing",
@@ -223,4 +239,4 @@ export const detailedTemplate = {
       },
     },
   },
-} as const satisfies SegmentsTemplate;
+} as const satisfies SegmentsTemplate<DetailedSegments>;

@@ -1,5 +1,16 @@
 import type { SegmentsTemplate } from ".";
 
+type DefaultSegments =
+  | "customer-relations"
+  | "channels"
+  | "customers"
+  | "costs"
+  | "revenue"
+  | "key-partners"
+  | "key-activities"
+  | "key-resources"
+  | "value";
+
 export const defaultTemplate = {
   grid: {
     columns: [200, 200, 100, 100, 200, 200],
@@ -133,4 +144,4 @@ export const defaultTemplate = {
       },
     },
   },
-} as const satisfies SegmentsTemplate;
+} as const satisfies SegmentsTemplate<DefaultSegments>;
