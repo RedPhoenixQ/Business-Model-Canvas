@@ -1,7 +1,6 @@
 import type { IconInfo } from "$lib/components/custom/icon";
 import type { DefaultNode } from "$lib/info/nodes";
 
-
 export type ItemData = IconInfo & {
   name: string;
   description: string;

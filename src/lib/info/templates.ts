@@ -51,7 +51,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "steam",
-          iconSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+          iconSrc:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
           iconShape: "circle",
         },
         position: { x: 90, y: 80 },
@@ -73,7 +74,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "empty test",
-          iconSrc: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+          iconSrc:
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
         },
         position: { x: 120, y: 50 },
         parentNode: "channels",
@@ -84,7 +86,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Costs",
-          iconSrc: "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
+          iconSrc:
+            "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
           iconShape: "circle",
           iconBackground: "light",
         },
@@ -159,7 +162,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Influencer",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=nrEFWOZ9YrxK",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=nrEFWOZ9YrxK",
         },
         parentNode: "marketing",
       },
@@ -203,7 +207,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Self Service",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=fGknlRQpuSVb",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=fGknlRQpuSVb",
         },
         parentNode: "customer-relations",
       },
@@ -225,7 +230,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Co-Creation (Modding)",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=Pj0ay2nNKIhI",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=Pj0ay2nNKIhI",
         },
         parentNode: "customer-relations",
       },
@@ -236,7 +242,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Steam",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=ImwGPKqJwA2U",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=ImwGPKqJwA2U",
         },
         parentNode: "distribution",
       },
@@ -259,7 +266,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Epic Games",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=gItgZriuEvjv",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=gItgZriuEvjv",
         },
         parentNode: "distribution",
       },
@@ -325,7 +333,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Publisher",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=4QcyAmItf6M0",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=4QcyAmItf6M0",
         },
         parentNode: "key-support",
       },
@@ -468,7 +477,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Know-How",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=qiruWgTuD5o8",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=qiruWgTuD5o8",
         },
         parentNode: "key-resources",
       },
@@ -479,7 +489,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Development",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=SBEjRDmczSCC",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=SBEjRDmczSCC",
           description:
             "Product Management\nProgramming\nArt\nAudio\nDesign/Writing",
         },
@@ -525,7 +536,8 @@ export const pageTemplates = {
         data: {
           ...defaultItemData,
           name: "Marketing",
-          iconSrc: "https://img.icons8.com/?size=100&format=png&id=xOxAdcl6DVo2",
+          iconSrc:
+            "https://img.icons8.com/?size=100&format=png&id=xOxAdcl6DVo2",
         },
         parentNode: "key-activities",
       },
