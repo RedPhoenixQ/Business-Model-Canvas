@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { Handle, Position, type NodeProps } from "@xyflow/svelte";
+  import { type NodeProps } from "@xyflow/svelte";
   import Slider from "$lib/components/ui/slider/slider.svelte";
   import MaleIcon from "../../icons/MaleIcon.svelte";
   import FemaleIcon from "../../icons/FemaleIcon.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import type { SliderData } from ".";
+  import ConnectionHandles from "../ConnectionHandles.svelte";
 
   type $$Props = NodeProps<SliderData>;
 
@@ -32,14 +33,8 @@
   }
 </script>
 
-<div class="grid gap-2" style:grid-template-columns="auto 1fr auto">
-  <Handle type="source" position={Position.Left} />
-  <Handle type="source" position={Position.Right} />
-  <Handle
-    style="top: 0; left: 0; transform: none; width: 100%; height: 100%; visibility: hidden;"
-    type="target"
-    position={Position.Top}
-  />
+<div class="group grid gap-2 pt-2" style:grid-template-columns="auto 1fr auto">
+  <ConnectionHandles />
   <MaleIcon />
   <Slider
     bind:value={data.value}
