@@ -1,14 +1,9 @@
+import type { IconInfo } from "$lib/components/custom/icon";
 import type { DefaultNode } from "$lib/info/nodes";
 
-export type ItemIconInfo = {
-  src?: string;
-  background?: "dark" | "light";
-  shape?: "square" | "circle";
-};
 
-export type ItemData = {
+export type ItemData = IconInfo & {
   name: string;
-  icon: ItemIconInfo;
   description: string;
   showTitle: boolean;
   showText: boolean;
@@ -19,7 +14,6 @@ export type ItemData = {
 
 export const defaultItemData = {
   name: "",
-  icon: {},
   description: "",
   showText: false,
   showTitle: false,

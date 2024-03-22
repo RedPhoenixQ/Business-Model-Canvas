@@ -1,5 +1,5 @@
 <script lang="ts">
-  import IconPopover from "./IconPopover.svelte";
+  import { IconPopover, CustomIcon } from "$lib/components/custom/icon";
   import Input from "$lib/components/ui/input/input.svelte";
   import Label from "$lib/components/ui/label/label.svelte";
   import * as Sheet from "$lib/components/ui/sheet";
@@ -10,7 +10,6 @@
     useEdges,
     useSvelteFlow,
   } from "@xyflow/svelte";
-  import ItemIcon from "./ItemIcon.svelte";
   import { type ItemData } from ".";
   import {
     EditIcon,
@@ -62,11 +61,11 @@
     <div class="space-y-4 overflow-y-auto p-2">
       <div class="flex items-center gap-4">
         <IconPopover
-          bind:data
+          bind:icon={data}
           class="group relative size-20 flex-none rounded border p-2"
-          on:close={() => dispatch("change", "icon")}
+          on:change={(event) => dispatch("change", event.detail)}
         >
-          <ItemIcon icon={data.icon} alt={data.name} />
+          <CustomIcon icon={data} alt={data.name} />
           <EditIcon
             class="absolute right-1 top-1 text-white opacity-50 group-hover:opacity-100"
             size="20"
@@ -129,7 +128,7 @@
               <div class="flex items-center gap-2">
                 <div class="w-12">
                   {#if node?.data?.icon}
-                    <ItemIcon icon={node?.data?.icon} />
+                    <CustomIcon icon={node?.data?.icon} />
                   {:else if node.type === "slider"}
                     <span>Slider</span>
                   {:else if node.type === "customGroup"}

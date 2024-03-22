@@ -1,7 +1,7 @@
 <script lang="ts">
   import { type NodeProps } from "@xyflow/svelte";
   import { type ItemData } from ".";
-  import ItemIcon from "./ItemIcon.svelte";
+  import { CustomIcon } from "$lib/components/custom/icon";
   import { EditIcon } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
   import { menu, type MenuType } from "$lib/components/custom/menu";
@@ -26,7 +26,7 @@
 
 <Content>
   <Label class="flex items-center gap-2">
-    <ItemIcon class="size-6" icon={data.icon} alt={data.name} />
+    <CustomIcon class="size-6" icon={data} alt={data.name} />
     <span class="text-center">{data.name}</span>
   </Label>
   <Separator />

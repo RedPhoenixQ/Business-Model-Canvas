@@ -3,8 +3,8 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import { SearchIcon, Loader2Icon } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
-  import type { ItemIconInfo } from ".";
-  import ItemIcon from "./ItemIcon.svelte";
+  import ItemIcon from "./CustomIcon.svelte";
+  import type { IconInfo } from "./index";
 
   type Icons8Icon = {
     id: string;
@@ -33,7 +33,7 @@
     };
     icons: Icons8Icon[];
   };
-  export let iconInfo: ItemIconInfo;
+  export let iconInfo: IconInfo;
 
   const dispatch = createEventDispatcher<{
     iconSelected: Icons8Icon & { src: string };
@@ -98,7 +98,7 @@
       {#each icons as icon}
         {@const src = Icons8BaseImgUrl + icon.id}
         <button on:click={() => dispatch("iconSelected", { ...icon, src })}>
-          <ItemIcon icon={{ ...iconInfo, src }} alt={icon.name} />
+          <ItemIcon icon={{ ...iconInfo, iconSrc: src }} alt={icon.name} />
         </button>
       {/each}
     {:else if debounce !== undefined}

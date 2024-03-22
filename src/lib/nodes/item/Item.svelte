@@ -2,7 +2,7 @@
   import ItemMenu from "./ItemMenu.svelte";
   import { type NodeProps } from "@xyflow/svelte";
   import { type ItemData } from ".";
-  import ItemIcon from "./ItemIcon.svelte";
+  import { CustomIcon } from "$lib/components/custom/icon";
   import ItemDetails from "./ItemDetails.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import ConnectionHandles from "../ConnectionHandles.svelte";
@@ -42,9 +42,9 @@
   <ContextMenu.Trigger class="group relative" title={data.name}>
     <ConnectionHandles />
 
-    <ItemIcon
+    <CustomIcon
       class="size-10 ring-blue-500 [.selected_&]:ring"
-      icon={data.icon}
+      icon={data}
       alt={data.name}
     />
     {#if data.name}

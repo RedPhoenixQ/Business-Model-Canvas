@@ -1,33 +1,35 @@
+<svelte:options immutable={true} />
+
 <script lang="ts">
   import { cn } from "$lib/utils";
-  import type { ItemIconInfo } from ".";
+  import type { IconInfo } from "./index";
 
-  export let icon: ItemIconInfo;
+  export let icon: IconInfo;
   export let alt = "";
 </script>
 
-{#if icon?.src}
+{#if icon?.iconSrc}
   <div
     class={cn(
       "flex aspect-square items-center justify-center",
-      icon.shape === "circle" ? "rounded-full" : "rounded",
-      icon.background !== undefined
-        ? icon.background === "dark"
+      icon.iconShape === "circle" ? "rounded-full" : "rounded",
+      icon.iconBackground !== undefined
+        ? icon.iconBackground === "dark"
           ? "bg-black"
           : "bg-white"
         : "",
       $$restProps.class,
     )}
   >
-    <img class="w-full" src={icon.src} {alt} />
+    <img class="w-full" src={icon.iconSrc} {alt} />
   </div>
 {:else}
   <svg
     class={cn(
       "aspect-square stroke-black dark:stroke-white",
-      icon.shape === "circle" ? "rounded-full" : "rounded",
-      icon.background !== undefined
-        ? icon.background === "dark"
+      icon.iconShape === "circle" ? "rounded-full" : "rounded",
+      icon.iconBackground !== undefined
+        ? icon.iconBackground === "dark"
           ? "bg-black"
           : "bg-white"
         : "",

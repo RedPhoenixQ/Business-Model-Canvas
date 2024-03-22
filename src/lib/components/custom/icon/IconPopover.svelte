@@ -1,15 +1,18 @@
 <script lang="ts">
   import Input from "$lib/components/ui/input/input.svelte";
   import Label from "$lib/components/ui/label/label.svelte";
-  import { type ItemData } from ".";
   import IconSearch from "./IconSearch.svelte";
   import * as Popover from "$lib/components/ui/popover";
   import * as Select from "$lib/components/ui/select";
   import { createEventDispatcher } from "svelte";
+  import type { IconInfo } from "./index";
 
-  export let data: ItemData;
+  export let icon: IconInfo;
 
-  const dispatch = createEventDispatcher<{ close: undefined }>();
+  const dispatch = createEventDispatcher<{
+    close: undefined;
+    change: keyof IconInfo;
+  }>();
 
   const iconBackground = [
     { label: "None", value: "none" },
@@ -37,13 +40,14 @@
         <Select.Root
           items={iconBackground}
           selected={iconBackground.find(
-            ({ value }) => value === data?.icon?.background,
+            ({ value }) => value === icon?.iconBackground,
           ) ?? iconBackground[0]}
           onSelectedChange={(selected) => {
-            if (!data || !selected) return;
+            if (!selected) return;
             const value = selected.value;
-            data.icon.background =
+            icon.iconBackground =
               value === "light" || value === "dark" ? value : undefined;
+            dispatch("change", "iconBackground");
           }}
         >
           <Select.Trigger>
@@ -60,14 +64,14 @@
         <span>Shape</span>
         <Select.Root
           items={iconShape}
-          selected={iconShape.find(
-            ({ value }) => value === data?.icon?.shape,
-          ) ?? iconShape[0]}
+          selected={iconShape.find(({ value }) => value === icon?.iconShape) ??
+            iconShape[0]}
           onSelectedChange={(selected) => {
-            if (!data || !selected) return;
+            if (!selected) return;
             const value = selected.value;
-            data.icon.shape =
+            icon.iconShape =
               value === "circle" || value === "square" ? value : undefined;
+            dispatch("change", "iconShape");
           }}
         >
           <Select.Trigger>
@@ -84,17 +88,17 @@
     <div>
       <Label class="space-y-2">
         <span> Icon Link </span>
-        <Input type="url" bind:value={data.icon.src} />
+        <Input type="url" bind:value={icon.iconSrc} />
       </Label>
     </div>
     <div class="space-y-2 text-sm font-medium leading-none">
       <span>Search</span>
       <IconSearch
-        iconInfo={data.icon}
+        iconInfo={icon}
         on:iconSelected={(event) => {
           console.debug("iconSelected", event.detail);
-          if (!data) return;
-          data.icon.src = event.detail.src;
+          icon.iconSrc = event.detail.src;
+          dispatch("change", "iconSrc");
         }}
       />
     </div>
