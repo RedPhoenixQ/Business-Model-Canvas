@@ -7,6 +7,7 @@ import {
 import { defaultItemData, defaultItemNode } from "../nodes/item";
 import { defaultSegmentNode, type SegmentData } from "$lib/nodes/segment";
 import type { Node } from "@xyflow/svelte";
+import { defaultSliderData } from "$lib/nodes/slider";
 
 export const defaultPageData: Omit<PageData, "template"> = {
   name: "Page 1",
@@ -568,9 +569,7 @@ export const pageTemplates = {
           x: 23,
           y: 39,
         },
-        data: {
-          value: [50],
-        },
+        data: { ...defaultSliderData },
         parentNode: "users",
       },
       {
@@ -580,9 +579,7 @@ export const pageTemplates = {
           x: 25,
           y: 55,
         },
-        data: {
-          value: [50],
-        },
+        data: { ...defaultSliderData },
         parentNode: "key-resources",
       },
     ],
