@@ -1,11 +1,14 @@
 <script lang="ts">
   import { type NodeProps } from "@xyflow/svelte";
   import Slider from "$lib/components/ui/slider/slider.svelte";
-  import MaleIcon from "../../icons/MaleIcon.svelte";
-  import FemaleIcon from "../../icons/FemaleIcon.svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import type { SliderData } from ".";
   import ConnectionHandles from "../ConnectionHandles.svelte";
+  import {
+    CustomIcon,
+    IconPopover,
+    type IconInfo,
+  } from "$lib/components/custom/icon";
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import SliderMenu from "./SliderMenu.svelte";
 
@@ -33,6 +36,22 @@
       });
     }, 1000);
   }
+
+  function onIconChange(
+    side: keyof Pick<SliderData, "leftIcon" | "rightIcon">,
+    key: keyof IconInfo,
+  ) {
+    console.log(side, key);
+    if (from?.[side]?.[key] === data?.[side]?.[key]) return;
+    const to = structuredClone(data);
+    addHistoryEntry({
+      type: "nodeData",
+      from,
+      to,
+      id,
+    });
+    from = to;
+  }
 </script>
 
 <ContextMenu.Root>
@@ -43,7 +62,13 @@
     >
       <SliderMenu type="context-menu" {id} />
       <ConnectionHandles />
-      <MaleIcon />
+      <IconPopover
+        side="left"
+        bind:icon={data.leftIcon}
+        on:change={(event) => onIconChange("leftIcon", event.detail)}
+      >
+        <CustomIcon class="w-6" icon={data.leftIcon} />
+      </IconPopover>
       <Slider
         bind:value={data.value}
         min={0}
@@ -52,7 +77,12 @@
         {onValueChange}
         class="w-24"
       />
-      <FemaleIcon />
+      <IconPopover
+        bind:icon={data.rightIcon}
+        on:change={(event) => onIconChange("rightIcon", event.detail)}
+      >
+        <CustomIcon class="w-6" icon={data.rightIcon} />
+      </IconPopover>
     </div>
   </ContextMenu.Trigger>
 </ContextMenu.Root>
