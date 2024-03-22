@@ -3,7 +3,7 @@
   import Input from "$lib/components/ui/input/input.svelte";
   import { SearchIcon, Loader2Icon } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
-  import ItemIcon from "./CustomIcon.svelte";
+  import CustomIcon from "./CustomIcon.svelte";
   import type { IconInfo } from "./index";
 
   type Icons8Icon = {
@@ -92,13 +92,16 @@
   </form>
   <div
     class="grid max-h-32 gap-2 overflow-y-auto rounded border p-1"
-    style:grid-template-columns="repeat(auto-fill, minmax(75px, 1fr))"
+    style:grid-template-columns="repeat(auto-fill, minmax(50px, 1fr))"
   >
     {#if icons.length > 0}
       {#each icons as icon}
         {@const src = Icons8BaseImgUrl + icon.id}
         <button on:click={() => dispatch("iconSelected", { ...icon, src })}>
-          <ItemIcon icon={{ ...iconInfo, iconSrc: src }} alt={icon.name} />
+          <CustomIcon
+            icon={{ ...iconInfo, iconDefault: undefined, iconSrc: src }}
+            alt={icon.name}
+          />
         </button>
       {/each}
     {:else if debounce !== undefined}

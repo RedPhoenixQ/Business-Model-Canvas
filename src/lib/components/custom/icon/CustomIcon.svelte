@@ -2,13 +2,18 @@
 
 <script lang="ts">
   import { cn } from "$lib/utils";
-  import type { IconInfo } from "./index";
+  import { predefinedIcons, type IconInfo } from "./index";
 
   export let icon: IconInfo;
   export let alt = "";
+
+  // Used to stop type error from not having $$restProps typed
+  $: restProps = $$restProps as object;
 </script>
 
-{#if icon?.iconSrc}
+{#if icon.iconDefault}
+  <svelte:component this={predefinedIcons[icon.iconDefault]} {...restProps} />
+{:else if icon.iconSrc}
   <div
     class={cn(
       "flex aspect-square items-center justify-center",
