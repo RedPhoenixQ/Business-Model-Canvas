@@ -6,14 +6,11 @@
     useSvelteFlow,
     type Dimensions,
   } from "@xyflow/svelte";
-  import {
-    getSegmentInfo,
-    getDimensionsInGrid,
-  } from "$lib/info/segments/index";
+  import { getDimensionsInGrid } from "$lib/info/segments/index";
   import { type SegmentData } from ".";
   import { cn } from "$lib/utils";
   import { addHistoryEntry } from "$lib/project/history";
-  import { pageStore, gridStore } from "$lib/project";
+  import { gridStore, templateInfoStore } from "$lib/project";
   import ResizeControl from "../ResizeControl.svelte";
 
   type $$Props = NodeProps<SegmentData>;
@@ -22,7 +19,7 @@
 
   const { getNode } = useSvelteFlow();
   const updateNodeInternals = useUpdateNodeInternals();
-  $: segmentInfo = getSegmentInfo($pageStore.template, id);
+  $: segmentInfo = $templateInfoStore.nodes[id];
 
   $: cols = segmentInfo.grid.column.end - segmentInfo.grid.column.start;
   $: rows = segmentInfo.grid.row.end - segmentInfo.grid.row.start;

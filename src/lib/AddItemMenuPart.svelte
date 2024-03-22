@@ -15,8 +15,8 @@
     type DefaultNode,
   } from "./info/nodes";
   import { menu, type MenuType } from "./components/custom/menu";
-  import { getSegmentInfo, type SegmentInfo } from "./info/segments";
-  import { pageStore } from "./project";
+  import { type SegmentInfo } from "./info/segments";
+  import { templateInfoStore } from "./project";
 
   export let type: MenuType;
   export let createPos: XYPosition;
@@ -32,7 +32,7 @@
     height: 1,
   }).find((node) => node.type === "segment");
   $: segmentInfo = clickedSegment
-    ? getSegmentInfo($pageStore.template, clickedSegment.id)
+    ? $templateInfoStore.nodes?.[clickedSegment.id]
     : undefined;
 
   /**

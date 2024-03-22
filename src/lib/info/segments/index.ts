@@ -1,4 +1,4 @@
-import type { Grid } from "$lib/project";
+import { type Grid } from "$lib/project";
 import type { Dimensions, Node, XYPosition } from "@xyflow/svelte";
 import { defaultTemplate } from "./default";
 import { detailedTemplate } from "./detailed";
@@ -44,24 +44,8 @@ const segmentTemplateInfo_ = {
   detailed: detailedTemplate,
 } as const satisfies Record<string, SegmentsTemplate>;
 
-export const segmentTemplateInfo: Record<string, SegmentsTemplate> =
+export const segmentTemplateInfo: Record<SegmentTemplateKey, SegmentsTemplate> =
   segmentTemplateInfo_;
-
-/**
- * @throws if an invalid tempalte and id combination is given
- */
-export function getSegmentInfo(
-  template: SegmentTemplateKey,
-  id: string,
-): SegmentInfo {
-  const info = segmentTemplateInfo?.[template]?.nodes?.[id];
-  if (!info) {
-    throw new Error(
-      `No segment info is available for template ${template} with id ${id}`,
-    );
-  }
-  return info;
-}
 
 export function getDimensionsInGrid(
   grid: Grid,

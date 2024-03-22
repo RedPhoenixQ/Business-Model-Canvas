@@ -5,8 +5,8 @@ import {
   type Viewport,
   useStore,
 } from "@xyflow/svelte";
-import { type SegmentTemplateKey } from "../info/segments";
-import { get, writable } from "svelte/store";
+import { segmentTemplateInfo, type SegmentTemplateKey } from "../info/segments";
+import { derived, get, writable } from "svelte/store";
 import {
   defaultPageData,
   pageTemplates,
@@ -54,6 +54,12 @@ export const pageStore = writable<PageData>({
   template: "empty",
 });
 pageStore.subscribe(($page) => console.debug("pageStore", $page));
+
+export const templateInfoStore = derived(
+  pageStore,
+  ($page) => segmentTemplateInfo[$page.template],
+  segmentTemplateInfo.empty,
+);
 
 export const gridStore = writable<Grid>({ columns: [], rows: [] });
 gridStore.subscribe(($grid) => console.debug("gridSize", $grid));
