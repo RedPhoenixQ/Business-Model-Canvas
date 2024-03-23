@@ -46,6 +46,8 @@
   }
 </script>
 
+<svelte:window on:item-details-open={(event) => (open = event.detail === id)} />
+
 <Sheet.Root portal="#itemDetailsPortal" bind:open>
   {#if $$slots.default}
     <Sheet.Trigger><slot /></Sheet.Trigger>
@@ -127,8 +129,18 @@
             {#if node && node.data}
               <div class="flex items-center gap-2">
                 <div class="w-12">
-                  {#if node?.data?.icon}
-                    <CustomIcon icon={node?.data?.icon} />
+                  {#if node?.data}
+                    <button
+                      on:click={() => {
+                        window.dispatchEvent(
+                          new CustomEvent("item-details-open", {
+                            detail: node.id,
+                          }),
+                        );
+                      }}
+                    >
+                      <CustomIcon icon={node?.data} />
+                    </button>
                   {:else if node.type === "slider"}
                     <span>Slider</span>
                   {:else if node.type === "customGroup"}
