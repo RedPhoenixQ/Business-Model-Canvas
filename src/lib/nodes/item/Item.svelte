@@ -8,6 +8,7 @@
   import ConnectionHandles from "../ConnectionHandles.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import { pageStore } from "$lib/project";
+  import NeedsRelation from "../NeedsRelation.svelte";
 
   type $$Props = NodeProps<ItemData>;
 
@@ -41,6 +42,7 @@
   />
   <ContextMenu.Trigger class="group relative" title={data.name}>
     <ConnectionHandles />
+    <NeedsRelation {id} />
 
     <CustomIcon
       class="size-10 ring-blue-500 [.selected_&]:ring"
