@@ -53,6 +53,9 @@ const historyStore = writable({
 });
 historyStore.subscribe((val) => console.debug("history", val));
 
+const lastHandledHistoryStore = writable<HistoryEntry | undefined>();
+
+export const lastEntry = readonly(lastHandledHistoryStore);
 export const readHistory = readonly(historyStore);
 export const undoEmpty = derived(historyStore, ($history) => {
   return $history.undo.isEmpty();
@@ -67,6 +70,7 @@ export function addHistoryEntry(entry: HistoryEntry) {
   $history.undo.add(entry);
   $history.redo.clear();
   historyStore.set($history);
+  lastHandledHistoryStore.set(entry);
 }
 
 export function getHistory() {
@@ -82,6 +86,7 @@ export function setHistory(
     redo: [],
   },
 ) {
+  lastHandledHistoryStore.set(undefined);
   historyStore.set({
     undo: RingBuffer.fromArray(newHistory.undo, UNDO_SIZE),
     redo: RingBuffer.fromArray(newHistory.redo, REDO_SIZE),
@@ -120,6 +125,7 @@ export function useHistory() {
   }
 
   function applyEntry(entry: HistoryEntry, undo: boolean) {
+    lastHandledHistoryStore.set(entry);
     switch (entry.type) {
       case "delete":
         applyNodes(entry.nodes, undo);
