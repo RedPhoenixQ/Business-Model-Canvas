@@ -1,3 +1,4 @@
+import { defaultItemData, defaultItemNode } from "$lib/nodes/item";
 import type { SegmentsTemplate } from ".";
 
 type DefaultSegments =
@@ -30,6 +31,7 @@ export const defaultTemplate = {
           end: 2,
         },
       },
+      needsRelation: [["key-resources"]],
     },
     "key-activities": {
       title: "Key activities",
@@ -44,6 +46,7 @@ export const defaultTemplate = {
           end: 1,
         },
       },
+      needsRelation: [["key-resources"], ["key-partners"]],
     },
     "key-resources": {
       title: "Key Resources",
@@ -86,6 +89,7 @@ export const defaultTemplate = {
           end: 1,
         },
       },
+      needsRelation: [["key-activities"]],
     },
     channels: {
       title: "Channels",
@@ -100,6 +104,7 @@ export const defaultTemplate = {
           end: 2,
         },
       },
+      needsRelation: [["key-activities"]],
     },
     customers: {
       title: "Customers",
