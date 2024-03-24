@@ -15,6 +15,7 @@
     type Edge,
     ConnectionLineType,
     useSvelteFlow,
+    useNodes,
   } from "@xyflow/svelte";
   import { theme } from "$lib/theme";
   import AddItemMenuPart from "$lib/AddItemMenuPart.svelte";
@@ -37,6 +38,8 @@
   const edges = writable([] as Edge[]);
 
   const { getIntersectingNodes, updateNode } = useSvelteFlow();
+
+  useNodes().setOptions({ elevateNodesOnSelect: false });
 
   let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
   /**
