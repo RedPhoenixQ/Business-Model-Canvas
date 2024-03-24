@@ -1,16 +1,18 @@
 <script lang="ts">
   import { menu, type MenuType } from "$lib/components/custom/menu";
+  import CopyCutMenuPart from "$lib/copyPaste/CopyCutMenuPart.svelte";
   import MoveMenuPart from "../MoveMenuPart.svelte";
-  import DeleteNodeMenuPart from "../DeleteNodeMenuPart.svelte";
 
   export let type: MenuType;
   export let id: string;
 
-  const { Content, Separator } = menu(type);
+  const { Content, Separator, Group } = menu(type);
 </script>
 
 <Content {...$$restProps}>
-  <MoveMenuPart {type} {id} />
+  <Group>
+    <CopyCutMenuPart {type} {id} />
+  </Group>
   <Separator />
-  <DeleteNodeMenuPart {type} {id} />
+  <MoveMenuPart {type} {id} />
 </Content>
