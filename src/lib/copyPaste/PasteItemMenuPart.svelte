@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ClipboardIcon } from "lucide-svelte";
+  import { ClipboardIcon, ClipboardXIcon } from "lucide-svelte";
   import { type XYPosition } from "@xyflow/svelte";
   import { menu, type MenuType } from "../components/custom/menu";
   import { nodeClipboard, usePaste } from ".";
@@ -24,4 +24,18 @@
 >
   <ClipboardIcon size={20} class="mr-2" />
   Paste
+</Item>
+<Item
+  disabled={!$nodeClipboard}
+  on:click={(event) =>
+    paste(
+      createPos ?? {
+        x: event.detail.originalEvent.clientX,
+        y: event.detail.originalEvent.clientY,
+      },
+      false,
+    )}
+>
+  <ClipboardXIcon size={20} class="mr-2" />
+  Paste without connections
 </Item>

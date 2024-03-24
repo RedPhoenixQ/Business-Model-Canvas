@@ -27,11 +27,13 @@ export function usePaste() {
   const nodes = useNodes();
   const edges = useEdges();
 
-  return function pasteNode(screenPos: XYPosition) {
+  return function pasteNode(screenPos: XYPosition, pasteConnections = true) {
     const $nodeClipboard = get(nodeClipboard);
     if (!$nodeClipboard) return;
     const newNodes = structuredClone($nodeClipboard.nodes);
-    const newEdges = structuredClone($nodeClipboard.edges);
+    const newEdges = pasteConnections
+      ? structuredClone($nodeClipboard.edges)
+      : [];
 
     const idsMap: Map<string, string> = new Map();
 
@@ -111,7 +113,7 @@ export function useCopy() {
   const edgesStore = useEdges();
   const nodesStore = useNodes();
 
-  async function copy(nodes: Node[], copyConnections = false) {
+  async function copy(nodes: Node[], copyConnections = true) {
     if (nodes.length === 0) return;
 
     const storedNodes = get(nodesStore);

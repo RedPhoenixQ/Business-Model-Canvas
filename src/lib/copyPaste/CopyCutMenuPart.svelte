@@ -35,13 +35,3 @@
   <CopyIcon size={20} class="mr-2" />
   Copy
 </Item>
-<Item
-  on:click={() => {
-    const node = getNode(id);
-    if (!node) return;
-    copy([node], true);
-  }}
->
-  <CopyIcon size={20} class="mr-2" />
-  Copy with connections
-</Item>
