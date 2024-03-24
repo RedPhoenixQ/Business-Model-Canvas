@@ -7,7 +7,7 @@
   export let type: MenuType;
   export let id: string;
 
-  const { Item } = menu(type);
+  const { Item, Shortcut } = menu(type);
 
   const { getNode } = useSvelteFlow();
   const { copy, cut } = useCopy();
@@ -16,22 +16,26 @@
 <svelte:window on:paste={console.log} />
 
 <Item
+  class="gap-2"
   on:click={() => {
     const node = getNode(id);
     if (!node) return;
     cut([node]);
   }}
 >
-  <ScissorsIcon size={20} class="mr-2" />
+  <ScissorsIcon size={20} />
   Cut
+  <Shortcut>Ctrl+X</Shortcut>
 </Item>
 <Item
+  class="gap-2"
   on:click={() => {
     const node = getNode(id);
     if (!node) return;
     copy([node]);
   }}
 >
-  <CopyIcon size={20} class="mr-2" />
+  <CopyIcon size={20} />
   Copy
+  <Shortcut>Ctrl+C</Shortcut>
 </Item>

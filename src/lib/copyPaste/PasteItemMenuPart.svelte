@@ -7,12 +7,13 @@
   export let type: MenuType;
   export let createPos: XYPosition;
 
-  const { Item } = menu(type);
+  const { Item, Shortcut } = menu(type);
 
   const paste = usePaste();
 </script>
 
 <Item
+  class="gap-2"
   disabled={!$nodeClipboard}
   on:click={(event) =>
     paste(
@@ -22,10 +23,12 @@
       },
     )}
 >
-  <ClipboardIcon size={20} class="mr-2" />
+  <ClipboardIcon size={20} />
   Paste
+  <Shortcut>Ctrl+V</Shortcut>
 </Item>
 <Item
+  class="gap-2"
   disabled={!$nodeClipboard}
   on:click={(event) =>
     paste(
@@ -36,6 +39,7 @@
       false,
     )}
 >
-  <ClipboardXIcon size={20} class="mr-2" />
+  <ClipboardXIcon size={20} />
   Paste without connections
+  <Shortcut>Ctrl+Shift+V</Shortcut>
 </Item>
