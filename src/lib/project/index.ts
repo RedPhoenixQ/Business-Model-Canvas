@@ -31,6 +31,7 @@ export type PageData = {
   template: SegmentTemplateKey;
   keepWithinParent: boolean;
   showItemNames: boolean;
+  showRelationWarnings: boolean;
 };
 
 export type Grid = {

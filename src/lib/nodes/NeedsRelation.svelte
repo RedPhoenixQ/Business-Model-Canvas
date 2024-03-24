@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { templateInfoStore } from "$lib/project";
+  import { templateInfoStore, pageStore } from "$lib/project";
   import { lastEntry } from "$lib/project/history";
   import { getConnectedEdges, useEdges, useSvelteFlow } from "@xyflow/svelte";
   import { AlertCircleIcon, CheckCircle2Icon } from "lucide-svelte";
@@ -100,7 +100,7 @@
   }
 </script>
 
-{#if relations}
+{#if $pageStore.showRelationWarnings && relations}
   <Popover.Root>
     {@const hasNeedRelations = relations.missing.some(
       (set) => set.length === 0,

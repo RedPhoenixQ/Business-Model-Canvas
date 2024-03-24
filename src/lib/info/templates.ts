@@ -13,6 +13,7 @@ export const defaultPageData: Omit<PageData, "template"> = {
   name: "Page 1",
   keepWithinParent: true,
   showItemNames: false,
+  showRelationWarnings: true,
 };
 
 export function fromSegmentTemplate<T extends SegmentTemplateKey>(
