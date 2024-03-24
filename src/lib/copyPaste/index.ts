@@ -67,8 +67,20 @@ export function usePaste() {
       nodes: [newNode],
       edges: newEdges,
     });
-    nodes.update(($nodes) => [...$nodes, newNode]);
-    edges.update(($edges) => [...$edges, ...newEdges]);
+    nodes.update(($nodes) => {
+      // Unselect all other nodes on paste
+      for (const node of $nodes) {
+        node.selected = false;
+      }
+      return [...$nodes, newNode];
+    });
+    edges.update(($edges) => {
+      // Unselect all other edges on paste
+      for (const edge of $edges) {
+        edge.selected = false;
+      }
+      return [...$edges, ...newEdges];
+    });
   };
 }
 
