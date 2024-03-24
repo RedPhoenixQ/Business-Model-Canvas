@@ -15,16 +15,13 @@
 <Item
   class="text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"
   on:click={async () => {
-    if (confirm("Are you sure?")) {
-      console.debug("deleting node", id);
-
-      const deleted = await deleteElements({ nodes: [{ id }] });
-      addHistoryEntry({
-        type: "delete",
-        nodes: deleted.deletedNodes,
-        edges: deleted.deletedEdges,
-      });
-    }
+    const deleted = await deleteElements({ nodes: [{ id }] });
+    console.debug("deleting node", id, deleted);
+    addHistoryEntry({
+      type: "delete",
+      nodes: deleted.deletedNodes,
+      edges: deleted.deletedEdges,
+    });
   }}
 >
   <XIcon class="mr-2" size="20" />
