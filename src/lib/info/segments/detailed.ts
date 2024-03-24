@@ -54,6 +54,7 @@ export const detailedTemplate = {
     },
     "key-support": {
       title: "Key Support",
+      description: detailedDesc.KeySupport,
       classes: "bg-cyan-700",
       grid: {
         column: {
@@ -68,6 +69,7 @@ export const detailedTemplate = {
     },
     "key-resources": {
       title: "Key Resourses",
+      description: detailedDesc.KeyResource,
       classes: "bg-cyan-600",
       grid: {
         column: {
@@ -82,6 +84,7 @@ export const detailedTemplate = {
     },
     "key-activities": {
       title: "Key Activities",
+      description: detailedDesc.KeyActivites,
       classes: "bg-cyan-600",
       grid: {
         column: {
@@ -96,6 +99,7 @@ export const detailedTemplate = {
     },
     marketing: {
       title: "Marketing",
+      description: detailedDesc.Marketing,
       classes: "bg-lime-600",
       grid: {
         column: {
@@ -130,6 +134,7 @@ export const detailedTemplate = {
     },
     "customer-relations": {
       title: "Customer Relations",
+      description: detailedDesc.CustomerRelation,
       classes: "bg-lime-600",
       grid: {
         column: {
