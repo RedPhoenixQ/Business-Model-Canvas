@@ -180,12 +180,14 @@
         }}
         on:nodedragstart={(event) => {
           console.debug("on node drag start", event.detail.node);
+          if (event.detail.node === undefined) return;
           toggleNodeEdgeHidden([event.detail.node]);
           // For node move history
           moveNodeStartPos = event.detail.node.position;
         }}
         on:nodedragstop={(event) => {
           console.debug("on node drag stop", event.detail.node);
+          if (event.detail.node === undefined) return;
           handleMove(event.detail.node, moveNodeStartPos);
         }}
         on:edgeclick={(event) => {
