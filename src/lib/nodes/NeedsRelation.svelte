@@ -3,6 +3,7 @@
   import { lastEntry } from "$lib/project/history";
   import { getConnectedEdges, useEdges, useSvelteFlow } from "@xyflow/svelte";
   import { AlertCircleIcon, CheckCircle2Icon } from "lucide-svelte";
+  import * as Popover from "$lib/components/ui/popover";
 
   export let id: string;
 
@@ -90,21 +91,23 @@
 </script>
 
 {#if relations}
-  {@const hasNeedRelations = relations.missing.some((set) => set.length === 0)}
-  <div
-    class="group/relation absolute right-0 top-0 size-2 -translate-y-1/2 translate-x-1/2 rounded-full"
-  >
-    {#if hasNeedRelations}
-      <CheckCircle2Icon
-        size={12}
-        class="rounded-full fill-green-500 opacity-0 transition-opacity group-hover:opacity-100"
-      />
-    {:else}
-      <AlertCircleIcon size={12} class="rounded-full fill-orange-500" />
-    {/if}
-    <div
-      class="pointer-events-none absolute left-full top-full m-1 w-fit space-y-2 rounded bg-card p-2 text-card-foreground opacity-0 transition-opacity group-hover/relation:opacity-100"
+  <Popover.Root>
+    {@const hasNeedRelations = relations.missing.some(
+      (set) => set.length === 0,
+    )}
+    <Popover.Trigger
+      class="absolute right-0 top-0 size-2 -translate-y-1/2 translate-x-1/2 rounded-full"
     >
+      {#if hasNeedRelations}
+        <CheckCircle2Icon
+          size={12}
+          class="rounded-full fill-green-500 opacity-0 transition-opacity group-hover:opacity-100"
+        />
+      {:else}
+        <AlertCircleIcon size={12} class="rounded-full fill-orange-500" />
+      {/if}
+    </Popover.Trigger>
+    <Popover.Content class="w-fit space-y-2" side="top" sideOffset={5}>
       <nobr>Needed Relations:</nobr>
       <div>
         {#each relations.needed as needed, setIndex}
@@ -140,6 +143,6 @@
       <p class="text-sm text-muted-foreground">
         * Dimmed names already have a relation to this item
       </p>
-    </div>
-  </div>
+    </Popover.Content>
+  </Popover.Root>
 {/if}
