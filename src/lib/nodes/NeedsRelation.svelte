@@ -4,13 +4,19 @@
   import { getConnectedEdges, useEdges, useSvelteFlow } from "@xyflow/svelte";
   import { AlertCircleIcon, CheckCircle2Icon } from "lucide-svelte";
   import * as Popover from "$lib/components/ui/popover";
+  import { createEventDispatcher } from "svelte";
 
   export let id: string;
+  export let ignoredRelations: string[] | undefined;
+
+  const dispatch = createEventDispatcher<{
+    ignoredChange: string[] | undefined;
+  }>();
 
   const { getNode } = useSvelteFlow();
   const edges = useEdges();
 
-  $: relations = id ? findMissingRelations() : undefined;
+  $: relations = id || ignoredRelations ? findMissingRelations() : undefined;
   $: {
     switch ($lastEntry?.type) {
       case "move":
@@ -84,7 +90,11 @@
     }
 
     const missing = needsRelation.map((needed) =>
-      needed.filter((segment) => !connectedSegments.includes(segment)),
+      needed.filter(
+        (segment) =>
+          !connectedSegments.includes(segment) &&
+          !ignoredRelations?.includes?.(segment),
+      ),
     );
     return { missing, needed: needsRelation };
   }
@@ -128,14 +138,27 @@
             {/if}
             {#each needed as m, i}
               {@const info = $templateInfoStore.nodes[m]}
+              {@const ignored = ignoredRelations?.includes?.(m) ?? false}
               {@const fullfilled = relations.missing[setIndex].includes(m)}
               {#if i > 0}
                 <span> & </span>
               {/if}
-              <nobr
-                class="rounded px-1 text-sm {info.classes} {!fullfilled &&
-                  'opacity-50'}">{info.title}</nobr
+              <button
+                class="w-fit rounded px-1 text-sm {info.classes} {!fullfilled &&
+                  'opacity-50'} {ignored && 'line-through grayscale'}"
+                on:click={() => {
+                  dispatch(
+                    "ignoredChange",
+                    ignoredRelations
+                      ? ignored
+                        ? ignoredRelations.filter((ig) => ig !== m)
+                        : [...ignoredRelations, m]
+                      : [m],
+                  );
+                }}
               >
+                {info.title}
+              </button>
             {/each}
           </div>
         {/each}
