@@ -9,6 +9,7 @@ export type ItemData = IconInfo & {
   textWidth: number;
   textHeight: number;
   impactText?: string;
+  ignoredRelations?: string[];
 };
 
 export const defaultItemData = {

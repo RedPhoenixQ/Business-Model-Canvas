@@ -19,7 +19,13 @@
   class="group h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50"
 >
   <ConnectionHandles />
-  <NeedsRelation {id} />
+  <NeedsRelation
+    {id}
+    ignoredRelations={data.ignoredRelations}
+    on:ignoredChange={(e) => {
+      data.ignoredRelations = e.detail;
+    }}
+  />
 
   <div class="nodrag flex p-1">
     <input

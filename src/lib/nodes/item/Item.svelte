@@ -42,7 +42,14 @@
   />
   <ContextMenu.Trigger class="group relative" title={data.name}>
     <ConnectionHandles />
-    <NeedsRelation {id} />
+    <NeedsRelation
+      {id}
+      ignoredRelations={data.ignoredRelations}
+      on:ignoredChange={(e) => {
+        data.ignoredRelations = e.detail;
+        nodeDataChange("ignoredRelations");
+      }}
+    />
 
     <CustomIcon
       class="size-10 ring-blue-500 [.selected_&]:ring"
