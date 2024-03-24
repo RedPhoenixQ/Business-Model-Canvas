@@ -7,6 +7,7 @@
   import { menu, type MenuType } from "$lib/components/custom/menu";
   import MoveMenuPart from "../MoveMenuPart.svelte";
   import DeleteNodeMenuPart from "../DeleteNodeMenuPart.svelte";
+  import CopyCutMenuPart from "$lib/copyPaste/CopyCutMenuPart.svelte";
 
   type $$Props = Pick<NodeProps<ItemData>, "data" | "id"> & {
     type: MenuType;
@@ -16,7 +17,7 @@
   export let data: $$Props["data"];
   export let type: $$Props["type"];
 
-  const { Content, Item, CheckboxItem, Label, Separator } = menu(type);
+  const { Content, Item, CheckboxItem, Label, Separator, Group } = menu(type);
 
   const dispatch = createEventDispatcher<{
     edit: undefined;
@@ -35,6 +36,10 @@
     Edit
   </Item>
   <MoveMenuPart {type} {id} />
+  <Separator />
+  <Group>
+    <CopyCutMenuPart {type} {id} />
+  </Group>
   <Separator />
   <CheckboxItem
     bind:checked={data.showTitle}

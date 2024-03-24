@@ -16,7 +16,7 @@
 </script>
 
 <div
-  class="group h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50"
+  class="group h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50 ring-blue-500 [.selected_&]:ring"
 >
   <ConnectionHandles />
   <NeedsRelation

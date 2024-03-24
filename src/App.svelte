@@ -15,6 +15,7 @@
     type Edge,
     ConnectionLineType,
     useSvelteFlow,
+    useNodes,
   } from "@xyflow/svelte";
   import { theme } from "$lib/theme";
   import AddItemMenuPart from "$lib/AddItemMenuPart.svelte";
@@ -29,12 +30,16 @@
   import ProjectName from "$lib/project/ProjectName.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import { findFirstParentAndRelativePos } from "$lib/info/nodes";
+  import PasteItemMenuPart from "$lib/copyPaste/PasteItemMenuPart.svelte";
   import { isInputElement } from "$lib/utils";
+  import CopyPasteShortcutHandler from "$lib/copyPaste/CopyPasteShortcutHandler.svelte";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
 
   const { getIntersectingNodes, updateNode } = useSvelteFlow();
+
+  useNodes().setOptions({ elevateNodesOnSelect: false });
 
   let moveNodeStartPos: XYPosition = { x: 0, y: 0 };
   /**
@@ -213,6 +218,10 @@
             type="context-menu"
             bind:createPos={contextmenuPos}
           />
+          <PasteItemMenuPart
+            type="context-menu"
+            bind:createPos={contextmenuPos}
+          />
         </ContextMenu.Content>
 
         <FlowControls />
@@ -220,6 +229,7 @@
         <MiniMap />
 
         <AutoSave />
+        <CopyPasteShortcutHandler />
 
         <div id="itemDetailsPortal" />
       </SvelteFlow>
