@@ -29,6 +29,7 @@
   import ProjectName from "$lib/project/ProjectName.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import { findFirstParentAndRelativePos } from "$lib/info/nodes";
+  import { isInputElement } from "$lib/utils";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -119,10 +120,11 @@
   class="h-screen bg-neutral-600"
   on:selectstart={(event) => {
     // This prevents wierd selection in textareas when selecting nodes
-    // @ts-expect-error: target will be a HTMLElement and getAttribute exists
-    if (!event?.target?.getAttribute?.("contenteditable")) {
-      event.preventDefault();
+    // @ts-expect-error: target will be an  HTMLElement
+    if (isInputElement(event.target)) {
+      return;
     }
+    event.preventDefault();
   }}
 >
   <ContextMenu.Root bind:open={contextmenuOpen}>

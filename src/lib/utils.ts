@@ -60,3 +60,11 @@ export const flyAndScale = (
     easing: cubicOut,
   };
 };
+
+export function isInputElement(element: HTMLElement) {
+  return (
+    element.getAttribute?.("contenteditable") ||
+    element.nodeName === "INPUT" ||
+    element.nodeName === "TEXTAREA"
+  );
+}
