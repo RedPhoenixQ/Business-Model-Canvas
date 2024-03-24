@@ -13,7 +13,7 @@
     <Popover.Trigger class="pointer-events-auto">
       <InfoIcon />
     </Popover.Trigger>
-    <Popover.Content align="end" side="bottom">
+    <Popover.Content class="space-y-2" align="end" side="bottom">
       <div class="mb-2 text-lg">{info.title}</div>
       <svelte:component this={info.description} />
     </Popover.Content>

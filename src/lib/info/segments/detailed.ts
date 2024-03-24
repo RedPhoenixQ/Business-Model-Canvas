@@ -149,6 +149,7 @@ export const detailedTemplate = {
     },
     distribution: {
       title: "Distribution",
+      description: detailedDesc.Distribution,
       classes: "bg-lime-600",
       grid: {
         column: {
@@ -173,6 +174,7 @@ export const detailedTemplate = {
     },
     users: {
       title: "Users",
+      description: detailedDesc.Users,
       classes: "bg-lime-700",
       grid: {
         column: {
@@ -187,6 +189,7 @@ export const detailedTemplate = {
     },
     costs: {
       title: "Costs",
+      description: detailedDesc.Costs,
       classes: "bg-orange-600",
       grid: {
         column: {
@@ -215,6 +218,7 @@ export const detailedTemplate = {
     },
     revenue: {
       title: "Revenue",
+      description: detailedDesc.Revenue,
       classes: "bg-orange-700",
       grid: {
         column: {
