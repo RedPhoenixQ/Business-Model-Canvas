@@ -9,9 +9,13 @@
   const nodes = useNodes();
 
   const mousePos = { x: 0, y: 0 };
+
+  let holdingShift = false;
 </script>
 
 <svelte:window
+  on:keydown={(event) => (holdingShift = event.shiftKey)}
+  on:keyup={(event) => (holdingShift = event.shiftKey)}
   on:mousemove={(event) => {
     mousePos.x = event.pageX;
     mousePos.y = event.pageY;
@@ -21,7 +25,7 @@
     // @ts-expect-error: event.target will be a HTMLElement
     if (event.defaultPrevented || isInputElement(event.target)) return;
     event.preventDefault();
-    paste(mousePos);
+    paste(mousePos, !holdingShift);
   }}
   on:copy={(event) => {
     // @ts-expect-error: event.target will be a HTMLElement
