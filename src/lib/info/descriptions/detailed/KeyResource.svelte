@@ -15,7 +15,7 @@
 </p>
 
 <div>
-  Examples:
+  <span class="font-bold">Examples:</span>
   <ul class="list-disc pl-6">
     <li>Hardware</li>
     <li>Software</li>

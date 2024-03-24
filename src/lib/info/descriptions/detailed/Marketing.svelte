@@ -3,7 +3,7 @@
 <p>How support the customer in evaluating our offering?</p>
 
 <div>
-  Examples:
+  <span class="font-bold">Examples:</span>
   <ul class="list-disc pl-6">
     <li>X/Twitter</li>
     <li>YouTube</li>

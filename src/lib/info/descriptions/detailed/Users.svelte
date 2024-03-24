@@ -25,7 +25,3 @@
   Multifaceted platform – Offering that can be offered to two or more customer
   segments.
 </p>
-
-<ul class="list-disc pl-6">
-  <li></li>
-</ul>

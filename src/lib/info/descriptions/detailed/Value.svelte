@@ -1,4 +1,6 @@
-<p>Examples of values in a business</p>
+<p>The value of your business</p>
+
+<span class="font-bold">Examples:</span>
 <ul class="list-disc pl-6">
   <li>New</li>
   <li>Low price</li>
