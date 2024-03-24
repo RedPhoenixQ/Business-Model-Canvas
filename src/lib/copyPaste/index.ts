@@ -13,7 +13,7 @@ import { findFirstParentAndRelativePos } from "$lib/info/nodes";
 
 export const nodeClipboard = writable<
   | {
-      node: Node;
+      nodes: Node[];
       edges: Edge[];
     }
   | undefined
@@ -30,20 +30,27 @@ export function usePaste() {
   return function pasteNode(screenPos: XYPosition) {
     const $nodeClipboard = get(nodeClipboard);
     if (!$nodeClipboard) return;
-    const newNode = structuredClone($nodeClipboard.node);
+    const newNodes = structuredClone($nodeClipboard.nodes);
     const newEdges = structuredClone($nodeClipboard.edges);
 
+    const idsMap: Map<string, string> = new Map();
+
     // Replate id's
-    const newId = crypto.randomUUID();
+    for (const node of newNodes) {
+      const newId = crypto.randomUUID();
+      idsMap.set(node.id, newId);
+      node.id = newId;
+    }
     for (const edge of newEdges) {
       edge.id = crypto.randomUUID();
-      if (edge.source === newNode.id) {
-        edge.source = newId;
-      } else if (edge.target === newNode.id) {
-        edge.target = newId;
+      const sourceId = idsMap.get(edge.source);
+      const targetId = idsMap.get(edge.target);
+      if (sourceId) {
+        edge.source = sourceId;
+      } else if (targetId) {
+        edge.target = targetId;
       }
     }
-    newNode.id = newId;
 
     const position = screenToFlowPosition(screenPos);
     const intersecting = getIntersectingNodes({
@@ -59,12 +66,16 @@ export function usePaste() {
       position,
     );
 
-    newNode.position = parent ? parent?.relative_pos : position;
-    newNode.parentNode = parent?.node?.id;
+    const newPos = parent ? parent?.relative_pos : position;
+    for (const [i, node] of newNodes.entries()) {
+      node.position.x = newPos.x + 5 * i;
+      node.position.y = newPos.y + 5 * i;
+      node.parentNode = parent?.node?.id;
+    }
 
     addHistoryEntry({
       type: "create",
-      nodes: [newNode],
+      nodes: newNodes,
       edges: newEdges,
     });
     nodes.update(($nodes) => {
@@ -72,7 +83,7 @@ export function usePaste() {
       for (const node of $nodes) {
         node.selected = false;
       }
-      return [...$nodes, newNode];
+      return [...$nodes, ...newNodes];
     });
     edges.update(($edges) => {
       // Unselect all other edges on paste
@@ -85,29 +96,29 @@ export function usePaste() {
 }
 
 export function useCopy() {
-  const { getNode, deleteElements } = useSvelteFlow();
+  const { deleteElements } = useSvelteFlow();
 
   const edges = useEdges();
 
-  async function copy(id: string, copyConnections = false) {
-    const node = getNode(id);
-    if (!node) return;
+  async function copy(nodes: Node[], copyConnections = false) {
+    if (nodes.length === 0) return;
     const connectedEdges = copyConnections
-      ? getConnectedEdges([node], get(edges))
+      ? getConnectedEdges(nodes, get(edges))
       : [];
-    nodeClipboard.set({ node, edges: connectedEdges });
+    nodeClipboard.set({ nodes, edges: connectedEdges });
   }
 
-  async function cut(id: string) {
-    const deleted = await deleteElements({ nodes: [{ id }] });
+  async function cut(nodes: Node[]) {
+    const deleted = await deleteElements({ nodes });
     addHistoryEntry({
       type: "delete",
       nodes: deleted.deletedNodes,
       edges: deleted.deletedEdges,
     });
-    const node = deleted.deletedNodes[0];
-    if (!node) return;
-    nodeClipboard.set({ node, edges: deleted.deletedEdges });
+    nodeClipboard.set({
+      nodes: deleted.deletedNodes,
+      edges: deleted.deletedEdges,
+    });
   }
 
   return { copy, cut };
