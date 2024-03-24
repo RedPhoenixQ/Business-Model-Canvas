@@ -91,8 +91,19 @@ export const pageTemplates = {
           iconShape: "circle",
           iconBackground: "light",
         },
-        position: { x: 320, y: 120 },
+        position: { x: 120, y: 120 },
         parentNode: "costs",
+      },
+      {
+        ...defaultItemNode,
+        id: "5",
+        data: {
+          ...defaultItemData,
+          name: "Agreement",
+          iconSrc: "https://img.icons8.com/?size=100&format=png&id=16183",
+        },
+        position: { x: 38, y: 96 },
+        parentNode: "key-resources",
       },
     ],
     edges: [
@@ -110,6 +121,11 @@ export const pageTemplates = {
         id: "1-4-test",
         source: "1",
         target: "4",
+      },
+      {
+        id: "1-5-test",
+        source: "5",
+        target: "1",
       },
     ],
   }),
