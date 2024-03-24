@@ -29,6 +29,7 @@
   import ProjectName from "$lib/project/ProjectName.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import { findFirstParentAndRelativePos } from "$lib/info/nodes";
+  import PasteItemMenuPart from "$lib/copyPaste/PasteItemMenuPart.svelte";
   import { isInputElement } from "$lib/utils";
 
   const nodes = writable([] as Node[]);
@@ -208,6 +209,10 @@
 
         <ContextMenu.Content>
           <AddItemMenuPart
+            type="context-menu"
+            bind:createPos={contextmenuPos}
+          />
+          <PasteItemMenuPart
             type="context-menu"
             bind:createPos={contextmenuPos}
           />
