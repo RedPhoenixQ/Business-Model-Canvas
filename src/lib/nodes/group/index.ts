@@ -14,6 +14,5 @@ export const defaultGroupNode = {
   zIndex: -5,
   width: 200,
   height: 120,
-  selectable: false,
   extent: "parent",
 } as const satisfies DefaultNode;
