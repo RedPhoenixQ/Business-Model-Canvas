@@ -13,8 +13,15 @@
     <Popover.Trigger class="pointer-events-auto">
       <InfoIcon />
     </Popover.Trigger>
-    <Popover.Content class="space-y-2" align="end" side="bottom">
-      <div class="mb-2 text-lg">{info.title}</div>
+    <Popover.Content
+      class="space-y-2 overflow-y-auto pt-0"
+      align="end"
+      side="left"
+      fitViewport={true}
+    >
+      <div class="sticky top-0 border-b bg-inherit pb-1 pt-4 text-lg">
+        {info.title}
+      </div>
       <svelte:component this={info.description} />
     </Popover.Content>
   </Popover.Root>
