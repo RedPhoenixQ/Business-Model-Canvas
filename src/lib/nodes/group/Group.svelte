@@ -7,6 +7,7 @@
   import ResizeControl from "../ResizeControl.svelte";
   import ConnectionHandles from "../ConnectionHandles.svelte";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+  import NeedsRelation from "../NeedsRelation.svelte";
 
   type $$Props = NodeProps<GroupData>;
 
@@ -18,6 +19,14 @@
   class="group h-full w-full border-2 border-white border-opacity-25 bg-gray-700 bg-opacity-50"
 >
   <ConnectionHandles />
+  <NeedsRelation
+    {id}
+    ignoredRelations={data.ignoredRelations}
+    on:ignoredChange={(e) => {
+      data.ignoredRelations = e.detail;
+    }}
+  />
+
   <div class="nodrag flex p-1">
     <input
       class="w-full overflow-ellipsis bg-transparent px-2 py-1"

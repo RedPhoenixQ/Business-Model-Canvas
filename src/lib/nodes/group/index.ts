@@ -3,6 +3,7 @@ import type { DefaultNode } from "$lib/info/nodes";
 export type GroupData = {
   name: string;
   color?: string;
+  ignoredRelations?: string[];
 };
 
 export const defaultGroupNode = {

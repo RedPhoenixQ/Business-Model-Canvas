@@ -4,6 +4,7 @@
     EyeOffIcon,
     SquareIcon,
     BoxSelectIcon,
+    AlertCircle,
   } from "lucide-svelte";
   import { Controls, ControlButton, useNodes } from "@xyflow/svelte";
   import { pageStore } from "./project";
@@ -32,6 +33,20 @@
       <EyeIcon class="!fill-transparent" />
     {:else}
       <EyeOffIcon class="!fill-transparent" />
+    {/if}
+  </ControlButton>
+  <ControlButton
+    class="relative"
+    title="toggle show relation warnings"
+    aria-label="toggle show relation warnings"
+    on:click={() =>
+      ($pageStore.showRelationWarnings = !$pageStore.showRelationWarnings)}
+  >
+    <AlertCircle class="!fill-transparent" />
+    {#if !$pageStore.showRelationWarnings}
+      <svg class="absolute inset-0 m-auto stroke-current">
+        <line x1="0" y1="0" x2="20" y2="20" />
+      </svg>
     {/if}
   </ControlButton>
   <ControlButton

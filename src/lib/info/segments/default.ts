@@ -1,4 +1,16 @@
+import { defaultItemData, defaultItemNode } from "$lib/nodes/item";
 import type { SegmentsTemplate } from ".";
+
+type DefaultSegments =
+  | "customer-relations"
+  | "channels"
+  | "customers"
+  | "costs"
+  | "revenue"
+  | "key-partners"
+  | "key-activities"
+  | "key-resources"
+  | "value";
 
 export const defaultTemplate = {
   grid: {
@@ -19,6 +31,7 @@ export const defaultTemplate = {
           end: 2,
         },
       },
+      needsRelation: [["key-resources"]],
     },
     "key-activities": {
       title: "Key activities",
@@ -33,6 +46,7 @@ export const defaultTemplate = {
           end: 1,
         },
       },
+      needsRelation: [["key-resources"], ["key-partners"]],
     },
     "key-resources": {
       title: "Key Resources",
@@ -45,6 +59,16 @@ export const defaultTemplate = {
         row: {
           start: 1,
           end: 2,
+        },
+      },
+      presetNodes: {
+        Agreement: {
+          ...defaultItemNode,
+          data: {
+            ...defaultItemData,
+            name: "Agreement",
+            iconSrc: "https://img.icons8.com/?size=100&format=png&id=16183",
+          },
         },
       },
     },
@@ -75,6 +99,7 @@ export const defaultTemplate = {
           end: 1,
         },
       },
+      needsRelation: [["key-activities"]],
     },
     channels: {
       title: "Channels",
@@ -89,6 +114,7 @@ export const defaultTemplate = {
           end: 2,
         },
       },
+      needsRelation: [["key-activities"]],
     },
     customers: {
       title: "Customers",
@@ -133,4 +159,4 @@ export const defaultTemplate = {
       },
     },
   },
-} as const satisfies SegmentsTemplate;
+} as const satisfies SegmentsTemplate<DefaultSegments>;

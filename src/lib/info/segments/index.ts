@@ -10,7 +10,7 @@ export type GridPos = {
   row: { start: number; end: number };
 };
 
-export type SegmentInfo = {
+export type SegmentInfo<SegmentKey extends string = string> = {
   title: string;
   description?: ComponentType;
   classes: string;
@@ -23,11 +23,16 @@ export type SegmentInfo = {
       nodes: (DefaultNode & Pick<Node, "position">)[];
     }
   >;
+  /**One of the sets in the outer array must be fullfilled, e.g:
+   *
+   * A or (B and C) = [ [A], [B, C] ]
+   */
+  needsRelation?: SegmentKey[][];
 };
 
-export type SegmentsTemplate = {
+export type SegmentsTemplate<SegmentKey extends string = string> = {
   grid: Grid;
-  nodes: Record<string, SegmentInfo>;
+  nodes: Record<SegmentKey, SegmentInfo<SegmentKey>>;
 };
 
 export type SegmentTemplateKey = keyof typeof segmentTemplateInfo_;
