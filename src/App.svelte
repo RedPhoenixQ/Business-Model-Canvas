@@ -31,6 +31,7 @@
   import { findFirstParentAndRelativePos } from "$lib/info/nodes";
   import PasteItemMenuPart from "$lib/copyPaste/PasteItemMenuPart.svelte";
   import { isInputElement } from "$lib/utils";
+  import CopyPasteShortcutHandler from "$lib/copyPaste/CopyPasteShortcutHandler.svelte";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -223,6 +224,7 @@
         <MiniMap />
 
         <AutoSave />
+        <CopyPasteShortcutHandler />
 
         <div id="itemDetailsPortal" />
       </SvelteFlow>
