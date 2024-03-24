@@ -80,7 +80,7 @@ export const detailedTemplate = {
           end: 4,
         },
       },
-      needsRelation: [["key-resources"]],
+      needsRelation: [["key-resources"], ["key-resources", "key-activities"]],
     },
     "key-resources": {
       title: "Key Resourses",
@@ -154,7 +154,7 @@ export const detailedTemplate = {
           ],
         },
       },
-      needsRelation: [["key-activities"]],
+      needsRelation: [["key-activities"], ["key-support"]],
     },
     "customer-relations": {
       title: "Customer Relations",
@@ -169,7 +169,7 @@ export const detailedTemplate = {
           end: 3,
         },
       },
-      needsRelation: [["key-activities"]],
+      needsRelation: [["key-activities"], ["key-support"]],
     },
     distribution: {
       title: "Distribution",
@@ -194,7 +194,7 @@ export const detailedTemplate = {
           },
         },
       },
-      needsRelation: [["key-activities"]],
+      needsRelation: [["key-activities"], ["key-support"]],
     },
     users: {
       title: "Users",
