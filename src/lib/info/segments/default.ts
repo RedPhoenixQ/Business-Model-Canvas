@@ -61,6 +61,16 @@ export const defaultTemplate = {
           end: 2,
         },
       },
+      presetNodes: {
+        Agreement: {
+          ...defaultItemNode,
+          data: {
+            ...defaultItemData,
+            name: "Agreement",
+            iconSrc: "https://img.icons8.com/?size=100&format=png&id=16183",
+          },
+        },
+      },
     },
     value: {
       title: "Value Proposition",

@@ -95,6 +95,16 @@ export const detailedTemplate = {
           end: 4,
         },
       },
+      presetNodes: {
+        Agreement: {
+          ...defaultItemNode,
+          data: {
+            ...defaultItemData,
+            name: "Agreement",
+            iconSrc: "https://img.icons8.com/?size=100&format=png&id=16183",
+          },
+        },
+      },
     },
     "key-activities": {
       title: "Key Activities",
