@@ -68,9 +68,17 @@ export function usePaste() {
 
     const newPos = parent ? parent?.relative_pos : position;
     for (const [i, node] of newNodes.entries()) {
-      node.position.x = newPos.x + 5 * i;
-      node.position.y = newPos.y + 5 * i;
-      node.parentNode = parent?.node?.id;
+      const parentId = idsMap.get(node.parentNode!);
+      if (parentId) {
+        // If nodes parent was also copied, the parent relation should remain
+        node.parentNode = idsMap.get(node.parentNode!);
+      } else {
+        // Else the new parent and position should be set
+        node.position.x = newPos.x + 5 * i;
+        node.position.y = newPos.y + 5 * i;
+        node.parentNode = parent?.node?.id;
+      }
+      node.selected = false;
     }
 
     addHistoryEntry({
