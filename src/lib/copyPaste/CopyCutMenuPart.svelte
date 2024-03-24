@@ -13,8 +13,6 @@
   const { copy, cut } = useCopy();
 </script>
 
-<svelte:window on:paste={console.log} />
-
 <Item
   class="gap-2"
   on:click={() => {

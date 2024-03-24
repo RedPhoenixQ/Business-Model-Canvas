@@ -21,7 +21,6 @@
     mousePos.y = event.pageY;
   }}
   on:paste={(event) => {
-    console.log(event);
     // @ts-expect-error: event.target will be a HTMLElement
     if (event.defaultPrevented || isInputElement(event.target)) return;
     event.preventDefault();
