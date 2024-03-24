@@ -10,8 +10,8 @@
 
 {#if info.description}
   <Popover.Root bind:open>
-    <Popover.Trigger class="pointer-events-auto">
-      <InfoIcon />
+    <Popover.Trigger class="pointer-events-auto p-1">
+      <InfoIcon size={20} />
     </Popover.Trigger>
     <Popover.Content
       class="space-y-2 overflow-y-auto pt-0"
