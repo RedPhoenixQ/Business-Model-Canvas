@@ -74,8 +74,10 @@ export function usePaste() {
         node.parentNode = idsMap.get(node.parentNode!);
       } else {
         // Else the new parent and position should be set
-        node.position.x = newPos.x + 5 * i;
-        node.position.y = newPos.y + 5 * i;
+        const width = node.width ?? node.computed?.width ?? 0;
+        const height = node.height ?? node.computed?.height ?? 0;
+        node.position.x = newPos.x - width / 2 + 5 * i;
+        node.position.y = newPos.y - height / 2 + 5 * i;
         node.parentNode = parent?.node?.id;
       }
       node.selected = false;
