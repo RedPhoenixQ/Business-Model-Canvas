@@ -49,7 +49,7 @@
           >
             {page.data.name}
           </span>
-          <PageMenu {i} />
+          <PageMenu {page} {i} />
         </div>
       {:else}
         {@const name = page.data.name ?? "page"}
@@ -61,7 +61,7 @@
           <span class="p-2">
             {name}
           </span>
-          <PageMenu {i} />
+          <PageMenu {page} {i} />
         </Button>
       {/if}
     </li>

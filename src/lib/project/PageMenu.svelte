@@ -1,9 +1,10 @@
 <script lang="ts">
   import { MoreVerticalIcon, XIcon, CopyPlusIcon } from "lucide-svelte";
   import * as Dropdown from "../components/ui/dropdown-menu";
-  import { useProject } from ".";
+  import { useProject, type SavedPage } from ".";
   import Button from "../components/ui/button/button.svelte";
 
+  export let page: SavedPage;
   export let i: number;
 
   const { duplicatePage, removePage } = useProject();
@@ -31,7 +32,11 @@
     <Dropdown.Separator />
     <Dropdown.Item
       class="gap-2 text-destructive hover:bg-destructive hover:text-destructive-foreground"
-      on:click={() => removePage(i)}
+      on:click={() => {
+        if (confirm(`Do you want to permanently delete "${page.data.name}"?`)) {
+          removePage(i);
+        }
+      }}
     >
       <XIcon size="20" />
       Delete
