@@ -84,4 +84,5 @@ const migratations: Record<
     project.version = "0.0.1";
     return project;
   },
+  "0.0.1": "0.0.2",
 };
