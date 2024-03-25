@@ -1,7 +1,9 @@
 import type { Project } from ".";
 
+type Semver = `${number}.${number}.${number}`;
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function migrateVersion(project: any & { version: string }): Project {
+export function migrateVersion(project: any & { version: Semver }): Project {
   if (project.version === APP_VERSION) return project as Project;
   if (!project.version) project.version = "0.0.0";
   const savedVersion = project.version;
@@ -35,9 +37,9 @@ export function migrateVersion(project: any & { version: string }): Project {
 }
 
 const migratations: Record<
-  string,
+  Semver,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  string | ((project: any) => any & { version: string })
+  Semver | ((project: any) => any & { version: Semver })
 > = {
   "0.0.0": (project) => {
     for (const page of project.pages) {
