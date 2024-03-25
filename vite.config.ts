@@ -13,6 +13,7 @@ export default defineConfig({
       injectRegister: "inline",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
+        inlineWorkboxRuntime: true,
       },
       scope: "/Business-Model-Canvas/",
       manifest: {
