@@ -16,6 +16,8 @@ export default defineConfig({
       manifest: {
         name: "Business Model Canvas",
         short_name: "BMC",
+        scope: "/Business-Model-Canvas/",
+        start_url: "/Business-Model-Canvas/",
         description: "An interactive Business Model Canvas",
         theme_color: "#2c2c2c",
         icons: [
