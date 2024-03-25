@@ -10,9 +10,11 @@ export default defineConfig({
     svelte(),
     VitePWA({
       registerType: "autoUpdate",
+      injectRegister: "inline",
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
       },
+      scope: "/Business-Model-Canvas/",
       manifest: {
         name: "Business Model Canvas",
         short_name: "BMC",
