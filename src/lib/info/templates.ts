@@ -1006,4 +1006,3 @@ export const projectTemplates = {
     pages: [pageTemplates.default],
   },
 } as const satisfies Record<string, Project>;
-
