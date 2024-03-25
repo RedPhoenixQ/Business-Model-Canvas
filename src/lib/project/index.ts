@@ -13,6 +13,7 @@ import {
   projectTemplates,
 } from "../info/templates";
 import { type HistoryEntry, getHistory, setHistory } from "./history";
+import { migrateVersion } from "./version";
 
 export type SavedPage = {
   data: PageData;
@@ -40,6 +41,7 @@ export type Grid = {
 };
 
 export type Project = {
+  version: number;
   name?: string;
   activePageIndex: number;
   pages: SavedPage[];
@@ -127,7 +129,7 @@ export function useProject() {
     },
     fromJSON(json: string) {
       // TODO: Handle parse error and validation
-      const $project: Project = JSON.parse(json);
+      const $project = migrateVersion(JSON.parse(json));
       console.debug("loaded project", $project);
       loadPage($project);
       projectStore.set($project);

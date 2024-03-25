@@ -8,6 +8,7 @@ import { defaultItemData, defaultItemNode } from "../nodes/item";
 import { defaultSegmentNode, type SegmentData } from "$lib/nodes/segment";
 import type { Node } from "@xyflow/svelte";
 import { defaultSliderData } from "$lib/nodes/slider";
+import { PROJECT_VERSION } from "$lib/project/version";
 
 export const defaultPageData: Omit<PageData, "template"> = {
   name: "Page 1",
@@ -996,10 +997,12 @@ export const pageTemplates = {
 
 export const projectTemplates = {
   empty: {
+    version: PROJECT_VERSION,
     activePageIndex: -1,
     pages: [],
   },
   default: {
+    version: PROJECT_VERSION,
     activePageIndex: 0,
     pages: [pageTemplates.default],
   },
