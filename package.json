@@ -10,7 +10,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "lint": "eslint src & prettier . --check",
     "format": "prettier . --write",
-    "deploy": "DEPLOY_VERSION=$(npm pkg get version --workspaces=false | tr -d \\\") && mkdir -p dist/$(echo $DEPLOY_VERSION) && cp -f dist/index.html $(echo dist/$(echo $DEPLOY_VERSION)/index.html) && git checkout pages && cp -rf dist/* ./ && git add index.html $(echo $(echo $DEPLOY_VERSION)/index.html) && git commit --message=\"$(echo Deploy version $(echo $DEPLOY_VERSION) of pages)\" && git push origin pages"
+    "deploy": "DEPLOY_VERSION=$(npm pkg get version --workspaces=false | tr -d \\\") && git checkout pages && cp -f dist/* ./ && mkdir -p $(echo $DEPLOY_VERSION) && cp -f index.html $(echo $(echo $DEPLOY_VERSION)/index.html) && git add . && git commit --message=\"$(echo Deploy version $(echo $DEPLOY_VERSION) of pages)\" && git push origin pages"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.2",
