@@ -8,11 +8,14 @@
   import ConnectionHandles from "../ConnectionHandles.svelte";
   import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import NeedsRelation from "../NeedsRelation.svelte";
+  import { useNodeDataChange } from "..";
 
   type $$Props = NodeProps<GroupData>;
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];
+
+  const nodeDataChange = useNodeDataChange(id, data);
 </script>
 
 <div
@@ -24,6 +27,7 @@
     ignoredRelations={data.ignoredRelations}
     on:ignoredChange={(e) => {
       data.ignoredRelations = e.detail;
+      nodeDataChange(data, "ignoredRelations");
     }}
   />
 
@@ -31,6 +35,7 @@
     <input
       class="w-full overflow-ellipsis bg-transparent px-2 py-1"
       bind:value={data.name}
+      on:change={() => nodeDataChange(data, "name")}
     />
     <DropdownMenu.Root>
       <GroupMenu type="dropdown-menu" {id} />
