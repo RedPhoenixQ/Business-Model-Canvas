@@ -10,6 +10,7 @@ import {
 } from "@xyflow/svelte";
 import { addHistoryEntry } from "$lib/project/history";
 import { findFirstParentAndRelativePos } from "$lib/info/nodes";
+import { findChildNodes } from "$lib/nodes";
 
 export const nodeClipboard = writable<
   | {
@@ -116,23 +117,7 @@ export function useCopy() {
   async function copy(nodes: Node[], copyConnections = true) {
     if (nodes.length === 0) return;
 
-    const storedNodes = get(nodesStore);
-    function findChildNodes(nodes: Node[]): Node[] {
-      const children = [];
-      for (const node of nodes) {
-        if (node.type !== "customGroup") continue;
-        for (const storedNode of storedNodes) {
-          if (storedNode.parentNode === node.id) {
-            children.push(storedNode);
-          }
-        }
-      }
-      if (children.length !== 0) {
-        children.push(...findChildNodes(children));
-      }
-      return children;
-    }
-    nodes.push(...findChildNodes(nodes));
+    nodes.push(...findChildNodes(nodes, get(nodesStore)));
 
     const edges = copyConnections
       ? getConnectedEdges(nodes, get(edgesStore))

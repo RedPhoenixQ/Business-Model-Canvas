@@ -1,4 +1,4 @@
-import type { NodeTypes } from "@xyflow/svelte";
+import type { Node, NodeTypes } from "@xyflow/svelte";
 import Item from "./item/Item.svelte";
 import Segment from "./segment/Segment.svelte";
 import Slider from "./slider/Slider.svelte";
@@ -35,4 +35,20 @@ export function useNodeDataChange<T extends object>(
     addHistoryEntry({ type: "nodeData", id, from, to });
     from = structuredClone(data);
   };
+}
+
+export function findChildNodes(parentNodes: Node[], nodes: Node[]): Node[] {
+  const children = [];
+  for (const node of parentNodes) {
+    if (node.type !== "customGroup") continue;
+    for (const storedNode of nodes) {
+      if (storedNode.parentNode === node.id) {
+        children.push(storedNode);
+      }
+    }
+  }
+  if (children.length !== 0) {
+    children.push(...findChildNodes(children, nodes));
+  }
+  return children;
 }
