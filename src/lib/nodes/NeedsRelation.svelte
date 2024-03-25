@@ -70,7 +70,7 @@
     const segment = thisNodeAndParents.find((node) => node.type === "segment");
     if (!segment) return;
 
-    const needsRelation = $templateInfoStore.nodes[segment.id].needsRelation;
+    const needsRelation = $templateInfoStore.nodes[segment.id]?.needsRelation;
     if (!needsRelation) return;
 
     const connections = getConnectedEdges(thisNodeAndParents, $edges);
