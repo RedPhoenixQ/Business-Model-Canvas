@@ -1,5 +1,3 @@
-<svelte:options immutable={true} />
-
 <script lang="ts">
   import { cn } from "$lib/utils";
   import { predefinedIcons, type IconInfo } from "./index";
