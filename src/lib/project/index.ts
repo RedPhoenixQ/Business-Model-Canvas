@@ -129,10 +129,18 @@ export function useProject() {
     },
     fromJSON(json: string) {
       // TODO: Handle parse error and validation
-      const $project = migrateVersion(JSON.parse(json));
-      console.debug("loaded project", $project);
-      loadPage($project);
-      projectStore.set($project);
+      try {
+        const $project = migrateVersion(JSON.parse(json));
+        console.debug("loaded project", $project);
+        loadPage($project);
+        projectStore.set($project);
+      } catch (err) {
+        console.error(err);
+        alert(
+          (err as Error)?.message ??
+            "Something went wrong when loading the projet",
+        );
+      }
     },
     newProject(template: keyof typeof projectTemplates = "default") {
       const $project: Project = structuredClone(projectTemplates[template]);
