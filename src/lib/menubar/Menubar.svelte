@@ -6,7 +6,7 @@
   import Edit from "./Edit.svelte";
 </script>
 
-<Menubar.Root>
+<Menubar.Root class="w-fit">
   <File />
   <Settings />
   <Edit />
