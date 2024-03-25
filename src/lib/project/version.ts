@@ -3,6 +3,7 @@ import type { Project } from ".";
 export function migrateVersion(project: Project): Project {
   if (project.version === APP_VERSION) return project;
   if (!project.version) project.version = "0.0.0";
+  const savedVersion = project.version;
   console.debug("migrating project from verison", project.version, project);
 
   let migrate = migratations[project.version];
@@ -24,7 +25,9 @@ export function migrateVersion(project: Project): Project {
     migrate = migratations[project.version];
   }
   if (project.version !== APP_VERSION) {
-    throw new Error("Could not migrate project to latest version");
+    throw new Error(
+      `Could not migrate project to current version ${APP_VERSION} from ${savedVersion}`,
+    );
   }
 
   return project;
