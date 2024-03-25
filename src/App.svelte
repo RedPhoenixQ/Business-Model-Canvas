@@ -21,7 +21,7 @@
   import AddItemMenuPart from "$lib/AddItemMenuPart.svelte";
   import FlowControls from "./lib/FlowControls.svelte";
   import { edgeTypes } from "$lib/edges";
-  import { nodeTypes } from "$lib/nodes";
+  import { findChildNodes, nodeTypes } from "$lib/nodes";
   import Menubar from "$lib/menubar/Menubar.svelte";
   import AutoSave from "$lib/project/AutoSave.svelte";
   import PagesList from "$lib/project/PagesList.svelte";
@@ -37,7 +37,7 @@
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
 
-  const { getIntersectingNodes, updateNode } = useSvelteFlow();
+  const { getIntersectingNodes, updateNode, deleteElements } = useSvelteFlow();
 
   useNodes().setOptions({ elevateNodesOnSelect: false });
 
@@ -154,8 +154,17 @@
         {edgeTypes}
         fitView
         colorMode={$theme}
-        ondelete={(deleted) => {
+        ondelete={async (deleted) => {
           console.debug("ondelete", deleted);
+          const childNodes = findChildNodes(deleted.nodes, $nodes);
+          if (childNodes.length > 0) {
+            const { deletedNodes, deletedEdges } = await deleteElements({
+              nodes: childNodes,
+            });
+            deleted.nodes.push(...deletedNodes);
+            deleted.edges.push(...deletedEdges);
+            console.debug("ondelete with children", deleted);
+          }
           addHistoryEntry({ type: "delete", ...deleted });
         }}
         onedgecreate={(connection) => {
