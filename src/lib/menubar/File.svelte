@@ -48,8 +48,13 @@
           <Menubar.Item
             class="capitalize"
             on:click={() => {
-              // TODO: Prompt for saving old project first
-              newProject(template);
+              if (
+                confirm(
+                  "Are you sure you want to create a new project?\n\nAll unsaved progress will be lost!",
+                )
+              ) {
+                newProject(template);
+              }
             }}
           >
             {template.replace("-", " ")}
