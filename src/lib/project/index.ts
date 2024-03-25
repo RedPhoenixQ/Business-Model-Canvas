@@ -41,7 +41,7 @@ export type Grid = {
 };
 
 export type Project = {
-  version: number;
+  version: string;
   name?: string;
   activePageIndex: number;
   pages: SavedPage[];
@@ -214,3 +214,4 @@ export function useProject() {
     },
   };
 }
+

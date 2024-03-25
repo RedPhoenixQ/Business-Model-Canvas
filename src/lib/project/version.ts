@@ -1,34 +1,38 @@
 import type { Project } from ".";
 
-export const PROJECT_VERSION = 1;
-
 export function migrateVersion(project: Project): Project {
-  if (project.version === PROJECT_VERSION) return project;
-  console.debug("migrating project", project);
+  if (project.version === APP_VERSION) return project;
+  if (!project.version) project.version = "0.0.0";
+  console.debug("migrating project from verison", project.version, project);
 
-  if (project.version > PROJECT_VERSION) {
+  if (project.version > APP_VERSION) {
     throw new Error(
       "Project version is newer than this program. Please update the program.",
       {
         cause: {
           savedVersion: project.version,
-          programVersion: PROJECT_VERSION,
+          programVersion: APP_VERSION,
         },
       },
     );
   }
 
-  for (let i = project.version || 0; i < PROJECT_VERSION; i++) {
-    project = migrate[i](project);
+  let migrate = migratations[project.version];
+  if (!migrate)
+    throw new Error(`Cannot migrate project from version ${project.version}`);
+  while (migrate) {
+    project = migrate(project);
+    migrate = migratations[project.version];
   }
-  project.version = PROJECT_VERSION;
+  if (project.version !== APP_VERSION) {
+    throw new Error("Could not migrate project to latest version");
+  }
 
   return project;
 }
 
-const migrate: ((project: Project) => Project)[] = [
-  // 0 to 1
-  (project) => {
+const migratations: Record<string, (project: Project) => Project> = {
+  "0.0.0": (project) => {
     for (const page of project.pages) {
       // Get template from segments
       let template = "empty";
@@ -68,6 +72,8 @@ const migrate: ((project: Project) => Project)[] = [
       };
       delete page.name;
     }
+    project.version = "0.0.1";
     return project;
   },
-];
+};
+
