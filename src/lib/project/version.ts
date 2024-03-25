@@ -9,15 +9,19 @@ export function migrateVersion(project: Project): Project {
   if (!migrate)
     throw new Error(`Cannot migrate project from version ${project.version}`);
   while (migrate) {
-    try {
-      project = migrate(project);
-      migrate = migratations[project.version];
-    } catch (err) {
-      console.log("Error migrating from", project.version, err);
-      throw new Error(`Error migrating from ${project.version}`, {
-        cause: err,
-      });
+    if (typeof migrate === "string") {
+      project.version = migrate;
+    } else {
+      try {
+        project = migrate(project);
+      } catch (err) {
+        console.log("Error migrating from", project.version, err);
+        throw new Error(`Error migrating from ${project.version}`, {
+          cause: err,
+        });
+      }
     }
+    migrate = migratations[project.version];
   }
   if (project.version !== APP_VERSION) {
     throw new Error("Could not migrate project to latest version");
@@ -26,7 +30,7 @@ export function migrateVersion(project: Project): Project {
   return project;
 }
 
-const migratations: Record<string, (project: Project) => Project> = {
+const migratations: Record<string, string | ((project: Project) => Project)> = {
   "0.0.0": (project) => {
     for (const page of project.pages) {
       // Get template from segments
@@ -71,4 +75,3 @@ const migratations: Record<string, (project: Project) => Project> = {
     return project;
   },
 };
-
