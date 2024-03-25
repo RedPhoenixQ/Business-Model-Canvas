@@ -8,6 +8,7 @@ import { defaultSegmentNode } from "./segment";
 import { defaultSliderNode } from "./slider";
 import { defaultGroupNode } from "./group";
 import type { DefaultNode } from "$lib/info/nodes";
+import { addHistoryEntry } from "$lib/project/history";
 
 export const nodeTypes = {
   item: Item,
@@ -22,3 +23,16 @@ export const defaultNodes = {
   slider: defaultSliderNode,
   customGroup: defaultGroupNode,
 } as const satisfies Record<keyof typeof nodeTypes, DefaultNode>;
+
+export function useNodeDataChange<T extends object>(
+  id: string,
+  initialData: T,
+) {
+  let from = structuredClone(initialData);
+  return async function nodeDataChange(data: T, ...keys: (keyof T)[]) {
+    if (keys.length > 0 && !keys.some((key) => data[key] !== from[key])) return;
+    const to = structuredClone(data);
+    addHistoryEntry({ type: "nodeData", id, from, to });
+    from = structuredClone(data);
+  };
+}

@@ -4,24 +4,18 @@
   import { type ItemData } from ".";
   import { CustomIcon } from "$lib/components/custom/icon";
   import ItemDetails from "./ItemDetails.svelte";
-  import { addHistoryEntry } from "$lib/project/history";
   import ConnectionHandles from "../ConnectionHandles.svelte";
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import { pageStore } from "$lib/project";
   import NeedsRelation from "../NeedsRelation.svelte";
+  import { useNodeDataChange } from "..";
 
   type $$Props = NodeProps<ItemData>;
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];
 
-  let from: ItemData = structuredClone(data);
-  async function nodeDataChange(...keys: (keyof ItemData)[]) {
-    if (keys.length > 0 && !keys.some((key) => data[key] !== from[key])) return;
-    const to = structuredClone(data);
-    addHistoryEntry({ type: "nodeData", id, from, to });
-    from = structuredClone(data);
-  }
+  const nodeDataChange = useNodeDataChange(id, data);
 
   let detailsOpen = false;
 </script>
@@ -32,13 +26,13 @@
     bind:data
     {id}
     on:edit={() => (detailsOpen = true)}
-    on:change={(e) => nodeDataChange(e.detail)}
+    on:change={(e) => nodeDataChange(data, e.detail)}
   />
   <ItemDetails
     bind:data
     {id}
     bind:open={detailsOpen}
-    on:change={(e) => nodeDataChange(e.detail)}
+    on:change={(e) => nodeDataChange(data, e.detail)}
   />
   <ContextMenu.Trigger class="group relative" title={data.name}>
     <ConnectionHandles />
@@ -47,7 +41,7 @@
       ignoredRelations={data.ignoredRelations}
       on:ignoredChange={(e) => {
         data.ignoredRelations = e.detail;
-        nodeDataChange("ignoredRelations");
+        nodeDataChange(data, "ignoredRelations");
       }}
     />
 
@@ -73,12 +67,12 @@
         bind:clientHeight={data.textHeight}
         style:height={data.textHeight + "px"}
         style:width={data.textWidth + "px"}
-        on:pointerup={() => nodeDataChange("textHeight", "textWidth")}
+        on:pointerup={() => nodeDataChange(data, "textHeight", "textWidth")}
       >
         <textarea
           class="resize-none bg-background/75 px-2 py-1 text-sm text-foreground"
           bind:value={data.description}
-          on:change={() => nodeDataChange("description")}
+          on:change={() => nodeDataChange(data, "description")}
         />
       </div>
     {/if}
