@@ -5,24 +5,19 @@ export function migrateVersion(project: Project): Project {
   if (!project.version) project.version = "0.0.0";
   console.debug("migrating project from verison", project.version, project);
 
-  if (project.version > APP_VERSION) {
-    throw new Error(
-      "Project version is newer than this program. Please update the program.",
-      {
-        cause: {
-          savedVersion: project.version,
-          programVersion: APP_VERSION,
-        },
-      },
-    );
-  }
-
   let migrate = migratations[project.version];
   if (!migrate)
     throw new Error(`Cannot migrate project from version ${project.version}`);
   while (migrate) {
-    project = migrate(project);
-    migrate = migratations[project.version];
+    try {
+      project = migrate(project);
+      migrate = migratations[project.version];
+    } catch (err) {
+      console.log("Error migrating from", project.version, err);
+      throw new Error(`Error migrating from ${project.version}`, {
+        cause: err,
+      });
+    }
   }
   if (project.version !== APP_VERSION) {
     throw new Error("Could not migrate project to latest version");
