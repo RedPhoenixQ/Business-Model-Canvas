@@ -1,7 +1,8 @@
 import type { Project } from ".";
 
-export function migrateVersion(project: Project): Project {
-  if (project.version === APP_VERSION) return project;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function migrateVersion(project: any & { version: string }): Project {
+  if (project.version === APP_VERSION) return project as Project;
   if (!project.version) project.version = "0.0.0";
   const savedVersion = project.version;
   console.debug("migrating project from verison", project.version, project);
@@ -33,7 +34,11 @@ export function migrateVersion(project: Project): Project {
   return project;
 }
 
-const migratations: Record<string, string | ((project: Project) => Project)> = {
+const migratations: Record<
+  string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  string | ((project: any) => any & { version: string })
+> = {
   "0.0.0": (project) => {
     for (const page of project.pages) {
       // Get template from segments
