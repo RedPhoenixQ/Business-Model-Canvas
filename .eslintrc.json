@@ -43,5 +43,8 @@
         "argsIgnorePattern": "^_"
       }
     ]
+  },
+  "globals": {
+    "APP_VERSION": "readonly"
   }
 }
