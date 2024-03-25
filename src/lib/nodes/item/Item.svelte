@@ -1,7 +1,7 @@
 <script lang="ts">
   import ItemMenu from "./ItemMenu.svelte";
   import { type NodeProps } from "@xyflow/svelte";
-  import { type ItemData } from ".";
+  import { type ItemNode } from ".";
   import { CustomIcon } from "$lib/components/custom/icon";
   import ItemDetails from "./ItemDetails.svelte";
   import ConnectionHandles from "../ConnectionHandles.svelte";
@@ -10,7 +10,7 @@
   import NeedsRelation from "../NeedsRelation.svelte";
   import { useNodeDataChange } from "..";
 
-  type $$Props = NodeProps<ItemData>;
+  type $$Props = NodeProps<ItemNode>;
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];

@@ -1,28 +1,10 @@
-import type { GroupData } from "$lib/nodes/group";
-import type { ItemData } from "$lib/nodes/item";
-import type { SegmentData } from "$lib/nodes/segment";
-import type { SliderData } from "$lib/nodes/slider";
+import type { TypedNode } from "$lib/nodes";
 import type { Node, XYPosition } from "@xyflow/svelte";
 
-export type DefaultNode = Omit<Node, "id" | "position" | "data"> &
-  (
-    | {
-        type: "item";
-        data: ItemData;
-      }
-    | {
-        type: "segment";
-        data: SegmentData;
-      }
-    | {
-        type: "slider";
-        data: SliderData;
-      }
-    | {
-        type: "customGroup";
-        data: GroupData;
-      }
-  );
+export type DefaultNode<NodeType extends Node = TypedNode> = Omit<
+  NodeType,
+  "id" | "position"
+>;
 
 /**
  *

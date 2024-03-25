@@ -10,7 +10,7 @@
     useEdges,
     useSvelteFlow,
   } from "@xyflow/svelte";
-  import { type ItemData } from ".";
+  import { type ItemData, type ItemNode } from ".";
   import {
     EditIcon,
     ArrowLeftFromLineIcon,
@@ -22,9 +22,10 @@
   import { createEventDispatcher } from "svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import Button from "$lib/components/ui/button/button.svelte";
+  import type { TypedNode } from "..";
 
-  export let id: NodeProps<ItemData>["id"];
-  export let data: NodeProps<ItemData>["data"];
+  export let id: NodeProps<ItemNode>["id"];
+  export let data: NodeProps<ItemNode>["data"];
   export let open = false;
 
   const dispatch = createEventDispatcher<{
@@ -43,6 +44,10 @@
       nodes: deleted.deletedNodes,
       edges: deleted.deletedEdges,
     });
+  }
+
+  function getNodeTyped(id: string): TypedNode | undefined {
+    return getNode(id) as TypedNode;
   }
 </script>
 
@@ -123,13 +128,13 @@
         <div class="space-y-4">
           {#each connections as connection}
             {@const selfIsSource = connection.source === id}
-            {@const node = getNode(
+            {@const node = getNodeTyped(
               selfIsSource ? connection.target : connection.source,
             )}
-            {#if node && node.data}
+            {#if node}
               <div class="flex items-center gap-2">
                 <div class="w-12">
-                  {#if node?.data}
+                  {#if node.type === "item"}
                     <button
                       on:click={() => {
                         window.dispatchEvent(
@@ -139,7 +144,7 @@
                         );
                       }}
                     >
-                      <CustomIcon icon={node?.data?.icon} />
+                      <CustomIcon icon={node.data.icon} />
                     </button>
                   {:else if node.type === "slider"}
                     <span>Slider</span>
@@ -154,9 +159,12 @@
                     {:else}
                       <ArrowRightToLineIcon size={16} class="inline" />
                     {/if}
-                    {node.data.name}{node.parentNode
-                      ? ` - ${node.parentNode}`
-                      : ""}
+                    {#if node.type === "item" || node.type === "customGroup"}
+                      {node.data?.name}
+                    {:else if node.type === "slider"}
+                      Slider {node.data.value[0]}%
+                    {/if}
+                    {node.parentNode && ` - ${node.parentNode}`}
                   </span>
                   <Input
                     value={connection.label}

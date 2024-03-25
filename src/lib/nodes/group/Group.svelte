@@ -1,7 +1,7 @@
 <script lang="ts">
   import { MoreVerticalIcon } from "lucide-svelte";
   import { type NodeProps } from "@xyflow/svelte";
-  import type { GroupData } from ".";
+  import type { GroupNode } from ".";
   import GroupMenu from "./GroupMenu.svelte";
   import { Button } from "../../components/ui/button";
   import ResizeControl from "../ResizeControl.svelte";
@@ -10,7 +10,7 @@
   import NeedsRelation from "../NeedsRelation.svelte";
   import { useNodeDataChange } from "..";
 
-  type $$Props = NodeProps<GroupData>;
+  type $$Props = NodeProps<GroupNode>;
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];

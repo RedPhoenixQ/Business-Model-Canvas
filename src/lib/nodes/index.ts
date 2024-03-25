@@ -3,12 +3,14 @@ import Item from "./item/Item.svelte";
 import Segment from "./segment/Segment.svelte";
 import Slider from "./slider/Slider.svelte";
 import Group from "./group/Group.svelte";
-import { defaultItemNode } from "./item";
-import { defaultSegmentNode } from "./segment";
-import { defaultSliderNode } from "./slider";
-import { defaultGroupNode } from "./group";
+import { defaultItemNode, type ItemNode } from "./item";
+import { defaultSegmentNode, type SegmentNode } from "./segment";
+import { defaultSliderNode, type SliderNode } from "./slider";
+import { defaultGroupNode, type GroupNode } from "./group";
 import type { DefaultNode } from "$lib/info/nodes";
 import { addHistoryEntry } from "$lib/project/history";
+
+export type TypedNode = ItemNode | SegmentNode | SliderNode | GroupNode;
 
 export const nodeTypes = {
   item: Item,

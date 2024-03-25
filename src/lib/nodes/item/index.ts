@@ -1,5 +1,6 @@
 import type { IconInfo } from "$lib/components/custom/icon";
 import type { DefaultNode } from "$lib/info/nodes";
+import type { Node } from "@xyflow/svelte";
 
 export type ItemData = {
   name: string;
@@ -12,6 +13,8 @@ export type ItemData = {
   impactText?: string;
   ignoredRelations?: string[];
 };
+
+export type ItemNode = Node<ItemData, "item">;
 
 export const defaultItemData = {
   name: "",
@@ -27,4 +30,4 @@ export const defaultItemNode = {
   type: "item",
   data: defaultItemData,
   extent: "parent",
-} as const satisfies DefaultNode;
+} as const satisfies DefaultNode<ItemNode>;

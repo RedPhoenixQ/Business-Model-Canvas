@@ -4,6 +4,7 @@ import { defaultTemplate } from "./default";
 import { detailedTemplate } from "./detailed";
 import type { ComponentType } from "svelte";
 import type { DefaultNode } from "../nodes";
+import type { GroupNode } from "$lib/nodes/group";
 
 export type GridPos = {
   column: { start: number; end: number };
@@ -19,7 +20,7 @@ export type SegmentInfo<SegmentKey extends string = string> = {
   presetGroups?: Record<
     string,
     {
-      group: DefaultNode & { type: "customGroup" };
+      group: DefaultNode<GroupNode>;
       nodes: (DefaultNode & Pick<Node, "position">)[];
     }
   >;

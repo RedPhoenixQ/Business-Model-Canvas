@@ -2,7 +2,7 @@
   import { type NodeProps } from "@xyflow/svelte";
   import Slider from "$lib/components/ui/slider/slider.svelte";
   import { addHistoryEntry } from "$lib/project/history";
-  import type { SliderData } from ".";
+  import type { SliderData, SliderNode } from ".";
   import ConnectionHandles from "../ConnectionHandles.svelte";
   import {
     CustomIcon,
@@ -12,7 +12,7 @@
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import SliderMenu from "./SliderMenu.svelte";
 
-  type $$Props = NodeProps<SliderData>;
+  type $$Props = NodeProps<SliderNode>;
 
   export let id: $$Props["id"];
   export let data: $$Props["data"];

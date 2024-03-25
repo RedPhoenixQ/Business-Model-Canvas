@@ -7,13 +7,13 @@
     type Dimensions,
   } from "@xyflow/svelte";
   import { getDimensionsInGrid } from "$lib/info/segments/index";
-  import { type SegmentData } from ".";
+  import { type SegmentNode } from ".";
   import { cn } from "$lib/utils";
   import { addHistoryEntry } from "$lib/project/history";
   import { gridStore, templateInfoStore } from "$lib/project";
   import ResizeControl from "../ResizeControl.svelte";
 
-  type $$Props = NodeProps<SegmentData>;
+  type $$Props = NodeProps<SegmentNode>;
 
   export let id: $$Props["id"];
 

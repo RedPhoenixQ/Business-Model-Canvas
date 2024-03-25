@@ -1,6 +1,6 @@
 <script lang="ts">
   import { type NodeProps } from "@xyflow/svelte";
-  import { type ItemData } from ".";
+  import { type ItemData, type ItemNode } from ".";
   import { CustomIcon } from "$lib/components/custom/icon";
   import { EditIcon } from "lucide-svelte";
   import { createEventDispatcher } from "svelte";
@@ -9,7 +9,7 @@
   import DeleteNodeMenuPart from "../DeleteNodeMenuPart.svelte";
   import CopyCutMenuPart from "$lib/copyPaste/CopyCutMenuPart.svelte";
 
-  type $$Props = Pick<NodeProps<ItemData>, "data" | "id"> & {
+  type $$Props = Pick<NodeProps<ItemNode>, "data" | "id"> & {
     type: MenuType;
   };
 
