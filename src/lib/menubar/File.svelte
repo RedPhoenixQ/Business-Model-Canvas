@@ -27,10 +27,9 @@
     URL.revokeObjectURL(url);
   }
 
-  function fromTemplate(template: string) {
-    if (!Object.keys(projectTemplates).includes(template)) return;
-    newProject(template as keyof typeof projectTemplates);
-  }
+  const projectTemplateKeys = Object.keys(
+    projectTemplates,
+  ) as (keyof typeof projectTemplates)[];
 
   let open = false;
 </script>
@@ -45,12 +44,13 @@
       </Menubar.SubTrigger>
       <Menubar.SubContent>
         <Menubar.Label>Template</Menubar.Label>
-        {#each Object.keys(projectTemplates) as template}
+        {#each projectTemplateKeys as template}
           <Menubar.Item
             class="capitalize"
-            on:click={() =>
+            on:click={() => {
               // TODO: Prompt for saving old project first
-              fromTemplate(template)}
+              newProject(template);
+            }}
           >
             {template.replace("-", " ")}
           </Menubar.Item>
