@@ -24,16 +24,16 @@
     </Button>
   </Dropdown.Trigger>
   <Dropdown.Content>
-    <Dropdown.Item on:click={() => duplicatePage(i)}>
-      <CopyPlusIcon class="mr-2" size="20" />
+    <Dropdown.Item class="gap-2" on:click={() => duplicatePage(i)}>
+      <CopyPlusIcon size="20" />
       Duplicate
     </Dropdown.Item>
     <Dropdown.Separator />
     <Dropdown.Item
-      class="text-destructive hover:bg-destructive hover:text-destructive-foreground"
+      class="gap-2 text-destructive hover:bg-destructive hover:text-destructive-foreground"
       on:click={() => removePage(i)}
     >
-      <XIcon class="mr-2" size="20" />
+      <XIcon size="20" />
       Delete
     </Dropdown.Item>
   </Dropdown.Content>

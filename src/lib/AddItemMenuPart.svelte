@@ -104,16 +104,18 @@
 
 {#if !segmentInfo?.presetNodes}
   <Item
+    class="gap-2"
     on:click={(event) => {
       addNode(event, "item");
     }}
   >
-    <PlusIcon class="mr-2" size="20" />
+    <PlusIcon size="20" />
     Item
   </Item>
 {:else}
   <Sub>
     <SubTrigger
+      class="gap-2"
       on:click={(event) => {
         document.dispatchEvent(
           new CustomEvent("custom-menu-close", { detail: "" }),
@@ -121,16 +123,17 @@
         addNode(event, "item");
       }}
     >
-      <PlusIcon class="mr-2" size="20" />
+      <PlusIcon size="20" />
       Item
     </SubTrigger>
     <SubContent>
       <Item
+        class="gap-2"
         on:click={(event) => {
           addNode(event, "item");
         }}
       >
-        <PlusIcon class="mr-2" size="20" />
+        <PlusIcon size="20" />
         New empty
       </Item>
       <Label>Presets</Label>
@@ -143,13 +146,14 @@
   </Sub>
 {/if}
 {#if !segmentInfo?.presetGroups}
-  <Item on:click={(event) => addNode(event, "customGroup")}>
-    <PlusIcon class="mr-2" size="20" />
+  <Item class="gap-2" on:click={(event) => addNode(event, "customGroup")}>
+    <PlusIcon size="20" />
     Group
   </Item>
 {:else}
   <Sub>
     <SubTrigger
+      class="gap-2"
       on:click={(event) => {
         document.dispatchEvent(
           new CustomEvent("custom-menu-close", { detail: "" }),
@@ -157,12 +161,12 @@
         addNode(event, "customGroup");
       }}
     >
-      <PlusIcon class="mr-2" size="20" />
+      <PlusIcon size="20" />
       Group
     </SubTrigger>
     <SubContent>
-      <Item on:click={(event) => addNode(event, "item")}>
-        <PlusIcon class="mr-2" size="20" />
+      <Item class="gap-2" on:click={(event) => addNode(event, "item")}>
+        <PlusIcon size="20" />
         New empty
       </Item>
       <Label>Presets</Label>
@@ -174,7 +178,7 @@
     </SubContent>
   </Sub>
 {/if}
-<Item on:click={(event) => addNode(event, "slider")}>
-  <PlusIcon class="mr-2" size="20" />
+<Item class="gap-2" on:click={(event) => addNode(event, "slider")}>
+  <PlusIcon size="20" />
   Slider
 </Item>

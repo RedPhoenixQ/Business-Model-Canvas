@@ -39,8 +39,8 @@
   <Menubar.Trigger>File</Menubar.Trigger>
   <Menubar.Content>
     <Menubar.Sub>
-      <Menubar.SubTrigger>
-        <PlusIcon class="mr-2" size="20" />
+      <Menubar.SubTrigger class="gap-2">
+        <PlusIcon size="20" />
         New
       </Menubar.SubTrigger>
       <Menubar.SubContent>
@@ -60,27 +60,31 @@
 
     <Menubar.Separator />
     <Menubar.Item
+      class="gap-2"
       on:click={() => {
         const input = prompt("input");
         if (input === null) return;
         fromJSON(input);
       }}
     >
-      <ClipboardPasteIcon class="mr-2" size="20" />
+      <ClipboardPasteIcon size="20" />
       Open from clipboard
     </Menubar.Item>
-    <Menubar.Item on:click={() => (open = true)}>
-      <FileInputIcon class="mr-2" size="20" />
+    <Menubar.Item class="gap-2" on:click={() => (open = true)}>
+      <FileInputIcon size="20" />
       Open file
     </Menubar.Item>
 
     <Menubar.Separator />
-    <Menubar.Item on:click={() => navigator.clipboard.writeText(toJSON())}>
-      <ClipboardCopyIcon class="mr-2" size="20" />
+    <Menubar.Item
+      class="gap-2"
+      on:click={() => navigator.clipboard.writeText(toJSON())}
+    >
+      <ClipboardCopyIcon size="20" />
       Copy to Clipboard
     </Menubar.Item>
-    <Menubar.Item on:click={downloadFile}>
-      <DownloadIcon class="mr-2" size="20" />
+    <Menubar.Item class="gap-2" on:click={downloadFile}>
+      <DownloadIcon size="20" />
       Download
     </Menubar.Item>
   </Menubar.Content>

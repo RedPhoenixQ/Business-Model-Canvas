@@ -31,8 +31,8 @@
     <span class="text-center">{data.name}</span>
   </Label>
   <Separator />
-  <Item on:click={() => dispatch("edit")}>
-    <EditIcon class="mr-2" size={20} />
+  <Item class="gap-2" on:click={() => dispatch("edit")}>
+    <EditIcon size={20} />
     Edit
   </Item>
   <MoveMenuPart {type} {id} />

@@ -13,7 +13,7 @@
 </script>
 
 <Item
-  class="text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"
+  class="gap-2 text-destructive data-[highlighted]:bg-destructive data-[highlighted]:text-destructive-foreground"
   on:click={async () => {
     const deleted = await deleteElements({ nodes: [{ id }] });
     console.debug("deleting node", id, deleted);
@@ -24,6 +24,6 @@
     });
   }}
 >
-  <XIcon class="mr-2" size="20" />
+  <XIcon size="20" />
   Delete
 </Item>

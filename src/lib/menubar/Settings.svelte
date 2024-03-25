@@ -15,11 +15,11 @@
   <Menubar.Content>
     <!-- Theme -->
     <Menubar.Sub>
-      <Menubar.SubTrigger>
+      <Menubar.SubTrigger class="gap-2">
         {#if $theme === "dark"}
-          <MoonIcon class="mr-2" size="20" />
+          <MoonIcon size="20" />
         {:else}
-          <SunIcon class="mr-2" size="20" />
+          <SunIcon size="20" />
         {/if}
         Theme
       </Menubar.SubTrigger>

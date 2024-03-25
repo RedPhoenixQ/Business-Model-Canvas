@@ -42,8 +42,8 @@
 </script>
 
 <Sub>
-  <SubTrigger>
-    <BringToFrontIcon class="mr-2" size={20} />
+  <SubTrigger class="gap-2">
+    <BringToFrontIcon size={20} />
     Move To Segment
   </SubTrigger>
   <SubContent class="max-h-72 overflow-y-scroll">
