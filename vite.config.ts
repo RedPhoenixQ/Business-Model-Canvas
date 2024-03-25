@@ -16,4 +16,8 @@ export default defineConfig({
       $lib: path.resolve("./src/lib"),
     },
   },
+  define: {
+    APP_VERSION: JSON.stringify(process.env.npm_package_version),
+  },
 });
+
