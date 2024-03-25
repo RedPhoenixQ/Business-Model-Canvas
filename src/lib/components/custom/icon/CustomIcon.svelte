@@ -11,30 +11,30 @@
   $: restProps = $$restProps as object;
 </script>
 
-{#if icon.iconDefault}
-  <svelte:component this={predefinedIcons[icon.iconDefault]} {...restProps} />
-{:else if icon.iconSrc}
+{#if icon.default}
+  <svelte:component this={predefinedIcons[icon.default]} {...restProps} />
+{:else if icon.src}
   <div
     class={cn(
       "flex aspect-square items-center justify-center",
-      icon.iconShape === "circle" ? "rounded-full" : "rounded",
-      icon.iconBackground !== undefined
-        ? icon.iconBackground === "dark"
+      icon.shape === "circle" ? "rounded-full" : "rounded",
+      icon.background !== undefined
+        ? icon.background === "dark"
           ? "bg-black"
           : "bg-white"
         : "",
       $$restProps.class,
     )}
   >
-    <img class="w-full" src={icon.iconSrc} {alt} />
+    <img class="w-full" src={icon.src} {alt} />
   </div>
 {:else}
   <svg
     class={cn(
       "aspect-square stroke-black dark:stroke-white",
-      icon.iconShape === "circle" ? "rounded-full" : "rounded",
-      icon.iconBackground !== undefined
-        ? icon.iconBackground === "dark"
+      icon.shape === "circle" ? "rounded-full" : "rounded",
+      icon.background !== undefined
+        ? icon.background === "dark"
           ? "bg-black"
           : "bg-white"
         : "",

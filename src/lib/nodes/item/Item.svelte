@@ -47,7 +47,7 @@
 
     <CustomIcon
       class="size-10 ring-blue-500 [.selected_&]:ring"
-      icon={data}
+      icon={data.icon}
       alt={data.name}
     />
     {#if data.name}

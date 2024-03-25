@@ -27,7 +27,7 @@
 
 <Content>
   <Label class="flex items-center gap-2">
-    <CustomIcon class="size-6" icon={data} alt={data.name} />
+    <CustomIcon class="size-6" icon={data.icon} alt={data.name} />
     <span class="text-center">{data.name}</span>
   </Label>
   <Separator />

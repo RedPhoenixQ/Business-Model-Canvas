@@ -99,7 +99,7 @@
         {@const src = Icons8BaseImgUrl + icon.id}
         <button on:click={() => dispatch("iconSelected", { ...icon, src })}>
           <CustomIcon
-            icon={{ ...iconInfo, iconDefault: undefined, iconSrc: src }}
+            icon={{ ...iconInfo, default: undefined, src: src }}
             alt={icon.name}
           />
         </button>

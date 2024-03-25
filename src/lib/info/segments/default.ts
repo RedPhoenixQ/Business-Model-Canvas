@@ -67,7 +67,9 @@ export const defaultTemplate = {
           data: {
             ...defaultItemData,
             name: "Agreement",
-            iconSrc: "https://img.icons8.com/?size=100&format=png&id=16183",
+            icon: {
+              src: "https://img.icons8.com/?size=100&format=png&id=16183",
+            },
           },
         },
       },

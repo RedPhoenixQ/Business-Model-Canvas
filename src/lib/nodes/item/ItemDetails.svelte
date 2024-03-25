@@ -63,11 +63,11 @@
     <div class="space-y-4 overflow-y-auto p-2">
       <div class="flex items-center gap-4">
         <IconPopover
-          bind:icon={data}
+          bind:icon={data.icon}
           class="group relative size-20 flex-none rounded border p-2"
-          on:change={(event) => dispatch("change", event.detail)}
+          on:change={() => dispatch("change", "icon")}
         >
-          <CustomIcon icon={data} alt={data.name} />
+          <CustomIcon icon={data.icon} alt={data.name} />
           <EditIcon
             class="absolute right-1 top-1 text-white opacity-50 group-hover:opacity-100"
             size="20"
@@ -139,7 +139,7 @@
                         );
                       }}
                     >
-                      <CustomIcon icon={node?.data} />
+                      <CustomIcon icon={node?.data?.icon} />
                     </button>
                   {:else if node.type === "slider"}
                     <span>Slider</span>

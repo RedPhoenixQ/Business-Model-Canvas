@@ -14,19 +14,18 @@
     change: keyof IconInfo;
   }>();
 
-  const iconBackground: { label: string; value: IconInfo["iconBackground"] }[] =
-    [
-      { label: "None", value: undefined },
-      { label: "Light", value: "light" },
-      { label: "Dark", value: "dark" },
-    ];
-  const iconShape: { label: string; value: IconInfo["iconShape"] }[] = [
+  const background: { label: string; value: IconInfo["background"] }[] = [
+    { label: "None", value: undefined },
+    { label: "Light", value: "light" },
+    { label: "Dark", value: "dark" },
+  ];
+  const shape: { label: string; value: IconInfo["shape"] }[] = [
     { label: "Square", value: "square" },
     { label: "Circle", value: "circle" },
   ];
-  const defaultIcons: { label: string; value: IconInfo["iconDefault"] }[] =
+  const defaultIcons: { label: string; value: IconInfo["default"] }[] =
     Object.keys(predefinedIcons).map((value) => {
-      return { label: value, value: value as IconInfo["iconDefault"] };
+      return { label: value, value: value as IconInfo["default"] };
     });
 </script>
 
@@ -43,20 +42,18 @@
       <Label class="space-y-2">
         <span>Background</span>
         <Select.Root
-          items={iconBackground}
-          selected={iconBackground.find(
-            ({ value }) => value === icon?.iconBackground,
-          )}
+          items={background}
+          selected={background.find(({ value }) => value === icon?.background)}
           onSelectedChange={(selected) => {
-            icon.iconBackground = selected?.value;
-            dispatch("change", "iconBackground");
+            icon.background = selected?.value;
+            dispatch("change", "background");
           }}
         >
           <Select.Trigger>
             <Select.Value class="capitalize" />
           </Select.Trigger>
           <Select.Content>
-            {#each iconBackground as { value, label }}
+            {#each background as { value, label }}
               <Select.Item
                 {value}
                 on:click={(e) => e.detail.originalEvent.preventDefault()}
@@ -70,19 +67,19 @@
       <Label class="space-y-2">
         <span>Shape</span>
         <Select.Root
-          items={iconShape}
-          selected={iconShape.find(({ value }) => value === icon?.iconShape) ??
-            iconShape[0]}
+          items={shape}
+          selected={shape.find(({ value }) => value === icon?.shape) ??
+            shape[0]}
           onSelectedChange={(selected) => {
-            icon.iconShape = selected?.value;
-            dispatch("change", "iconShape");
+            icon.shape = selected?.value;
+            dispatch("change", "shape");
           }}
         >
           <Select.Trigger>
             <Select.Value class="capitalize" />
           </Select.Trigger>
           <Select.Content>
-            {#each iconShape as { value, label }}
+            {#each shape as { value, label }}
               <Select.Item
                 {value}
                 on:click={(e) => e.detail.originalEvent.preventDefault()}
@@ -98,10 +95,10 @@
       <span>Default icon</span>
       <Select.Root
         items={defaultIcons}
-        selected={defaultIcons.find(({ value }) => value === icon?.iconDefault)}
+        selected={defaultIcons.find(({ value }) => value === icon?.default)}
         onSelectedChange={(selected) => {
-          icon.iconDefault = selected?.value;
-          dispatch("change", "iconDefault");
+          icon.default = selected?.value;
+          dispatch("change", "default");
         }}
       >
         <Select.Trigger><Select.Value /></Select.Trigger>
@@ -123,13 +120,13 @@
         </Select.Content>
       </Select.Root>
     </Label>
-    {#if !icon.iconDefault}
+    {#if !icon.default}
       <Label class="block space-y-2">
         <span> Icon Link </span>
         <Input
           type="url"
-          bind:value={icon.iconSrc}
-          on:change={() => dispatch("change", "iconSrc")}
+          bind:value={icon.src}
+          on:change={() => dispatch("change", "src")}
           on:keydown={(e) => e.stopPropagation()}
         />
       </Label>
@@ -141,9 +138,9 @@
         iconInfo={icon}
         on:iconSelected={(event) => {
           console.debug("iconSelected", event.detail);
-          icon.iconDefault = undefined;
-          icon.iconSrc = event.detail.src;
-          dispatch("change", "iconSrc");
+          icon.default = undefined;
+          icon.src = event.detail.src;
+          dispatch("change", "src");
         }}
       />
     </div>

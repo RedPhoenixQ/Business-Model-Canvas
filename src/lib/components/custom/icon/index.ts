@@ -4,10 +4,10 @@ import FemaleIcon from "$lib/icons/FemaleIcon.svelte";
 import MaleIcon from "$lib/icons/MaleIcon.svelte";
 
 export type IconInfo = {
-  iconSrc?: string;
-  iconDefault?: PredefinedIcon;
-  iconBackground?: "dark" | "light";
-  iconShape?: "square" | "circle";
+  src?: string;
+  default?: PredefinedIcon;
+  background?: "dark" | "light";
+  shape?: "square" | "circle";
 };
 
 export type PredefinedIcon = keyof typeof predefinedIcons;

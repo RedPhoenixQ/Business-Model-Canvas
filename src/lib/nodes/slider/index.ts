@@ -10,10 +10,10 @@ export type SliderData = {
 export const defaultSliderData = {
   value: [50],
   leftIcon: {
-    iconDefault: "Male",
+    default: "Male",
   },
   rightIcon: {
-    iconDefault: "Female",
+    default: "Female",
   },
 } as const satisfies SliderData;
 
