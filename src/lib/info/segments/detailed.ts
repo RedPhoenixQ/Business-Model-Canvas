@@ -4,9 +4,6 @@ import type { SegmentsTemplate } from ".";
 import * as detailedDesc from "$lib/info/descriptions/detailed";
 
 type DetailedSegments =
-  | "sustainable-company"
-  | "value"
-  | "impact"
   | "key-support"
   | "key-resources"
   | "key-activities"
@@ -15,7 +12,7 @@ type DetailedSegments =
   | "distribution"
   | "users"
   | "costs"
-  | "sustainability"
+  | "value"
   | "revenue";
 
 export const detailedTemplate = {
@@ -24,49 +21,6 @@ export const detailedTemplate = {
     rows: [200, 180, 180, 180, 200],
   },
   nodes: {
-    "sustainable-company": {
-      title: "Sustainable Company",
-      classes: "bg-purple-500",
-      grid: {
-        column: {
-          start: 0,
-          end: 2,
-        },
-        row: {
-          start: 0,
-          end: 1,
-        },
-      },
-    },
-    value: {
-      title: "Value Proposition",
-      description: detailedDesc.Value,
-      classes: "bg-yellow-600",
-      grid: {
-        column: {
-          start: 2,
-          end: 4,
-        },
-        row: {
-          start: 0,
-          end: 1,
-        },
-      },
-    },
-    impact: {
-      title: "Impact - product level",
-      classes: "bg-purple-500",
-      grid: {
-        column: {
-          start: 4,
-          end: 6,
-        },
-        row: {
-          start: 0,
-          end: 1,
-        },
-      },
-    },
     "key-support": {
       title: "Key Support",
       description: detailedDesc.KeySupport,
@@ -77,8 +31,8 @@ export const detailedTemplate = {
           end: 1,
         },
         row: {
-          start: 1,
-          end: 4,
+          start: 0,
+          end: 3,
         },
       },
       needsRelation: [["key-resources"], ["key-resources", "key-activities"]],
@@ -93,8 +47,8 @@ export const detailedTemplate = {
           end: 2,
         },
         row: {
-          start: 1,
-          end: 4,
+          start: 0,
+          end: 3,
         },
       },
       presetNodes: {
@@ -120,8 +74,8 @@ export const detailedTemplate = {
           end: 3,
         },
         row: {
-          start: 1,
-          end: 4,
+          start: 0,
+          end: 3,
         },
       },
       needsRelation: [["key-resources"], ["key-support"]],
@@ -136,8 +90,8 @@ export const detailedTemplate = {
           end: 5,
         },
         row: {
-          start: 1,
-          end: 2,
+          start: 0,
+          end: 1,
         },
       },
       presetGroups: {
@@ -172,8 +126,8 @@ export const detailedTemplate = {
           end: 5,
         },
         row: {
-          start: 2,
-          end: 3,
+          start: 1,
+          end: 2,
         },
       },
       needsRelation: [["key-activities"], ["key-support"]],
@@ -188,8 +142,8 @@ export const detailedTemplate = {
           end: 5,
         },
         row: {
-          start: 3,
-          end: 4,
+          start: 2,
+          end: 3,
         },
       },
       presetNodes: {
@@ -214,8 +168,8 @@ export const detailedTemplate = {
           end: 6,
         },
         row: {
-          start: 1,
-          end: 4,
+          start: 0,
+          end: 3,
         },
       },
     },
@@ -229,22 +183,23 @@ export const detailedTemplate = {
           end: 3,
         },
         row: {
-          start: 4,
-          end: 5,
+          start: 3,
+          end: 4,
         },
       },
     },
-    sustainability: {
-      title: "Sustainability",
-      classes: "bg-purple-600",
+    value: {
+      title: "Value Proposition",
+      description: detailedDesc.Value,
+      classes: "bg-yellow-600",
       grid: {
         column: {
           start: 3,
           end: 5,
         },
         row: {
-          start: 4,
-          end: 5,
+          start: 3,
+          end: 4,
         },
       },
     },
@@ -258,8 +213,8 @@ export const detailedTemplate = {
           end: 6,
         },
         row: {
-          start: 4,
-          end: 5,
+          start: 3,
+          end: 4,
         },
       },
     },
