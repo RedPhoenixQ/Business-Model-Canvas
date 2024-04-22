@@ -178,6 +178,7 @@
           addHistoryEntry({ type: "create", edges: [edge] });
           return edge;
         }}
+        deleteKey={["Backspace", "Delete"]}
         on:paneclick={hideAllEdges}
         on:nodeclick={(event) => {
           console.debug("on node click", event.detail.node);
