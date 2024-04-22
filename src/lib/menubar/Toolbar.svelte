@@ -13,4 +13,5 @@
   <Toolbar.Button class="p-1" disabled={$redoEmpty} on:click={redo}>
     <RedoIcon />
   </Toolbar.Button>
+  <slot />
 </Toolbar.Root>

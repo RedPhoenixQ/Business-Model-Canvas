@@ -3,6 +3,7 @@
   import { useProject } from ".";
   import { lastEntry } from "./history";
   import { Loader2Icon, SaveIcon, XCircleIcon } from "lucide-svelte";
+  import { ToolbarButton } from "$lib/components/custom/toolbar";
 
   const { toJSON, fromJSON } = useProject();
 
@@ -58,7 +59,11 @@
   }}
 />
 
-<div class="relative m-4 ml-auto w-fit">
+<ToolbarButton
+  class="relative p-1"
+  title={saved ? "Project is already saved" : "Save unsaved changes"}
+  on:click={save}
+>
   <SaveIcon />
   {#if saving}
     <Loader2Icon
@@ -73,4 +78,4 @@
       strokeWidth={2}
     />
   {/if}
-</div>
+</ToolbarButton>

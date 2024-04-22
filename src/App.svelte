@@ -216,7 +216,9 @@
         <Panel position="top-left" class="space-y-1">
           <div class="flex gap-2">
             <ProjectName />
-            <Toolbar />
+            <Toolbar>
+              <AutoSave />
+            </Toolbar>
           </div>
           <Menubar />
         </Panel>
@@ -238,7 +240,6 @@
         <Background variant={BackgroundVariant.Dots} />
         <MiniMap />
 
-        <AutoSave />
         <CopyPasteShortcutHandler />
 
         <div id="itemDetailsPortal" />
