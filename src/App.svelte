@@ -194,16 +194,16 @@
           toggleNodeEdgeHidden([event.detail.node], true);
         }}
         on:nodedragstart={(event) => {
-          console.debug("on node drag start", event.detail.node);
-          if (event.detail.node === undefined) return;
-          toggleNodeEdgeHidden([event.detail.node]);
+          console.debug("on node drag start", event.detail.targetNode);
+          if (!event.detail.targetNode) return;
+          toggleNodeEdgeHidden([event.detail.targetNode]);
           // For node move history
-          moveNodeStartPos = event.detail.node.position;
+          moveNodeStartPos = event.detail.targetNode.position;
         }}
         on:nodedragstop={(event) => {
-          console.debug("on node drag stop", event.detail.node);
-          if (event.detail.node === undefined) return;
-          handleMove(event.detail.node, moveNodeStartPos);
+          console.debug("on node drag stop", event.detail.targetNode);
+          if (!event.detail.targetNode) return;
+          handleMove(event.detail.targetNode, moveNodeStartPos);
         }}
         on:edgeclick={(event) => {
           console.debug("on edge click", event.detail.edge);
