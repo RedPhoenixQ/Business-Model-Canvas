@@ -85,4 +85,26 @@ const migratations: Record<
     return project;
   },
   "0.0.1": "0.0.2",
+  "0.0.2": (project) => {
+    const removedSegments = ["sustainable-company", "impact", "sustainability"];
+    for (const page of project.pages) {
+      if (page.data.template !== "detailed") continue;
+      // Remove the top row
+      page.grid.rows.shift();
+      // Filter away the removed segments
+      page.nodes = page.nodes.filter(
+        (node: { type: string; id: string }) =>
+          node.type !== "segment" || !removedSegments.includes(node.id),
+      );
+      // Update all nodes within removed segments to be placed outside the grid
+      for (const node of page.nodes) {
+        if (node.parentNode && removedSegments.includes(node.parentNode)) {
+          node.parentNode = undefined;
+          node.position.y = -100;
+        }
+      }
+    }
+    project.version = "0.0.3";
+    return project;
+  },
 };
