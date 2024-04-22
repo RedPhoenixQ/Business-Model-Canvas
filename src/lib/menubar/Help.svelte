@@ -21,9 +21,21 @@
       <GithubIcon size={20} />
       Github
     </Menubar.Item>
-    <!-- svelte-ignore missing-declaration -->
-    <div class="text-small px-2 py-1 text-sm text-muted-foreground">
-      Version {APP_VERSION}
-    </div>
+    <Menubar.Separator />
+    <Menubar.Group>
+      <Menubar.Label>About</Menubar.Label>
+      <div class="text-small px-2 py-1 text-sm text-muted-foreground">
+        Icons by <a
+          class="underline"
+          href="https://icons8.com/"
+          target="_blank"
+          rel="noopener noreferrer">Icons8</a
+        >
+      </div>
+      <!-- svelte-ignore missing-declaration -->
+      <div class="text-small px-2 py-1 text-sm text-muted-foreground">
+        Version {APP_VERSION}
+      </div>
+    </Menubar.Group>
   </Menubar.Content>
 </Menubar.Menu>
