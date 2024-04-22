@@ -36,7 +36,7 @@
     "vite-plugin-singlefile": "^1.0.0"
   },
   "dependencies": {
-    "@xyflow/svelte": "^0.0.39",
+    "@xyflow/svelte": "^0.0.41",
     "bits-ui": "^0.20.1",
     "clsx": "^2.1.0",
     "lucide-svelte": "^0.319.0",
