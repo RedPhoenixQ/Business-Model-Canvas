@@ -112,4 +112,12 @@
       </div>
     {/if}
   </div>
+  <div class="text-small px-2 py-1 text-sm text-muted-foreground">
+    Icons by <a
+      class="underline"
+      href="https://icons8.com/"
+      target="_blank"
+      rel="noopener noreferrer">Icons8</a
+    >
+  </div>
 </div>
