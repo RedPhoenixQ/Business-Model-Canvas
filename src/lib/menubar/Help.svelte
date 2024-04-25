@@ -2,11 +2,20 @@
   import * as Menubar from "$lib/components/ui/menubar";
   import { BugIcon } from "lucide-svelte";
   import GithubIcon from "../icons/GithubIcon.svelte";
+  import QuickstartQuide from "$lib/info/quide/QuickstartQuide.svelte";
+
+  let open = false;
 </script>
+
+<QuickstartQuide bind:open />
 
 <Menubar.Menu>
   <Menubar.Trigger>Help</Menubar.Trigger>
   <Menubar.Content>
+    <Menubar.Item class="gap-2" on:click={() => (open = true)}>
+      Quickstart guide
+    </Menubar.Item>
+    <Menubar.Separator />
     <Menubar.Item class="gap-2" href="mailto:redphoenixq@gmail.com">
       <BugIcon size={20} />
       Report issue (email)
