@@ -108,4 +108,19 @@ const migratations: Record<
     return project;
   },
   "0.0.3": "0.0.4",
+  "0.0.4": (project) => {
+    // Templates were renamed with these mappings
+    const templateRename: Record<string, string> = {
+      empty: "Empty",
+      default: "BMC",
+      detailed: "Extended BMC",
+    };
+    for (const page of project.pages) {
+      page.data.template =
+        templateRename?.[page.data.template] ?? page.data.template;
+    }
+
+    project.version = "0.0.5";
+    return project;
+  },
 };
