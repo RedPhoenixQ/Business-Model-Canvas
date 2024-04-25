@@ -1,19 +1,27 @@
 import type { Node, NodeTypes } from "@xyflow/svelte";
 import Item from "./item/Item.svelte";
+import Text from "./text/Text.svelte";
 import Segment from "./segment/Segment.svelte";
 import Slider from "./slider/Slider.svelte";
 import Group from "./group/Group.svelte";
 import { defaultItemNode, type ItemNode } from "./item";
+import { defaultTextNode, type TextNode } from "./text";
 import { defaultSegmentNode, type SegmentNode } from "./segment";
 import { defaultSliderNode, type SliderNode } from "./slider";
 import { defaultGroupNode, type GroupNode } from "./group";
 import type { DefaultNode } from "$lib/info/nodes";
 import { addHistoryEntry } from "$lib/project/history";
 
-export type TypedNode = ItemNode | SegmentNode | SliderNode | GroupNode;
+export type TypedNode =
+  | ItemNode
+  | SegmentNode
+  | SliderNode
+  | GroupNode
+  | TextNode;
 
 export const nodeTypes = {
   item: Item,
+  text: Text,
   segment: Segment,
   slider: Slider,
   customGroup: Group,
@@ -21,6 +29,7 @@ export const nodeTypes = {
 
 export const defaultNodes = {
   item: defaultItemNode,
+  text: defaultTextNode,
   segment: defaultSegmentNode,
   slider: defaultSliderNode,
   customGroup: defaultGroupNode,
