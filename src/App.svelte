@@ -137,8 +137,8 @@
     <ContextMenu.Trigger
       class="absolute h-full w-full"
       on:contextmenu={(event) => {
-        contextmenuPos.x = event.detail.originalEvent.clientX;
-        contextmenuPos.y = event.detail.originalEvent.clientY;
+        contextmenuPos.x = event.detail.detail.originalEvent.clientX;
+        contextmenuPos.y = event.detail.detail.originalEvent.clientY;
       }}
     >
       <SvelteFlow

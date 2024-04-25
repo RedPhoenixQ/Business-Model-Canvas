@@ -5,7 +5,7 @@
   type $$Props = ContextMenuPrimitive.TriggerProps;
   type $$Event = ContextMenuPrimitive.TriggerEvents;
 
-  const dispatch = createEventDispatcher();
+  const dispatch = createEventDispatcher<Pick<$$Event, "contextmenu">>();
 
   const rootId: string = getContext("custom-context-menu-id");
 </script>
@@ -21,7 +21,7 @@
         new CustomEvent("custom-menu-close", { detail: rootId }),
       );
     }
-    dispatch("contextmenu", event.detail);
+    dispatch("contextmenu", event);
   }}
 >
   <slot />
