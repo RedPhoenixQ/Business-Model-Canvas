@@ -241,6 +241,7 @@
             type="context-menu"
             bind:createPos={contextmenuPos}
           />
+          <ContextMenu.Separator />
           <PasteItemMenuPart
             type="context-menu"
             bind:createPos={contextmenuPos}
