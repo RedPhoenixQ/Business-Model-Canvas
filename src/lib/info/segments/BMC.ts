@@ -1,7 +1,7 @@
 import { defaultItemData, defaultItemNode } from "$lib/nodes/item";
 import type { SegmentsTemplate } from ".";
 
-type DefaultSegments =
+type BMCSegments =
   | "customer-relations"
   | "channels"
   | "customers"
@@ -12,7 +12,7 @@ type DefaultSegments =
   | "key-resources"
   | "value";
 
-export const defaultTemplate = {
+export const BMCTemplate = {
   grid: {
     columns: [200, 200, 100, 100, 200, 200],
     rows: [200, 200, 200],
@@ -161,4 +161,4 @@ export const defaultTemplate = {
       },
     },
   },
-} as const satisfies SegmentsTemplate<DefaultSegments>;
+} as const satisfies SegmentsTemplate<BMCSegments>;

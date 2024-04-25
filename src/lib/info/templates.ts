@@ -43,11 +43,11 @@ export function fromSegmentTemplate<T extends SegmentTemplateKey>(
 }
 
 export const pageTemplates = {
-  Empty: [fromSegmentTemplate("empty", {}), {}],
-  Default: [
-    fromSegmentTemplate("default", {}),
+  Empty: [fromSegmentTemplate("Empty", {}), {}],
+  BMC: [
+    fromSegmentTemplate("BMC", {}),
     {
-      "Basic Example": fromSegmentTemplate("default", {
+      "Basic Example": fromSegmentTemplate("BMC", {
         nodes: [
           {
             ...defaultItemNode,
@@ -140,10 +140,10 @@ export const pageTemplates = {
       }),
     },
   ],
-  Detailed: [
-    fromSegmentTemplate("detailed", {}),
+  "Extended BMC": [
+    fromSegmentTemplate("Extended BMC", {}),
     {
-      "Big example": fromSegmentTemplate("detailed", {
+      "Big example": fromSegmentTemplate("Extended BMC", {
         grid: {
           columns: [200, 224, 200, 200, 200, 200],
           rows: [200, 210, 210, 210, 200],

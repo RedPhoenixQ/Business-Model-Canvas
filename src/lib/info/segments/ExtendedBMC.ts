@@ -1,9 +1,9 @@
 import { defaultGroupNode } from "$lib/nodes/group";
 import { defaultItemData, defaultItemNode } from "$lib/nodes/item";
 import type { SegmentsTemplate } from ".";
-import * as detailedDesc from "$lib/info/descriptions/detailed";
+import * as ExtededBMCDesc from "$lib/info/descriptions/ExtendedBMC";
 
-type DetailedSegments =
+type ExtendedBMCSegments =
   | "key-support"
   | "key-resources"
   | "key-activities"
@@ -15,7 +15,7 @@ type DetailedSegments =
   | "value"
   | "revenue";
 
-export const detailedTemplate = {
+export const ExtendedBMCTemplate = {
   grid: {
     columns: [200, 200, 200, 200, 200, 200],
     rows: [200, 180, 180, 180, 200],
@@ -23,7 +23,7 @@ export const detailedTemplate = {
   nodes: {
     "key-support": {
       title: "Key Support",
-      description: detailedDesc.KeySupport,
+      description: ExtededBMCDesc.KeySupport,
       classes: "bg-cyan-700",
       grid: {
         column: {
@@ -39,7 +39,7 @@ export const detailedTemplate = {
     },
     "key-resources": {
       title: "Key Resourses",
-      description: detailedDesc.KeyResource,
+      description: ExtededBMCDesc.KeyResource,
       classes: "bg-cyan-600",
       grid: {
         column: {
@@ -66,7 +66,7 @@ export const detailedTemplate = {
     },
     "key-activities": {
       title: "Key Activities",
-      description: detailedDesc.KeyActivites,
+      description: ExtededBMCDesc.KeyActivites,
       classes: "bg-cyan-600",
       grid: {
         column: {
@@ -82,7 +82,7 @@ export const detailedTemplate = {
     },
     marketing: {
       title: "Marketing",
-      description: detailedDesc.Marketing,
+      description: ExtededBMCDesc.Marketing,
       classes: "bg-lime-600",
       grid: {
         column: {
@@ -118,7 +118,7 @@ export const detailedTemplate = {
     },
     "customer-relations": {
       title: "Customer Relations",
-      description: detailedDesc.CustomerRelation,
+      description: ExtededBMCDesc.CustomerRelation,
       classes: "bg-lime-600",
       grid: {
         column: {
@@ -134,7 +134,7 @@ export const detailedTemplate = {
     },
     distribution: {
       title: "Distribution",
-      description: detailedDesc.Distribution,
+      description: ExtededBMCDesc.Distribution,
       classes: "bg-lime-600",
       grid: {
         column: {
@@ -160,7 +160,7 @@ export const detailedTemplate = {
     },
     users: {
       title: "Users",
-      description: detailedDesc.Users,
+      description: ExtededBMCDesc.Users,
       classes: "bg-lime-700",
       grid: {
         column: {
@@ -175,7 +175,7 @@ export const detailedTemplate = {
     },
     costs: {
       title: "Costs",
-      description: detailedDesc.Costs,
+      description: ExtededBMCDesc.Costs,
       classes: "bg-orange-600",
       grid: {
         column: {
@@ -190,7 +190,7 @@ export const detailedTemplate = {
     },
     value: {
       title: "Value Proposition",
-      description: detailedDesc.Value,
+      description: ExtededBMCDesc.Value,
       classes: "bg-yellow-600",
       grid: {
         column: {
@@ -205,7 +205,7 @@ export const detailedTemplate = {
     },
     revenue: {
       title: "Revenue",
-      description: detailedDesc.Revenue,
+      description: ExtededBMCDesc.Revenue,
       classes: "bg-orange-700",
       grid: {
         column: {
@@ -219,4 +219,4 @@ export const detailedTemplate = {
       },
     },
   },
-} as const satisfies SegmentsTemplate<DetailedSegments>;
+} as const satisfies SegmentsTemplate<ExtendedBMCSegments>;
