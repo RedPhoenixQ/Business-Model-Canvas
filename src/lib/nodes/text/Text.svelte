@@ -34,9 +34,9 @@
     on:copy|stopPropagation={() => {}}
     on:cut|stopPropagation={() => {}}
     on:paste|stopPropagation={() => {}}
-    on:select|stopPropagation={() => {}}
     on:wheel|stopPropagation={() => {}}
     on:scroll|stopPropagation={() => {}}
+    on:change={() => nodeDataChange(data, "text")}
     bind:value={data.text}
   ></textarea>
 </div>
