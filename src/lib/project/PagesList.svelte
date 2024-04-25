@@ -6,14 +6,15 @@
   import { pageTemplates } from "../info/templates";
   import * as Dropdown from "../components/ui/dropdown-menu";
   import { createEventDispatcher } from "svelte";
+  import { Separator } from "bits-ui";
 
   const dispatch = createEventDispatcher<{ pageSwap: undefined }>();
 
   const { swapActivePage, addPage } = useProject();
 
-  function pageFromTemplate(template: string) {
-    if (!Object.keys(pageTemplates).includes(template)) return;
-    addPage(template as keyof typeof pageTemplates);
+  function pageFromTemplate(template: string, preset?: string) {
+    if (!pageTemplates?.[template as keyof typeof pageFromTemplate]) return;
+    addPage(template as keyof typeof pageTemplates, preset);
   }
 
   let prevPage = $projectStore.activePageIndex;
@@ -21,6 +22,8 @@
     prevPage = $projectStore.activePageIndex;
     dispatch("pageSwap");
   }
+
+  let open = false;
 </script>
 
 <ul
@@ -67,7 +70,7 @@
     </li>
   {/each}
   <li>
-    <Dropdown.Root>
+    <Dropdown.Root bind:open>
       <Dropdown.Trigger
         class={buttonVariants({ variant: "secondary", size: "icon" })}
       >
@@ -75,13 +78,40 @@
       </Dropdown.Trigger>
       <Dropdown.Content>
         <Dropdown.Label>Templates</Dropdown.Label>
-        {#each Object.keys(pageTemplates) as template}
-          <Dropdown.Item
-            class="capitalize"
-            on:click={() => pageFromTemplate(template)}
-          >
-            {template.replaceAll("_", " ")}
-          </Dropdown.Item>
+        {#each Object.entries(pageTemplates) as [templateName, template]}
+          {@const presets = template[1]}
+          {#if Object.keys(presets).length > 0}
+            <Dropdown.Sub>
+              <Dropdown.SubTrigger
+                class="gap-2"
+                on:click={() => {
+                  open = false;
+                  pageFromTemplate(templateName);
+                }}
+              >
+                {templateName}
+              </Dropdown.SubTrigger>
+              <Dropdown.SubContent>
+                <Dropdown.Label>Presets</Dropdown.Label>
+                <Dropdown.Separator />
+                {#each Object.keys(presets) as presetName}
+                  <Dropdown.Item
+                    class="gap-2"
+                    on:click={() => pageFromTemplate(templateName, presetName)}
+                  >
+                    {presetName}
+                  </Dropdown.Item>
+                {/each}
+              </Dropdown.SubContent>
+            </Dropdown.Sub>
+          {:else}
+            <Dropdown.Item
+              class="gap-2"
+              on:click={() => pageFromTemplate(templateName)}
+            >
+              {templateName}
+            </Dropdown.Item>
+          {/if}
         {/each}
       </Dropdown.Content>
     </Dropdown.Root>

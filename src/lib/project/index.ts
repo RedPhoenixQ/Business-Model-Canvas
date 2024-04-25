@@ -54,14 +54,14 @@ projectStore.subscribe(($project) => console.debug("project", $project));
 
 export const pageStore = writable<PageData>({
   ...defaultPageData,
-  template: "empty",
+  template: "Empty",
 });
 pageStore.subscribe(($page) => console.debug("pageStore", $page));
 
 export const templateInfoStore = derived(
   pageStore,
   ($page) => segmentTemplateInfo[$page.template],
-  segmentTemplateInfo.empty,
+  segmentTemplateInfo["Empty"],
 );
 
 export const gridStore = writable<Grid>({ columns: [], rows: [] });
@@ -86,7 +86,7 @@ export function useProject() {
   function loadPage($project: Project) {
     const page =
       $project.pages?.[$project.activePageIndex] ??
-      structuredClone(pageTemplates.empty);
+      structuredClone(pageTemplates["Empty"][0]);
 
     // Update name immediatly to prevent flashing
     pageStore.update((p) => {
@@ -147,7 +147,14 @@ export function useProject() {
       loadPage($project);
       projectStore.set($project);
     },
-    addPage(template: keyof typeof pageTemplates = "default") {
+    addPage(template: keyof typeof pageTemplates, preset?: string) {
+      const [base, presets]: [SavedPage, Record<string, SavedPage>] =
+        pageTemplates[template];
+      const new_page =
+        preset && presets?.[preset]
+          ? structuredClone(presets[preset])
+          : structuredClone(base);
+
       const $project = get(projectStore);
       storePage($project);
 
@@ -162,7 +169,6 @@ export function useProject() {
       }
 
       $project.activePageIndex = $project.pages.length;
-      const new_page = structuredClone(pageTemplates[template]);
       new_page.data.name = `Page ${max + 1}`;
       $project.pages.push(new_page);
       loadPage($project);
