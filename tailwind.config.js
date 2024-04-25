@@ -57,6 +57,12 @@ const config = {
       fontFamily: {
         sans: [...fontFamily.sans],
       },
+      gridTemplateColumns: {
+        a1a: "auto 1fr auto",
+        "1a": "1fr auto",
+        a1: "auto 1fr",
+        "1a1": "1fr auto 1fr",
+      },
     },
   },
 };
