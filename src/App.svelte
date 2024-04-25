@@ -33,6 +33,7 @@
   import PasteItemMenuPart from "$lib/copyPaste/PasteItemMenuPart.svelte";
   import { isInputElement } from "$lib/utils";
   import CopyPasteShortcutHandler from "$lib/copyPaste/CopyPasteShortcutHandler.svelte";
+  import SgaLogo from "$lib/icons/SGALogo.svelte";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -221,6 +222,10 @@
             </Toolbar>
           </div>
           <Menubar />
+        </Panel>
+
+        <Panel>
+          <SgaLogo class="pointer-events-none h-12" />
         </Panel>
 
         <PagesList on:pageSwap={() => nodeEdgesToShow.clear()} />

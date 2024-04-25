@@ -23,7 +23,7 @@
   }
 </script>
 
-<Controls>
+<Controls {...$$restProps}>
   <ControlButton
     title="toggle always show names"
     aria-label="toggle always show names"
