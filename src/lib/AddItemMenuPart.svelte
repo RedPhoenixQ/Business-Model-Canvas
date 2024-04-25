@@ -21,7 +21,7 @@
   export let type: MenuType;
   export let createPos: XYPosition;
 
-  const { Item, Sub, SubTrigger, SubContent, Label } = menu(type);
+  const { Group, Item, Sub, SubTrigger, SubContent, Label } = menu(type);
 
   const nodes = useNodes();
   const { screenToFlowPosition, getIntersectingNodes } = useSvelteFlow();
@@ -102,92 +102,94 @@
   }
 </script>
 
-{#if !segmentInfo?.presetNodes}
-  <Item
-    class="gap-2"
-    on:click={(event) => {
-      addNode(event, "item");
-    }}
-  >
-    <PlusIcon size="20" />
-    Item
-  </Item>
-{:else}
-  <Sub>
-    <SubTrigger
+<Group>
+  {#if !segmentInfo?.presetNodes}
+    <Item
       class="gap-2"
       on:click={(event) => {
-        document.dispatchEvent(
-          new CustomEvent("custom-menu-close", { detail: "" }),
-        );
         addNode(event, "item");
       }}
     >
       <PlusIcon size="20" />
       Item
-    </SubTrigger>
-    <SubContent>
-      <Item
+    </Item>
+  {:else}
+    <Sub>
+      <SubTrigger
         class="gap-2"
         on:click={(event) => {
+          document.dispatchEvent(
+            new CustomEvent("custom-menu-close", { detail: "" }),
+          );
           addNode(event, "item");
         }}
       >
         <PlusIcon size="20" />
-        New empty
-      </Item>
-      <Label>Presets</Label>
-      {#each Object.entries(segmentInfo.presetNodes) as [name, preset]}
-        <Item on:click={(event) => addNode(event, preset)}>
-          {name}
+        Item
+      </SubTrigger>
+      <SubContent>
+        <Item
+          class="gap-2"
+          on:click={(event) => {
+            addNode(event, "item");
+          }}
+        >
+          <PlusIcon size="20" />
+          New empty
         </Item>
-      {/each}
-    </SubContent>
-  </Sub>
-{/if}
-<Item
-  class="gap-2"
-  on:click={(event) => {
-    addNode(event, "text");
-  }}
->
-  <PlusIcon size="20" />
-  Text
-</Item>
-{#if !segmentInfo?.presetGroups}
-  <Item class="gap-2" on:click={(event) => addNode(event, "customGroup")}>
+        <Label>Presets</Label>
+        {#each Object.entries(segmentInfo.presetNodes) as [name, preset]}
+          <Item on:click={(event) => addNode(event, preset)}>
+            {name}
+          </Item>
+        {/each}
+      </SubContent>
+    </Sub>
+  {/if}
+  <Item
+    class="gap-2"
+    on:click={(event) => {
+      addNode(event, "text");
+    }}
+  >
     <PlusIcon size="20" />
-    Group
+    Text
   </Item>
-{:else}
-  <Sub>
-    <SubTrigger
-      class="gap-2"
-      on:click={(event) => {
-        document.dispatchEvent(
-          new CustomEvent("custom-menu-close", { detail: "" }),
-        );
-        addNode(event, "customGroup");
-      }}
-    >
+  {#if !segmentInfo?.presetGroups}
+    <Item class="gap-2" on:click={(event) => addNode(event, "customGroup")}>
       <PlusIcon size="20" />
       Group
-    </SubTrigger>
-    <SubContent>
-      <Item class="gap-2" on:click={(event) => addNode(event, "item")}>
+    </Item>
+  {:else}
+    <Sub>
+      <SubTrigger
+        class="gap-2"
+        on:click={(event) => {
+          document.dispatchEvent(
+            new CustomEvent("custom-menu-close", { detail: "" }),
+          );
+          addNode(event, "customGroup");
+        }}
+      >
         <PlusIcon size="20" />
-        New empty
-      </Item>
-      <Label>Presets</Label>
-      {#each Object.entries(segmentInfo.presetGroups) as [name, preset]}
-        <Item on:click={(event) => addGroupPreset(event, preset)}>
-          {name}
+        Group
+      </SubTrigger>
+      <SubContent>
+        <Item class="gap-2" on:click={(event) => addNode(event, "item")}>
+          <PlusIcon size="20" />
+          New empty
         </Item>
-      {/each}
-    </SubContent>
-  </Sub>
-{/if}
-<Item class="gap-2" on:click={(event) => addNode(event, "slider")}>
-  <PlusIcon size="20" />
-  Slider
-</Item>
+        <Label>Presets</Label>
+        {#each Object.entries(segmentInfo.presetGroups) as [name, preset]}
+          <Item on:click={(event) => addGroupPreset(event, preset)}>
+            {name}
+          </Item>
+        {/each}
+      </SubContent>
+    </Sub>
+  {/if}
+  <Item class="gap-2" on:click={(event) => addNode(event, "slider")}>
+    <PlusIcon size="20" />
+    Slider
+  </Item>
+</Group>

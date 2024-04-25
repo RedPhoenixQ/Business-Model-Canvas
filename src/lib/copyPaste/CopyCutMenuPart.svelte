@@ -7,33 +7,35 @@
   export let type: MenuType;
   export let id: string;
 
-  const { Item, Shortcut } = menu(type);
+  const { Group, Item, Shortcut } = menu(type);
 
   const { getNode } = useSvelteFlow();
   const { copy, cut } = useCopy();
 </script>
 
-<Item
-  class="gap-2"
-  on:click={() => {
-    const node = getNode(id);
-    if (!node) return;
-    cut([node]);
-  }}
->
-  <ScissorsIcon size={20} />
-  Cut
-  <Shortcut>Ctrl+X</Shortcut>
-</Item>
-<Item
-  class="gap-2"
-  on:click={() => {
-    const node = getNode(id);
-    if (!node) return;
-    copy([node]);
-  }}
->
-  <CopyIcon size={20} />
-  Copy
-  <Shortcut>Ctrl+C</Shortcut>
-</Item>
+<Group>
+  <Item
+    class="gap-2"
+    on:click={() => {
+      const node = getNode(id);
+      if (!node) return;
+      cut([node]);
+    }}
+  >
+    <ScissorsIcon size={20} />
+    Cut
+    <Shortcut>Ctrl+X</Shortcut>
+  </Item>
+  <Item
+    class="gap-2"
+    on:click={() => {
+      const node = getNode(id);
+      if (!node) return;
+      copy([node]);
+    }}
+  >
+    <CopyIcon size={20} />
+    Copy
+    <Shortcut>Ctrl+C</Shortcut>
+  </Item>
+</Group>

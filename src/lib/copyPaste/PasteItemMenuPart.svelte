@@ -7,39 +7,41 @@
   export let type: MenuType;
   export let createPos: XYPosition;
 
-  const { Item, Shortcut } = menu(type);
+  const { Group, Item, Shortcut } = menu(type);
 
   const paste = usePaste();
 </script>
 
-<Item
-  class="gap-2"
-  disabled={!$nodeClipboard}
-  on:click={(event) =>
-    paste(
-      createPos ?? {
-        x: event.detail.originalEvent.clientX,
-        y: event.detail.originalEvent.clientY,
-      },
-    )}
->
-  <ClipboardIcon size={20} />
-  Paste
-  <Shortcut>Ctrl+V</Shortcut>
-</Item>
-<Item
-  class="gap-2"
-  disabled={!$nodeClipboard}
-  on:click={(event) =>
-    paste(
-      createPos ?? {
-        x: event.detail.originalEvent.clientX,
-        y: event.detail.originalEvent.clientY,
-      },
-      false,
-    )}
->
-  <ClipboardXIcon size={20} />
-  Paste without connections
-  <Shortcut>Ctrl+Shift+V</Shortcut>
-</Item>
+<Group>
+  <Item
+    class="gap-2"
+    disabled={!$nodeClipboard}
+    on:click={(event) =>
+      paste(
+        createPos ?? {
+          x: event.detail.originalEvent.clientX,
+          y: event.detail.originalEvent.clientY,
+        },
+      )}
+  >
+    <ClipboardIcon size={20} />
+    Paste
+    <Shortcut>Ctrl+V</Shortcut>
+  </Item>
+  <Item
+    class="gap-2"
+    disabled={!$nodeClipboard}
+    on:click={(event) =>
+      paste(
+        createPos ?? {
+          x: event.detail.originalEvent.clientX,
+          y: event.detail.originalEvent.clientY,
+        },
+        false,
+      )}
+  >
+    <ClipboardXIcon size={20} />
+    Paste without connections
+    <Shortcut>Ctrl+Shift+V</Shortcut>
+  </Item>
+</Group>
