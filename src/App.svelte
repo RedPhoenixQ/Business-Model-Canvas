@@ -225,7 +225,13 @@
         </Panel>
 
         <Panel>
-          <SgaLogo class="pointer-events-none h-12" />
+          <a
+            href="https://swedengamearena.com/en/us/sweden-game-startup/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <SgaLogo class="pointer-events-none h-12" />
+          </a>
         </Panel>
 
         <PagesList on:pageSwap={() => nodeEdgesToShow.clear()} />
