@@ -1,0 +1,1025 @@
+{
+  "version": "0.0.4",
+  "activePageIndex": 1,
+  "pages": [
+    {
+      "nodes": [
+        {
+          "id": "key-partners",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 400,
+          "position": { "x": 0, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 0, "y": 0 },
+            "width": 200,
+            "height": 400
+          },
+          "selected": false
+        },
+        {
+          "id": "key-activities",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 200,
+          "position": { "x": 200, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 200, "y": 0 },
+            "width": 200,
+            "height": 200
+          },
+          "selected": false
+        },
+        {
+          "id": "key-resources",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 200,
+          "position": { "x": 200, "y": 200 },
+          "computed": {
+            "positionAbsolute": { "x": 200, "y": 200 },
+            "width": 200,
+            "height": 200
+          },
+          "selected": false
+        },
+        {
+          "id": "value",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 400,
+          "position": { "x": 400, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 400, "y": 0 },
+            "width": 200,
+            "height": 400
+          },
+          "selected": false
+        },
+        {
+          "id": "customer-relations",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 200,
+          "position": { "x": 600, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 600, "y": 0 },
+            "width": 200,
+            "height": 200
+          },
+          "selected": false
+        },
+        {
+          "id": "channels",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 200,
+          "position": { "x": 600, "y": 200 },
+          "computed": {
+            "positionAbsolute": { "x": 600, "y": 200 },
+            "width": 200,
+            "height": 200
+          },
+          "selected": false
+        },
+        {
+          "id": "customers",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 400,
+          "position": { "x": 800, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 800, "y": 0 },
+            "width": 200,
+            "height": 400
+          },
+          "selected": false
+        },
+        {
+          "id": "costs",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 500,
+          "height": 200,
+          "position": { "x": 0, "y": 400 },
+          "computed": {
+            "positionAbsolute": { "x": 0, "y": 400 },
+            "width": 500,
+            "height": 200
+          },
+          "selected": false
+        },
+        {
+          "id": "revenue",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 500,
+          "height": 200,
+          "position": { "x": 500, "y": 400 },
+          "computed": {
+            "positionAbsolute": { "x": 500, "y": 400 },
+            "width": 500,
+            "height": 200
+          },
+          "selected": false
+        },
+        {
+          "type": "item",
+          "data": {
+            "name": "steam",
+            "icon": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+              "shape": "circle"
+            },
+            "description": "",
+            "showText": false,
+            "showTitle": true,
+            "textWidth": 120,
+            "textHeight": 40
+          },
+          "extent": "parent",
+          "id": "1",
+          "position": { "x": 62.08583856655608, "y": 116.78960484094684 },
+          "parentNode": "key-partners",
+          "computed": {
+            "positionAbsolute": {
+              "x": 62.08583856655608,
+              "y": 116.78960484094684
+            },
+            "width": 40,
+            "height": 40
+          },
+          "selected": false,
+          "dragging": false
+        },
+        {
+          "type": "item",
+          "data": {
+            "name": "empty test",
+            "icon": {},
+            "description": "",
+            "showText": false,
+            "showTitle": true,
+            "textWidth": 120,
+            "textHeight": 40
+          },
+          "extent": "parent",
+          "id": "2",
+          "position": { "x": 56.90826727066815, "y": 94.76783691959231 },
+          "parentNode": "key-activities",
+          "computed": {
+            "positionAbsolute": {
+              "x": 256.90826727066815,
+              "y": 94.76783691959231
+            },
+            "width": 40,
+            "height": 40
+          },
+          "selected": false,
+          "dragging": false
+        },
+        {
+          "type": "item",
+          "data": {
+            "name": "empty test",
+            "icon": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png"
+            },
+            "description": "",
+            "showText": false,
+            "showTitle": false,
+            "textWidth": 120,
+            "textHeight": 40
+          },
+          "extent": "parent",
+          "id": "3",
+          "position": { "x": 120, "y": 50 },
+          "parentNode": "channels",
+          "computed": {
+            "positionAbsolute": { "x": 720, "y": 250 },
+            "width": 40,
+            "height": 40
+          },
+          "selected": false
+        },
+        {
+          "type": "item",
+          "data": {
+            "name": "Costs",
+            "icon": {
+              "src": "https://static.vecteezy.com/system/resources/previews/019/006/277/original/money-cash-icon-png.png",
+              "shape": "circle",
+              "background": "light"
+            },
+            "description": "",
+            "showText": false,
+            "showTitle": false,
+            "textWidth": 120,
+            "textHeight": 40
+          },
+          "extent": "parent",
+          "id": "4",
+          "position": { "x": 120, "y": 120 },
+          "parentNode": "costs",
+          "computed": {
+            "positionAbsolute": { "x": 120, "y": 520 },
+            "width": 40,
+            "height": 40
+          },
+          "selected": false
+        },
+        {
+          "type": "item",
+          "data": {
+            "name": "Agreement",
+            "icon": {
+              "src": "https://img.icons8.com/?size=100&format=png&id=16183"
+            },
+            "description": "",
+            "showText": false,
+            "showTitle": false,
+            "textWidth": 120,
+            "textHeight": 40
+          },
+          "extent": "parent",
+          "id": "5",
+          "position": { "x": 38, "y": 96 },
+          "parentNode": "key-resources",
+          "computed": {
+            "positionAbsolute": { "x": 238, "y": 296 },
+            "width": 40,
+            "height": 40
+          },
+          "selected": false
+        },
+        {
+          "type": "text",
+          "data": { "name": "", "text": "Text here now" },
+          "width": 150,
+          "height": 100,
+          "extent": "parent",
+          "id": "5aac3a2f-7280-439f-8e21-3f01d6408b75",
+          "position": { "x": 18.982917220125046, "y": 178.86169734866576 },
+          "parentNode": "value",
+          "computed": {
+            "positionAbsolute": {
+              "x": 418.98291722012505,
+              "y": 178.86169734866576
+            },
+            "width": 150,
+            "height": 100
+          },
+          "selected": false,
+          "dragging": false
+        }
+      ],
+      "edges": [
+        {
+          "type": "line",
+          "style": "stroke-width: 2;",
+          "id": "1-2-test",
+          "source": "1",
+          "target": "2",
+          "hidden": true,
+          "selected": false
+        },
+        {
+          "type": "line",
+          "style": "stroke-width: 2;",
+          "id": "2-3-test",
+          "source": "2",
+          "target": "3",
+          "selected": false,
+          "hidden": true
+        },
+        {
+          "type": "line",
+          "style": "stroke-width: 2;",
+          "id": "1-4-test",
+          "source": "1",
+          "target": "4",
+          "hidden": true,
+          "selected": false
+        },
+        {
+          "type": "line",
+          "style": "stroke-width: 2;",
+          "id": "1-5-test",
+          "source": "5",
+          "target": "1",
+          "hidden": true,
+          "selected": false
+        }
+      ],
+      "viewport": {
+        "x": 305.1837841547752,
+        "y": 153.64809684497476,
+        "zoom": 1.0139225213853649
+      },
+      "data": {
+        "name": "Page 1",
+        "keepWithinParent": true,
+        "showItemNames": false,
+        "showRelationWarnings": true,
+        "template": "default"
+      },
+      "grid": {
+        "columns": [200, 200, 100, 100, 200, 200],
+        "rows": [200, 200, 200]
+      },
+      "history": {
+        "undo": [
+          {
+            "type": "move",
+            "id": "1",
+            "from": { "x": 90, "y": 80 },
+            "to": { "x": 65.07564604107476, "y": 95.86095251931604 },
+            "parent": { "from": "key-partners", "to": "key-partners" }
+          },
+          {
+            "type": "nodeData",
+            "id": "2",
+            "from": {
+              "name": "empty test",
+              "icon": {},
+              "description": "",
+              "showText": false,
+              "showTitle": false,
+              "textWidth": 120,
+              "textHeight": 40
+            },
+            "to": {
+              "name": "empty test",
+              "icon": {},
+              "description": "",
+              "showText": false,
+              "showTitle": true,
+              "textWidth": 120,
+              "textHeight": 40
+            }
+          },
+          {
+            "type": "move",
+            "id": "2",
+            "from": { "x": 30, "y": 100 },
+            "to": { "x": 42.706681766704406, "y": 102.24235560588902 },
+            "parent": { "from": "key-activities", "to": "key-activities" }
+          },
+          {
+            "type": "nodeData",
+            "id": "1",
+            "from": {
+              "name": "steam",
+              "icon": {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+                "shape": "circle"
+              },
+              "description": "",
+              "showText": false,
+              "showTitle": false,
+              "textWidth": 120,
+              "textHeight": 40
+            },
+            "to": {
+              "name": "steam",
+              "icon": {
+                "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/2048px-Steam_icon_logo.svg.png",
+                "shape": "circle"
+              },
+              "description": "",
+              "showText": false,
+              "showTitle": true,
+              "textWidth": 120,
+              "textHeight": 40
+            }
+          },
+          {
+            "type": "move",
+            "id": "1",
+            "from": { "x": 65.07564604107476, "y": 95.86095251931604 },
+            "to": { "x": 62.08583856655608, "y": 116.78960484094684 },
+            "parent": { "from": "key-partners", "to": "key-partners" }
+          },
+          {
+            "type": "move",
+            "id": "2",
+            "from": { "x": 42.706681766704406, "y": 102.24235560588902 },
+            "to": { "x": 56.90826727066815, "y": 94.76783691959231 },
+            "parent": { "from": "key-activities", "to": "key-activities" }
+          },
+          {
+            "type": "create",
+            "nodes": [
+              {
+                "type": "text",
+                "data": { "name": "", "text": "Text here now" },
+                "width": 150,
+                "height": 100,
+                "extent": "parent",
+                "id": "5aac3a2f-7280-439f-8e21-3f01d6408b75",
+                "position": { "x": 66.32381259190907, "y": 260.72199559570896 },
+                "parentNode": "value"
+              }
+            ]
+          },
+          {
+            "type": "move",
+            "id": "5aac3a2f-7280-439f-8e21-3f01d6408b75",
+            "from": { "x": 66.32381259190907, "y": 260.72199559570896 },
+            "to": { "x": 18.982917220125046, "y": 178.86169734866576 },
+            "parent": { "from": "value", "to": "value" }
+          },
+          {
+            "type": "nodeData",
+            "id": "5aac3a2f-7280-439f-8e21-3f01d6408b75",
+            "from": { "name": "", "text": "" },
+            "to": { "name": "", "text": "Text here now" }
+          }
+        ],
+        "redo": []
+      }
+    },
+    {
+      "nodes": [
+        {
+          "id": "key-support",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 560,
+          "position": { "x": 0, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 0, "y": 0 },
+            "width": 200,
+            "height": 560
+          },
+          "selected": false
+        },
+        {
+          "id": "key-resources",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 560,
+          "position": { "x": 200, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 200, "y": 0 },
+            "width": 200,
+            "height": 560
+          },
+          "selected": false
+        },
+        {
+          "id": "key-activities",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 560,
+          "position": { "x": 400, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 400, "y": 0 },
+            "width": 200,
+            "height": 560
+          },
+          "selected": false
+        },
+        {
+          "id": "marketing",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 400,
+          "height": 200,
+          "position": { "x": 600, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 600, "y": 0 },
+            "width": 400,
+            "height": 200
+          },
+          "selected": false
+        },
+        {
+          "id": "customer-relations",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 400,
+          "height": 180,
+          "position": { "x": 600, "y": 200 },
+          "computed": {
+            "positionAbsolute": { "x": 600, "y": 200 },
+            "width": 400,
+            "height": 180
+          },
+          "selected": false
+        },
+        {
+          "id": "distribution",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 400,
+          "height": 180,
+          "position": { "x": 600, "y": 380 },
+          "computed": {
+            "positionAbsolute": { "x": 600, "y": 380 },
+            "width": 400,
+            "height": 180
+          },
+          "selected": false
+        },
+        {
+          "id": "users",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 560,
+          "position": { "x": 1000, "y": 0 },
+          "computed": {
+            "positionAbsolute": { "x": 1000, "y": 0 },
+            "width": 200,
+            "height": 560
+          },
+          "selected": false
+        },
+        {
+          "id": "costs",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 600,
+          "height": 180,
+          "position": { "x": 0, "y": 560 },
+          "computed": {
+            "positionAbsolute": { "x": 0, "y": 560 },
+            "width": 600,
+            "height": 180
+          },
+          "selected": false
+        },
+        {
+          "id": "value",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 400,
+          "height": 180,
+          "position": { "x": 600, "y": 560 },
+          "computed": {
+            "positionAbsolute": { "x": 600, "y": 560 },
+            "width": 400,
+            "height": 180
+          },
+          "selected": false
+        },
+        {
+          "id": "revenue",
+          "type": "segment",
+          "data": {},
+          "selectable": false,
+          "connectable": false,
+          "deletable": false,
+          "draggable": false,
+          "style": "pointer-events: none",
+          "zIndex": -10,
+          "width": 200,
+          "height": 180,
+          "position": { "x": 1000, "y": 560 },
+          "computed": {
+            "positionAbsolute": { "x": 1000, "y": 560 },
+            "width": 200,
+            "height": 180
+          },
+          "selected": false
+        },
+        {
+          "type": "item",
+          "data": {
+            "name": "New name",
+            "icon": {},
+            "description": "",
+            "showText": false,
+            "showTitle": true,
+            "textWidth": 120,
+            "textHeight": 40
+          },
+          "extent": "parent",
+          "id": "1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+          "position": { "x": 60.47892165779956, "y": 267.0592906194503 },
+          "parentNode": "key-activities",
+          "computed": {
+            "positionAbsolute": {
+              "x": 460.47892165779956,
+              "y": 267.0592906194503
+            },
+            "width": 40,
+            "height": 40
+          },
+          "selected": false,
+          "dragging": false
+        },
+        {
+          "type": "item",
+          "data": {
+            "name": "",
+            "icon": {},
+            "description": "",
+            "showText": false,
+            "showTitle": false,
+            "textWidth": 120,
+            "textHeight": 40
+          },
+          "extent": "parent",
+          "id": "dc993c59-ea2b-4ea9-94ce-18345f56ce00",
+          "position": { "x": 73.15362872139303, "y": 346.1251610146868 },
+          "parentNode": "key-resources",
+          "computed": {
+            "positionAbsolute": {
+              "x": 273.15362872139303,
+              "y": 346.1251610146868
+            },
+            "width": 40,
+            "height": 40
+          },
+          "selected": false
+        },
+        {
+          "type": "text",
+          "data": { "name": "", "text": "Good relations" },
+          "width": 150,
+          "height": 100,
+          "extent": "parent",
+          "id": "8ebd8415-712c-4830-9831-40a69d178159",
+          "position": { "x": 88.03737259343154, "y": 53.38505096262742 },
+          "parentNode": "customer-relations",
+          "computed": {
+            "positionAbsolute": {
+              "x": 688.0373725934315,
+              "y": 253.38505096262742
+            },
+            "width": 150,
+            "height": 100
+          },
+          "selected": false,
+          "dragging": false
+        }
+      ],
+      "edges": [
+        {
+          "type": "line",
+          "style": "stroke-width: 2;",
+          "source": "dc993c59-ea2b-4ea9-94ce-18345f56ce00",
+          "target": "1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+          "id": "dc993c59-ea2b-4ea9-94ce-18345f56ce00-1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+          "selected": false,
+          "hidden": true
+        }
+      ],
+      "viewport": {
+        "x": 208.6400491400492,
+        "y": 40.13636363636368,
+        "zoom": 1.0847665847665846
+      },
+      "data": {
+        "name": "Page 2",
+        "keepWithinParent": true,
+        "showItemNames": false,
+        "showRelationWarnings": true,
+        "template": "detailed"
+      },
+      "grid": {
+        "columns": [200, 200, 200, 200, 200, 200],
+        "rows": [200, 180, 180, 180, 200]
+      },
+      "history": {
+        "undo": [
+          {
+            "type": "create",
+            "nodes": [
+              {
+                "type": "item",
+                "data": {
+                  "name": "New name",
+                  "icon": {},
+                  "description": "",
+                  "showText": false,
+                  "showTitle": true,
+                  "textWidth": 120,
+                  "textHeight": 40
+                },
+                "extent": "parent",
+                "id": "1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+                "position": { "x": 34.934563530107766, "y": 284.0888627045781 },
+                "parentNode": "key-activities"
+              }
+            ]
+          },
+          {
+            "type": "create",
+            "nodes": [
+              {
+                "type": "item",
+                "data": {
+                  "name": "",
+                  "icon": {},
+                  "description": "",
+                  "showText": false,
+                  "showTitle": false,
+                  "textWidth": 120,
+                  "textHeight": 40
+                },
+                "extent": "parent",
+                "id": "3c80bf7a-0b09-4073-bbb4-ad5d47aac0fe",
+                "position": { "x": 383.8458472747242, "y": 142.52977679629146 },
+                "parentNode": "costs"
+              }
+            ]
+          },
+          {
+            "type": "move",
+            "id": "3c80bf7a-0b09-4073-bbb4-ad5d47aac0fe",
+            "from": { "x": 383.8458472747242, "y": 142.52977679629146 },
+            "to": { "x": 388.71143929904645, "y": 74.41148845578005 },
+            "parent": { "from": "costs", "to": "costs" }
+          },
+          {
+            "type": "delete",
+            "nodes": [
+              {
+                "type": "item",
+                "data": {
+                  "name": "",
+                  "icon": {},
+                  "description": "",
+                  "showText": false,
+                  "showTitle": false,
+                  "textWidth": 120,
+                  "textHeight": 40
+                },
+                "extent": "parent",
+                "id": "3c80bf7a-0b09-4073-bbb4-ad5d47aac0fe",
+                "position": { "x": 388.71143929904645, "y": 74.41148845578005 },
+                "parentNode": "costs",
+                "computed": {
+                  "positionAbsolute": {
+                    "x": 388.71143929904645,
+                    "y": 634.41148845578
+                  },
+                  "width": 40,
+                  "height": 40
+                },
+                "selected": true,
+                "dragging": false
+              }
+            ],
+            "edges": []
+          },
+          {
+            "type": "create",
+            "nodes": [
+              {
+                "type": "item",
+                "data": {
+                  "name": "",
+                  "icon": {},
+                  "description": "",
+                  "showText": false,
+                  "showTitle": false,
+                  "textWidth": 120,
+                  "textHeight": 40
+                },
+                "extent": "parent",
+                "id": "dc993c59-ea2b-4ea9-94ce-18345f56ce00",
+                "position": { "x": 73.15362872139303, "y": 346.1251610146868 },
+                "parentNode": "key-resources"
+              }
+            ]
+          },
+          {
+            "type": "create",
+            "edges": [
+              {
+                "source": "dc993c59-ea2b-4ea9-94ce-18345f56ce00",
+                "sourceHandle": null,
+                "target": "1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+                "targetHandle": null,
+                "id": "dc993c59-ea2b-4ea9-94ce-18345f56ce00-1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227"
+              }
+            ]
+          },
+          {
+            "type": "move",
+            "id": "1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+            "from": { "x": 34.934563530107766, "y": 284.0888627045781 },
+            "to": { "x": 60.47892165779956, "y": 292.6036487471421 },
+            "parent": { "from": "key-activities", "to": "key-activities" }
+          },
+          {
+            "type": "nodeData",
+            "id": "1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+            "from": {
+              "name": "",
+              "icon": {},
+              "description": "",
+              "showText": false,
+              "showTitle": false,
+              "textWidth": 120,
+              "textHeight": 40
+            },
+            "to": {
+              "name": "",
+              "icon": {},
+              "description": "",
+              "showText": false,
+              "showTitle": true,
+              "textWidth": 120,
+              "textHeight": 40
+            }
+          },
+          {
+            "type": "nodeData",
+            "id": "1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+            "from": {
+              "name": "",
+              "icon": {},
+              "description": "",
+              "showText": false,
+              "showTitle": true,
+              "textWidth": 120,
+              "textHeight": 40
+            },
+            "to": {
+              "name": "New name",
+              "icon": {},
+              "description": "",
+              "showText": false,
+              "showTitle": true,
+              "textWidth": 120,
+              "textHeight": 40
+            }
+          },
+          {
+            "type": "move",
+            "id": "1eb5aa8b-3b8b-40f1-b8b3-9c1574a76227",
+            "from": { "x": 60.47892165779956, "y": 292.6036487471421 },
+            "to": { "x": 60.47892165779956, "y": 267.0592906194503 },
+            "parent": { "from": "key-activities", "to": "key-activities" }
+          },
+          {
+            "type": "create",
+            "nodes": [
+              {
+                "type": "text",
+                "data": { "name": "", "text": "Good relations" },
+                "width": 150,
+                "height": 100,
+                "extent": "parent",
+                "id": "8ebd8415-712c-4830-9831-40a69d178159",
+                "position": { "x": 98.17780294450745, "y": 79.19705549263875 },
+                "parentNode": "customer-relations"
+              }
+            ]
+          },
+          {
+            "type": "move",
+            "id": "8ebd8415-712c-4830-9831-40a69d178159",
+            "from": { "x": 98.17780294450745, "y": 79.19705549263875 },
+            "to": { "x": 98.17780294450745, "y": 79.19705549263875 },
+            "parent": {
+              "from": "customer-relations",
+              "to": "customer-relations"
+            }
+          },
+          {
+            "type": "move",
+            "id": "8ebd8415-712c-4830-9831-40a69d178159",
+            "from": { "x": 98.17780294450745, "y": 79.19705549263875 },
+            "to": { "x": 88.03737259343154, "y": 53.38505096262742 },
+            "parent": {
+              "from": "customer-relations",
+              "to": "customer-relations"
+            }
+          },
+          {
+            "type": "nodeData",
+            "id": "8ebd8415-712c-4830-9831-40a69d178159",
+            "from": { "name": "", "text": "" },
+            "to": { "name": "", "text": "Good relations" }
+          }
+        ],
+        "redo": []
+      }
+    }
+  ],
+  "name": "Version 0.0.4"
+}
