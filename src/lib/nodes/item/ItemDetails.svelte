@@ -17,12 +17,15 @@
     ArrowRightToLineIcon,
     XIcon,
     PlusIcon,
+    TextCursorInputIcon,
+    GroupIcon,
   } from "lucide-svelte";
   import { Textarea } from "$lib/components/ui/textarea";
   import { createEventDispatcher } from "svelte";
   import { addHistoryEntry } from "$lib/project/history";
   import Button from "$lib/components/ui/button/button.svelte";
   import type { TypedNode } from "..";
+  import SliderIcon from "$lib/icons/SliderIcon.svelte";
 
   export let id: NodeProps<ItemNode>["id"];
   export let data: NodeProps<ItemNode>["data"];
@@ -147,9 +150,11 @@
                       <CustomIcon icon={node.data.icon} />
                     </button>
                   {:else if node.type === "slider"}
-                    <span>Slider</span>
+                    <SliderIcon class="size-full p-1" />
                   {:else if node.type === "customGroup"}
-                    <span>Group</span>
+                    <GroupIcon class="size-full p-1" />
+                  {:else if node.type === "text"}
+                    <TextCursorInputIcon class="size-full p-1" />
                   {/if}
                 </div>
                 <Label class="flex-1 space-y-1">
@@ -163,6 +168,8 @@
                       {node.data?.name}
                     {:else if node.type === "slider"}
                       Slider {node.data.value[0]}%
+                    {:else if node.type === "text"}
+                      Text
                     {/if}
                     {#if node.parentNode}
                       - {node.parentNode}
