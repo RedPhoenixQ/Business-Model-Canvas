@@ -18,7 +18,8 @@ Add "group" class to a containg element to show source handle on hover
   />
 {/if}
 <Handle
-  style="top: 0; left: 0; transform: none; width: 100%; height: 100%; opacity: 0; border-radius: unset; border: none;"
+  class="!cursor-copy !rounded-md ring-green-500 hover:ring-2"
+  style="top: 0; left: 0; transform: none; width: 100%; height: 100%; background: none; border: none;"
   type="target"
   position={Position.Bottom}
   isConnectable={isConnecting}
