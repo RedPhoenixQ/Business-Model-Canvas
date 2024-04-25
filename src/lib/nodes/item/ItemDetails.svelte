@@ -164,7 +164,9 @@
                     {:else if node.type === "slider"}
                       Slider {node.data.value[0]}%
                     {/if}
-                    {node.parentNode && ` - ${node.parentNode}`}
+                    {#if node.parentNode}
+                      - {node.parentNode}
+                    {/if}
                   </span>
                   <Input
                     value={connection.label}
