@@ -16,7 +16,7 @@
     class={cn(
       "flex aspect-square items-center justify-center",
       icon.shape === "circle" ? "rounded-full" : "rounded",
-      icon.background !== undefined
+      icon.background
         ? icon.background === "dark"
           ? "bg-black"
           : "bg-white"
@@ -31,7 +31,7 @@
     class={cn(
       "aspect-square stroke-black dark:stroke-white",
       icon.shape === "circle" ? "rounded-full" : "rounded",
-      icon.background !== undefined
+      icon.background
         ? icon.background === "dark"
           ? "bg-black"
           : "bg-white"
