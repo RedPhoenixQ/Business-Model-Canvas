@@ -145,6 +145,15 @@
     </SubContent>
   </Sub>
 {/if}
+<Item
+  class="gap-2"
+  on:click={(event) => {
+    addNode(event, "text");
+  }}
+>
+  <PlusIcon size="20" />
+  Text
+</Item>
 {#if !segmentInfo?.presetGroups}
   <Item class="gap-2" on:click={(event) => addNode(event, "customGroup")}>
     <PlusIcon size="20" />
