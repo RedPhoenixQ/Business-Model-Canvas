@@ -33,7 +33,7 @@
     "typescript": "^5.4.3",
     "vite": "^5.2.6",
     "vite-plugin-pwa": "^0.19.7",
-    "vite-plugin-singlefile": "^1.0.0"
+    "vite-plugin-singlefile": "^2.0.1"
   },
   "dependencies": {
     "@xyflow/svelte": "^0.0.41",
