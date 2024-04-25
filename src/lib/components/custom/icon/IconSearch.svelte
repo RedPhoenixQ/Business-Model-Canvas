@@ -65,7 +65,7 @@
       icons = [];
       await getIcons(term);
       debounce = undefined;
-    }, 1000);
+    }, 1000) as unknown as number;
   }
 
   let icons: Icons8Icon[] = [];
