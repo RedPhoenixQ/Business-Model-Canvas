@@ -44,6 +44,8 @@ export type Project = {
   version: string;
   name?: string;
   activePageIndex: number;
+  /** Should always be atleast one page, else changes will not be saved
+   * when a page is created as there is no page to save the changes to */
   pages: SavedPage[];
 };
 
@@ -51,6 +53,9 @@ export const projectStore = writable<Project>(
   structuredClone(projectTemplates.empty),
 );
 projectStore.subscribe(($project) => console.debug("project", $project));
+export const canRemovePages = derived(projectStore, ($project, set) => {
+  set($project.pages.length > 1);
+});
 
 export const pageStore = writable<PageData>({
   ...defaultPageData,
