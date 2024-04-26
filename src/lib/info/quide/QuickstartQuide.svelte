@@ -15,7 +15,7 @@
 
 <Dialog.Root bind:open {onOpenChange}>
   <Dialog.Content
-    class="max-h-[90vh] overflow-auto md:max-w-screen-sm lg:max-w-screen-md"
+    class="max-h-[90vh] scroll-p-8 overflow-auto scroll-smooth motion-reduce:scroll-auto md:max-w-screen-sm lg:max-w-screen-md"
   >
     <Dialog.Header>
       <Dialog.Title level="h2">Quickstart guide</Dialog.Title>
