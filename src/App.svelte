@@ -56,7 +56,9 @@
       y: node.computed.positionAbsolute.y,
     };
     const intersecting = getIntersectingNodes(node).filter(
-      (n) => n.type === "segment" || n.type === "customGroup",
+      (n) =>
+        n.type === "segment" ||
+        (node.type !== "customGroup" && n.type === "customGroup"),
     );
     if (intersecting.length === 0) {
       addHistoryEntry({
