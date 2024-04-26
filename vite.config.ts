@@ -49,4 +49,8 @@ export default defineConfig({
   define: {
     APP_VERSION: JSON.stringify(process.env.npm_package_version),
   },
+  build: {
+    // Almost unlimited inline limit, we want to produce single file
+    assetsInlineLimit: 2 ** 32,
+  },
 });
