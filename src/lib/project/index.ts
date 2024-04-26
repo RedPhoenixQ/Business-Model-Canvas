@@ -202,8 +202,8 @@ export function useProject() {
       // If active page is outside the indexable range of pages
       if ($project.activePageIndex >= $project.pages.length) {
         $project.activePageIndex -= 1;
+        loadPage($project);
       }
-      loadPage($project);
       projectStore.set($project);
     },
     movePage(pageIndex: number, toIndex: number) {
