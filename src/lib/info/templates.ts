@@ -1007,7 +1007,7 @@ export const projectTemplates = {
   empty: {
     version: APP_VERSION,
     activePageIndex: -1,
-    pages: [],
+    pages: [pageTemplates.Empty[0]],
   },
   default: {
     version: APP_VERSION,
