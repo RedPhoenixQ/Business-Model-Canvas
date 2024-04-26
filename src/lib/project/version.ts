@@ -124,4 +124,25 @@ const migratations: Record<
     return project;
   },
   "0.0.5": "0.0.6",
+  "0.0.6": (project) => {
+    // Nodes must be order in [...segments, ...groups, ...other] for
+    // @xyflow/svelte to work properly
+    for (const page of project.pages) {
+      page.nodes = [
+        ...page.nodes.filter(
+          (node: { type: string }) => node.type === "segment",
+        ),
+        ...page.nodes.filter(
+          (node: { type: string }) => node.type === "customGroup",
+        ),
+        ...page.nodes.filter(
+          (node: { type: string }) =>
+            node.type !== "segment" && node.type !== "customGroup",
+        ),
+      ];
+    }
+
+    project.version = "0.0.7";
+    return project;
+  },
 };
