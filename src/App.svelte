@@ -34,6 +34,7 @@
   import { isInputElement } from "$lib/utils";
   import CopyPasteShortcutHandler from "$lib/copyPaste/CopyPasteShortcutHandler.svelte";
   import SgaLogo from "$lib/icons/SGALogo.svelte";
+  import FileDropHandler from "$lib/project/FileDropHandler.svelte";
 
   const nodes = writable([] as Node[]);
   const edges = writable([] as Edge[]);
@@ -121,6 +122,8 @@
   let contextmenuPos: XYPosition = { x: 0, y: 0 };
   let contextmenuOpen = false;
 </script>
+
+<FileDropHandler />
 
 <div
   class="h-screen bg-neutral-600"
