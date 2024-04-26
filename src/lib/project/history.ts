@@ -28,8 +28,11 @@ export type HistoryEntry =
       from: XYPosition;
       to: XYPosition;
       parent?: {
-        to: string;
-        from: string;
+        // Need to set null and not undefined so that the change is not ignored
+        // when setting the parent.
+        // Works in version 0.0.41 of @xyflow/svelte
+        to: string | null;
+        from: string | null;
       };
     }
   | {
@@ -153,11 +156,10 @@ export function useHistory() {
         console.debug("apply move");
         updateNode(entry.id, {
           position: undo ? entry.from : entry.to,
-          ...(entry.parent
-            ? {
-                parentNode: undo ? entry.parent.from : entry.parent.to,
-              }
-            : {}),
+          // Convert to string | undefined for node types
+          parentNode: (undo ? entry.parent?.from : entry.parent?.to) as
+            | string
+            | undefined,
         });
         break;
       case "resize": {

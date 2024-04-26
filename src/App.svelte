@@ -65,6 +65,10 @@
         id: node.id,
         from: old_pos,
         to: node.position,
+        parent: {
+          from: node.parentNode ?? null,
+          to: null,
+        },
       });
       updateNode(node.id, {
         parentNode: undefined,
@@ -80,7 +84,7 @@
         from: old_pos,
         to: parent.relative_pos,
         parent: {
-          from: node.parentNode ?? "UNKNOWN",
+          from: node.parentNode ?? null,
           to: parent.node.id,
         },
       });
