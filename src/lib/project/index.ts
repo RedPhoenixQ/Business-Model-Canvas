@@ -208,6 +208,37 @@ export function useProject() {
       loadPage($project);
       projectStore.set($project);
     },
+    movePage(pageIndex: number, toIndex: number) {
+      if (pageIndex === toIndex) return;
+      const $project = get(projectStore);
+
+      if (pageIndex >= $project.pages.length || pageIndex < 0) return;
+      if (toIndex >= $project.pages.length || toIndex < 0) return;
+      const removed = $project.pages.splice(pageIndex, 1);
+      if (removed.length < 1) return;
+
+      if (pageIndex < toIndex) toIndex - 1;
+
+      $project.pages = [
+        ...$project.pages.slice(0, toIndex),
+        ...removed,
+        ...$project.pages.slice(toIndex),
+      ];
+      if (pageIndex === $project.activePageIndex) {
+        $project.activePageIndex = toIndex;
+      } else if (
+        pageIndex < $project.activePageIndex &&
+        toIndex >= $project.activePageIndex
+      ) {
+        $project.activePageIndex -= 1;
+      } else if (
+        pageIndex > $project.activePageIndex &&
+        toIndex <= $project.activePageIndex
+      ) {
+        $project.activePageIndex += 1;
+      }
+      projectStore.set($project);
+    },
     swapActivePage(pageIndex: number) {
       const $project = get(projectStore);
       if (

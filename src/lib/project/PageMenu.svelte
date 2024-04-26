@@ -1,13 +1,17 @@
 <script lang="ts">
-  import { MoreVerticalIcon, XIcon, CopyPlusIcon } from "lucide-svelte";
+  import {
+    MoreVerticalIcon,
+    XIcon,
+    CopyPlusIcon,
+    ArrowLeftRightIcon,
+  } from "lucide-svelte";
   import * as Dropdown from "../components/ui/dropdown-menu";
-  import { useProject, type SavedPage, canRemovePages } from ".";
+  import { useProject, type SavedPage, canRemovePages, projectStore } from ".";
   import Button from "../components/ui/button/button.svelte";
-
   export let page: SavedPage;
   export let i: number;
 
-  const { duplicatePage, removePage } = useProject();
+  const { duplicatePage, removePage, movePage } = useProject();
 </script>
 
 <Dropdown.Root>
@@ -29,6 +33,20 @@
       <CopyPlusIcon size="20" />
       Duplicate
     </Dropdown.Item>
+    <Dropdown.Separator />
+    <Dropdown.Sub>
+      <Dropdown.SubTrigger class="gap-2">
+        <ArrowLeftRightIcon size="20" />
+        Move to
+      </Dropdown.SubTrigger>
+      <Dropdown.SubContent>
+        {#each $projectStore.pages as otherPage, to}
+          <Dropdown.Item on:click={() => movePage(i, to)} disabled={i === to}>
+            {otherPage.data.name}
+          </Dropdown.Item>
+        {/each}
+      </Dropdown.SubContent>
+    </Dropdown.Sub>
     {#if $canRemovePages}
       <Dropdown.Separator />
       <Dropdown.Item
