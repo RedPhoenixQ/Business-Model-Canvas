@@ -199,10 +199,8 @@ export function useProject() {
       if (pageIndex >= $project.pages.length || pageIndex < 0) return;
       const removed = $project.pages.splice(pageIndex, 1);
       if (removed.length < 1) return;
-      if (
-        $project.pages.length === 0 ||
-        pageIndex <= $project.activePageIndex
-      ) {
+      // If active page is outside the indexable range of pages
+      if ($project.activePageIndex >= $project.pages.length) {
         $project.activePageIndex -= 1;
       }
       loadPage($project);
