@@ -1,7 +1,8 @@
 <script lang="ts">
   import RMB from "../RMB.svelte";
   import LMB from "../LMB.svelte";
-  import AddingAndRemovingItems from "../preview/AddingAndRemovingItems.svelte";
+  // import AddingAndRemovingItems from "../preview/AddingAndRemovingItems.svelte";
+  import AddingAndRemovingItems from "../preview/AddingAndRemoving.gif";
 </script>
 
 <p>
@@ -14,6 +15,10 @@
   it and pressing either <kbd>Delete</kbd> or <kbd>Backspace</kbd> on the keyboard.
 </p>
 <figure>
-  <AddingAndRemovingItems class="m-auto max-h-[50vh]" />
+  <img
+    class="m-auto max-h-[50vh]"
+    src={AddingAndRemovingItems}
+    alt="Adding and removing an item with menus and with keyboard"
+  />
   <figcaption>Editing the name and description on an item</figcaption>
 </figure>

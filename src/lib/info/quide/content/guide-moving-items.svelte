@@ -1,7 +1,7 @@
 <script lang="ts">
   import RMB from "../RMB.svelte";
   import LMB from "../LMB.svelte";
-  import MovingBetweenSegments from "../preview/MovingBetweenSegments.svelte";
+  import MovingBetweenSegments from "../preview/MovingBetweenSegment.gif";
 </script>
 
 <p>
@@ -19,7 +19,11 @@
   the <i>Move To</i> option select the segments you wish to move the item to.
 </p>
 <figure>
-  <MovingBetweenSegments class="m-auto max-h-[50vh]" />
+  <img
+    class="m-auto max-h-[50vh]"
+    src={MovingBetweenSegments}
+    alt="Moving items and moving them between segments"
+  />
   <figcaption>
     Moving an item between segments. Note the recommened relations changing when
     the segment changes.

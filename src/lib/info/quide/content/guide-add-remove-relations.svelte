@@ -1,6 +1,6 @@
 <script lang="ts">
   import LMB from "../LMB.svelte";
-  import AddRemoveRelations from "../preview/AddRemoveRelations.svelte";
+  import AddRemoveRelations from "../preview/AddRemoveRelations.gif";
 </script>
 
 <p>
@@ -18,6 +18,10 @@
   its highlighted, press <kbd>Delete</kbd> or <kbd>Backspace</kbd>.
 </p>
 <figure>
-  <AddRemoveRelations class="m-auto" />
+  <img
+    class="m-auto max-h-[50vh]"
+    src={AddRemoveRelations}
+    alt="Adding and removing relations between items"
+  />
   <figcaption>Adding and removing a relation between to items</figcaption>
 </figure>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import RMB from "../RMB.svelte";
-  import EditItem from "../preview/EditItem.svelte";
+  import EditItem from "../preview/EditItem.gif";
 </script>
 
 <p>
@@ -8,6 +8,6 @@
   things about the item can be changed.
 </p>
 <figure>
-  <EditItem class="m-auto max-h-[50vh]" />
+  <img class="m-auto max-h-[50vh]" src={EditItem} alt="Editing an item" />
   <figcaption>Editing the name and description on an item</figcaption>
 </figure>

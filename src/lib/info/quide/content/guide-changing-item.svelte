@@ -1,5 +1,5 @@
 <script lang="ts">
-  import ChangeIcon from "../preview/ChangeIcon.svelte";
+  import ChangeIcon from "../preview/ChangeIcon.gif";
 </script>
 
 <p>
@@ -9,6 +9,10 @@
   image that is available online.
 </p>
 <figure>
-  <ChangeIcon class="m-auto" />
+  <img
+    class="m-auto max-h-[50vh]"
+    src={ChangeIcon}
+    alt="Change the icon of an item"
+  />
   <figcaption>Changing the icon by searching</figcaption>
 </figure>

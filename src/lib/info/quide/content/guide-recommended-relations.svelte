@@ -1,6 +1,6 @@
 <script lang="ts">
   import LMB from "../LMB.svelte";
-  import RecommendedRelation from "../preview/RecommendedRelation.svelte";
+  import RecommendedAndIgnoredRelations from "../preview/RecommendedAndIgnoredRelations.gif";
 </script>
 
 <p>
@@ -20,7 +20,11 @@
   noise.
 </aside>
 <figure>
-  <RecommendedRelation class="m-auto" />
+  <img
+    class="m-auto max-h-[50vh]"
+    src={RecommendedAndIgnoredRelations}
+    alt="Adding and removing an item with menus and with keyboard"
+  />
   <figcaption>
     Items in <i>Key Activites</i> has recommended relations to
     <i>Key Resource</i> OR <i>Key Support</i>

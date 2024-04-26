@@ -1,6 +1,6 @@
 <script lang="ts">
   import LMB from "../LMB.svelte";
-  import RelationshipText from "../preview/RelationshipText.svelte";
+  import RelationshipText from "../preview/RelationText.gif";
 </script>
 
 <p>
@@ -18,6 +18,10 @@
   </p>
 </aside>
 <figure>
-  <RelationshipText class="m-auto" />
+  <img
+    class="m-auto max-h-[50vh]"
+    src={RelationshipText}
+    alt="Adding text to a relationship"
+  />
   <figcaption>Adding text to a relationsship</figcaption>
 </figure>
