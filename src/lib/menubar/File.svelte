@@ -39,6 +39,13 @@
   on:change={async () => {
     const file = fileInput.files?.[0];
     if (!file) return;
+    if (
+      !confirm(
+        "All unsaved changes will be lost. Are you sure you want to open this file?",
+      )
+    ) {
+      return;
+    }
     fromJSON(await file.text());
   }}
   bind:this={fileInput}
