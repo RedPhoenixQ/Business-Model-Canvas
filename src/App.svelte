@@ -31,7 +31,6 @@
   import * as ContextMenu from "$lib/components/ui/context-menu";
   import { findFirstParentAndRelativePos } from "$lib/info/nodes";
   import PasteItemMenuPart from "$lib/copyPaste/PasteItemMenuPart.svelte";
-  import { isInputElement } from "$lib/utils";
   import CopyPasteShortcutHandler from "$lib/copyPaste/CopyPasteShortcutHandler.svelte";
   import SgaLogo from "$lib/icons/SGALogo.svelte";
   import FileDropHandler from "$lib/project/FileDropHandler.svelte";
