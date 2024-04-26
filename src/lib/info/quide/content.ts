@@ -8,6 +8,9 @@ import GuideRecommendedRelations from "./content/guide-recommended-relations.sve
 import GuideTextRelations from "./content/guide-text-relations.svelte";
 import GuideManagingProject from "./content/guide-managing-project.svelte";
 import GuidePages from "./content/guide-pages.svelte";
+import GuideCopyPaste from "./content/guide-copy-paste.svelte";
+import GuideGroups from "./content/guide-groups.svelte";
+import GuideSelections from "./content/guide-selections.svelte";
 
 export interface SectionInfo {
   heading: string;
@@ -77,6 +80,27 @@ export const sections: SectionInfo[] = [
         id: "guide-pages",
         heading: "Pages",
         content: GuidePages,
+      },
+    ],
+  },
+  {
+    id: "guide-other",
+    heading: "Other features",
+    children: [
+      {
+        id: "guide-copy-paste",
+        heading: "Copy and Paste",
+        content: GuideCopyPaste,
+      },
+      {
+        id: "guide-groups",
+        heading: "Groups",
+        content: GuideGroups,
+      },
+      {
+        id: "guide-selections",
+        heading: "Selections",
+        content: GuideSelections,
       },
     ],
   },
