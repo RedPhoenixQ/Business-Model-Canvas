@@ -13,9 +13,9 @@
   }
 
   onMount(() => {
-    window.addEventListener("custom-menu-close", close, false);
+    document.addEventListener("custom-menu-close", close, false);
     return () => {
-      window.removeEventListener("custom-menu-close", close);
+      document.removeEventListener("custom-menu-close", close);
     };
   });
 </script>
