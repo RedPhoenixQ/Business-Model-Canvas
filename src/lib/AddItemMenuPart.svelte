@@ -82,7 +82,23 @@
     typeOrNode: DefaultNode | keyof typeof defaultNodes,
   ) {
     const node = createNode(event, typeOrNode);
-    $nodes = [...$nodes, node];
+    if (
+      typeOrNode === "customGroup" ||
+      (typeof typeOrNode === "object" && typeOrNode.type === "customGroup")
+    ) {
+      // Groups should be places after segments and before other nodes
+      // for @xyflow/svelte to behave properly when deleting groups
+      const lastGroupIdx = $nodes.findIndex(
+        ({ type }) => type !== "segment" && type !== "customGroup",
+      );
+      $nodes = [
+        ...$nodes.slice(0, lastGroupIdx),
+        node,
+        ...$nodes.slice(lastGroupIdx),
+      ];
+    } else {
+      $nodes = [...$nodes, node];
+    }
     addHistoryEntry({ type: "create", nodes: [node] });
   }
 
