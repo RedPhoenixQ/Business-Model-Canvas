@@ -123,4 +123,5 @@ const migratations: Record<
     project.version = "0.0.5";
     return project;
   },
+  "0.0.5": "0.0.6",
 };
