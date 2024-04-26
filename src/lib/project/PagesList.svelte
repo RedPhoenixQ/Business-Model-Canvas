@@ -6,7 +6,6 @@
   import { pageTemplates } from "../info/templates";
   import * as Dropdown from "../components/ui/dropdown-menu";
   import { createEventDispatcher } from "svelte";
-  import { Separator } from "bits-ui";
 
   const dispatch = createEventDispatcher<{ pageSwap: undefined }>();
 
