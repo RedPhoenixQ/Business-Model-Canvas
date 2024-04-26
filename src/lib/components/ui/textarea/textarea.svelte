@@ -27,5 +27,7 @@
   on:mouseleave
   on:paste
   on:input
+  on:mousedown|stopPropagation={() => {}}
+  on:selectstart|stopPropagation={() => {}}
   {...$$restProps}
 />

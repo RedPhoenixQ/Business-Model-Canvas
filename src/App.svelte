@@ -127,13 +127,8 @@
 
 <div
   class="h-screen bg-neutral-600"
-  on:selectstart={(event) => {
+  on:selectstart|preventDefault={() => {
     // This prevents wierd selection in textareas when selecting nodes
-    // @ts-expect-error: target will be an  HTMLElement
-    if (isInputElement(event.target)) {
-      return;
-    }
-    event.preventDefault();
   }}
 >
   <ContextMenu.Root bind:open={contextmenuOpen}>

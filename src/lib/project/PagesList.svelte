@@ -49,6 +49,7 @@
                 event.preventDefault();
               }
             }}
+            on:selectstart|stopPropagation={() => {}}
           >
             {page.data.name}
           </span>
