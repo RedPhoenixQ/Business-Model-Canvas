@@ -6,6 +6,8 @@ import GuideChangingItem from "./content/guide-changing-item.svelte";
 import GuideAddRemoveRelations from "./content/guide-add-remove-relations.svelte";
 import GuideRecommendedRelations from "./content/guide-recommended-relations.svelte";
 import GuideTextRelations from "./content/guide-text-relations.svelte";
+import GuideManagingProject from "./content/guide-managing-project.svelte";
+import GuidePages from "./content/guide-pages.svelte";
 
 export interface SectionInfo {
   heading: string;
@@ -59,6 +61,22 @@ export const sections: SectionInfo[] = [
         id: "guide-text-relations",
         heading: "Adding Text To Relations",
         content: GuideTextRelations,
+      },
+    ],
+  },
+  {
+    id: "guide-project",
+    heading: "Project",
+    children: [
+      {
+        id: "guide-managing-projects",
+        heading: "Managing projects",
+        content: GuideManagingProject,
+      },
+      {
+        id: "guide-pages",
+        heading: "Pages",
+        content: GuidePages,
       },
     ],
   },
