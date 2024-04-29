@@ -14,6 +14,7 @@ import {
 } from "../info/templates";
 import { type HistoryEntry, getHistory, setHistory } from "./history";
 import { migrateVersion } from "./version";
+import type { FileSystemFileHandle } from "native-file-system-adapter";
 
 export type SavedPage = {
   data: PageData;
@@ -48,6 +49,9 @@ export type Project = {
    * when a page is created as there is no page to save the changes to */
   pages: SavedPage[];
 };
+
+export const handleStore = writable<FileSystemFileHandle | undefined>();
+handleStore.subscribe(($handle) => console.debug("handle", $handle));
 
 export const projectStore = writable<Project>(
   structuredClone(projectTemplates.empty),
@@ -150,6 +154,8 @@ export function useProject() {
     newProject(template: keyof typeof projectTemplates = "default") {
       const $project: Project = structuredClone(projectTemplates[template]);
       loadPage($project);
+      // There is no savefile for a new project
+      handleStore.set(undefined);
       projectStore.set($project);
     },
     addPage(template: keyof typeof pageTemplates, preset?: string) {
