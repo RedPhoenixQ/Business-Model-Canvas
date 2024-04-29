@@ -52,6 +52,9 @@ export type Project = {
 
 export const handleStore = writable<FileSystemFileHandle | undefined>();
 handleStore.subscribe(($handle) => console.debug("handle", $handle));
+handleStore.subscribe(
+  ($handle) => (document.title = $handle?.name ?? "Business Model Canvas"),
+);
 
 export const projectStore = writable<Project>(
   structuredClone(projectTemplates.empty),
