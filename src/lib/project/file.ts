@@ -11,12 +11,13 @@ const types = [{ accept: { "application/json": [".json"] } }];
 
 const lastSavedEntryStore: Writable<HistoryEntry | undefined> = writable();
 
+const supportsFileAPIWrites = "showSaveFilePicker" in window;
 export const savedStore = derived(
   [lastEntry, lastSavedEntryStore, handleStore],
   ([$lastEntry, $lastSaved, $handle]) => {
     if ($lastEntry !== $lastSaved) {
       return "unsaved";
-    } else if ($handle) {
+    } else if (supportsFileAPIWrites && $handle) {
       return "file";
     } else {
       return "local";
@@ -54,6 +55,7 @@ export function useFile() {
   async function saveLocal(json = toJSON()): Promise<boolean> {
     localStorage.setItem("save", json);
     lastSavedEntryStore.set(get(lastEntry));
+    if (!supportsFileAPIWrites) return false;
     return await writeToHandle(json);
   }
 
