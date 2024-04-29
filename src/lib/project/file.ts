@@ -77,7 +77,7 @@ export function useFile() {
 
   async function saveAll(json: string = toJSON()) {
     saveLocal(json);
-    if (!supportsFileAPIWrites) writeToHandle(json);
+    if (supportsFileAPIWrites) writeToHandle(json);
   }
 
   async function saveFileAs(json: string = toJSON()) {
