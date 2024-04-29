@@ -28,6 +28,8 @@ export const savedStore = derived(
 export function useFile() {
   const { toJSON, fromJSON } = useProject();
 
+  /**If the browser doesn't support writes to file, a download with the name
+   * of the handle will be started instead. */
   async function writeToHandle(json: string): Promise<boolean> {
     const $handle = get(handleStore);
     if (!$handle) return false;
