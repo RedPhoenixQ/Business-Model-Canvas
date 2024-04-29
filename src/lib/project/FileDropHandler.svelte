@@ -13,13 +13,18 @@
   on:drop={async (event) => {
     isDraging = false;
     event.preventDefault();
+    // Alias dataTransfer so that broswer doesn't clean it up waiting for user confirmation
+    const transfer = event.dataTransfer;
     if (
+      transfer &&
       confirm(
         "All unsaved changes will be lost. Are you sure you want to open this file?",
       )
     ) {
-      const item = event.dataTransfer?.items?.[0];
-      if (!item || item.type !== "application/json") return;
+      const item = transfer?.items?.[0];
+      if (!item) {
+        return console.error("No item in drop event", transfer, event);
+      }
       //@ts-expect-error: getAsFileSystemHandle() is pollyfilled by "native-file-system-adapter"
       loadFromHandle(await item.getAsFileSystemHandle());
     }
