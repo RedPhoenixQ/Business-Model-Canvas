@@ -79,7 +79,10 @@ export function useFile() {
   }
 
   async function saveFileAs(json: string = toJSON()) {
-    const name = get(projectStore).name;
+    let name = get(projectStore).name;
+    if (!supportsFileAPIWrites) {
+      name = prompt("Please enter a file name") || name;
+    }
     const handle = await showSaveFilePicker({
       _preferPolyfill: false,
       _name: `${name ?? "unnamed"}.json`,
