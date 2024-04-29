@@ -40,6 +40,7 @@
     "bits-ui": "^0.20.1",
     "clsx": "^2.1.0",
     "lucide-svelte": "^0.319.0",
+    "native-file-system-adapter": "^3.0.1",
     "ring-buffer-ts": "^1.2.0",
     "tailwind-merge": "^2.2.2",
     "tailwind-variants": "^0.1.20"
