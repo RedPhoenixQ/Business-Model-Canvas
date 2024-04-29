@@ -12,7 +12,7 @@
   import { useFile } from "$lib/project/file";
 
   const { fromJSON, toJSON, newProject } = useProject();
-  const { openFile, saveFile, saveFileAs } = useFile();
+  const { openFile, saveLocal, saveFile, saveFileAs } = useFile();
 
   const projectTemplateKeys = Object.keys(
     projectTemplates,
@@ -65,7 +65,13 @@
         <FileInputIcon size="20" />
         Open file
       </Menubar.Item>
-      <Menubar.Item class="gap-2" on:click={() => saveFile()}>
+      <Menubar.Item
+        class="gap-2"
+        on:click={() => {
+          saveFile();
+          saveLocal();
+        }}
+      >
         <FileOutputIcon size="20" />
         Save
       </Menubar.Item>
