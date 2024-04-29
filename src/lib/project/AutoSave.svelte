@@ -4,7 +4,7 @@
   import { FileIcon, SaveIcon, XCircleIcon } from "lucide-svelte";
   import { ToolbarButton } from "$lib/components/custom/toolbar";
 
-  const { loadLocal, saveLocal } = useFile();
+  const { loadLocal, saveAll } = useFile();
 
   function autosave() {
     console.debug(
@@ -14,13 +14,13 @@
     );
     if (!document.hidden) return;
     console.debug("Autosaving to localstorage");
-    saveLocal();
+    saveAll();
   }
 
   onMount(() => {
     loadLocal();
     return () => {
-      saveLocal();
+      saveAll();
     };
   });
 </script>
@@ -30,7 +30,7 @@
   on:keydown={(event) => {
     if (event.ctrlKey && event.code === "KeyS") {
       event.preventDefault();
-      saveLocal();
+      saveAll();
     }
   }}
 />
@@ -42,7 +42,7 @@
     : $savedStore === "local"
       ? "Project is saved in the browser"
       : "Project is saved to file"}
-  on:click={() => saveLocal()}
+  on:click={() => saveAll()}
 >
   <SaveIcon />
   {#if $savedStore === "unsaved"}

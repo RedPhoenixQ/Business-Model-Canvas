@@ -52,11 +52,9 @@ export function useFile() {
     fromJSON(await file.text());
   }
 
-  async function saveLocal(json = toJSON()): Promise<boolean> {
+  function saveLocal(json = toJSON()) {
     localStorage.setItem("save", json);
     lastSavedEntryStore.set(get(lastEntry));
-    if (!supportsFileAPIWrites) return false;
-    return await writeToHandle(json);
   }
 
   async function loadLocal() {
@@ -75,6 +73,11 @@ export function useFile() {
     }
   }
 
+  async function saveAll(json: string = toJSON()) {
+    saveLocal(json);
+    if (!supportsFileAPIWrites) writeToHandle(json);
+  }
+
   async function saveFileAs(json: string = toJSON()) {
     const name = get(projectStore).name;
     const handle = await showSaveFilePicker({
@@ -89,6 +92,7 @@ export function useFile() {
     });
     handleStore.set(handle);
     saveLocal(json);
+    writeToHandle(json);
   }
 
   async function openFile() {
@@ -113,5 +117,6 @@ export function useFile() {
     openFile,
     saveFile,
     saveFileAs,
+    saveAll,
   };
 }
