@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { useProject } from ".";
+  import "native-file-system-adapter";
+  import { useFile } from "./file";
 
-  const { fromJSON } = useProject();
+  const { loadFromHandle } = useFile();
 
   let isDraging = false;
 </script>
@@ -11,17 +12,17 @@
   on:dragleave={() => (isDraging = false)}
   on:drop={async (event) => {
     isDraging = false;
-    const file = event.dataTransfer?.files?.item?.(0);
-    if (!file || file.type !== "application/json") return;
     event.preventDefault();
     if (
-      !confirm(
+      confirm(
         "All unsaved changes will be lost. Are you sure you want to open this file?",
       )
     ) {
-      return;
+      const item = event.dataTransfer?.items?.[0];
+      if (!item || item.type !== "application/json") return;
+      //@ts-expect-error: getAsFileSystemHandle() is pollyfilled by "native-file-system-adapter"
+      loadFromHandle(await item.getAsFileSystemHandle());
     }
-    fromJSON(await file.text());
   }}
 />
 

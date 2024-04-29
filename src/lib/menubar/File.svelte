@@ -1,55 +1,23 @@
 <script lang="ts">
   import {
-    DownloadIcon,
+    FileOutputIcon,
     ClipboardCopyIcon,
     ClipboardPasteIcon,
     FileInputIcon,
     PlusIcon,
   } from "lucide-svelte/icons";
   import * as Menubar from "$lib/components/ui/menubar";
-  import { useProject, projectStore } from "$lib/project/index";
+  import { useProject } from "$lib/project/index";
   import { projectTemplates } from "$lib/info/templates";
+  import { useFile } from "$lib/project/file";
 
-  const { toJSON, fromJSON, newProject } = useProject();
-
-  function downloadFile() {
-    const blob = new Blob([toJSON()], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    // Create a one-time link element for downloading
-    const dlink = document.createElement("a");
-    // TODO: Get project name from somewere
-    dlink.download = `${$projectStore.name ?? "unnamed"}.json`;
-    dlink.href = url;
-    dlink.click();
-    dlink.remove();
-    URL.revokeObjectURL(url);
-  }
+  const { fromJSON, toJSON, newProject } = useProject();
+  const { openFile, saveFile, saveFileAs } = useFile();
 
   const projectTemplateKeys = Object.keys(
     projectTemplates,
   ) as (keyof typeof projectTemplates)[];
-
-  let fileInput: HTMLInputElement;
 </script>
-
-<input
-  class="hidden"
-  type="file"
-  accept="application/json"
-  on:change={async () => {
-    const file = fileInput.files?.[0];
-    if (!file) return;
-    if (
-      !confirm(
-        "All unsaved changes will be lost. Are you sure you want to open this file?",
-      )
-    ) {
-      return;
-    }
-    fromJSON(await file.text());
-  }}
-  bind:this={fileInput}
-/>
 
 <Menubar.Menu>
   <Menubar.Trigger>File</Menubar.Trigger>
@@ -81,33 +49,52 @@
     </Menubar.Sub>
 
     <Menubar.Separator />
-    <Menubar.Item
-      class="gap-2"
-      on:click={() => {
-        const input = prompt("input");
-        if (input === null) return;
-        fromJSON(input);
-      }}
-    >
-      <ClipboardPasteIcon size="20" />
-      Open from clipboard
-    </Menubar.Item>
-    <Menubar.Item class="gap-2" on:click={() => fileInput.click()}>
-      <FileInputIcon size="20" />
-      Open file
-    </Menubar.Item>
+    <Menubar.Group>
+      <Menubar.Item
+        class="gap-2"
+        on:click={() => {
+          if (
+            confirm(
+              "Are you sure you want to open a file?\n\nAll unsaved progress will be lost!",
+            )
+          ) {
+            openFile();
+          }
+        }}
+      >
+        <FileInputIcon size="20" />
+        Open file
+      </Menubar.Item>
+      <Menubar.Item class="gap-2" on:click={() => saveFile()}>
+        <FileOutputIcon size="20" />
+        Save
+      </Menubar.Item>
+      <Menubar.Item class="gap-2" on:click={() => saveFileAs()}>
+        <FileOutputIcon size="20" />
+        Save As...
+      </Menubar.Item>
+    </Menubar.Group>
 
     <Menubar.Separator />
-    <Menubar.Item
-      class="gap-2"
-      on:click={() => navigator.clipboard.writeText(toJSON())}
-    >
-      <ClipboardCopyIcon size="20" />
-      Copy to Clipboard
-    </Menubar.Item>
-    <Menubar.Item class="gap-2" on:click={downloadFile}>
-      <DownloadIcon size="20" />
-      Download
-    </Menubar.Item>
+    <Menubar.Group>
+      <Menubar.Item
+        class="gap-2"
+        on:click={() => {
+          const input = prompt("input");
+          if (input === null) return;
+          fromJSON(input);
+        }}
+      >
+        <ClipboardPasteIcon size="20" />
+        Open from clipboard
+      </Menubar.Item>
+      <Menubar.Item
+        class="gap-2"
+        on:click={() => navigator.clipboard.writeText(toJSON())}
+      >
+        <ClipboardCopyIcon size="20" />
+        Copy to Clipboard
+      </Menubar.Item>
+    </Menubar.Group>
   </Menubar.Content>
 </Menubar.Menu>
